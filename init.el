@@ -14,10 +14,25 @@
 (setq use-package-always-ensure t)
 
 
+
+;;;; Local packages
 (use-package haba-osx
   :ensure nil
   :load-path "lisp/"
   :if (eq system-type 'darwin))
+
+(use-package haba-comment
+  :ensure nil
+  :load-path "lisp/"
+  :bind ("M-;" . haba-comment-dwim))
+
+(use-package haba-misc
+  :ensure nil
+  :load-path "lisp/"
+  :bind (("C-c W W" . haba-toggle-window-split)
+         ("C-c f i" . find-user-init-file)))
+;;;;
+
 
 
 (use-package expand-region
@@ -105,8 +120,8 @@
     (show-smartparens-global-mode)))
 
 
-;; (use-package material-theme		
-;;   :config (load-theme 'material-light t))
+(use-package zenburn-theme		
+  :config (load-theme 'zenburn t))
 
 ;; rust
 ;; (use-package rust-mode
@@ -212,85 +227,4 @@
 (setq org-fontify-whole-heading-line t)
 
 
-;; Toggle fullscreen
-;; (global-set-key (kbd "<C-s-268632070>") 'toggle-frame-fullscreen)
-;; (global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
 
-;; TODO: move to separate files. 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Additional keybindings
-;;
-
-
-;; Comment a line.
-(defun haba-comment-dwim (arg)
-  "Comment or uncomment current line if mark region is not active.
-Otherwise call well known `comment-dwim'"
-  (interactive "*P")
-  (comment-normalize-vars)
-  (if (and (not mark-active) (save-excursion (beginning-of-line) (not (looking-at "\\s-*$"))))
-      (progn
-        (comment-or-uncomment-region (line-beginning-position) (line-end-position))
-        (next-line))
-    (comment-dwim arg)))
-
-(global-set-key (kbd "M-;") 'haba-comment-dwim)
-
-
-(defun haba-toggle-window-split ()
-  "Change vertical and horizontal splits"
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
-	     (next-win-buffer (window-buffer (next-window)))
-	     (this-win-edges (window-edges (selected-window)))
-	     (next-win-edges (window-edges (next-window)))
-	     (this-win-2nd (not (and (<= (car this-win-edges)
-					 (car next-win-edges))
-				     (<= (cadr this-win-edges)
-					 (cadr next-win-edges)))))
-	     (splitter
-	      (if (= (car this-win-edges)
-		     (car (window-edges (next-window))))
-		  'split-window-horizontally
-		'split-window-vertically)))
-	(delete-other-windows)
-	(let ((first-win (selected-window)))
-	  (funcall splitter)
-	  (if this-win-2nd (other-window 1))
-	  (set-window-buffer (selected-window) this-win-buffer)
-	  (set-window-buffer (next-window) next-win-buffer)
-	  (select-window first-win)
-	  (if this-win-2nd (other-window 1))))))
-
-(define-key ctl-x-4-map "4" 'haba-toggle-window-split)
-
-
-;; Quick dotemacs/initel opening
-(defun find-user-init-file ()
-  "Edit the `user-init-file', in another window"
-  (interactive)
-  (find-file-other-window user-init-file))
-
-(global-set-key (kbd "C-c f i") 'find-user-init-file)
-
-
-
-;; (defadvice kill-ring-save (before slickcopy activate compile)
-;;   "When called interactively with no active region, copy a single line instead."
-;;   (interactive
-;;    (if mark-active
-;;        (list (region-beginning) (region-end))
-;;      (progn
-;;        ;; (push-mark (point) t nil) ; to suppress visual feedback
-;;        (set-mark (point))
-;;        (list (line-beginning-position)
-;;              (line-beginning-position 2))))))
-
-;; (defadvice kill-region (before slickcut activate compile)
-;;   "When called interactively with no active region, kill a single line instead."
-;;   (interactive
-;;    (if mark-active
-;;        (list (region-beginning) (region-end))
-;;      (list (line-beginning-position)
-;;            (line-beginning-position 2)))))
