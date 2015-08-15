@@ -1,6 +1,7 @@
 ;; Init file for Emacs
 ;; Maxim Kim <habamax@gmail.com>
 
+;;;; Set up packaging system
 (setq package-enable-at-startup nil)
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
@@ -12,7 +13,7 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
-
+;;;;
 
 
 ;;;; Local packages
@@ -41,12 +42,12 @@
 (use-package helm
   :diminish helm-mode
   :bind* (("M-x" . helm-M-x)
-	  ("C-c M-x" . execute-extended-command)
-	  ("M-]" . helm-command-prefix)
-	  ("M-y" . helm-show-kill-ring)
-	  ("C-x C-b" . helm-buffers-list)
-	  ("C-x b" . helm-mini)
-	  ("C-x C-f" . helm-find-files))
+          ("C-c M-x" . execute-extended-command)
+          ("M-]" . helm-command-prefix)
+          ("M-y" . helm-show-kill-ring)
+          ("C-x C-b" . helm-buffers-list)
+          ("C-x b" . helm-mini)
+          ("C-x C-f" . helm-find-files))
   :config
   (progn
     (require 'helm-config)
@@ -55,33 +56,33 @@
     (bind-key "C-i" 'helm-execute-persistent-action helm-map)
     (bind-key "C-z" 'helm-select-action helm-map)
     (setq helm-M-x-fuzzy-match t
-	  helm-recentf-fuzzy-match t
-	  helm-buffers-fuzzy-matching t
-	  helm-semantic-fuzzy-match t
-	  helm-imenu-fuzzy-match t
-	  helm-apropos-fuzzy-match t
-	  helm-lisp-fuzzy-completion t
-	  helm-move-to-line-cycle-in-source t
-	  helm-ff-file-name-history-use-recentf t
-	  helm-ff-auto-update-initial-value nil
-	  helm-tramp-verbose 9)
+          helm-recentf-fuzzy-match t
+          helm-buffers-fuzzy-matching t
+          helm-semantic-fuzzy-match t
+          helm-imenu-fuzzy-match t
+          helm-apropos-fuzzy-match t
+          helm-lisp-fuzzy-completion t
+          helm-move-to-line-cycle-in-source t
+          helm-ff-file-name-history-use-recentf t
+          helm-ff-auto-update-initial-value nil
+          helm-tramp-verbose 9)
     (helm-mode)
     (helm-autoresize-mode t)))
 
-;; company "complete anything"
+ ;; company "complete anything"
 (use-package company
   :commands (company-mode)
   :config
   (progn
     (use-package company-c-headers)
     (push '(company-clang
-	    :with company-semantic
-	    :with company-yasnippet
-	    :with company-c-headers)
+            :with company-semantic
+            :with company-yasnippet
+            :with company-c-headers)
           company-backends)
     (setq company-minimum-prefix-length 2
           company-idle-delay nil
-	  company-global-modes '(not gud-mode))))
+          company-global-modes '(not gud-mode))))
 
 
 (use-package helm-company
@@ -103,6 +104,7 @@
     (add-to-list 'golden-ratio-extra-commands 'ace-window)))
 
 (use-package golden-ratio
+  :diminish golden-ratio-mode
   :config (golden-ratio-mode 1))
 
 (use-package rainbow-delimiters
@@ -120,8 +122,8 @@
     (show-smartparens-global-mode)))
 
 
-(use-package zenburn-theme		
-  :config (load-theme 'zenburn t))
+(use-package spacegray-theme
+  :config (load-theme 'spacegray t))
 
 ;; rust
 ;; (use-package rust-mode
@@ -133,15 +135,15 @@
   :commands (magit-status projectile-vc)
   :config
   (setq magit-log-arguments '("--graph" "--show-signature")
-	magit-push-always-verify nil
-	magit-popup-use-prefix-argument 'default
-	magit-revert-buffers t))
+        magit-push-always-verify nil
+        magit-popup-use-prefix-argument 'default
+        magit-revert-buffers t))
 
 
-;; ;; flycheck
+;; flycheck
 ;; (use-package flycheck
-;;   :init (global-flycheck-mode))
-
+;; :init (global-flycheck-mode))
+;;
 ;; (use-package helm-flycheck
 ;;   :bind ("C-c ! h" . helm-flycheck)
 ;;   :config (global-flycheck-mode))
@@ -161,9 +163,9 @@
   :config
   (progn
     (setq projectile-completion-system 'helm
-	  projectile-switch-project-action 'helm-projectile
-	  projectile-enable-caching t
-	  projectile-file-exists-remote-cache-expire (* 10 60))
+          projectile-switch-project-action 'helm-projectile
+          projectile-enable-caching t
+          projectile-file-exists-remote-cache-expire (* 10 60))
     (use-package helm-projectile
       :commands helm-projectile
       :config (helm-projectile-on))
@@ -176,15 +178,18 @@
 (set-terminal-coding-system 'utf-8)
 
 
+;; auto indent on Enter (should be default since Emacs 24.4)
+(electric-indent-mode t)
+(show-paren-mode t)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(column-number-mode t)
 
-(electric-indent-mode t)		; auto indent on Enter (should be default since Emacs 24.4)
-(show-paren-mode t)			; show matching parens
-(tool-bar-mode -1)			; no toolbar
-(scroll-bar-mode -1)			; no scrollbar
-(column-number-mode t)			; column/line numbers on modeline
+;; scroll to the top or bottom with C-v and M-v
+(setq scroll-error-top-bottom t)
 
-(setq scroll-error-top-bottom t)	; scroll to the top or bottom with C-v and M-v
-(setq sentence-end-double-space nil)	; M-a and M-e use punct and single space as sentence delimiter
+;; M-a and M-e use punct and single space as sentence delimiter
+(setq sentence-end-double-space nil)
 
 (setq-default indent-tabs-mode nil)
 
@@ -192,13 +197,15 @@
 
 (setq ring-bell-function #'ignore)
 
-(recentf-mode 1)			; enable recent files
+(recentf-mode 1)
 
-(put 'upcase-region 'disabled nil)	; C-x C-u
-(put 'downcase-region 'disabled nil)	; C-x C-l
+;; C-x C-u
+(put 'upcase-region 'disabled nil)
+;; C-x C-l
+(put 'downcase-region 'disabled nil)
 
-(setq default-major-mode 'text-mode)
-(setq initial-major-mode 'text-mode)
+(setq default-major-mode 'text-mode
+      initial-major-mode 'text-mode)
 
 (setq make-backup-files nil)
 (setq suggest-key-bindings t)
@@ -225,6 +232,3 @@
 ;; org mode
 (setq org-src-fontify-natively t)
 (setq org-fontify-whole-heading-line t)
-
-
-
