@@ -99,7 +99,7 @@
   :bind* ("M-o" . ace-window)
   :config
   (progn
-    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+    (setq aw-keys '(?l ?k ?j ?h ?o ?i ?u ?m ?n))
     (add-to-list 'golden-ratio-extra-commands 'ace-window)))
 
 (use-package golden-ratio
