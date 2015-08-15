@@ -1,0 +1,17 @@
+*.elc
+*.*~
+/auto-save-list/
+/backups/
+/bookmarks
+/elpa/
+/eshell/
+/kill-ring-saved.el
+/projectile-bookmarks.eld
+/projectile.cache
+/recentf
+/saved-places
+/semanticdb/
+/site-lisp/
+/tramp
+/undo-tree/
+/url/
