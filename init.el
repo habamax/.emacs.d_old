@@ -100,7 +100,7 @@
   :bind* ("M-o" . ace-window)
   :config
   (progn
-    (setq aw-keys '(?l ?k ?j ?h ?o ?i ?u ?m ?n))
+    (setq aw-keys '(?j ?k ?l ?u ?i ?o ?n ?m))
     (add-to-list 'golden-ratio-extra-commands 'ace-window)))
 
 (use-package golden-ratio
@@ -122,8 +122,8 @@
     (show-smartparens-global-mode)))
 
 
-(use-package spacegray-theme
-  :config (load-theme 'spacegray t))
+(use-package monokai-theme
+  :config (load-theme 'monokai t))
 
 ;; rust
 ;; (use-package rust-mode
@@ -170,6 +170,10 @@
       :commands helm-projectile
       :config (helm-projectile-on))
     (projectile-global-mode)))
+
+(use-package markdown-mode
+  :mode ("\\.\\(markdown|md\\)$" . markdown-mode))
+
 
 
 ;; RU stuff
