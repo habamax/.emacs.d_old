@@ -1,6 +1,8 @@
 ;; Init file for Emacs
 ;; Maxim Kim <habamax@gmail.com>
 
+
+
 ;;;; Set up packaging system
 (setq package-enable-at-startup nil)
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")))
@@ -34,6 +36,12 @@
          ("C-c f i" . find-user-init-file)))
 ;;;;
 
+
+;; PATH for OSX
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize)
+  :if (eq system-type 'darwin))
 
 
 (use-package expand-region
@@ -121,14 +129,22 @@
     (smartparens-global-mode)
     (show-smartparens-global-mode)))
 
+(use-package leuven-theme
+  :config
+  (load-theme 'leuven t))
 
-(use-package monokai-theme
-  :config (load-theme 'monokai t))
+(use-package solarized-theme
+  :disabled t
+  :config
+  (setq solarized-high-contrast-mode-line t
+        solarized-use-more-italic t)
+  (load-theme 'solarized-dark t))
 
-;; rust
-;; (use-package rust-mode
-;;   :mode "\\.rs\\'"
-;;   :config (use-package flycheck-rust))
+(use-package zenburn-theme
+  :disabled t
+  :config
+  (load-theme 'zenburn-dark t))
+
 
 ;; magit
 (use-package magit
@@ -139,20 +155,6 @@
         magit-popup-use-prefix-argument 'default
         magit-revert-buffers t))
 
-
-;; flycheck
-;; (use-package flycheck
-;; :init (global-flycheck-mode))
-;;
-;; (use-package helm-flycheck
-;;   :bind ("C-c ! h" . helm-flycheck)
-;;   :config (global-flycheck-mode))
-
-;; ;; flyspell - use aspell instead of ispell
-;; (use-package flyspell
-;;   :commands (flyspell-mode flyspell-prog-mode)
-;;   :config (setq ispell-program-name (executable-find "aspell")
-;;                 ispell-extra-args '("--sug-mode=ultra")))
 
 
 ;; projectile
@@ -176,6 +178,44 @@
 
 
 
+;; Doesn't work as there is no let-alist blablabla.
+;; flycheck
+;; (use-package flycheck
+;; :init (global-flycheck-mode))
+;;
+;; (use-package helm-flycheck
+;;   :bind ("C-c ! h" . helm-flycheck)
+;;   :config (global-flycheck-mode))
+
+;; ;; flyspell - use aspell instead of ispell
+;; (use-package flyspell
+;;   :commands (flyspell-mode flyspell-prog-mode)
+;;   :config (setq ispell-program-name (executable-find "aspell")
+;;                 ispell-extra-args '("--sug-mode=ultra")))
+
+
+;; rust
+;; (use-package rust-mode
+;;   :mode "\\.rs\\'"
+;;   :config (use-package flycheck-rust))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 
+;; Non-Package setup
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq user-full-name "Maxim Kim"
+      user-mail-address "habamax@gmail.com")
+
+(when window-system
+  (tooltip-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode 1)
+  (scroll-bar-mode -1))
+
 ;; RU stuff
 (set-language-environment 'Russian)
 (set-default-coding-systems 'utf-8)
@@ -185,8 +225,6 @@
 ;; auto indent on Enter (should be default since Emacs 24.4)
 (electric-indent-mode t)
 (show-paren-mode t)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
 (column-number-mode t)
 
 ;; scroll to the top or bottom with C-v and M-v
@@ -212,15 +250,14 @@
       initial-major-mode 'text-mode)
 
 (setq make-backup-files nil)
+
 (setq suggest-key-bindings t)
 
 ;; y/n for yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; quit prompt
-(setq confirm-kill-emacs 'y-or-n-p)
 
-;; Calendar
+;; Calendar -- говорим и показываем по русски.
 (setq calendar-date-style 'iso)
 (setq calendar-week-start-day 1)
 (setq calendar-day-name-array ["Вс" "Пн" "Вт" "Ср" "Чт" "Пт" "Сб"])
