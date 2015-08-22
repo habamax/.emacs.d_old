@@ -79,7 +79,7 @@
 
  ;; company "complete anything"
 (use-package company
-  :commands (company-mode)
+  :defer 2
   :config
   (progn
     (use-package company-c-headers)
@@ -88,20 +88,9 @@
             :with company-yasnippet
             :with company-c-headers)
           company-backends)
-    (setq company-minimum-prefix-length 2
-          company-idle-delay nil
-          company-global-modes '(not gud-mode))))
-
-
-(use-package helm-company
-  :bind ("<backtab>" . helm-company)
-  :commands (helm-company)
-  :config
-  (progn
-    (company-mode)
-    (define-key company-mode-map (kbd "C-:") 'helm-company)
-    (define-key company-active-map (kbd "C-:") 'helm-company)))
-
+    (setq company-minimum-prefix-length 2)
+    (global-company-mode)))
+  
 
 ;; ace-window
 (use-package ace-window
@@ -129,7 +118,12 @@
     (smartparens-global-mode)
     (show-smartparens-global-mode)))
 
+(use-package cyberpunk-theme
+  :config
+  (load-theme 'cyberpunk t))
+
 (use-package leuven-theme
+  :disabled t
   :config
   (load-theme 'leuven t))
 
@@ -139,11 +133,6 @@
   (setq solarized-high-contrast-mode-line t
         solarized-use-more-italic t)
   (load-theme 'solarized-dark t))
-
-(use-package zenburn-theme
-  :disabled t
-  :config
-  (load-theme 'zenburn-dark t))
 
 
 ;; magit
@@ -202,7 +191,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; 
+;;
 ;; Non-Package setup
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -217,10 +206,10 @@
   (scroll-bar-mode -1))
 
 ;; RU stuff
-(set-language-environment 'Russian)
+(set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
-
+(setq default-input-method 'russian-computer)
 
 ;; auto indent on Enter (should be default since Emacs 24.4)
 (electric-indent-mode t)
@@ -273,3 +262,12 @@
 ;; org mode
 (setq org-src-fontify-natively t)
 (setq org-fontify-whole-heading-line t)
+
+;; irc
+(setq rcirc-default-nick "habamax"
+      rcirc-default-user-name "mxmkm"
+      rcirc-default-full-name "Maxim Kim")
+(setq rcirc-time-format "%Y-%m-%d %H:%M ")
+;; Join these channels at startup.
+(setq rcirc-startup-channels-alist
+      '(("\\.freenode\\.net$" "#emacs" "#racket")))
