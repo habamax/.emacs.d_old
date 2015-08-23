@@ -15,7 +15,7 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
-;;;;
+
 
 
 ;;;; Local packages
@@ -34,7 +34,9 @@
   :load-path "lisp/"
   :bind (("C-c W W" . haba-toggle-window-split)
          ("C-c f i" . find-user-init-file)))
-;;;;
+
+
+;;;; Melpa packages
 
 
 ;; PATH for OSX
@@ -73,6 +75,7 @@
           helm-move-to-line-cycle-in-source t
           helm-ff-file-name-history-use-recentf t
           helm-ff-auto-update-initial-value nil
+          helm-split-window-in-side-p t
           helm-tramp-verbose 9)
     (helm-mode)
     (helm-autoresize-mode t)))
@@ -118,20 +121,19 @@
     (smartparens-global-mode)
     (show-smartparens-global-mode)))
 
-(use-package cyberpunk-theme
-  :config
-  (load-theme 'cyberpunk t))
 
 (use-package leuven-theme
-  :disabled t
+  ;; :disabled t
   :config
   (load-theme 'leuven t))
 
 (use-package solarized-theme
+  :ensure nil
   :disabled t
   :config
   (setq solarized-high-contrast-mode-line t
-        solarized-use-more-italic t)
+        solarized-use-more-italic nil
+        solarized-use-less-bold nil)
   (load-theme 'solarized-dark t))
 
 
@@ -168,6 +170,8 @@
 
 
 ;; Doesn't work as there is no let-alist blablabla.
+;; I should have find some time to resolve it.
+;;
 ;; flycheck
 ;; (use-package flycheck
 ;; :init (global-flycheck-mode))
@@ -183,14 +187,7 @@
 ;;                 ispell-extra-args '("--sug-mode=ultra")))
 
 
-;; rust
-;; (use-package rust-mode
-;;   :mode "\\.rs\\'"
-;;   :config (use-package flycheck-rust))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Non-Package setup
 ;;
@@ -235,16 +232,25 @@
 ;; C-x C-l
 (put 'downcase-region 'disabled nil)
 
-(setq default-major-mode 'text-mode
-      initial-major-mode 'text-mode)
-
-(setq make-backup-files nil)
-
 (setq suggest-key-bindings t)
 
 ;; y/n for yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;;;; Backups
+(defvar --backup-directory (concat user-emacs-directory "backups"))
+(if (not (file-exists-p --backup-directory))
+        (make-directory --backup-directory t))
+(setq backup-directory-alist `(("." . ,--backup-directory)))
+
+(setq make-backup-files t
+      backup-by-copying t
+      version-control t
+      delete-old-versions t
+      delete-by-moving-to-trash t
+      kept-old-versions 6
+      kept-new-versions 9
+      auto-save-default t)
 
 ;; Calendar -- говорим и показываем по русски.
 (setq calendar-date-style 'iso)
@@ -263,11 +269,13 @@
 (setq org-src-fontify-natively t)
 (setq org-fontify-whole-heading-line t)
 
-;; irc
+;; RCIRC is quite basic they said.
+;; There is also CIRCE out there...
+;; But I tend to use ERC more.
 (setq rcirc-default-nick "habamax"
       rcirc-default-user-name "mxmkm"
       rcirc-default-full-name "Maxim Kim")
 (setq rcirc-time-format "%Y-%m-%d %H:%M ")
-;; Join these channels at startup.
-(setq rcirc-startup-channels-alist
-      '(("\\.freenode\\.net$" "#emacs" "#racket")))
+(add-hook 'rcirc-mode-hook
+          (lambda ()
+            (rcirc-track-minor-mode 1)))
