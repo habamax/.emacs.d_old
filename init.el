@@ -187,6 +187,52 @@
 ;;                 ispell-extra-args '("--sug-mode=ultra")))
 
 
+
+
+
+;;;; Built-in packages
+
+
+(use-package rcirc
+  :ensure nil
+  :init
+  (setq rcirc-default-nick "habamax"
+        rcirc-default-user-name "mxmkm"
+        rcirc-default-full-name "Maxim Kim")
+  (setq rcirc-time-format "%Y-%m-%d %H:%M ")
+  (add-hook 'rcirc-mode-hook
+            (lambda ()
+              (rcirc-track-minor-mode 1)))
+  )
+
+
+(use-package calendar
+  :ensure nil
+  :init
+  ;; Calendar -- говорим и показываем по русски.
+  (setq calendar-date-style 'iso)
+  (setq calendar-week-start-day 1)
+  (setq calendar-day-name-array ["Вс" "Пн" "Вт" "Ср" "Чт" "Пт" "Сб"])
+  (setq calendar-month-name-array ["Январь" "Февраль" "Март" "Апрель" "Май" "Июнь" "Июль" "Август" "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"])
+  )
+
+
+(use-package org
+  :ensure nil
+  :bind (("C-c o a" . org-agenda)
+         ("C-c o l" . org-store-link)
+         ("C-c o c" . org-capture))
+  :init
+  (setq org-src-fontify-natively t
+        org-fontify-whole-heading-line t
+        org-return-follows-link t
+        org-special-ctrl-a/e t
+        org-special-ctrl-k t))
+
+
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Non-Package setup
@@ -220,18 +266,10 @@
 (setq sentence-end-double-space nil)
 
 (setq-default indent-tabs-mode nil)
-
 (delete-selection-mode 1)
-
-(setq ring-bell-function #'ignore)
-
 (recentf-mode 1)
-
-;; C-x C-u
-(put 'upcase-region 'disabled nil)
-;; C-x C-l
-(put 'downcase-region 'disabled nil)
-
+(setq ring-bell-function #'ignore)
+(setq disabled-command-function nil)
 (setq suggest-key-bindings t)
 
 ;; y/n for yes/no
@@ -252,11 +290,6 @@
       kept-new-versions 9
       auto-save-default t)
 
-;; Calendar -- говорим и показываем по русски.
-(setq calendar-date-style 'iso)
-(setq calendar-week-start-day 1)
-(setq calendar-day-name-array ["Вс" "Пн" "Вт" "Ср" "Чт" "Пт" "Сб"])
-(setq calendar-month-name-array ["Январь" "Февраль" "Март" "Апрель" "Май" "Июнь" "Июль" "Август" "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"])
 
 (setq inhibit-startup-message t)
 (setq inhibit-splash-screen t)
@@ -265,17 +298,6 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook 'text-mode-hook-identify)
 
-;; org mode
-(setq org-src-fontify-natively t)
-(setq org-fontify-whole-heading-line t)
 
-;; RCIRC is quite basic they said.
-;; There is also CIRCE out there...
-;; But I tend to use ERC more.
-(setq rcirc-default-nick "habamax"
-      rcirc-default-user-name "mxmkm"
-      rcirc-default-full-name "Maxim Kim")
-(setq rcirc-time-format "%Y-%m-%d %H:%M ")
-(add-hook 'rcirc-mode-hook
-          (lambda ()
-            (rcirc-track-minor-mode 1)))
+;; Global rebinds
+(global-set-key (kbd "M-/") 'hippie-expand)
