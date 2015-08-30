@@ -107,6 +107,7 @@
     ("b" next-buffer "Next buffer")
     ("B" previous-buffer "Previous buffer")
     ("k" kill-this-buffer "Kill buffer")
+    ("m" delete-other-windows "Maximize window")
     ("q" nil "quit")))
 
 (use-package golden-ratio
