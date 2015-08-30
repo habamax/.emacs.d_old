@@ -31,4 +31,28 @@
   (find-file-other-window user-init-file))
 
 
+;; Next Buffer
+(defun haba-next-buffer ()
+  (interactive)
+  (let ((bread-crumb(buffer-name)))
+    (next-buffer)
+    (while
+        (and
+         (string-match-p "^\*" (buffer-name))
+         (not (equal bread-crumb (buffer-name))))
+      (next-buffer))))
+
+
+;; Next Buffer
+(defun haba-previous-buffer ()
+  (interactive)
+  (let ((bread-crumb (buffer-name)))
+    (previous-buffer)
+    (while
+        (and
+         (string-match-p "^\*" (buffer-name))
+         (not (equal bread-crumb (buffer-name))))
+      (previous-buffer))))
+
+
 (provide 'haba-misc)

@@ -31,6 +31,7 @@
 
 (use-package haba-misc
   :ensure nil
+  :commands haba-next-buffer haba-previous-buffer
   :load-path "lisp/"
   :bind (("C-c W W" . haba-toggle-window-split)
          ("C-c f i" . find-user-init-file)))
@@ -105,8 +106,8 @@
     ("O" (other-window -1) "Previous window")
     ("f" other-frame "Next frame")
     ("F" (other-frame -1) "Previous frame")
-    ("b" next-buffer "Next buffer")
-    ("B" previous-buffer "Previous buffer")
+    ("b" haba-next-buffer "Next buffer")
+    ("B" haba-previous-buffer "Previous buffer")
     ("k" kill-this-buffer "Kill buffer")
     ("m" delete-other-windows "Maximize window")
     ("q" nil "quit")))
