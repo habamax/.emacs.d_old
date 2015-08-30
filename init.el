@@ -78,6 +78,7 @@
           helm-split-window-in-side-p t
           helm-tramp-verbose 9)
     (helm-mode)
+    (add-hook 'helm-minibuffer-set-up-hook 'deactivate-input-method)
     (helm-autoresize-mode t)))
 
  ;; company "complete anything"
@@ -334,3 +335,12 @@
 ;; Customize stuff
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
+
+
+
+;; (add-hook 'minibuffer-setup-hook
+;;           (lambda ()
+;;             (if (not (bound-and-true-p isearch-mode))
+;;                 (set-input-method nil))))
+
+
