@@ -95,13 +95,19 @@
     (global-company-mode)))
   
 
-;; ace-window
-(use-package ace-window
-  :bind* ("M-o" . ace-window)
+(use-package hydra
+  :bind ("C-." . hydra-cycle-windows/body)
   :config
-  (progn
-    (setq aw-keys '(?j ?k ?l ?u ?i ?o ?n ?m))
-    (add-to-list 'golden-ratio-extra-commands 'ace-window)))
+  (defhydra hydra-cycle-windows ()
+    "Windows, Buffers, Frames"
+    ("o" other-window "Next window")
+    ("O" (other-window -1) "Previous window")
+    ("f" other-frame "Next frame")
+    ("F" (other-frame -1) "Previous frame")
+    ("b" next-buffer "Next buffer")
+    ("B" previous-buffer "Previous buffer")
+    ("k" kill-this-buffer "Kill buffer")
+    ("q" nil "quit")))
 
 (use-package golden-ratio
   :diminish golden-ratio-mode
@@ -123,13 +129,18 @@
 
 
 (use-package leuven-theme
-  ;; :disabled t
+  :disabled t
   :config
   (load-theme 'leuven t))
 
+(use-package cyberpunk-theme
+  :disabled t
+  :config
+  (load-theme 'cyberpunk t))
+
 (use-package solarized-theme
   :ensure nil
-  :disabled t
+  ;; :disabled t
   :config
   (setq solarized-high-contrast-mode-line t
         solarized-use-more-italic nil
@@ -192,17 +203,32 @@
 
 ;;;; Built-in packages
 
+;; (use-package erc
+;;   :ensure nil
+;;   :init
+;;   (setq erc-nick "habamax"
+;;         erc-user-full-name "Maxim Kim"
+;;         erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor")))
+
+;;   (add-hook 'erc-mode-hook
+;;             (lambda ()
+;;               (erc-track-minor-mode 1))))
 
 (use-package rcirc
   :ensure nil
   :init
   (setq rcirc-default-nick "habamax"
         rcirc-default-user-name "mxmkm"
-        rcirc-default-full-name "Maxim Kim")
-  (setq rcirc-time-format "%Y-%m-%d %H:%M ")
+        rcirc-default-full-name "Maxim Kim"
+        rcirc-fill-column 'frame-width
+        rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY" "MODE")
+        rcirc-time-format "[%Y-%m-%d %H:%M] "
+        rcirc-server-alist '(("irc.freenode.net" :channels ("#emacs" "#lor"))))
   (add-hook 'rcirc-mode-hook
             (lambda ()
-              (rcirc-track-minor-mode 1)))
+              (rcirc-track-minor-mode 1)
+              (set (make-local-variable 'scroll-conservatively)
+                 8192)))
   )
 
 
