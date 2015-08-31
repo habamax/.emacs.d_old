@@ -1,13 +1,21 @@
 (setq mac-command-modifier 'control)
 
-;; (let ((path
-;;        (concat (getenv "HOME") "/bin:" (getenv "PATH"))))
-;;   (setenv "PATH" path)
-;;   (setq exec-path (split-string path ":")))
+;; choose font
+;; TODO: make a function with a loop
+(cond 
+ ((find-font (font-spec :name "Hack"))
+  (set-face-attribute 'default nil
+                      :family "Hack"
+                      :height 160))
+ ((find-font (font-spec :name "Menlo"))
+  (set-face-attribute 'default nil
+                      :family "Menlo"
+                      :height 160))
+ ((find-font (font-spec :name "DejaVu Sans Mono"))
+  (set-face-attribute 'default nil
+                      :family "DejaVu Sans Mono"
+                      :height 160)))
 
-(set-face-attribute 'default nil
-		    :family "Menlo"
-		    :height 160)
 
 (setq default-frame-alist
       '(

@@ -132,7 +132,7 @@
 
 
 (use-package leuven-theme
-  :disabled t
+  ;; :disabled t
   :config
   (load-theme 'leuven t))
 
@@ -143,7 +143,7 @@
 
 (use-package solarized-theme
   :ensure nil
-  ;; :disabled t
+  :disabled t
   :config
   (setq solarized-high-contrast-mode-line t
         solarized-use-more-italic nil
