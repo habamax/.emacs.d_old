@@ -48,9 +48,7 @@
 
 
 (use-package expand-region
-  :bind ("C-." . er/expand-region)
-  :config
-  (setq expand-region-contract-fast-key ","))
+  :bind ("C-=" . er/expand-region))
 
 (use-package helm
   :diminish helm-mode
@@ -102,18 +100,23 @@
   
 
 (use-package hydra
-  :bind ("C-1" . hydra-cycle-windows/body)
+  :bind ("C-1" . hydra-cycle-other/body)
+  :bind ("C-x o" . hydra-cycle-windows/body)
   :config
-  (defhydra hydra-cycle-windows ()
-    "Windows, Buffers, Frames"
-    ("o" other-window "Next window")
-    ("O" (other-window -1) "Previous window")
+  (defhydra hydra-cycle-windows
+    (:body-pre (other-window 1))
+    "Windows"
+    ("o" (other-window 1) "Next")
+    ("O" (other-window -1) "Previous")
+    ("m" delete-other-windows "Maximize window"))
+  
+  (defhydra hydra-cycle-other ()
+    "Frames, Buffers"
     ("f" other-frame "Next frame")
     ("F" (other-frame -1) "Previous frame")
     ("b" haba-next-buffer "Next buffer")
     ("B" haba-previous-buffer "Previous buffer")
     ("k" kill-this-buffer "Kill buffer")
-    ("m" delete-other-windows "Maximize window")
     ("q" nil "quit")))
 
 (use-package golden-ratio
@@ -337,9 +340,9 @@
 
 
 ;; Subtle facelifting
-;; (setq cl-bg "#EAEAEA")
-;; (set-face-attribute 'default nil :foreground "black" :background cl-bg)
-;; (set-face-attribute 'fringe nil :background cl-bg)
-;; (set-face-attribute 'mode-line nil :background "#FFBFAF" :box '(:line-width 1 :color "#F0A090" :style released-button))
-;; (set-face-attribute 'mode-line-inactive nil :background "#DADADA" :box '(:line-width 1 :color "#DADADA"))
-;; (set-face-attribute 'font-lock-comment-face nil :foreground "#7f7f7f")
+(setq cl-bg "#EAEAEA")
+(set-face-attribute 'default nil :foreground "black" :background cl-bg)
+(set-face-attribute 'fringe nil :background cl-bg)
+(set-face-attribute 'mode-line nil :background "#FFBFAF" :box '(:line-width 1 :color "#F0A090" :style released-button))
+(set-face-attribute 'mode-line-inactive nil :background "#DADADA" :box '(:line-width 1 :color "#DADADA"))
+(set-face-attribute 'font-lock-comment-face nil :foreground "#7f7f7f")

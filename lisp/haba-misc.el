@@ -24,11 +24,12 @@
 	  (select-window first-win)
 	  (if this-win-2nd (other-window 1))))))
 
+
 ;; Quick dotemacs/initel opening
 (defun find-user-init-file ()
   "Edit the `user-init-file', in another window"
   (interactive)
-  (find-file-other-window user-init-file))
+  (find-file user-init-file))
 
 
 ;; Next Buffer
