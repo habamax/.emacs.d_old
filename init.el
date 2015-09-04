@@ -346,3 +346,9 @@
 (set-face-attribute 'mode-line nil :background "#FFBFAF" :box '(:line-width 1 :color "#F0A090" :style released-button))
 (set-face-attribute 'mode-line-inactive nil :background "#DADADA" :box '(:line-width 1 :color "#DADADA"))
 (set-face-attribute 'font-lock-comment-face nil :foreground "#7f7f7f")
+;; org
+(set-face-attribute 'org-level-1 nil :height 1.5 :weight 'normal :foreground "black" :background "gray88")
+(set-face-attribute 'org-level-2 nil :height 1.3 :weight 'normal :foreground "black" :background "#d5e5f5")
+(set-face-attribute 'org-level-3 nil :height 1.1 :weight 'normal :foreground "black" :background "#d5e5d5")
+
+
