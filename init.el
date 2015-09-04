@@ -48,16 +48,20 @@
 
 
 (use-package expand-region
-  :bind ("C-=" . er/expand-region))
+  :bind ("C-." . er/expand-region)
+  :config
+  (setq expand-region-contract-fast-key ","))
 
 (use-package helm
   :diminish helm-mode
-  :bind* (("M-x" . helm-M-x)
+  :defer 2
+  :bind* (("M-x"     . helm-M-x)
           ("C-c M-x" . execute-extended-command)
-          ("M-]" . helm-command-prefix)
-          ("M-y" . helm-show-kill-ring)
+          ("C-c h"   . helm-command-prefix)
+          ("M-s o"   . helm-occur)
+          ("M-y"     . helm-show-kill-ring)
           ("C-x C-b" . helm-buffers-list)
-          ("C-x b" . helm-mini)
+          ("C-x b"   . helm-mini)
           ("C-x C-f" . helm-find-files))
   :config
   (progn
@@ -98,7 +102,7 @@
   
 
 (use-package hydra
-  :bind ("C-." . hydra-cycle-windows/body)
+  :bind ("C-1" . hydra-cycle-windows/body)
   :config
   (defhydra hydra-cycle-windows ()
     "Windows, Buffers, Frames"
@@ -132,7 +136,7 @@
 
 
 (use-package leuven-theme
-  ;; :disabled t
+  :disabled t
   :config
   (load-theme 'leuven t))
 
@@ -165,7 +169,7 @@
 ;; projectile
 (use-package projectile
   :diminish projectile-mode
-  :bind* ("M-[" . projectile-command-map)
+  :bind* ("C-c p" . projectile-command-map)
   :demand
   :config
   (progn
@@ -206,17 +210,6 @@
 
 ;;;; Built-in packages
 
-;; (use-package erc
-;;   :ensure nil
-;;   :init
-;;   (setq erc-nick "habamax"
-;;         erc-user-full-name "Maxim Kim"
-;;         erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor")))
-
-;;   (add-hook 'erc-mode-hook
-;;             (lambda ()
-;;               (erc-track-minor-mode 1))))
-
 (use-package rcirc
   :ensure nil
   :init
@@ -227,11 +220,11 @@
         rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY" "MODE")
         rcirc-time-format "[%Y-%m-%d %H:%M] "
         rcirc-server-alist '(("irc.freenode.net" :channels ("#emacs" "#lor"))))
-  (add-hook 'rcirc-mode-hook
-            (lambda ()
-              (rcirc-track-minor-mode 1)
-              (set (make-local-variable 'scroll-conservatively)
-                 8192)))
+  ;; (add-hook 'rcirc-mode-hook
+  ;;           (lambda ()
+  ;;             (rcirc-track-minor-mode 1)
+  ;;             (set (make-local-variable 'scroll-conservatively)
+  ;;                8192)))
   )
 
 
@@ -259,6 +252,12 @@
         org-special-ctrl-a/e t
         org-special-ctrl-k t))
 
+(use-package ledger
+  :ensure nil
+  :mode ("\\.ledger$" . ledger-mode)
+  :init
+  (setq ledger-default-date-format "%Y-%m-%d"
+        ledger-reconcile-default-commodity "RUR"))
 
 
 
@@ -284,7 +283,6 @@
 (set-terminal-coding-system 'utf-8)
 (setq default-input-method 'russian-computer)
 
-;; auto indent on Enter (should be default since Emacs 24.4)
 (electric-indent-mode t)
 (show-paren-mode t)
 (column-number-mode t)
@@ -338,10 +336,10 @@
 (load custom-file 'noerror)
 
 
-
-;; (add-hook 'minibuffer-setup-hook
-;;           (lambda ()
-;;             (if (not (bound-and-true-p isearch-mode))
-;;                 (set-input-method nil))))
-
-
+;; Subtle facelifting
+;; (setq cl-bg "#EAEAEA")
+;; (set-face-attribute 'default nil :foreground "black" :background cl-bg)
+;; (set-face-attribute 'fringe nil :background cl-bg)
+;; (set-face-attribute 'mode-line nil :background "#FFBFAF" :box '(:line-width 1 :color "#F0A090" :style released-button))
+;; (set-face-attribute 'mode-line-inactive nil :background "#DADADA" :box '(:line-width 1 :color "#DADADA"))
+;; (set-face-attribute 'font-lock-comment-face nil :foreground "#7f7f7f")

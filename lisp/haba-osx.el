@@ -3,10 +3,6 @@
 ;; choose font
 ;; TODO: make a function with a loop
 (cond 
- ((find-font (font-spec :name "Hack"))
-  (set-face-attribute 'default nil
-                      :family "Hack"
-                      :height 160))
  ((find-font (font-spec :name "Menlo"))
   (set-face-attribute 'default nil
                       :family "Menlo"
@@ -19,8 +15,8 @@
 
 (setq default-frame-alist
       '(
-	(width . 120)
-	(height . 38)
+	(width . 125)
+	(height . 39)
 	))
   
 
