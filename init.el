@@ -2,6 +2,104 @@
 ;; Maxim Kim <habamax@gmail.com>
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Non-Package setup
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq user-full-name "Maxim Kim"
+      user-mail-address "habamax@gmail.com")
+
+(setq inhibit-startup-message t
+      inhibit-splash-screen t
+      initial-scratch-message "")
+
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'control))
+
+(when window-system
+  (tooltip-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode 1)
+  (scroll-bar-mode -1)
+
+
+  ;; choose font
+  ;; TODO: make a function with a loop
+  (cond 
+   ((find-font (font-spec :name "Menlo"))
+    (set-face-attribute 'default nil
+                        :family "Menlo"
+                        :height 160))
+   ((find-font (font-spec :name "DejaVu Sans Mono"))
+    (set-face-attribute 'default nil
+                        :family "DejaVu Sans Mono"
+                        :height 160)))
+
+  (setq default-frame-alist '((fullscreen . maximized))))
+
+
+;; RU stuff
+(set-language-environment 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(setq default-input-method 'russian-computer)
+
+(electric-indent-mode t)
+(show-paren-mode t)
+(column-number-mode t)
+
+;; scroll to the top or bottom with C-v and M-v
+(setq scroll-error-top-bottom t)
+
+;; M-a and M-e use punct and single space as sentence delimiter
+(setq sentence-end-double-space nil)
+
+(setq-default indent-tabs-mode nil)
+(delete-selection-mode 1)
+(recentf-mode 1)
+(setq ring-bell-function #'ignore)
+(setq disabled-command-function nil)
+(setq suggest-key-bindings t)
+
+;; y/n for yes/no
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;;;; Backups
+(defvar --backup-directory (concat user-emacs-directory "backups"))
+(if (not (file-exists-p --backup-directory))
+        (make-directory --backup-directory t))
+(setq backup-directory-alist `(("." . ,--backup-directory)))
+
+(setq make-backup-files t
+      backup-by-copying t
+      version-control t
+      delete-old-versions t
+      delete-by-moving-to-trash t
+      kept-old-versions 6
+      kept-new-versions 9
+      auto-save-default t)
+
+;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; (add-hook 'text-mode-hook 'text-mode-hook-identify)
+
+
+;; Global rebinds
+(global-set-key (kbd "M-/") 'hippie-expand)
+
+
+;; Customize stuff
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file 'noerror)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Packages for the rescue
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;; Set up packaging system
 (setq package-enable-at-startup nil)
@@ -19,10 +117,6 @@
 
 
 ;;;; Local packages
-(use-package haba-osx
-  :ensure nil
-  :load-path "lisp/"
-  :if (eq system-type 'darwin))
 
 (use-package haba-comment
   :ensure nil
@@ -148,6 +242,11 @@
   :config
   (load-theme 'cyberpunk t))
 
+(use-package gotham-theme
+  :disabled t
+  :config
+  (load-theme 'gotham t))
+
 (use-package solarized-theme
   :ensure nil
   :disabled t
@@ -223,11 +322,29 @@
         rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY" "MODE")
         rcirc-time-format "[%Y-%m-%d %H:%M] "
         rcirc-server-alist '(("irc.freenode.net" :channels ("#emacs" "#lor"))))
-  ;; (add-hook 'rcirc-mode-hook
-  ;;           (lambda ()
-  ;;             (rcirc-track-minor-mode 1)
-  ;;             (set (make-local-variable 'scroll-conservatively)
-  ;;                8192)))
+  :config
+  (defun-rcirc-command reconnect (arg)
+     "Reconnect the server process."
+     (interactive "i")
+     (unless process
+       (error "There's no process for this target"))
+     (let* ((server (car (process-contact process)))
+            (port (process-contact process :service))
+            (nick (rcirc-nick process))
+            channels query-buffers)
+       (dolist (buf (buffer-list))
+         (with-current-buffer buf
+           (when (eq process (rcirc-buffer-process))
+             (remove-hook 'change-major-mode-hook
+                          'rcirc-change-major-mode-hook)
+             (if (rcirc-channel-p rcirc-target)
+                 (setq channels (cons rcirc-target channels))
+               (setq query-buffers (cons buf query-buffers))))))
+       (delete-process process)
+       (rcirc-connect server port nick
+                      rcirc-default-user-name
+                      rcirc-default-full-name
+                      channels)))
   )
 
 
@@ -263,92 +380,5 @@
         ledger-reconcile-default-commodity "RUR"))
 
 
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Non-Package setup
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq user-full-name "Maxim Kim"
-      user-mail-address "habamax@gmail.com")
-
-(when window-system
-  (tooltip-mode -1)
-  (tool-bar-mode -1)
-  (menu-bar-mode 1)
-  (scroll-bar-mode -1))
-
-;; RU stuff
-(set-language-environment 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(setq default-input-method 'russian-computer)
-
-(electric-indent-mode t)
-(show-paren-mode t)
-(column-number-mode t)
-
-;; scroll to the top or bottom with C-v and M-v
-(setq scroll-error-top-bottom t)
-
-;; M-a and M-e use punct and single space as sentence delimiter
-(setq sentence-end-double-space nil)
-
-(setq-default indent-tabs-mode nil)
-(delete-selection-mode 1)
-(recentf-mode 1)
-(setq ring-bell-function #'ignore)
-(setq disabled-command-function nil)
-(setq suggest-key-bindings t)
-
-;; y/n for yes/no
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;;;; Backups
-(defvar --backup-directory (concat user-emacs-directory "backups"))
-(if (not (file-exists-p --backup-directory))
-        (make-directory --backup-directory t))
-(setq backup-directory-alist `(("." . ,--backup-directory)))
-
-(setq make-backup-files t
-      backup-by-copying t
-      version-control t
-      delete-old-versions t
-      delete-by-moving-to-trash t
-      kept-old-versions 6
-      kept-new-versions 9
-      auto-save-default t)
-
-
-(setq inhibit-startup-message t)
-(setq inhibit-splash-screen t)
-(setq initial-scratch-message "")
-
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'text-mode-hook 'text-mode-hook-identify)
-
-
-;; Global rebinds
-(global-set-key (kbd "M-/") 'hippie-expand)
-
-
-;; Customize stuff
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(load custom-file 'noerror)
-
-
-;; Subtle facelifting
-(setq cl-bg "#EAEAEA")
-(set-face-attribute 'default nil :foreground "black" :background cl-bg)
-(set-face-attribute 'fringe nil :background cl-bg)
-(set-face-attribute 'mode-line nil :background "#FFBFAF" :box '(:line-width 1 :color "#F0A090" :style released-button))
-(set-face-attribute 'mode-line-inactive nil :background "#DADADA" :box '(:line-width 1 :color "#DADADA"))
-(set-face-attribute 'font-lock-comment-face nil :foreground "#7f7f7f")
-;; org
-(set-face-attribute 'org-level-1 nil :height 1.5 :weight 'normal :foreground "black" :background "gray88")
-(set-face-attribute 'org-level-2 nil :height 1.3 :weight 'normal :foreground "black" :background "#d5e5f5")
-(set-face-attribute 'org-level-3 nil :height 1.1 :weight 'normal :foreground "black" :background "#d5e5d5")
 
 
