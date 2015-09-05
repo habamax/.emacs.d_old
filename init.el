@@ -140,7 +140,6 @@
   (exec-path-from-shell-initialize)
   :if (eq system-type 'darwin))
 
-
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
@@ -378,7 +377,3 @@
   :init
   (setq ledger-default-date-format "%Y-%m-%d"
         ledger-reconcile-default-commodity "RUR"))
-
-
-
-
