@@ -195,7 +195,14 @@
 (use-package hydra
   :bind ("C-1" . hydra-cycle-other/body)
   :bind ("C-x o" . hydra-cycle-windows/body)
+  :bind ("C-c i" . hydra-insert/body)
   :config
+  (defhydra hydra-insert ()
+    "Insert"
+    ("E" (insert-string "EUR") "EUR")
+    ("U" (insert-string "USD") "USD")
+    ("R" (insert-string "RUR") "RUR"))
+  
   (defhydra hydra-cycle-windows
     (:body-pre (other-window 1))
     "Windows"
@@ -232,7 +239,7 @@
 
 
 (use-package leuven-theme
-  :disabled t
+  ;; :disabled t
   :config
   (load-theme 'leuven t))
 
@@ -319,9 +326,12 @@
         rcirc-default-full-name "Maxim Kim"
         rcirc-fill-column 'frame-width
         rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY" "MODE")
-        rcirc-time-format "[%Y-%m-%d %H:%M] "
+        ;; rcirc-time-format "[%Y-%m-%d %H:%M] "
+        rcirc-time-format "[%H:%M] "
         rcirc-server-alist '(("irc.freenode.net" :channels ("#emacs" "#lor"))))
   :config
+  (rcirc-track-minor-mode 1)
+  
   (defun-rcirc-command reconnect (arg)
      "Reconnect the server process."
      (interactive "i")
