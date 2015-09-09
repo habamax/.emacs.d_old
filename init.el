@@ -386,4 +386,5 @@
   :mode ("\\.ledger$" . ledger-mode)
   :init
   (setq ledger-default-date-format "%Y-%m-%d"
+        ledger-use-iso-dates t
         ledger-reconcile-default-commodity "RUR"))
