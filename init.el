@@ -208,7 +208,13 @@
     "Windows"
     ("o" (other-window 1) "Next")
     ("O" (other-window -1) "Previous")
-    ("m" delete-other-windows "Maximize window"))
+    ("]" enlarge-window-horizontally "Enlarge horizontal")
+    ("[" shrink-window-horizontally "Shrink horizontal")
+    ("=" enlarge-window "Enlarge vertival")
+    ("-" shrink-window "Shrink vertical")
+    ("b" balance-windows "Balance windows")
+    ("m" delete-other-windows "Maximize window")
+    ("c" delete-window "Close window"))
   
   (defhydra hydra-cycle-other ()
     "Frames, Buffers"
@@ -219,9 +225,9 @@
     ("k" kill-this-buffer "Kill buffer")
     ("q" nil "quit")))
 
-(use-package golden-ratio
-  :diminish golden-ratio-mode
-  :config (golden-ratio-mode 1))
+;; (use-package golden-ratio
+;;   :diminish golden-ratio-mode
+;;   :config (golden-ratio-mode 1))
 
 (use-package rainbow-delimiters
   :config
