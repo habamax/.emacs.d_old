@@ -54,6 +54,10 @@
 (show-paren-mode t)
 (column-number-mode t)
 
+;(add-hook 'prog-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'prog-mode-hook 'linum-mode)
+
+
 ;; scroll to the top or bottom with C-v and M-v
 (setq scroll-error-top-bottom t)
 
@@ -323,6 +327,31 @@
 
 
 ;;;; Built-in packages
+
+(use-package erc
+  :ensure nil
+  :init
+  (setq erc-fill-column (- (window-width) 2)
+        erc-nick '("habamax" "mxmkm")
+        erc-track-minor-mode t
+        erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor")))
+  (defun erc-freenode ()
+    (interactive)
+    (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
+  
+  :config
+  (make-variable-buffer-local 'erc-fill-column)
+  (add-hook 'window-configuration-change-hook 
+            '(lambda ()
+               (save-excursion
+                 (walk-windows
+                  (lambda (w)
+                    (let ((buffer (window-buffer w)))
+                      (set-buffer buffer)
+                      (when (eq major-mode 'erc-mode)
+                        (setq erc-fill-column (- (window-width w) 2)))))))))
+  )
+
 
 (use-package rcirc
   :ensure nil
