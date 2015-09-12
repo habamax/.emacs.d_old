@@ -28,6 +28,10 @@
   ;; choose font
   ;; TODO: make a function with a loop
   (cond 
+   ((find-font (font-spec :name "Anonymous Pro"))
+    (set-face-attribute 'default nil
+                        :family "Anonymous Pro"
+                        :height 180))
    ((find-font (font-spec :name "Menlo"))
     (set-face-attribute 'default nil
                         :family "Menlo"
@@ -113,7 +117,6 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
-
 
 
 ;;;; Local packages
@@ -225,10 +228,6 @@
     ("k" kill-this-buffer "Kill buffer")
     ("q" nil "quit")))
 
-;; (use-package golden-ratio
-;;   :diminish golden-ratio-mode
-;;   :config (golden-ratio-mode 1))
-
 (use-package rainbow-delimiters
   :config
   (progn
@@ -241,6 +240,7 @@
   (progn
     (require 'smartparens-config)
     (smartparens-global-mode)
+    (sp-use-smartparens-bindings)
     (show-smartparens-global-mode)))
 
 
