@@ -132,10 +132,9 @@
 
 (use-package haba-misc
   :ensure nil
-  :commands haba-next-buffer haba-previous-buffer
+  :commands haba-next-buffer haba-previous-buffer haba-toggle-window-split
   :load-path "lisp/"
-  :bind (("C-c W W" . haba-toggle-window-split)
-         ("C-c f i" . find-user-init-file)))
+  :bind (("C-c f i" . find-user-init-file)))
 
 
 ;;;; Melpa packages
@@ -200,7 +199,7 @@
   
 
 (use-package hydra
-  :bind ("C-1" . hydra-cycle-other/body)
+  :bind ("C-c n" . hydra-cycle-next/body)
   :bind ("C-x o" . hydra-cycle-windows/body)
   :bind ("C-c i" . hydra-insert/body)
   :config
@@ -215,15 +214,17 @@
     "Windows"
     ("o" (other-window 1) "Next")
     ("O" (other-window -1) "Previous")
+    ("t" haba-toggle-window-split "Toggle split")
     ("]" enlarge-window-horizontally "Enlarge horizontal")
     ("[" shrink-window-horizontally "Shrink horizontal")
     ("=" enlarge-window "Enlarge vertival")
     ("-" shrink-window "Shrink vertical")
     ("b" balance-windows "Balance windows")
     ("m" delete-other-windows "Maximize window")
-    ("c" delete-window "Close window"))
+    ("c" delete-window "Close window")
+    ("q" nil "quit"))
   
-  (defhydra hydra-cycle-other ()
+  (defhydra hydra-cycle-next ()
     "Frames, Buffers"
     ("f" other-frame "Next frame")
     ("F" (other-frame -1) "Previous frame")
@@ -244,7 +245,6 @@
   (progn
     (require 'smartparens-config)
     (smartparens-global-mode)
-    (sp-use-smartparens-bindings)
     (show-smartparens-global-mode)))
 
 
@@ -252,11 +252,6 @@
   ;; :disabled t
   :config
   (load-theme 'leuven t))
-
-(use-package cyberpunk-theme
-  :disabled t
-  :config
-  (load-theme 'cyberpunk t))
 
 (use-package gotham-theme
   :disabled t
@@ -334,7 +329,7 @@
   (setq erc-fill-column (- (window-width) 2)
         erc-nick '("habamax" "mxmkm")
         erc-track-minor-mode t
-        erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor")))
+        erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#racket")))
   (defun erc-freenode ()
     (interactive)
     (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
@@ -360,7 +355,6 @@
         rcirc-default-user-name "mxmkm"
         rcirc-default-full-name "Maxim Kim"
         rcirc-fill-column 'frame-width
-        rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY" "MODE")
         ;; rcirc-time-format "[%Y-%m-%d %H:%M] "
         rcirc-time-format "[%H:%M] "
         rcirc-server-alist '(("irc.freenode.net" :channels ("#emacs" "#lor"))))
