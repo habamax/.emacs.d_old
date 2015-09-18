@@ -28,14 +28,14 @@
   ;; choose font
   ;; TODO: make a function with a loop
   (cond 
-   ((find-font (font-spec :name "Anonymous Pro"))
-    (set-face-attribute 'default nil
-                        :family "Anonymous Pro"
-                        :height 180))
+   ;; ((find-font (font-spec :name "Source Code Pro"))
+   ;;  (set-face-attribute 'default nil
+   ;;                      :family "Source Code Pro"
+   ;;                      :height 140))
    ((find-font (font-spec :name "Menlo"))
     (set-face-attribute 'default nil
                         :family "Menlo"
-                        :height 160))
+                        :height 140))
    ((find-font (font-spec :name "DejaVu Sans Mono"))
     (set-face-attribute 'default nil
                         :family "DejaVu Sans Mono"
@@ -43,33 +43,28 @@
 
   (setq default-frame-alist '((fullscreen . maximized))))
 
-
 ;; RU stuff
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (setq default-input-method 'russian-computer)
+;; scroll to the top or bottom with C-v and M-v
+(setq scroll-error-top-bottom t)
+;; M-a and M-e use punct and single space as sentence delimiter
+(setq sentence-end-double-space nil)
+(setq-default indent-tabs-mode nil)
+(delete-selection-mode 1)
+(setq ring-bell-function #'ignore)
+(setq disabled-command-function nil)
+(setq suggest-key-bindings t)
 
 (electric-indent-mode t)
 (show-paren-mode t)
 (column-number-mode t)
-
-;(add-hook 'prog-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'prog-mode-hook 'linum-mode)
-
-
-;; scroll to the top or bottom with C-v and M-v
-(setq scroll-error-top-bottom t)
-
-;; M-a and M-e use punct and single space as sentence delimiter
-(setq sentence-end-double-space nil)
-
-(setq-default indent-tabs-mode nil)
-(delete-selection-mode 1)
 (recentf-mode 1)
-(setq ring-bell-function #'ignore)
-(setq disabled-command-function nil)
-(setq suggest-key-bindings t)
+
+;; (add-hook 'prog-mode-hook '(lambda () (linum-mode 1)))
+;; (add-hook 'prog-mode-hook 'linum-mode)
 
 ;; y/n for yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -97,7 +92,7 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 
 
-;; Customize stuff
+;; 'Customize' stuff
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
 
@@ -132,7 +127,7 @@
 
 (use-package haba-misc
   :ensure nil
-  :commands haba-next-buffer haba-previous-buffer haba-toggle-window-split
+  :commands (haba-next-buffer haba-previous-buffer haba-toggle-window-split)
   :load-path "lisp/"
   :bind (("C-c f i" . find-user-init-file)))
 
@@ -179,6 +174,8 @@
           helm-ff-auto-update-initial-value nil
           helm-split-window-in-side-p t
           helm-tramp-verbose 9)
+    (setq ;helm-grep-ag-command "pt -e --nogroup --nocolor"
+          helm-ag-base-command "pt -e --nogroup --nocolor")
     (helm-mode)
     (add-hook 'helm-minibuffer-set-up-hook 'deactivate-input-method)
     (helm-autoresize-mode t)))
@@ -282,21 +279,68 @@
 ;; projectile
 (use-package projectile
   :diminish projectile-mode
-  :bind* ("C-c p" . projectile-command-map)
-  :demand
-  :config
-  (progn
-    (setq projectile-completion-system 'helm
+  :bind-keymap ("C-c p" . projectile-mode-map)
+  :init
+      (setq projectile-completion-system 'helm
           projectile-switch-project-action 'helm-projectile
           projectile-enable-caching t
           projectile-file-exists-remote-cache-expire (* 10 60))
+  :config
+  (progn
+    ;; (bind-key "C-c p" 'projectile-command-map projectile-mode-map)
     (use-package helm-projectile
-      :commands helm-projectile
       :config (helm-projectile-on))
     (projectile-global-mode)))
 
+
 (use-package markdown-mode
   :mode ("\\.\\(markdown|md\\)$" . markdown-mode))
+
+
+(use-package ledger
+  :ensure nil
+  :mode ("\\.ledger$" . ledger-mode)
+  :init
+  (setq ledger-default-date-format "%Y-%m-%d"
+        ledger-use-iso-dates t
+        ledger-reconcile-default-commodity "RUR"))
+
+(use-package geiser
+  :ensure nil
+  ;; :mode ("\\.ledger$" . ledger-mode)
+  :init
+  (setq geiser-active-implementations '(racket)))
+
+
+
+;; (use-package wanderlust
+;;   :ensure nil
+;;   :init
+;;   ;; imap
+;;   (setq elmo-imap4-default-server "imap.gmail.com"
+;;         elmo-imap4-default-user "habamax@gmail.com"
+;;         elmo-imap4-default-authenticate-type 'clear
+;;         elmo-imap4-default-port '993
+;;         elmo-imap4-default-stream-type 'ssl
+;;         elmo-imap4-use-modified-utf7 t)
+;;   ;; smtp
+;;   (setq wl-smtp-connection-type 'starttls
+;;         wl-smtp-posting-port 587
+;;         wl-smtp-authenticate-type "plain"
+;;         wl-smtp-posting-user "habamax"
+;;         wl-smtp-posting-server "smtp.gmail.com"
+;;         wl-local-domain "gmail.com"
+;;         wl-message-id-domain "smtp.gmail.com")
+
+;;   (setq wl-from "Maxim Kim <habamax@gmail.com>"
+;;         wl-default-folder "%inbox"
+;;         wl-draft-folder   "%[Gmail]/Черновики"
+;;         wl-trash-folder   "%[Gmail]/Корзина"
+;;         wl-fcc            "%[Gmail]/Отправленные"
+;;         wl-fcc-force-as-read t
+;;         wl-default-spec "%")
+
+;;   )
 
 
 
@@ -348,42 +392,42 @@
   )
 
 
-(use-package rcirc
-  :ensure nil
-  :init
-  (setq rcirc-default-nick "habamax"
-        rcirc-default-user-name "mxmkm"
-        rcirc-default-full-name "Maxim Kim"
-        rcirc-fill-column 'frame-width
-        ;; rcirc-time-format "[%Y-%m-%d %H:%M] "
-        rcirc-time-format "[%H:%M] "
-        rcirc-server-alist '(("irc.freenode.net" :channels ("#emacs" "#lor"))))
-  :config
-  (rcirc-track-minor-mode 1)
+;; (use-package rcirc
+;;   :ensure nil
+;;   :init
+;;   (setq rcirc-default-nick "habamax"
+;;         rcirc-default-user-name "mxmkm"
+;;         rcirc-default-full-name "Maxim Kim"
+;;         rcirc-fill-column 'frame-width
+;;         ;; rcirc-time-format "[%Y-%m-%d %H:%M] "
+;;         rcirc-time-format "[%H:%M] "
+;;         rcirc-server-alist '(("irc.freenode.net" :channels ("#emacs" "#lor"))))
+;;   :config
+;;   (rcirc-track-minor-mode 1)
   
-  (defun-rcirc-command reconnect (arg)
-     "Reconnect the server process."
-     (interactive "i")
-     (unless process
-       (error "There's no process for this target"))
-     (let* ((server (car (process-contact process)))
-            (port (process-contact process :service))
-            (nick (rcirc-nick process))
-            channels query-buffers)
-       (dolist (buf (buffer-list))
-         (with-current-buffer buf
-           (when (eq process (rcirc-buffer-process))
-             (remove-hook 'change-major-mode-hook
-                          'rcirc-change-major-mode-hook)
-             (if (rcirc-channel-p rcirc-target)
-                 (setq channels (cons rcirc-target channels))
-               (setq query-buffers (cons buf query-buffers))))))
-       (delete-process process)
-       (rcirc-connect server port nick
-                      rcirc-default-user-name
-                      rcirc-default-full-name
-                      channels)))
-  )
+;;   (defun-rcirc-command reconnect (arg)
+;;      "Reconnect the server process."
+;;      (interactive "i")
+;;      (unless process
+;;        (error "There's no process for this target"))
+;;      (let* ((server (car (process-contact process)))
+;;             (port (process-contact process :service))
+;;             (nick (rcirc-nick process))
+;;             channels query-buffers)
+;;        (dolist (buf (buffer-list))
+;;          (with-current-buffer buf
+;;            (when (eq process (rcirc-buffer-process))
+;;              (remove-hook 'change-major-mode-hook
+;;                           'rcirc-change-major-mode-hook)
+;;              (if (rcirc-channel-p rcirc-target)
+;;                  (setq channels (cons rcirc-target channels))
+;;                (setq query-buffers (cons buf query-buffers))))))
+;;        (delete-process process)
+;;        (rcirc-connect server port nick
+;;                       rcirc-default-user-name
+;;                       rcirc-default-full-name
+;;                       channels)))
+;;   )
 
 
 (use-package calendar
@@ -409,11 +453,3 @@
         org-return-follows-link t
         org-special-ctrl-a/e t
         org-special-ctrl-k t))
-
-(use-package ledger
-  :ensure nil
-  :mode ("\\.ledger$" . ledger-mode)
-  :init
-  (setq ledger-default-date-format "%Y-%m-%d"
-        ledger-use-iso-dates t
-        ledger-reconcile-default-commodity "RUR"))
