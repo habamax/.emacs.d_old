@@ -2,11 +2,8 @@
 ;; Maxim Kim <habamax@gmail.com>
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
+
 ;; Non-Package setup
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq user-full-name "Maxim Kim"
       user-mail-address "habamax@gmail.com")
@@ -23,15 +20,13 @@
   (tool-bar-mode -1)
   (menu-bar-mode 1)
   (scroll-bar-mode -1)
-
-
   ;; choose font
   ;; TODO: make a function with a loop
   (cond 
-   ;; ((find-font (font-spec :name "Source Code Pro"))
-   ;;  (set-face-attribute 'default nil
-   ;;                      :family "Source Code Pro"
-   ;;                      :height 140))
+   ((find-font (font-spec :name "Source Code Pro"))
+    (set-face-attribute 'default nil
+                        :family "Source Code Pro"
+                        :height 140))
    ((find-font (font-spec :name "Menlo"))
     (set-face-attribute 'default nil
                         :family "Menlo"
@@ -39,7 +34,7 @@
    ((find-font (font-spec :name "DejaVu Sans Mono"))
     (set-face-attribute 'default nil
                         :family "DejaVu Sans Mono"
-                        :height 160)))
+                        :height 140)))
 
   (setq default-frame-alist '((fullscreen . maximized))))
 
@@ -63,9 +58,6 @@
 (column-number-mode t)
 (recentf-mode 1)
 
-;; (add-hook 'prog-mode-hook '(lambda () (linum-mode 1)))
-;; (add-hook 'prog-mode-hook 'linum-mode)
-
 ;; y/n for yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -87,24 +79,16 @@
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;; (add-hook 'text-mode-hook 'text-mode-hook-identify)
 
-
 ;; Global rebinds
 (global-set-key (kbd "M-/") 'hippie-expand)
-
 
 ;; 'Customize' stuff
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
 
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Packages for the rescue
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;; Set up packaging system
+
+;; Set up packaging system
 (setq package-enable-at-startup nil)
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
@@ -118,7 +102,8 @@
 (setq use-package-always-ensure t)
 
 
-;;;; Local packages
+
+;; Local packages
 
 (use-package haba-comment
   :ensure nil
@@ -132,14 +117,18 @@
   :bind (("C-c f i" . find-user-init-file)))
 
 
-;;;; Melpa packages
-
+
+;; Melpa packages
 
 ;; PATH for OSX
 (use-package exec-path-from-shell
   :config
   (exec-path-from-shell-initialize)
   :if (eq system-type 'darwin))
+
+(use-package which-key
+  :defer 1
+  :config (which-key-mode))
 
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
@@ -174,13 +163,17 @@
           helm-ff-auto-update-initial-value nil
           helm-split-window-in-side-p t
           helm-tramp-verbose 9)
-    (setq ;helm-grep-ag-command "pt -e --nogroup --nocolor"
-          helm-ag-base-command "pt -e --nogroup --nocolor")
+    (setq helm-ag-base-command "pt -e --nogroup --nocolor")
     (helm-mode)
     (add-hook 'helm-minibuffer-set-up-hook 'deactivate-input-method)
     (helm-autoresize-mode t)))
 
- ;; company "complete anything"
+;; page-break-lines, convert ^L to nicely looking horizontal lines
+(use-package page-break-lines
+  :defer 1
+  :config (global-page-break-lines-mode))
+
+;; company "complete anything"
 (use-package company
   :defer 2
   :config
@@ -200,6 +193,13 @@
   :bind ("C-x o" . hydra-cycle-windows/body)
   :bind ("C-c i" . hydra-insert/body)
   :config
+  (defhydra hydra-page-break (global-map "C-x")
+    "Page breaks"
+    ("[" backward-page "Back")
+    ("]" forward-page "Forward")
+    ("RET" nil "quit")
+    ("q" nil "quit"))
+
   (defhydra hydra-insert ()
     "Insert"
     ("E" (insert-string "EUR") "EUR")
@@ -219,6 +219,7 @@
     ("b" balance-windows "Balance windows")
     ("m" delete-other-windows "Maximize window")
     ("c" delete-window "Close window")
+    ("RET" nil "quit")
     ("q" nil "quit"))
   
   (defhydra hydra-cycle-next ()
@@ -228,6 +229,7 @@
     ("b" haba-next-buffer "Next buffer")
     ("B" haba-previous-buffer "Previous buffer")
     ("k" kill-this-buffer "Kill buffer")
+    ("RET" nil "quit")
     ("q" nil "quit")))
 
 (use-package rainbow-delimiters
@@ -250,10 +252,6 @@
   :config
   (load-theme 'leuven t))
 
-(use-package gotham-theme
-  :disabled t
-  :config
-  (load-theme 'gotham t))
 
 (use-package solarized-theme
   :ensure nil
@@ -313,37 +311,6 @@
 
 
 
-;; (use-package wanderlust
-;;   :ensure nil
-;;   :init
-;;   ;; imap
-;;   (setq elmo-imap4-default-server "imap.gmail.com"
-;;         elmo-imap4-default-user "habamax@gmail.com"
-;;         elmo-imap4-default-authenticate-type 'clear
-;;         elmo-imap4-default-port '993
-;;         elmo-imap4-default-stream-type 'ssl
-;;         elmo-imap4-use-modified-utf7 t)
-;;   ;; smtp
-;;   (setq wl-smtp-connection-type 'starttls
-;;         wl-smtp-posting-port 587
-;;         wl-smtp-authenticate-type "plain"
-;;         wl-smtp-posting-user "habamax"
-;;         wl-smtp-posting-server "smtp.gmail.com"
-;;         wl-local-domain "gmail.com"
-;;         wl-message-id-domain "smtp.gmail.com")
-
-;;   (setq wl-from "Maxim Kim <habamax@gmail.com>"
-;;         wl-default-folder "%inbox"
-;;         wl-draft-folder   "%[Gmail]/Черновики"
-;;         wl-trash-folder   "%[Gmail]/Корзина"
-;;         wl-fcc            "%[Gmail]/Отправленные"
-;;         wl-fcc-force-as-read t
-;;         wl-default-spec "%")
-
-;;   )
-
-
-
 ;; Doesn't work as there is no let-alist blablabla.
 ;; I should have find some time to resolve it.
 ;;
@@ -365,7 +332,8 @@
 
 
 
-;;;; Built-in packages
+
+;; Built-in packages
 
 (use-package erc
   :ensure nil
