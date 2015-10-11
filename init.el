@@ -1,7 +1,6 @@
 ;; Init file for Emacs
 ;; Maxim Kim <habamax@gmail.com>
 
-
 
 ;; Non-Package setup
 
@@ -12,8 +11,8 @@
       inhibit-splash-screen t
       initial-scratch-message "")
 
-(when (eq system-type 'darwin)
-  (setq mac-command-modifier 'control))
+;; (when (eq system-type 'darwin)
+  ;; (setq mac-command-modifier 'control))
 
 (when window-system
   (tooltip-mode -1)
@@ -26,6 +25,10 @@
    ((find-font (font-spec :name "Source Code Pro"))
     (set-face-attribute 'default nil
                         :family "Source Code Pro"
+                        :height 140))
+   ((find-font (font-spec :name "Roboto Mono"))
+    (set-face-attribute 'default nil
+                        :family "Roboto Mono Light"
                         :height 140))
    ((find-font (font-spec :name "Menlo"))
     (set-face-attribute 'default nil
@@ -43,8 +46,10 @@
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (setq default-input-method 'russian-computer)
+
 ;; scroll to the top or bottom with C-v and M-v
 (setq scroll-error-top-bottom t)
+
 ;; M-a and M-e use punct and single space as sentence delimiter
 (setq sentence-end-double-space nil)
 (setq-default indent-tabs-mode nil)
@@ -79,9 +84,6 @@
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;; (add-hook 'text-mode-hook 'text-mode-hook-identify)
 
-;; Global rebinds
-(global-set-key (kbd "M-/") 'hippie-expand)
-
 ;; 'Customize' stuff
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
@@ -103,12 +105,26 @@
 
 
 
-;; Local packages
+;; Color themes
 
-(use-package haba-comment
-  :ensure nil
-  :load-path "lisp/"
-  :bind ("M-;" . haba-comment-dwim))
+(use-package cyberpunk-tomorrow
+  :disabled t
+  :config
+  (load-theme 'cyberpunk t))
+
+(use-package leuven-theme
+  :disabled t
+  :config
+  (load-theme 'leuven t))
+
+(use-package gruvbox-theme
+  ;; :disabled t
+  :config
+  (load-theme 'gruvbox t))
+
+
+
+;; Local packages
 
 (use-package haba-misc
   :ensure nil
@@ -120,6 +136,51 @@
 
 ;; Melpa packages
 
+
+;; EVIL
+(use-package evil
+  :init
+  (setq evil-search-module 'evil)
+
+  :config
+
+  (use-package evil-commentary
+    :config (evil-commentary-mode 1))
+
+  (use-package evil-surround
+    :config (global-evil-surround-mode))
+
+  (use-package evil-leader
+    :config
+    (evil-leader/set-leader "<SPC>")
+
+    ;; Files
+    (evil-leader/set-key "fs" 'save-buffer)
+    (evil-leader/set-key "fi" 'find-user-init-file)
+    (evil-leader/set-key "ff" 'helm-find-files)
+
+    ;; Buffers
+    (evil-leader/set-key "bb" 'helm-mini)
+
+    ;; Projects
+    (evil-leader/set-key "pp" 'helm-projectile)
+
+    ;; Quit
+    (evil-leader/set-key "qq" 'save-buffers-kill-terminal)
+
+    (global-evil-leader-mode))
+
+  (define-key evil-normal-state-map [escape] 'keyboard-quit)
+  (define-key evil-visual-state-map [escape] 'keyboard-quit)
+  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+
+
+  (evil-mode))
+
 ;; PATH for OSX
 (use-package exec-path-from-shell
   :config
@@ -128,6 +189,7 @@
 
 (use-package which-key
   :defer 1
+  :diminish which-key-mode
   :config (which-key-mode))
 
 (use-package expand-region
@@ -140,7 +202,6 @@
           ("C-c M-x" . execute-extended-command)
           ("C-c h"   . helm-command-prefix)
           ("M-s o"   . helm-occur)
-          ("M-y"     . helm-show-kill-ring)
           ("C-x C-b" . helm-buffers-list)
           ("C-x b"   . helm-mini)
           ("C-x C-f" . helm-find-files))
@@ -246,23 +307,6 @@
     (smartparens-global-mode)
     (show-smartparens-global-mode)))
 
-
-(use-package leuven-theme
-  ;; :disabled t
-  :config
-  (load-theme 'leuven t))
-
-
-(use-package solarized-theme
-  :ensure nil
-  :disabled t
-  :config
-  (setq solarized-high-contrast-mode-line t
-        solarized-use-more-italic nil
-        solarized-use-less-bold nil)
-  (load-theme 'solarized-dark t))
-
-
 ;; magit
 (use-package magit
   :commands (magit-status projectile-vc)
@@ -285,7 +329,6 @@
           projectile-file-exists-remote-cache-expire (* 10 60))
   :config
   (progn
-    ;; (bind-key "C-c p" 'projectile-command-map projectile-mode-map)
     (use-package helm-projectile
       :config (helm-projectile-on))
     (projectile-global-mode)))
@@ -358,44 +401,6 @@
                       (when (eq major-mode 'erc-mode)
                         (setq erc-fill-column (- (window-width w) 2)))))))))
   )
-
-
-;; (use-package rcirc
-;;   :ensure nil
-;;   :init
-;;   (setq rcirc-default-nick "habamax"
-;;         rcirc-default-user-name "mxmkm"
-;;         rcirc-default-full-name "Maxim Kim"
-;;         rcirc-fill-column 'frame-width
-;;         ;; rcirc-time-format "[%Y-%m-%d %H:%M] "
-;;         rcirc-time-format "[%H:%M] "
-;;         rcirc-server-alist '(("irc.freenode.net" :channels ("#emacs" "#lor"))))
-;;   :config
-;;   (rcirc-track-minor-mode 1)
-  
-;;   (defun-rcirc-command reconnect (arg)
-;;      "Reconnect the server process."
-;;      (interactive "i")
-;;      (unless process
-;;        (error "There's no process for this target"))
-;;      (let* ((server (car (process-contact process)))
-;;             (port (process-contact process :service))
-;;             (nick (rcirc-nick process))
-;;             channels query-buffers)
-;;        (dolist (buf (buffer-list))
-;;          (with-current-buffer buf
-;;            (when (eq process (rcirc-buffer-process))
-;;              (remove-hook 'change-major-mode-hook
-;;                           'rcirc-change-major-mode-hook)
-;;              (if (rcirc-channel-p rcirc-target)
-;;                  (setq channels (cons rcirc-target channels))
-;;                (setq query-buffers (cons buf query-buffers))))))
-;;        (delete-process process)
-;;        (rcirc-connect server port nick
-;;                       rcirc-default-user-name
-;;                       rcirc-default-full-name
-;;                       channels)))
-;;   )
 
 
 (use-package calendar
