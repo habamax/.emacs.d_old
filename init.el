@@ -118,10 +118,14 @@
   (load-theme 'leuven t))
 
 (use-package gruvbox-theme
-  ;; :disabled t
+  :disabled t
   :config
   (load-theme 'gruvbox t))
 
+(use-package zenburn-theme
+  ;; :disabled t
+  :config
+  (load-theme 'zenburn t))
 
 
 ;; Local packages
@@ -138,48 +142,48 @@
 
 
 ;; EVIL
-(use-package evil
-  :init
-  (setq evil-search-module 'evil)
+;; (use-package evil
+;;   :init
+;;   (setq evil-search-module 'evil)
 
-  :config
+;;   :config
 
-  (use-package evil-commentary
-    :config (evil-commentary-mode 1))
+;;   (use-package evil-commentary
+;;     :config (evil-commentary-mode 1))
 
-  (use-package evil-surround
-    :config (global-evil-surround-mode))
+;;   (use-package evil-surround
+;;     :config (global-evil-surround-mode))
 
-  (use-package evil-leader
-    :config
-    (evil-leader/set-leader "<SPC>")
+;;   (use-package evil-leader
+;;     :config
+;;     (evil-leader/set-leader "<SPC>")
 
-    ;; Files
-    (evil-leader/set-key "fs" 'save-buffer)
-    (evil-leader/set-key "fi" 'find-user-init-file)
-    (evil-leader/set-key "ff" 'helm-find-files)
+;;     ;; Files
+;;     (evil-leader/set-key "fs" 'save-buffer)
+;;     (evil-leader/set-key "fi" 'find-user-init-file)
+;;     (evil-leader/set-key "ff" 'helm-find-files)
 
-    ;; Buffers
-    (evil-leader/set-key "bb" 'helm-mini)
+;;     ;; Buffers
+;;     (evil-leader/set-key "bb" 'helm-mini)
 
-    ;; Projects
-    (evil-leader/set-key "pp" 'helm-projectile)
+;;     ;; Projects
+;;     (evil-leader/set-key "pp" 'helm-projectile)
 
-    ;; Quit
-    (evil-leader/set-key "qq" 'save-buffers-kill-terminal)
+;;     ;; Quit
+;;     (evil-leader/set-key "qq" 'save-buffers-kill-terminal)
 
-    (global-evil-leader-mode))
+;;     (global-evil-leader-mode))
 
-  (define-key evil-normal-state-map [escape] 'keyboard-quit)
-  (define-key evil-visual-state-map [escape] 'keyboard-quit)
-  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key evil-normal-state-map [escape] 'keyboard-quit)
+;;   (define-key evil-visual-state-map [escape] 'keyboard-quit)
+;;   (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+;;   (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 
-  (evil-mode))
+;;   (evil-mode))
 
 ;; PATH for OSX
 (use-package exec-path-from-shell
