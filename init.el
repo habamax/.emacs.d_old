@@ -1,7 +1,7 @@
 ;; Init file for Emacs
 ;; Maxim Kim <habamax@gmail.com>
 
-
+
 ;; Non-Package setup
 
 (setq user-full-name "Maxim Kim"
@@ -21,7 +21,7 @@
   (scroll-bar-mode -1)
   ;; choose font
   ;; TODO: make a function with a loop
-  (cond 
+  (cond
    ((find-font (font-spec :name "Source Code Pro"))
     (set-face-attribute 'default nil
                         :family "Source Code Pro"
@@ -89,7 +89,12 @@
 (load custom-file 'noerror)
 
 
-
+;; Convenience bindings
+(global-set-key (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "M-p") 'backward-paragraph)
+
+
+
 ;; Set up packaging system
 (setq package-enable-at-startup nil)
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")))
@@ -104,10 +109,10 @@
 (setq use-package-always-ensure t)
 
 
-
+
 ;; Color themes
 
-(use-package cyberpunk-tomorrow
+(use-package cyberpunk-theme
   :disabled t
   :config
   (load-theme 'cyberpunk t))
@@ -117,73 +122,26 @@
   :config
   (load-theme 'leuven t))
 
-(use-package gruvbox-theme
-  :disabled t
-  :config
-  (load-theme 'gruvbox t))
-
 (use-package zenburn-theme
   ;; :disabled t
   :config
   (load-theme 'zenburn t))
 
-
+
 ;; Local packages
 
-(use-package haba-misc
+(use-package haba-stuff
   :ensure nil
+  :demand
   :commands (haba-next-buffer haba-previous-buffer haba-toggle-window-split)
   :load-path "lisp/"
-  :bind (("C-c f i" . find-user-init-file)))
+  :bind (("M-;" . haba-comment-dwim)
+         ("C-a" . haba-move-beginning-of-line)
+         ("C-c f i" . haba-open-init-file)))
 
 
-
 ;; Melpa packages
 
-
-;; EVIL
-;; (use-package evil
-;;   :init
-;;   (setq evil-search-module 'evil)
-
-;;   :config
-
-;;   (use-package evil-commentary
-;;     :config (evil-commentary-mode 1))
-
-;;   (use-package evil-surround
-;;     :config (global-evil-surround-mode))
-
-;;   (use-package evil-leader
-;;     :config
-;;     (evil-leader/set-leader "<SPC>")
-
-;;     ;; Files
-;;     (evil-leader/set-key "fs" 'save-buffer)
-;;     (evil-leader/set-key "fi" 'find-user-init-file)
-;;     (evil-leader/set-key "ff" 'helm-find-files)
-
-;;     ;; Buffers
-;;     (evil-leader/set-key "bb" 'helm-mini)
-
-;;     ;; Projects
-;;     (evil-leader/set-key "pp" 'helm-projectile)
-
-;;     ;; Quit
-;;     (evil-leader/set-key "qq" 'save-buffers-kill-terminal)
-
-;;     (global-evil-leader-mode))
-
-;;   (define-key evil-normal-state-map [escape] 'keyboard-quit)
-;;   (define-key evil-visual-state-map [escape] 'keyboard-quit)
-;;   (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-;;   (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-;;   (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-;;   (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-;;   (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-
-
-;;   (evil-mode))
 
 ;; PATH for OSX
 (use-package exec-path-from-shell
@@ -197,7 +155,13 @@
   :config (which-key-mode))
 
 (use-package expand-region
-  :bind ("C-=" . er/expand-region))
+  :bind ("M-m" . er/expand-region)
+  :config
+  (progn
+    (setq expand-region-contract-fast-key "M")))
+
+(use-package undo-tree
+  :config (global-undo-tree-mode 1))
 
 (use-package helm
   :diminish helm-mode
@@ -233,11 +197,6 @@
     (add-hook 'helm-minibuffer-set-up-hook 'deactivate-input-method)
     (helm-autoresize-mode t)))
 
-;; page-break-lines, convert ^L to nicely looking horizontal lines
-(use-package page-break-lines
-  :defer 1
-  :config (global-page-break-lines-mode))
-
 ;; company "complete anything"
 (use-package company
   :defer 2
@@ -250,8 +209,9 @@
             :with company-c-headers)
           company-backends)
     (setq company-minimum-prefix-length 2)
+    (setq completion-styles '(substring completion-substring-try-completion completion-substring-all-completions))
     (global-company-mode)))
-  
+
 
 (use-package hydra
   :bind ("C-c n" . hydra-cycle-next/body)
@@ -360,14 +320,14 @@
 
 ;; Doesn't work as there is no let-alist blablabla.
 ;; I should have find some time to resolve it.
-;;
+
 ;; flycheck
 ;; (use-package flycheck
 ;; :init (global-flycheck-mode))
-;;
+
 ;; (use-package helm-flycheck
-;;   :bind ("C-c ! h" . helm-flycheck)
-;;   :config (global-flycheck-mode))
+  ;; :bind ("C-c ! h" . helm-flycheck)
+  ;; :config (global-flycheck-mode))
 
 ;; ;; flyspell - use aspell instead of ispell
 ;; (use-package flyspell
@@ -379,7 +339,7 @@
 
 
 
-
+
 ;; Built-in packages
 
 (use-package erc
