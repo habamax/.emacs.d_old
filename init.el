@@ -209,7 +209,7 @@
             :with company-c-headers)
           company-backends)
     (setq company-minimum-prefix-length 2)
-    (setq completion-styles '(substring completion-substring-try-completion completion-substring-all-completions))
+    ;; (setq completion-styles '(substring completion-substring-try-completion completion-substring-all-completions))
     (global-company-mode)))
 
 
@@ -224,12 +224,6 @@
     ("]" forward-page "Forward")
     ("RET" nil "quit")
     ("q" nil "quit"))
-
-  (defhydra hydra-insert ()
-    "Insert"
-    ("E" (insert-string "EUR") "EUR")
-    ("U" (insert-string "USD") "USD")
-    ("R" (insert-string "RUR") "RUR"))
   
   (defhydra hydra-cycle-windows
     (:body-pre (other-window 1))
@@ -268,6 +262,8 @@
   :config
   (progn
     (require 'smartparens-config)
+    (setq sp-base-key-bindings 'sp)
+    (sp-use-smartparens-bindings)
     (smartparens-global-mode)
     (show-smartparens-global-mode)))
 

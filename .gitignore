@@ -1,5 +1,6 @@
 *.elc
 *.*~
+ido.*
 /auto-save-list/
 /backups/
 /bookmarks
