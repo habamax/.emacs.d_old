@@ -113,11 +113,10 @@
   :config
   (load-theme 'leuven t))
 
-(use-package zenburn-theme
-  :disabled t
+(use-package gruvbox-theme
+  ;; :disabled t
   :config
-  (load-theme 'zenburn t))
-
+  (load-theme 'gruvbox t))
 
 
 ;; Melpa packages
