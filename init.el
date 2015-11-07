@@ -3,43 +3,22 @@
 
 
 ;; Non-Package setup
-
-(setq user-full-name "Maxim Kim"
-      user-mail-address "habamax@gmail.com")
-
-(setq inhibit-startup-message t
-      inhibit-splash-screen t
-      initial-scratch-message "")
-
-;; (when (eq system-type 'darwin)
-  ;; (setq mac-command-modifier 'control))
-
 (when window-system
   (tooltip-mode -1)
   (tool-bar-mode -1)
   (menu-bar-mode 1)
   (scroll-bar-mode -1)
-  ;; choose font
-  ;; TODO: make a function with a loop
-  (cond
-   ((find-font (font-spec :name "Source Code Pro"))
-    (set-face-attribute 'default nil
-                        :family "Source Code Pro"
-                        :height 140))
-   ((find-font (font-spec :name "Roboto Mono"))
-    (set-face-attribute 'default nil
-                        :family "Roboto Mono Light"
-                        :height 140))
-   ((find-font (font-spec :name "Menlo"))
-    (set-face-attribute 'default nil
-                        :family "Menlo"
-                        :height 140))
-   ((find-font (font-spec :name "DejaVu Sans Mono"))
-    (set-face-attribute 'default nil
-                        :family "DejaVu Sans Mono"
-                        :height 140)))
-
   (setq default-frame-alist '((fullscreen . maximized))))
+
+(setq inhibit-startup-message t
+      inhibit-splash-screen t
+      initial-scratch-message "")
+
+(setq user-full-name "Maxim Kim"
+      user-mail-address "habamax@gmail.com")
+
+;; (when (eq system-type 'darwin)
+  ;; (setq mac-command-modifier 'control))
 
 ;; RU stuff
 (set-language-environment 'utf-8)
@@ -88,11 +67,9 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
 
-
 ;; Convenience bindings
 (global-set-key (kbd "M-n") 'forward-paragraph)
 (global-set-key (kbd "M-p") 'backward-paragraph)
-
 
 
 ;; Set up packaging system
@@ -109,9 +86,23 @@
 (setq use-package-always-ensure t)
 
 
+;; Local packages
 
-;; Color themes
+(use-package haba-stuff
+  :ensure nil
+  :demand
+  :commands (haba-next-buffer haba-previous-buffer haba-toggle-window-split)
+  :load-path "lisp/"
+  :bind (("M-;" . haba-comment-dwim)
+         ("C-a" . haba-move-beginning-of-line)
+         ("M-j" . haba-join-line)	 
+         ("C-c f i" . haba-open-init-file))
+  :config
+  (haba-set-font '("Source Code Pro" "Roboto Mono" "Menlo" "Dejavu Sans Mono") 140))
 
+
+
+;; Themes
 (use-package cyberpunk-theme
   :disabled t
   :config
@@ -123,21 +114,10 @@
   (load-theme 'leuven t))
 
 (use-package zenburn-theme
-  ;; :disabled t
+  :disabled t
   :config
   (load-theme 'zenburn t))
 
-
-;; Local packages
-
-(use-package haba-stuff
-  :ensure nil
-  :demand
-  :commands (haba-next-buffer haba-previous-buffer haba-toggle-window-split)
-  :load-path "lisp/"
-  :bind (("M-;" . haba-comment-dwim)
-         ("C-a" . haba-move-beginning-of-line)
-         ("C-c f i" . haba-open-init-file)))
 
 
 ;; Melpa packages
@@ -297,20 +277,10 @@
 (use-package markdown-mode
   :mode ("\\.\\(markdown|md\\)$" . markdown-mode))
 
-
-(use-package ledger
-  :ensure nil
-  :mode ("\\.ledger$" . ledger-mode)
-  :init
-  (setq ledger-default-date-format "%Y-%m-%d"
-        ledger-use-iso-dates t
-        ledger-reconcile-default-commodity "RUR"))
-
-(use-package geiser
-  :ensure nil
-  ;; :mode ("\\.ledger$" . ledger-mode)
-  :init
-  (setq geiser-active-implementations '(racket)))
+;; (use-package geiser
+;;   :ensure nil
+;;   :init
+;;   (setq geiser-active-implementations '(racket)))
 
 
 

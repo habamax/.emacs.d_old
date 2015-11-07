@@ -13,28 +13,20 @@ Otherwise call well known `comment-dwim'"
     (comment-dwim arg)))
 
 
-(defun prelude-move-beginning-of-line (arg)
-    "Move point back to indentation of beginning of line.
+(defun haba-join-line ()
+  (interactive)
+  (join-line -1))
 
-Move point to the first non-whitespace character on this line.
-If point is already there, move to the beginning of the line.
-Effectively toggle between the first non-whitespace character and
-the beginning of the line.
 
-If ARG is not nil or 1, move forward ARG - 1 lines first. If
-point reaches the beginning or end of the buffer, stop there."
-    (interactive "^p")
-    (setq arg (or arg 1))
+(defun haba-set-font (fonts-list font-size)
+  (catch 'loop
+    (dolist (font fonts-list)
+      (when (find-font (font-spec :name font))
+        (progn
+          (set-face-attribute 'default nil :family font :height font-size)
+          (throw 'loop font))))))
 
-    ;; Move lines first
-    (when (/= arg 1)
-      (let ((line-move-visual nil))
-        (forward-line (1- arg))))
 
-    (let ((orig-point (point)))
-      (back-to-indentation)
-      (when (= orig-point (point))
-        (move-beginning-of-line 1))))
 
 (defun haba-move-beginning-of-line (arg)
     "Move point back to indentation of beginning of line.
@@ -136,3 +128,8 @@ line instead."
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
            (line-beginning-position 2)))))
+
+
+(defadvice load-theme (before theme-dont-propagate activate)
+  "Disable theme before loading new one."
+  (mapcar #'disable-theme custom-enabled-themes))
