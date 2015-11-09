@@ -1,7 +1,7 @@
 (provide 'haba-stuff)
 
 ;; Comment a line.
-(defun haba-comment-dwim (arg)
+(defun haba/toggle-comment (arg)
   "Comment or uncomment current line if mark region is not active.
 Otherwise call well known `comment-dwim'"
   (interactive "*P")
@@ -13,12 +13,26 @@ Otherwise call well known `comment-dwim'"
     (comment-dwim arg)))
 
 
-(defun haba-join-line ()
+(defun haba/join-line ()
+  "Join the following line onto the current one (analogous to `C-e', `C-d') or
+`C-u M-^' or `C-u M-x join-line'.
+If the current line is a comment and the pulled-up line is also a comment,
+remove the comment characters from that line."
   (interactive)
-  (join-line -1))
+  (join-line -1)
+  ;; If the current line is a comment
+  (when (nth 4 (syntax-ppss))
+    ;; Remove the comment prefix chars from the pulled-up line if present
+    (save-excursion
+      ;; Delete all comment-start and space characters
+      (while (looking-at (concat "\\s<" ; comment-start char as per syntax table
+                                 "\\|" (substring comment-start 0 1) ; first char of `comment-start'
+                                 "\\|" "\\s-")) ; extra spaces
+        (delete-forward-char 1))
+      (insert-char ? ))))
 
 
-(defun haba-set-font (fonts-list font-size)
+(defun haba/set-font (fonts-list font-size)
   (catch 'loop
     (dolist (font fonts-list)
       (when (find-font (font-spec :name font))
@@ -28,7 +42,7 @@ Otherwise call well known `comment-dwim'"
 
 
 
-(defun haba-move-beginning-of-line (arg)
+(defun haba/move-beginning-of-line (arg)
     "Move point back to indentation of beginning of line.
 
 Move point to the first non-whitespace character on this line.
@@ -53,7 +67,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 
 
-(defun haba-toggle-window-split ()
+(defun haba/toggle-window-split ()
   "Change vertical and horizontal splits"
   (interactive)
   (if (= (count-windows) 2)
@@ -81,14 +95,14 @@ point reaches the beginning or end of the buffer, stop there."
 
 
 ;; Quick dotemacs/initel opening
-(defun haba-open-init-file ()
+(defun haba/open-init-file ()
   "Edit the `user-init-file', in another window"
   (interactive)
   (find-file user-init-file))
 
 
 ;; Next Buffer
-(defun haba-next-buffer ()
+(defun haba/next-buffer ()
   (interactive)
   (let ((bread-crumb(buffer-name)))
     (next-buffer)
@@ -100,7 +114,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 
 ;; Next Buffer
-(defun haba-previous-buffer ()
+(defun haba/previous-buffer ()
   (interactive)
   (let ((bread-crumb (buffer-name)))
     (previous-buffer)

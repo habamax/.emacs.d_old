@@ -91,14 +91,14 @@
 (use-package haba-stuff
   :ensure nil
   :demand
-  :commands (haba-next-buffer haba-previous-buffer haba-toggle-window-split)
+  :commands (haba/next-buffer haba/previous-buffer haba/toggle-window-split)
   :load-path "lisp/"
-  :bind (("M-;" . haba-comment-dwim)
-         ("C-a" . haba-move-beginning-of-line)
-         ("M-j" . haba-join-line)	 
-         ("C-c f i" . haba-open-init-file))
+  :bind (("M-;" . haba/toggle-comment)
+         ("C-a" . haba/move-beginning-of-line)
+         ("M-j" . haba/join-line)	 
+         ("C-c f i" . haba/open-init-file))
   :config
-  (haba-set-font '("Source Code Pro" "Roboto Mono" "Menlo" "Dejavu Sans Mono") 140))
+  (haba/set-font '("Source Code Pro" "Roboto Mono" "Menlo" "Dejavu Sans Mono") 140))
 
 
 
@@ -120,7 +120,6 @@
 
 
 ;; Melpa packages
-
 
 ;; PATH for OSX
 (use-package exec-path-from-shell
@@ -176,7 +175,7 @@
     (add-hook 'helm-minibuffer-set-up-hook 'deactivate-input-method)
     (helm-autoresize-mode t)))
 
-;; company "complete anything"
+;; Complete Anything
 (use-package company
   :defer 2
   :config
@@ -209,7 +208,7 @@
     "Windows"
     ("o" (other-window 1) "Next")
     ("O" (other-window -1) "Previous")
-    ("t" haba-toggle-window-split "Toggle split")
+    ("t" haba/toggle-window-split "Toggle split")
     ("]" enlarge-window-horizontally "Enlarge horizontal")
     ("[" shrink-window-horizontally "Shrink horizontal")
     ("=" enlarge-window "Enlarge vertival")
@@ -224,8 +223,8 @@
     "Frames, Buffers"
     ("f" other-frame "Next frame")
     ("F" (other-frame -1) "Previous frame")
-    ("b" haba-next-buffer "Next buffer")
-    ("B" haba-previous-buffer "Previous buffer")
+    ("b" haba/next-buffer "Next buffer")
+    ("B" haba/previous-buffer "Previous buffer")
     ("k" kill-this-buffer "Kill buffer")
     ("RET" nil "quit")
     ("q" nil "quit")))
@@ -246,7 +245,6 @@
     (smartparens-global-mode)
     (show-smartparens-global-mode)))
 
-;; magit
 (use-package magit
   :commands (magit-status projectile-vc)
   :config
@@ -255,9 +253,6 @@
         magit-popup-use-prefix-argument 'default
         magit-revert-buffers t))
 
-
-
-;; projectile
 (use-package projectile
   :diminish projectile-mode
   :bind-keymap ("C-c p" . projectile-mode-map)
