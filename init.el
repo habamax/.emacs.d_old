@@ -114,9 +114,20 @@
   (load-theme 'leuven t))
 
 (use-package gruvbox-theme
-  ;; :disabled t
+  :disabled t
   :config
   (load-theme 'gruvbox t))
+
+;; use-package doen't work for base16 themes
+;; (use-package base16-theme
+  ;; :config
+  ;; (load-theme 'base16-tomorrow-dark t))
+
+(ignore-errors
+  (load-theme 'base16-eighties-dark t)
+;;  (load-theme 'base16-tomorrow-dark t)
+  )
+
 
 
 ;; Melpa packages
@@ -168,7 +179,7 @@
           helm-move-to-line-cycle-in-source t
           helm-ff-file-name-history-use-recentf t
           helm-ff-auto-update-initial-value nil
-          helm-split-window-in-side-p t
+          ;; helm-split-window-in-side-p t
           helm-tramp-verbose 9)
     (setq helm-ag-base-command "pt -e --nogroup --nocolor")
     (helm-mode)
@@ -194,7 +205,6 @@
 (use-package hydra
   :bind ("C-c n" . hydra-cycle-next/body)
   :bind ("C-x o" . hydra-cycle-windows/body)
-  :bind ("C-c i" . hydra-insert/body)
   :config
   (defhydra hydra-page-break (global-map "C-x")
     "Page breaks"
