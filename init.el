@@ -1,6 +1,8 @@
-;; Init file for Emacs
-;; Maxim Kim <habamax@gmail.com>
+;;; init.el -- Personal init file for Emacs
+;;; Commentary:
+;;; Maxim Kim <habamax@gmail.com>
 
+;;; Code:
 
 ;; Non-Package setup
 (when window-system
@@ -17,9 +19,7 @@
 (setq user-full-name "Maxim Kim"
       user-mail-address "habamax@gmail.com")
 
-;; (when (eq system-type 'darwin)
-  ;; (setq mac-command-modifier 'control))
-
+;
 ;; RU stuff
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -74,7 +74,8 @@
 
 ;; Set up packaging system
 (setq package-enable-at-startup nil)
-(setq package-archives '(("melpa" . "http://melpa.org/packages/")))
+(setq package-archives '(("elpa" . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
 ;; Bootstrap `use-package'
@@ -103,16 +104,6 @@
 
 
 ;; Themes
-(use-package cyberpunk-theme
-  :disabled t
-  :config
-  (load-theme 'cyberpunk t))
-
-(use-package leuven-theme
-  :disabled t
-  :config
-  (load-theme 'leuven t))
-
 (use-package gruvbox-theme
   :disabled t
   :config
@@ -164,12 +155,15 @@
           ("C-x C-f" . helm-find-files))
   :config
   (progn
+    (use-package helm-fuzzier :config (helm-fuzzier-mode 1))
+    (use-package helm-flx :config (helm-flx-mode +1))
     (require 'helm-config)
     (bind-key "C-c !" 'helm-toggle-suspend-update helm-map)
     (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
     (bind-key "C-i" 'helm-execute-persistent-action helm-map)
     (bind-key "C-z" 'helm-select-action helm-map)
     (setq helm-M-x-fuzzy-match t
+          helm-ff-fuzzy-matching t
           helm-recentf-fuzzy-match t
           helm-buffers-fuzzy-matching t
           helm-semantic-fuzzy-match t
@@ -179,7 +173,6 @@
           helm-move-to-line-cycle-in-source t
           helm-ff-file-name-history-use-recentf t
           helm-ff-auto-update-initial-value nil
-          ;; helm-split-window-in-side-p t
           helm-tramp-verbose 9)
     (setq helm-ag-base-command "pt -e --nogroup --nocolor")
     (helm-mode)
@@ -188,18 +181,16 @@
 
 ;; Complete Anything
 (use-package company
-  :defer 2
+  :defer 1
   :config
   (progn
-    (use-package company-c-headers)
-    (push '(company-clang
-            :with company-semantic
-            :with company-yasnippet
-            :with company-c-headers)
-          company-backends)
+    (use-package company-flx :config (company-flx-mode +1))
+    
+    (add-to-list 'company-backends 'company-omnisharp)
     (setq company-minimum-prefix-length 2)
-    ;; (setq completion-styles '(substring completion-substring-try-completion completion-substring-all-completions))
     (global-company-mode)))
+
+
 
 
 (use-package hydra
@@ -240,6 +231,7 @@
     ("q" nil "quit")))
 
 (use-package rainbow-delimiters
+  :defer
   :config
   (progn
     (add-hook 'text-mode-hook 'rainbow-delimiters-mode)
@@ -247,6 +239,7 @@
 
 (use-package smartparens
   :diminish smartparens-mode
+  :defer
   :config
   (progn
     (require 'smartparens-config)
@@ -281,6 +274,13 @@
 (use-package markdown-mode
   :mode ("\\.\\(markdown|md\\)$" . markdown-mode))
 
+(use-package csharp-mode
+  :defer
+  :config
+  (progn
+    (use-package omnisharp)
+    (add-hook 'csharp-mode-hook 'omnisharp-mode)))
+
 ;; (use-package geiser
 ;;   :ensure nil
 ;;   :init
@@ -288,22 +288,19 @@
 
 
 
-;; Doesn't work as there is no let-alist blablabla.
-;; I should have find some time to resolve it.
-
 ;; flycheck
-;; (use-package flycheck
-;; :init (global-flycheck-mode))
+(use-package flycheck
+  :config (global-flycheck-mode))
 
-;; (use-package helm-flycheck
-  ;; :bind ("C-c ! h" . helm-flycheck)
-  ;; :config (global-flycheck-mode))
+(use-package helm-flycheck
+  :bind ("C-c ! h" . helm-flycheck)
+  :config (global-flycheck-mode))
 
 ;; ;; flyspell - use aspell instead of ispell
-;; (use-package flyspell
-;;   :commands (flyspell-mode flyspell-prog-mode)
-;;   :config (setq ispell-program-name (executable-find "aspell")
-;;                 ispell-extra-args '("--sug-mode=ultra")))
+(use-package flyspell
+  :commands (flyspell-mode flyspell-prog-mode)
+  :config (setq ispell-program-name (executable-find "aspell")
+                ispell-extra-args '("--sug-mode=ultra")))
 
 
 
@@ -313,6 +310,7 @@
 ;; Built-in packages
 
 (use-package erc
+  :defer
   :ensure nil
   :init
   (setq erc-fill-column (- (window-width) 2)
