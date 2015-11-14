@@ -1,6 +1,13 @@
 ;;; init.el -- Personal init file for Emacs
-;;; Commentary:
 ;;; Maxim Kim <habamax@gmail.com>
+
+;;; Commentary:
+;; Things to do:
+;; - TABs or Spaces for CSharp?
+;; - Yasnippets
+;; - Multiple cursors (mark-multiple)
+;; - Smartparens hydra with C-9
+;; - Projectile setup
 
 ;;; Code:
 
@@ -60,8 +67,6 @@
       kept-new-versions 9
       auto-save-default t)
 
-;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
-;; (add-hook 'text-mode-hook 'text-mode-hook-identify)
 
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
@@ -141,6 +146,7 @@
     (setq expand-region-contract-fast-key "M")))
 
 (use-package undo-tree
+  :diminish undo-tree-mode
   :config (global-undo-tree-mode 1))
 
 (use-package helm
@@ -173,6 +179,7 @@
           helm-move-to-line-cycle-in-source t
           helm-ff-file-name-history-use-recentf t
           helm-ff-auto-update-initial-value nil
+          helm-split-window-in-side-p t
           helm-tramp-verbose 9)
     (setq helm-ag-base-command "pt -e --nogroup --nocolor")
     (helm-mode)
@@ -188,6 +195,14 @@
     
     (add-to-list 'company-backends 'company-omnisharp)
     (setq company-minimum-prefix-length 2)
+
+    ;; (define-key company-active-map (kbd "<tab>") 'company-select-next)
+    ;; (define-key company-active-map (kbd "<backtab>") 'company-select-previous)
+    ;; (define-key company-active-map (kbd "M-p") nil)
+    ;; (define-key company-active-map (kbd "M-n") nil)
+    ;; (define-key company-active-map (kbd "TAB") 'company-yasnippet-or-completion)
+
+    
     (global-company-mode)))
 
 
@@ -232,14 +247,14 @@
 
 (use-package rainbow-delimiters
   :defer
-  :config
-  (progn
-    (add-hook 'text-mode-hook 'rainbow-delimiters-mode)
-    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)))
+  :init
+    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  
+
 
 (use-package smartparens
   :diminish smartparens-mode
-  :defer
+  :defer 1
   :config
   (progn
     (require 'smartparens-config)
@@ -275,7 +290,7 @@
   :mode ("\\.\\(markdown|md\\)$" . markdown-mode))
 
 (use-package csharp-mode
-  :defer
+  :mode ("\\.\\(cs|sln\\)$" . csharp-mode)
   :config
   (progn
     (use-package omnisharp)
