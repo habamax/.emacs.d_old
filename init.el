@@ -163,6 +163,12 @@
   (progn
     (use-package helm-fuzzier :config (helm-fuzzier-mode 1))
     (use-package helm-flx :config (helm-flx-mode +1))
+    (use-package helm-ag
+      :config
+      (setq helm-ag-fuzzy-match t)
+      ;; (setq helm-ag-base-command "pt -e --nogroup --nocolor")
+      )
+
     (require 'helm-config)
     (bind-key "C-c !" 'helm-toggle-suspend-update helm-map)
     (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
@@ -181,7 +187,7 @@
           helm-ff-auto-update-initial-value nil
           helm-split-window-in-side-p t
           helm-tramp-verbose 9)
-    (setq helm-ag-base-command "pt -e --nogroup --nocolor")
+
     (helm-mode)
     (add-hook 'helm-minibuffer-set-up-hook 'deactivate-input-method)
     (helm-autoresize-mode t)))
@@ -251,7 +257,6 @@
     (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
   
 
-
 (use-package smartparens
   :diminish smartparens-mode
   :defer 1
@@ -281,8 +286,7 @@
           projectile-file-exists-remote-cache-expire (* 10 60))
   :config
   (progn
-    (use-package helm-projectile
-      :config (helm-projectile-on))
+    (use-package helm-projectile :config (helm-projectile-on))
     (projectile-global-mode)))
 
 
