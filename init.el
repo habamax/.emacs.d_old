@@ -109,10 +109,11 @@
 
 
 ;; Themes
-(use-package gruvbox-theme
-  :disabled t
-  :config
-  (load-theme 'gruvbox t))
+
+;; (use-package gruvbox-theme
+;;   :disabled t
+;;   :config
+;;   (load-theme 'gruvbox t))
 
 ;; use-package doen't work for base16 themes
 ;; (use-package base16-theme
@@ -120,10 +121,7 @@
   ;; (load-theme 'base16-tomorrow-dark t))
 
 (ignore-errors
-  (load-theme 'base16-eighties-dark t)
-;;  (load-theme 'base16-tomorrow-dark t)
-  )
-
+  (load-theme 'base16-eighties-dark t))
 
 
 ;; Melpa packages
@@ -187,6 +185,8 @@
           helm-ff-auto-update-initial-value nil
           helm-split-window-in-side-p t
           helm-tramp-verbose 9)
+    (setq helm-ff-skip-boring-files t)
+    ;; (setq )
 
     (helm-mode)
     (add-hook 'helm-minibuffer-set-up-hook 'deactivate-input-method)
@@ -270,11 +270,23 @@
 
 (use-package magit
   :commands (magit-status projectile-vc)
+  :bind ("C-c m" . magit-status)
   :config
   (setq magit-log-arguments '("--graph" "--show-signature")
         magit-push-always-verify nil
         magit-popup-use-prefix-argument 'default
         magit-revert-buffers t))
+
+;; (use-package find-file-in-project
+;;   :bind ("C-c f p" . ffip)
+;;   :commands (ffip find-file-in-project)
+;;   :config
+;;   (when (ffip-current-full-filename-match-pattern-p "\\(/unity\\)")
+;;     ;; (setq-local ffip-project-root ("~/work/PROJECT_DIR"))
+;;     ;; do NOT search files in below directories
+;;     (setq-local ffip-prune-patterns '("*/.git/*" "*/Library/*" "*/ProjectSettings/*" "*/Temp/*"))
+;;   ;; for this project, I'm only interested certain types of files
+;;     (setq-local ffip-patterns '("*.cs" "*.xml"))))
 
 (use-package projectile
   :diminish projectile-mode
