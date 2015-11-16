@@ -72,11 +72,6 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
 
-;; Convenience bindings
-(global-set-key (kbd "M-n") 'forward-paragraph)
-(global-set-key (kbd "M-p") 'backward-paragraph)
-
-
 ;; Set up packaging system
 (setq package-enable-at-startup nil)
 (setq package-archives '(("elpa" . "http://elpa.gnu.org/packages/")
@@ -101,7 +96,7 @@
   :load-path "lisp/"
   :bind (("M-;" . haba/toggle-comment)
          ("C-a" . haba/move-beginning-of-line)
-         ("M-j" . haba/join-line)	 
+         ("M-j" . haba/join-line)
          ("C-c f i" . haba/open-init-file))
   :config
   (haba/set-font '("Source Code Pro" "Roboto Mono" "Menlo" "Dejavu Sans Mono") 140))
@@ -211,7 +206,9 @@
     
     (global-company-mode)))
 
-
+(use-package multiple-cursors
+  :bind* (("M-n" . mc/mark-next-like-this)
+          ("M-p" . mc/mark-previous-like-this)))
 
 
 (use-package hydra
