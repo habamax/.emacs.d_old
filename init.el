@@ -217,7 +217,18 @@
 (use-package hydra
   :bind ("C-c n" . hydra-cycle-next/body)
   :bind ("C-x o" . hydra-cycle-windows/body)
+  :bind ("C-c l" . hydra-line/body)
+  :bind ("C-c C-l" . hydra-line/body)
+
   :config
+  (defhydra hydra-line ()
+    "Line operations"
+    ("d" haba/duplicate-line "Duplicate line")
+    ("n" haba/move-line-down "Move down")
+    ("p" haba/move-line-up "Move up")
+    ("RET" nil "quit")
+    ("q" nil "quit"))
+  
   (defhydra hydra-page-break (global-map "C-x")
     "Page breaks"
     ("[" backward-page "Back")
@@ -389,3 +400,5 @@
         org-return-follows-link t
         org-special-ctrl-a/e t
         org-special-ctrl-k t))
+
+;;; init.el ends here
