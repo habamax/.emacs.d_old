@@ -208,7 +208,9 @@
 
 (use-package multiple-cursors
   :bind* (("M-n" . mc/mark-next-like-this)
-          ("M-p" . mc/mark-previous-like-this)))
+          ("M-p" . mc/mark-previous-like-this)
+          ("M-N" . mc/unmark-next-like-this)
+          ("M-P" . mc/unmark-previous-like-this)))
 
 
 (use-package hydra
@@ -223,14 +225,14 @@
     ("d" haba/duplicate-line "Duplicate line")
     ("n" haba/move-line-down "Move down")
     ("p" haba/move-line-up "Move up")
-    ("RET" nil "quit")
+    ("SPC" nil "quit")
     ("q" nil "quit"))
   
   (defhydra hydra-page-break (global-map "C-x")
     "Page breaks"
     ("[" backward-page "Back")
     ("]" forward-page "Forward")
-    ("RET" nil "quit")
+    ("SPC" nil "quit")
     ("q" nil "quit"))
   
   (defhydra hydra-cycle-windows
@@ -246,7 +248,7 @@
     ("b" balance-windows "Balance windows")
     ("m" delete-other-windows "Maximize window")
     ("c" delete-window "Close window")
-    ("RET" nil "quit")
+    ("SPC" nil "quit")
     ("q" nil "quit"))
   
   (defhydra hydra-cycle-next ()
@@ -256,7 +258,7 @@
     ("b" haba/next-buffer "Next buffer")
     ("B" haba/previous-buffer "Previous buffer")
     ("k" kill-this-buffer "Kill buffer")
-    ("RET" nil "quit")
+    ("SPC" nil "quit")
     ("q" nil "quit")))
 
 (use-package rainbow-delimiters
