@@ -3,9 +3,6 @@
 
 ;;; Commentary:
 ;; Things to do:
-;; - TABs or Spaces for CSharp?
-;; - Yasnippets
-;; - Multiple cursors (mark-multiple)
 ;; - Smartparens hydra with C-9
 ;; - Projectile setup
 
@@ -38,7 +35,6 @@
 
 ;; M-a and M-e use punct and single space as sentence delimiter
 (setq sentence-end-double-space nil)
-(setq-default indent-tabs-mode nil)
 (delete-selection-mode 1)
 (setq ring-bell-function #'ignore)
 (setq disabled-command-function nil)
@@ -48,6 +44,13 @@
 (show-paren-mode t)
 (column-number-mode t)
 (recentf-mode 1)
+
+;; tabs are evil but...
+(setq-default indent-tabs-mode t)
+(setq tab-width 4)
+(defvaralias 'c-basic-offset 'tab-width)
+
+
 
 ;; y/n for yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -197,12 +200,29 @@
     (add-to-list 'company-backends 'company-omnisharp)
     (setq company-minimum-prefix-length 2)
 
+    ;; Add yasnippet support for all company backends
+    ;; https://github.com/syl20bnr/spacemacs/pull/179
+    (defvar company-mode/enable-yas t
+      "Enable yasnippet for all backends.")
+
+    (defun company-mode/backend-with-yas (backend)
+      (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+	  backend
+	(append (if (consp backend) backend (list backend))
+		'(:with company-yasnippet))))
+
+    (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
+    
+    (define-key company-active-map [tab] 'company-complete-common-or-cycle)
+    (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+
     ;; (define-key company-active-map (kbd "<tab>") 'company-select-next)
     ;; (define-key company-active-map (kbd "<backtab>") 'company-select-previous)
     ;; (define-key company-active-map (kbd "M-p") nil)
     ;; (define-key company-active-map (kbd "M-n") nil)
     ;; (define-key company-active-map (kbd "TAB") 'company-yasnippet-or-completion)
-
+    
     
     (global-company-mode)))
 
@@ -287,6 +307,13 @@
         magit-popup-use-prefix-argument 'default
         magit-revert-buffers t))
 
+
+(use-package yasnippet
+  :defer 2
+  :config
+  (yas-global-mode t))
+
+  
 ;; (use-package find-file-in-project
 ;;   :bind ("C-c f p" . ffip)
 ;;   :commands (ffip find-file-in-project)
@@ -390,14 +417,42 @@
 
 (use-package org
   :ensure nil
+  :mode ("\\.\\(org|txt\\)$" . org-mode)
   :bind (("C-c o a" . org-agenda)
          ("C-c o l" . org-store-link)
          ("C-c o c" . org-capture))
-  :init
+  :config
   (setq org-src-fontify-natively t
         org-fontify-whole-heading-line t
         org-return-follows-link t
         org-special-ctrl-a/e t
-        org-special-ctrl-k t))
+        org-special-ctrl-k t)
+
+  (setq org-directory "~/org")
+  (setq org-default-notes-file "~/org/refile.org")
+  ;; (setq org-agenda-files '("~/org"))
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+  (setq org-todo-state-tags-triggers
+        (quote (("CANCELLED" ("CANCELLED" . t))
+                ("WAITING" ("WAITING" . t))
+                ("HOLD" ("WAITING" . t) ("HOLD" . t))
+                (done ("WAITING") ("HOLD"))
+                ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+                ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
+                ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+
+  (setq org-capture-templates
+        (quote (("t" "Todo" entry (file org-default-notes-file)
+                 "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+                ("n" "Note" entry (file org-default-notes-file)
+                 "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+                ("j" "Journal" entry (file+datetree "~/org/diary.org")
+                 "* %?\n%U\n" :clock-in t :clock-resume t)
+                ("w" "Org-protocol" entry (file org-default-notes-file)
+                 "* TODO Review %c\n%U\n" :immediate-finish t))))
+  )
+
 
 ;;; init.el ends here
