@@ -16,3 +16,4 @@ ido.*
 /tramp
 /undo-tree/
 /url/
+/.mc-lists.el
