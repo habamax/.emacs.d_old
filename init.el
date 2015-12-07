@@ -58,7 +58,7 @@
 ;;;; Backups
 (defvar --backup-directory (concat user-emacs-directory "backups"))
 (if (not (file-exists-p --backup-directory))
-        (make-directory --backup-directory t))
+    (make-directory --backup-directory t))
 (setq backup-directory-alist `(("." . ,--backup-directory)))
 
 (setq make-backup-files t
@@ -78,7 +78,7 @@
 ;; Set up packaging system
 (setq package-enable-at-startup nil)
 (setq package-archives '(("elpa" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
+			 ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
 ;; Bootstrap `use-package'
@@ -98,9 +98,9 @@
   :commands (haba/next-buffer haba/previous-buffer haba/toggle-window-split)
   :load-path "lisp/"
   :bind (("M-;" . haba/toggle-comment)
-         ("C-a" . haba/move-beginning-of-line)
-         ("M-j" . haba/join-line)
-         ("C-c f i" . haba/open-init-file))
+	 ("C-a" . haba/move-beginning-of-line)
+	 ("M-j" . haba/join-line)
+	 ("C-c f i" . haba/open-init-file))
   :config
   (haba/set-font '("Source Code Pro" "Roboto Mono" "Menlo" "Dejavu Sans Mono") 140))
 
@@ -149,12 +149,13 @@
   :diminish helm-mode
   :defer 2
   :bind* (("M-x"     . helm-M-x)
-          ("C-c M-x" . execute-extended-command)
-          ("C-c h"   . helm-command-prefix)
-          ("M-s o"   . helm-occur)
-          ("C-x C-b" . helm-buffers-list)
-          ("C-x b"   . helm-mini)
-          ("C-x C-f" . helm-find-files))
+	  ("C-c M-x" . execute-extended-command)
+	  ("C-c h"   . helm-command-prefix)
+	  ("M-s o"   . helm-occur)
+	  ("M-s a"   . helm-do-ag-project-root)
+	  ("C-x C-b" . helm-buffers-list)
+	  ("C-x b"   . helm-mini)
+	  ("C-x C-f" . helm-find-files))
   :config
   (progn
     (use-package helm-fuzzier :config (helm-fuzzier-mode 1))
@@ -171,20 +172,20 @@
     (bind-key "C-i" 'helm-execute-persistent-action helm-map)
     (bind-key "C-z" 'helm-select-action helm-map)
     (setq helm-M-x-fuzzy-match t
-          helm-ff-fuzzy-matching t
-          helm-recentf-fuzzy-match t
-          helm-buffers-fuzzy-matching t
-          helm-semantic-fuzzy-match t
-          helm-imenu-fuzzy-match t
-          helm-apropos-fuzzy-match t
-          helm-lisp-fuzzy-completion t
-          helm-move-to-line-cycle-in-source t
-          helm-ff-file-name-history-use-recentf t
-          helm-ff-auto-update-initial-value nil
-          helm-split-window-in-side-p t
-          helm-tramp-verbose 9)
+	  helm-ff-fuzzy-matching t
+	  helm-recentf-fuzzy-match t
+	  helm-buffers-fuzzy-matching t
+	  helm-semantic-fuzzy-match t
+	  helm-imenu-fuzzy-match t
+	  helm-apropos-fuzzy-match t
+	  helm-lisp-fuzzy-completion t
+	  helm-move-to-line-cycle-in-source t
+	  helm-ff-file-name-history-use-recentf t
+	  helm-ff-auto-update-initial-value nil
+	  helm-split-window-in-side-p t
+	  helm-tramp-verbose 9)
     (setq helm-ff-skip-boring-files t)
-    ;; (setq )
+
 
     (helm-mode)
     (add-hook 'helm-minibuffer-set-up-hook 'deactivate-input-method)
@@ -193,6 +194,7 @@
 ;; Complete Anything
 (use-package company
   :defer 1
+  :bind ("s-/" . company-complete)
   :config
   (progn
     (use-package company-flx :config (company-flx-mode +1))
@@ -213,24 +215,16 @@
 
     (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
-    
-    (define-key company-active-map [tab] 'company-complete-common-or-cycle)
+        (define-key company-active-map [tab] 'company-complete-common-or-cycle)
     (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
-
-    ;; (define-key company-active-map (kbd "<tab>") 'company-select-next)
-    ;; (define-key company-active-map (kbd "<backtab>") 'company-select-previous)
-    ;; (define-key company-active-map (kbd "M-p") nil)
-    ;; (define-key company-active-map (kbd "M-n") nil)
-    ;; (define-key company-active-map (kbd "TAB") 'company-yasnippet-or-completion)
-    
     
     (global-company-mode)))
 
 (use-package multiple-cursors
   :bind* (("M-n" . mc/mark-next-like-this)
-          ("M-p" . mc/mark-previous-like-this)
-          ("M-N" . mc/unmark-next-like-this)
-          ("M-P" . mc/unmark-previous-like-this)))
+	  ("M-p" . mc/mark-previous-like-this)
+	  ("M-N" . mc/unmark-next-like-this)
+	  ("M-P" . mc/unmark-previous-like-this)))
 
 
 (use-package hydra
@@ -299,13 +293,13 @@
     (show-smartparens-global-mode)))
 
 (use-package magit
-  :commands (magit-status projectile-vc)
+  :commands (magit-status)
   :bind ("C-c m" . magit-status)
   :config
   (setq magit-log-arguments '("--graph" "--show-signature")
-        magit-push-always-verify nil
-        magit-popup-use-prefix-argument 'default
-        magit-revert-buffers t))
+	magit-push-always-verify nil
+	magit-popup-use-prefix-argument 'default
+	magit-revert-buffers t))
 
 
 (use-package yasnippet
@@ -314,29 +308,9 @@
   (yas-global-mode t))
 
   
-;; (use-package find-file-in-project
-;;   :bind ("C-c f p" . ffip)
-;;   :commands (ffip find-file-in-project)
-;;   :config
-;;   (when (ffip-current-full-filename-match-pattern-p "\\(/unity\\)")
-;;     ;; (setq-local ffip-project-root ("~/work/PROJECT_DIR"))
-;;     ;; do NOT search files in below directories
-;;     (setq-local ffip-prune-patterns '("*/.git/*" "*/Library/*" "*/ProjectSettings/*" "*/Temp/*"))
-;;   ;; for this project, I'm only interested certain types of files
-;;     (setq-local ffip-patterns '("*.cs" "*.xml"))))
-
-(use-package projectile
-  :diminish projectile-mode
-  :bind-keymap ("C-c p" . projectile-mode-map)
-  :init
-      (setq projectile-completion-system 'helm
-          projectile-switch-project-action 'helm-projectile
-          projectile-enable-caching t
-          projectile-file-exists-remote-cache-expire (* 10 60))
-  :config
-  (progn
-    (use-package helm-projectile :config (helm-projectile-on))
-    (projectile-global-mode)))
+(use-package find-file-in-project
+  :bind ("C-c f p" . ffip)
+  :commands (ffip find-file-in-project))
 
 
 (use-package markdown-mode
@@ -368,7 +342,7 @@
 (use-package flyspell
   :commands (flyspell-mode flyspell-prog-mode)
   :config (setq ispell-program-name (executable-find "aspell")
-                ispell-extra-args '("--sug-mode=ultra")))
+		ispell-extra-args '("--sug-mode=ultra")))
 
 
 
@@ -382,9 +356,9 @@
   :ensure nil
   :init
   (setq erc-fill-column (- (window-width) 2)
-        erc-nick '("habamax" "mxmkm")
-        erc-track-minor-mode t
-        erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#racket")))
+	erc-nick '("habamax" "mxmkm")
+	erc-track-minor-mode t
+	erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#racket")))
   (defun erc-freenode ()
     (interactive)
     (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
@@ -392,14 +366,14 @@
   :config
   (make-variable-buffer-local 'erc-fill-column)
   (add-hook 'window-configuration-change-hook 
-            '(lambda ()
-               (save-excursion
-                 (walk-windows
-                  (lambda (w)
-                    (let ((buffer (window-buffer w)))
-                      (set-buffer buffer)
-                      (when (eq major-mode 'erc-mode)
-                        (setq erc-fill-column (- (window-width w) 2)))))))))
+	    '(lambda ()
+	       (save-excursion
+		 (walk-windows
+		  (lambda (w)
+		    (let ((buffer (window-buffer w)))
+		      (set-buffer buffer)
+		      (when (eq major-mode 'erc-mode)
+			(setq erc-fill-column (- (window-width w) 2)))))))))
   )
 
 
@@ -408,50 +382,50 @@
   :init
   ;; Calendar -- говорим и показываем по русски.
   (setq calendar-date-style 'iso
-        calendar-week-start-day 1
-        calendar-day-name-array ["Вс" "Пн" "Вт" "Ср" "Чт" "Пт" "Сб"]
-        calendar-month-name-array ["Январь" "Февраль" "Март" "Апрель"
-                                   "Май" "Июнь" "Июль" "Август"
-                                   "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"]))
+	calendar-week-start-day 1
+	calendar-day-name-array ["Вс" "Пн" "Вт" "Ср" "Чт" "Пт" "Сб"]
+	calendar-month-name-array ["Январь" "Февраль" "Март" "Апрель"
+				   "Май" "Июнь" "Июль" "Август"
+				   "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"]))
 
 
 (use-package org
   :ensure nil
   :mode ("\\.\\(org|txt\\)$" . org-mode)
   :bind (("C-c o a" . org-agenda)
-         ("C-c o l" . org-store-link)
-         ("C-c o c" . org-capture))
+	 ("C-c o l" . org-store-link)
+	 ("C-c o c" . org-capture))
   :config
   (setq org-src-fontify-natively t
-        org-fontify-whole-heading-line t
-        org-return-follows-link t
-        org-special-ctrl-a/e t
-        org-special-ctrl-k t)
+	org-fontify-whole-heading-line t
+	org-return-follows-link t
+	org-special-ctrl-a/e t
+	org-special-ctrl-k t)
 
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/refile.org")
   ;; (setq org-agenda-files '("~/org"))
   (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+	(quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+		(sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
   (setq org-todo-state-tags-triggers
-        (quote (("CANCELLED" ("CANCELLED" . t))
-                ("WAITING" ("WAITING" . t))
-                ("HOLD" ("WAITING" . t) ("HOLD" . t))
-                (done ("WAITING") ("HOLD"))
-                ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
-                ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
-                ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+	(quote (("CANCELLED" ("CANCELLED" . t))
+		("WAITING" ("WAITING" . t))
+		("HOLD" ("WAITING" . t) ("HOLD" . t))
+		(done ("WAITING") ("HOLD"))
+		("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+		("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
+		("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
   (setq org-capture-templates
-        (quote (("t" "Todo" entry (file org-default-notes-file)
-                 "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-                ("n" "Note" entry (file org-default-notes-file)
-                 "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-                ("j" "Journal" entry (file+datetree "~/org/diary.org")
-                 "* %?\n%U\n" :clock-in t :clock-resume t)
-                ("w" "Org-protocol" entry (file org-default-notes-file)
-                 "* TODO Review %c\n%U\n" :immediate-finish t))))
+	(quote (("t" "Todo" entry (file org-default-notes-file)
+		 "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+		("n" "Note" entry (file org-default-notes-file)
+		 "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+		("j" "Journal" entry (file+datetree "~/org/diary.org")
+		 "* %?\n%U\n" :clock-in t :clock-resume t)
+		("w" "Org-protocol" entry (file org-default-notes-file)
+		 "* TODO Review %c\n%U\n" :immediate-finish t))))
   )
 
 
