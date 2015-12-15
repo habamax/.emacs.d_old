@@ -4,7 +4,6 @@
 ;;; Commentary:
 ;; Things to do:
 ;; - Smartparens hydra with C-9
-;; - Projectile setup
 
 ;;; Code:
 
@@ -77,8 +76,8 @@
 
 ;; Set up packaging system
 (setq package-enable-at-startup nil)
-(setq package-archives '(("elpa" . "http://elpa.gnu.org/packages/")
-			 ("melpa" . "http://melpa.org/packages/")))
+(setq package-archives '(;; ("elpa" . "http://elpa.gnu.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
 ;; Bootstrap `use-package'
@@ -100,7 +99,7 @@
   :bind (("M-;" . haba/toggle-comment)
 	 ("C-a" . haba/move-beginning-of-line)
 	 ("M-j" . haba/join-line)
-	 ("C-c f i" . haba/open-init-file))
+	 ("C-c i" . haba/open-init-file))
   :config
   (haba/set-font '("Source Code Pro" "Roboto Mono" "Menlo" "Dejavu Sans Mono") 140))
 
@@ -145,51 +144,80 @@
   :diminish undo-tree-mode
   :config (global-undo-tree-mode 1))
 
-(use-package helm
-  :diminish helm-mode
-  :defer 2
-  :bind* (("M-x"     . helm-M-x)
-	  ("C-c M-x" . execute-extended-command)
-	  ("C-c h"   . helm-command-prefix)
-	  ("M-s o"   . helm-occur)
-	  ("M-s a"   . helm-do-ag-project-root)
-	  ("C-x C-b" . helm-buffers-list)
-	  ("C-x b"   . helm-mini)
-	  ("C-x C-f" . helm-find-files))
+;; (use-package helm
+;;   :diminish helm-mode
+;;   :defer 2
+;;   :bind* (("M-x"     . helm-M-x)
+;; 	  ("C-c M-x" . execute-extended-command)
+;; 	  ("C-c h"   . helm-command-prefix)
+;; 	  ("M-s o"   . helm-occur)
+;; 	  ("M-s a"   . helm-do-ag-project-root)
+;; 	  ("C-x C-b" . helm-buffers-list)
+;; 	  ("C-x b"   . helm-mini)
+;; 	  ("C-x C-f" . helm-find-files))
+;;   :config
+;;   (progn
+;;     (use-package helm-fuzzier :config (helm-fuzzier-mode 1))
+;;     (use-package helm-flx :config (helm-flx-mode +1))
+;;     (use-package helm-ag
+;;       :config
+;;       (setq helm-ag-fuzzy-match t)
+;;       ;; (setq helm-ag-base-command "pt -e --nogroup --nocolor")
+;;       )
+
+;;     (require 'helm-config)
+;;     (bind-key "C-c !" 'helm-toggle-suspend-update helm-map)
+;;     (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
+;;     (bind-key "C-i" 'helm-execute-persistent-action helm-map)
+;;     (bind-key "C-z" 'helm-select-action helm-map)
+;;     (setq helm-M-x-fuzzy-match t
+;; 	  helm-ff-fuzzy-matching t
+;; 	  helm-recentf-fuzzy-match t
+;; 	  helm-buffers-fuzzy-matching t
+;; 	  helm-semantic-fuzzy-match t
+;; 	  helm-imenu-fuzzy-match t
+;; 	  helm-apropos-fuzzy-match t
+;; 	  helm-lisp-fuzzy-completion t
+;; 	  helm-move-to-line-cycle-in-source t
+;; 	  helm-ff-file-name-history-use-recentf t
+;; 	  helm-ff-auto-update-initial-value nil
+;; 	  helm-split-window-in-side-p t
+;; 	  helm-tramp-verbose 9)
+;;     (setq helm-ff-skip-boring-files t)
+
+
+;;     (helm-mode)
+;;     (add-hook 'helm-minibuffer-set-up-hook 'deactivate-input-method)
+;;     (helm-autoresize-mode t)))
+
+
+(use-package swiper
+  :bind (("C-s" . swiper)
+	 ("C-c C-r" . ivy-resume))
   :config
-  (progn
-    (use-package helm-fuzzier :config (helm-fuzzier-mode 1))
-    (use-package helm-flx :config (helm-flx-mode +1))
-    (use-package helm-ag
-      :config
-      (setq helm-ag-fuzzy-match t)
-      ;; (setq helm-ag-base-command "pt -e --nogroup --nocolor")
-      )
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  ;; (setq ivy-re-builders-alist
+	;; '((t . ivy--regex-fuzzy)))
+  )
 
-    (require 'helm-config)
-    (bind-key "C-c !" 'helm-toggle-suspend-update helm-map)
-    (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
-    (bind-key "C-i" 'helm-execute-persistent-action helm-map)
-    (bind-key "C-z" 'helm-select-action helm-map)
-    (setq helm-M-x-fuzzy-match t
-	  helm-ff-fuzzy-matching t
-	  helm-recentf-fuzzy-match t
-	  helm-buffers-fuzzy-matching t
-	  helm-semantic-fuzzy-match t
-	  helm-imenu-fuzzy-match t
-	  helm-apropos-fuzzy-match t
-	  helm-lisp-fuzzy-completion t
-	  helm-move-to-line-cycle-in-source t
-	  helm-ff-file-name-history-use-recentf t
-	  helm-ff-auto-update-initial-value nil
-	  helm-split-window-in-side-p t
-	  helm-tramp-verbose 9)
-    (setq helm-ff-skip-boring-files t)
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x C-f" . counsel-find-file)
+	 ("C-h f" . counsel-describe-function)
+	 ("C-h v" . counsel-describe-variable)
+	 ("C-c k" . counsel-ag)
+	 ("C-c g" . counsel-git))
+  :config
+  (setq counsel-find-file-at-point t)
+  (setq counsel-find-file-ignore-regexp
+	(concat
+	 ;; file names beginning with # or .
+	 "\\(?:\\`[#.]\\)"
+	 ;; file names ending with # or ~
+	 "\\|\\(?:\\`.+?[#~]\\'\\)")))
 
 
-    (helm-mode)
-    (add-hook 'helm-minibuffer-set-up-hook 'deactivate-input-method)
-    (helm-autoresize-mode t)))
 
 ;; Complete Anything
 (use-package company
@@ -309,7 +337,7 @@
 
   
 (use-package find-file-in-project
-  :bind ("C-c f p" . ffip)
+  :bind ("C-c f" . ffip)
   :commands (ffip find-file-in-project))
 
 
@@ -332,10 +360,6 @@
 
 ;; flycheck
 (use-package flycheck
-  :config (global-flycheck-mode))
-
-(use-package helm-flycheck
-  :bind ("C-c ! h" . helm-flycheck)
   :config (global-flycheck-mode))
 
 ;; ;; flyspell - use aspell instead of ispell
