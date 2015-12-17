@@ -43,6 +43,7 @@
 (show-paren-mode t)
 (column-number-mode t)
 (recentf-mode 1)
+(winner-mode 1)
 
 ;; tabs are evil but...
 (setq-default indent-tabs-mode t)
@@ -76,7 +77,7 @@
 
 ;; Set up packaging system
 (setq package-enable-at-startup nil)
-(setq package-archives '(;; ("elpa" . "http://elpa.gnu.org/packages/")
+(setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
 			 ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
@@ -108,9 +109,12 @@
 ;; Themes
 
 ;; (use-package gruvbox-theme
-;;   :disabled t
-;;   :config
-;;   (load-theme 'gruvbox t))
+  ;; :config
+  ;; (load-theme 'gruvbox t))
+
+;; (use-package cyberpunk-theme
+  ;; :config
+  ;; (load-theme 'cyberpunk t))
 
 ;; use-package doen't work for base16 themes
 ;; (use-package base16-theme
@@ -144,56 +148,10 @@
   :diminish undo-tree-mode
   :config (global-undo-tree-mode 1))
 
-;; (use-package helm
-;;   :diminish helm-mode
-;;   :defer 2
-;;   :bind* (("M-x"     . helm-M-x)
-;; 	  ("C-c M-x" . execute-extended-command)
-;; 	  ("C-c h"   . helm-command-prefix)
-;; 	  ("M-s o"   . helm-occur)
-;; 	  ("M-s a"   . helm-do-ag-project-root)
-;; 	  ("C-x C-b" . helm-buffers-list)
-;; 	  ("C-x b"   . helm-mini)
-;; 	  ("C-x C-f" . helm-find-files))
-;;   :config
-;;   (progn
-;;     (use-package helm-fuzzier :config (helm-fuzzier-mode 1))
-;;     (use-package helm-flx :config (helm-flx-mode +1))
-;;     (use-package helm-ag
-;;       :config
-;;       (setq helm-ag-fuzzy-match t)
-;;       ;; (setq helm-ag-base-command "pt -e --nogroup --nocolor")
-;;       )
-
-;;     (require 'helm-config)
-;;     (bind-key "C-c !" 'helm-toggle-suspend-update helm-map)
-;;     (bind-key "<tab>" 'helm-execute-persistent-action helm-map)
-;;     (bind-key "C-i" 'helm-execute-persistent-action helm-map)
-;;     (bind-key "C-z" 'helm-select-action helm-map)
-;;     (setq helm-M-x-fuzzy-match t
-;; 	  helm-ff-fuzzy-matching t
-;; 	  helm-recentf-fuzzy-match t
-;; 	  helm-buffers-fuzzy-matching t
-;; 	  helm-semantic-fuzzy-match t
-;; 	  helm-imenu-fuzzy-match t
-;; 	  helm-apropos-fuzzy-match t
-;; 	  helm-lisp-fuzzy-completion t
-;; 	  helm-move-to-line-cycle-in-source t
-;; 	  helm-ff-file-name-history-use-recentf t
-;; 	  helm-ff-auto-update-initial-value nil
-;; 	  helm-split-window-in-side-p t
-;; 	  helm-tramp-verbose 9)
-;;     (setq helm-ff-skip-boring-files t)
-
-
-;;     (helm-mode)
-;;     (add-hook 'helm-minibuffer-set-up-hook 'deactivate-input-method)
-;;     (helm-autoresize-mode t)))
-
 
 (use-package swiper
   :bind (("C-s" . swiper)
-	 ("C-c C-r" . ivy-resume))
+	 ("C-c C-r" . ivy-recentf))
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
