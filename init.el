@@ -7,6 +7,15 @@
 
 ;;; Code:
 
+
+;; TODO: This should be tweaked to select my projects
+;; (progn
+;;   (cd (ivy-read "Select project:" '("~/work/unity/Dominion Master/" "~/.emacs.d" "~/org")))
+;;   (ffip))
+;; (progn
+;;   (setq ffip-project-root (ivy-read "Select project:" '("~/Projects/Test ground" "~/.emacs.d" "~/org")))
+;;   (ffip))
+
 ;; Non-Package setup
 (when window-system
   (tooltip-mode -1)
@@ -49,8 +58,6 @@
 (setq-default indent-tabs-mode t)
 (setq tab-width 4)
 (defvaralias 'c-basic-offset 'tab-width)
-
-
 
 ;; y/n for yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -108,10 +115,6 @@
 
 ;; Themes
 
-;; (use-package gruvbox-theme
-  ;; :config
-  ;; (load-theme 'gruvbox t))
-
 ;; (use-package cyberpunk-theme
   ;; :config
   ;; (load-theme 'cyberpunk t))
@@ -122,7 +125,11 @@
   ;; (load-theme 'base16-tomorrow-dark t))
 
 (ignore-errors
-  (load-theme 'base16-eighties-dark t))
+  ;; (load-theme 'base16-ocean-dark t)
+  (load-theme 'base16-eighties-dark t)
+  ;; (load-theme 'base16-tomorrow-dark t)
+  ;; (load-theme 'base16-grayscale-dark t)
+  )
 
 
 ;; Melpa packages
@@ -134,7 +141,7 @@
   :if (eq system-type 'darwin))
 
 (use-package which-key
-  :defer 1
+  :defer 3
   :diminish which-key-mode
   :config (which-key-mode))
 
@@ -150,14 +157,18 @@
 
 
 (use-package swiper
+  :demand
   :bind (("C-s" . swiper)
-	 ("C-c C-r" . ivy-recentf))
+	 ("C-c C-r" . ivy-recentf)
+	 ("C-x b" . ivy-switch-buffer))
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   ;; (setq ivy-re-builders-alist
 	;; '((t . ivy--regex-fuzzy)))
   )
+
+(use-package smex :defer)
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
@@ -166,6 +177,10 @@
 	 ("C-h v" . counsel-describe-variable)
 	 ("C-c k" . counsel-ag)
 	 ("C-c g" . counsel-git))
+  :init
+  ;; clear default ^ for counsel-M-x and friends
+  (setq ivy-initial-inputs-alist '())
+  
   :config
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
@@ -201,8 +216,8 @@
 
     (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
-        (define-key company-active-map [tab] 'company-complete-common-or-cycle)
-    (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+    ;; (define-key company-active-map [tab] 'company-complete-common)
+    ;; (define-key company-active-map (kbd "TAB") 'company-complete-common)
     
     (global-company-mode)))
 
@@ -295,7 +310,7 @@
 
   
 (use-package find-file-in-project
-  :bind ("C-c f" . ffip)
+  :bind ("C-c f" . find-file-in-project)
   :commands (ffip find-file-in-project))
 
 
