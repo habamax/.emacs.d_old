@@ -146,7 +146,10 @@
   :config (which-key-mode))
 
 (use-package expand-region
-  :bind ("M-m" . er/expand-region)
+  :bind (("M-m" . er/expand-region))
+  :bind (:map sgml-mode-map
+	      ("s-m" . er/mark-inner-tag)
+	      ("s-M" . er/mark-outer-tag))
   :config
   (progn
     (setq expand-region-contract-fast-key "M")))
@@ -308,6 +311,12 @@
   :config
   (yas-global-mode t))
 
+(use-package emmet-mode
+  :defer
+  :init
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'html-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook  'emmet-mode))
   
 (use-package find-file-in-project
   :bind ("C-c f" . find-file-in-project)
