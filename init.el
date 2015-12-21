@@ -77,6 +77,8 @@
       kept-new-versions 9
       auto-save-default t)
 
+;; C-u C-SPC C-SPC to pop mark twice...
+(setq set-mark-command-repeat-pop t)
 
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
@@ -147,9 +149,9 @@
 
 (use-package expand-region
   :bind (("M-m" . er/expand-region))
-  :bind (:map sgml-mode-map
-	      ("s-m" . er/mark-inner-tag)
-	      ("s-M" . er/mark-outer-tag))
+  ;; :bind (:map html-mode-map
+	      ;; ("s-m" . er/mark-inner-tag)
+	      ;; ("s-M" . er/mark-outer-tag))
   :config
   (progn
     (setq expand-region-contract-fast-key "M")))
@@ -235,7 +237,7 @@
   :bind ("C-c n" . hydra-cycle-next/body)
   :bind ("C-x o" . hydra-cycle-windows/body)
   :bind ("C-c l" . hydra-line/body)
-  :bind ("C-c C-l" . hydra-line/body)
+  :bind ("s-l" . hydra-line/body)
 
   :config
   (defhydra hydra-line ()
