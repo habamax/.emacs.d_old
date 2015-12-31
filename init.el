@@ -121,17 +121,10 @@
   ;; :config
   ;; (load-theme 'cyberpunk t))
 
-;; use-package doen't work for base16 themes
-;; (use-package base16-theme
-  ;; :config
-  ;; (load-theme 'base16-tomorrow-dark t))
 
-(ignore-errors
-  ;; (load-theme 'base16-ocean-dark t)
-  (load-theme 'base16-eighties-dark t)
-  ;; (load-theme 'base16-tomorrow-dark t)
-  ;; (load-theme 'base16-grayscale-dark t)
-  )
+(use-package base16-theme
+  :init
+  (load-theme 'base16-eighties-dark t))
 
 
 ;; Melpa packages
