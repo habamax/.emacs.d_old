@@ -77,6 +77,12 @@
       kept-new-versions 9
       auto-save-default t)
 
+
+;; autosave position in file
+(setq save-place-file (concat user-emacs-directory "saveplace"))
+(setq-default save-place t)
+(require 'saveplace)
+
 ;; C-u C-SPC C-SPC to pop mark twice...
 (setq set-mark-command-repeat-pop t)
 
@@ -118,7 +124,7 @@
 ;; Themes
 
 ;; (use-package cyberpunk-theme
-  ;; :config
+  ;; :init
   ;; (load-theme 'cyberpunk t))
 
 
@@ -202,20 +208,11 @@
     (setq company-minimum-prefix-length 2)
 
     ;; Add yasnippet support for all company backends
-    ;; https://github.com/syl20bnr/spacemacs/pull/179
-    (defvar company-mode/enable-yas t
-      "Enable yasnippet for all backends.")
-
     (defun company-mode/backend-with-yas (backend)
-      (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
-	  backend
-	(append (if (consp backend) backend (list backend))
-		'(:with company-yasnippet))))
-
+      (append (if (consp backend) backend (list backend))
+	      '(:with company-yasnippet)))
     (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
-    ;; (define-key company-active-map [tab] 'company-complete-common)
-    ;; (define-key company-active-map (kbd "TAB") 'company-complete-common)
     
     (global-company-mode)))
 
@@ -326,6 +323,7 @@
   :config
   (progn
     (use-package omnisharp)
+    (setq omnisharp-company-match-type 'company-match-flx)
     (add-hook 'csharp-mode-hook 'omnisharp-mode)))
 
 ;; (use-package geiser
