@@ -16,6 +16,8 @@
 ;;   (setq ffip-project-root (ivy-read "Select project:" '("~/Projects/Test ground" "~/.emacs.d" "~/org")))
 ;;   (ffip))
 
+
+
 ;; Non-Package setup
 (when window-system
   (tooltip-mode -1)
@@ -122,15 +124,17 @@
 
 
 ;; Themes
-
-;; (use-package cyberpunk-theme
-  ;; :init
-  ;; (load-theme 'cyberpunk t))
-
-
-(use-package base16-theme
+(use-package cyberpunk-theme
   :init
-  (load-theme 'base16-eighties-dark t))
+  (load-theme 'cyberpunk t))
+
+;; (use-package dracula-theme
+  ;; :init
+  ;; (load-theme 'dracula t))
+
+;; (use-package leuven-theme
+  ;; :init
+  ;; (load-theme 'leuven t))
 
 
 ;; Melpa packages
@@ -168,8 +172,8 @@
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
-  ;; (setq ivy-re-builders-alist
-	;; '((t . ivy--regex-fuzzy)))
+  (setq ivy-re-builders-alist
+	'((t . ivy--regex-fuzzy)))
   )
 
 (use-package smex :defer)
@@ -213,6 +217,19 @@
 	      '(:with company-yasnippet)))
     (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
+    (defun do-yas-expand ()
+      (let ((yas/fallback-behavior 'return-nil))
+	(yas/expand)))
+    
+    (defun expand-snippet-or-complete-selection ()
+      (interactive)
+      (if (or (not yas/minor-mode)
+	      (null (do-yas-expand))
+	      (company-abort))
+	  (company-complete-selection)))
+
+    (define-key company-active-map [tab] 'expand-snippet-or-complete-selection)
+    (define-key company-active-map (kbd "TAB") 'expand-snippet-or-complete-selection)
     
     (global-company-mode)))
 
@@ -301,6 +318,8 @@
 (use-package yasnippet
   :defer 2
   :config
+  ;; add personal snippet folder.
+  ;; consider to remove defaults.
   (yas-global-mode t))
 
 (use-package emmet-mode
@@ -337,7 +356,7 @@
 (use-package flycheck
   :config (global-flycheck-mode))
 
-;; ;; flyspell - use aspell instead of ispell
+;; flyspell - use aspell instead of ispell
 (use-package flyspell
   :commands (flyspell-mode flyspell-prog-mode)
   :config (setq ispell-program-name (executable-find "aspell")
@@ -426,6 +445,8 @@
 		("w" "Org-protocol" entry (file org-default-notes-file)
 		 "* TODO Review %c\n%U\n" :immediate-finish t))))
   )
+
+
 
 
 ;;; init.el ends here
