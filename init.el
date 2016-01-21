@@ -124,13 +124,13 @@
 
 
 ;; Themes
-(use-package cyberpunk-theme
-  :init
-  (load-theme 'cyberpunk t))
-
-;; (use-package dracula-theme
+;; (use-package cyberpunk-theme
   ;; :init
-  ;; (load-theme 'dracula t))
+  ;; (load-theme 'cyberpunk t))
+
+(use-package base16-theme
+  :init
+  (load-theme 'base16-eighties-dark t))
 
 ;; (use-package leuven-theme
   ;; :init
