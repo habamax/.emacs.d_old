@@ -2,8 +2,7 @@
 ;;; Maxim Kim <habamax@gmail.com>
 
 ;;; Commentary:
-;; Things to do:
-;; - Smartparens hydra with C-9
+;; No comments.
 
 ;;; Code:
 
@@ -124,17 +123,10 @@
 
 
 ;; Themes
-;; (use-package cyberpunk-theme
-  ;; :init
-  ;; (load-theme 'cyberpunk t))
+(use-package base16-theme :init (load-theme 'base16-eighties-dark t))
+;; (use-package leuven-theme :init (load-theme 'leuven t))
+;; (use-package cyberpunk-theme :init (load-theme 'cyberpunk t))
 
-(use-package base16-theme
-  :init
-  (load-theme 'base16-eighties-dark t))
-
-;; (use-package leuven-theme
-  ;; :init
-  ;; (load-theme 'leuven t))
 
 
 ;; Melpa packages
@@ -166,6 +158,7 @@
 
 (use-package swiper
   :demand
+  :diminish ivy-mode
   :bind (("C-s" . swiper)
 	 ("C-c C-r" . ivy-recentf)
 	 ("C-x b" . ivy-switch-buffer))
@@ -210,26 +203,6 @@
     
     (add-to-list 'company-backends 'company-omnisharp)
     (setq company-minimum-prefix-length 2)
-
-    ;; Add yasnippet support for all company backends
-    (defun company-mode/backend-with-yas (backend)
-      (append (if (consp backend) backend (list backend))
-	      '(:with company-yasnippet)))
-    (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
-
-    (defun do-yas-expand ()
-      (let ((yas/fallback-behavior 'return-nil))
-	(yas/expand)))
-    
-    (defun expand-snippet-or-complete-selection ()
-      (interactive)
-      (if (or (not yas/minor-mode)
-	      (null (do-yas-expand))
-	      (company-abort))
-	  (company-complete-selection)))
-
-    (define-key company-active-map [tab] 'expand-snippet-or-complete-selection)
-    (define-key company-active-map (kbd "TAB") 'expand-snippet-or-complete-selection)
     
     (global-company-mode)))
 
@@ -315,13 +288,6 @@
 	magit-revert-buffers t))
 
 
-(use-package yasnippet
-  :defer 2
-  :config
-  ;; add personal snippet folder.
-  ;; consider to remove defaults.
-  (yas-global-mode t))
-
 (use-package emmet-mode
   :defer
   :init
@@ -341,8 +307,9 @@
   :mode ("\\.\\(cs|sln\\)$" . csharp-mode)
   :config
   (progn
-    (use-package omnisharp)
-    (setq omnisharp-company-match-type 'company-match-flx)
+    (use-package omnisharp
+      :config
+      (setq omnisharp-company-match-type 'company-match-flx))
     (add-hook 'csharp-mode-hook 'omnisharp-mode)))
 
 ;; (use-package geiser
