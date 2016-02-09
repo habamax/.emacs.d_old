@@ -87,6 +87,10 @@
 ;; C-u C-SPC C-SPC to pop mark twice...
 (setq set-mark-command-repeat-pop t)
 
+;; Tab to indent or complete
+(setq tab-always-indent 'complete)
+
+
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
@@ -123,9 +127,13 @@
 
 
 ;; Themes
-(use-package base16-theme :init (load-theme 'base16-eighties-dark t))
+;; Nighttime
+;; (use-package base16-theme :init (load-theme 'base16-eighties-dark t))
+(use-package base16-theme :init (load-theme 'base16-default-dark t))
+;; Daytime
 ;; (use-package leuven-theme :init (load-theme 'leuven t))
-;; (use-package cyberpunk-theme :init (load-theme 'cyberpunk t))
+
+
 
 
 
@@ -154,7 +162,6 @@
 (use-package undo-tree
   :diminish undo-tree-mode
   :config (global-undo-tree-mode 1))
-
 
 (use-package swiper
   :demand
@@ -206,11 +213,20 @@
     
     (global-company-mode)))
 
+
+
 (use-package multiple-cursors
   :bind* (("M-n" . mc/mark-next-like-this)
 	  ("M-p" . mc/mark-previous-like-this)
 	  ("M-N" . mc/unmark-next-like-this)
 	  ("M-P" . mc/unmark-previous-like-this)))
+
+
+(use-package aggressive-indent
+  :init
+  (global-aggressive-indent-mode 1)
+  ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+  )
 
 
 (use-package hydra
@@ -225,13 +241,6 @@
     ("d" haba/duplicate-line "Duplicate line")
     ("n" haba/move-line-down "Move down")
     ("p" haba/move-line-up "Move up")
-    ("SPC" nil "quit")
-    ("q" nil "quit"))
-  
-  (defhydra hydra-page-break (global-map "C-x")
-    "Page breaks"
-    ("[" backward-page "Back")
-    ("]" forward-page "Forward")
     ("SPC" nil "quit")
     ("q" nil "quit"))
   
@@ -312,10 +321,10 @@
       (setq omnisharp-company-match-type 'company-match-flx))
     (add-hook 'csharp-mode-hook 'omnisharp-mode)))
 
-;; (use-package geiser
-;;   :ensure nil
-;;   :init
-;;   (setq geiser-active-implementations '(racket)))
+(use-package geiser
+  ;; :ensure nil
+  :init
+  (setq geiser-active-implementations '(racket)))
 
 
 
@@ -381,6 +390,13 @@
 	 ("C-c o l" . org-store-link)
 	 ("C-c o c" . org-capture))
   :config
+  (use-package org-bullets
+    :init
+    (setq org-bullets-bullet-list '("✺" "✹" "✸" "✷" "●" "○"))
+    ;; (setq org-bullets-bullet-list '("◉" "◎" "⚫" "○" "►" "◇"))
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+    
   (setq org-src-fontify-natively t
 	org-fontify-whole-heading-line t
 	org-return-follows-link t
@@ -390,17 +406,25 @@
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/refile.org")
   ;; (setq org-agenda-files '("~/org"))
+
+  (setq org-refile-targets '((nil :maxlevel . 9)
+			     (org-agenda-files :maxlevel . 9)))
+  ;; Refile in a single go
+  (setq org-outline-path-complete-in-steps nil)
+  ;; Show full paths for refiling
+  (setq org-refile-use-outline-path t)
+
+  
   (setq org-todo-keywords
-	(quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-		(sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
-  (setq org-todo-state-tags-triggers
-	(quote (("CANCELLED" ("CANCELLED" . t))
-		("WAITING" ("WAITING" . t))
-		("HOLD" ("WAITING" . t) ("HOLD" . t))
-		(done ("WAITING") ("HOLD"))
-		("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
-		("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
-		("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+	(quote ((sequence "TODO(t)" "|" "DONE(d)")
+		(sequence "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+  ;; (setq org-todo-state-tags-triggers
+	;; (quote (("CANCELLED" ("CANCELLED" . t))
+		;; ("WAITING" ("WAITING" . t))
+		;; ("HOLD" ("WAITING" . t) ("HOLD" . t))
+		;; (done ("WAITING") ("HOLD"))
+		;; ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+		;; ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
   (setq org-capture-templates
 	(quote (("t" "Todo" entry (file org-default-notes-file)
