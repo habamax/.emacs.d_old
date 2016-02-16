@@ -1,5 +1,5 @@
 *.elc
-*.*~
+\#*\#
 ido.*
 /auto-save-list/
 /backups/
@@ -19,4 +19,4 @@ ido.*
 /.mc-lists.el
 /smex-items
 /saveplace
-#*.*#
+
