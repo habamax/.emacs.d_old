@@ -19,3 +19,4 @@ ido.*
 /.mc-lists.el
 /smex-items
 /saveplace
+#*.*#
