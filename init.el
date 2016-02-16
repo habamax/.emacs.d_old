@@ -44,6 +44,7 @@
 
 ;; M-a and M-e use punct and single space as sentence delimiter
 (setq sentence-end-double-space nil)
+
 (delete-selection-mode 1)
 (setq ring-bell-function #'ignore)
 (setq disabled-command-function nil)
@@ -128,8 +129,8 @@
 
 ;; Themes
 ;; Nighttime
-;; (use-package base16-theme :init (load-theme 'base16-eighties-dark t))
-(use-package base16-theme :init (load-theme 'base16-default-dark t))
+(use-package base16-theme :init (load-theme 'base16-eighties-dark t))
+;; (use-package base16-theme :init (load-theme 'base16-default-dark t))
 ;; Daytime
 ;; (use-package leuven-theme :init (load-theme 'leuven t))
 
@@ -243,7 +244,7 @@
     ("p" haba/move-line-up "Move up")
     ("SPC" nil "quit")
     ("q" nil "quit"))
-  
+
   (defhydra hydra-cycle-windows
     (:body-pre (other-window 1))
     "Windows"
@@ -273,8 +274,8 @@
 (use-package rainbow-delimiters
   :defer
   :init
-    (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-  
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
 
 (use-package smartparens
   :diminish smartparens-mode
@@ -304,10 +305,6 @@
   (add-hook 'html-mode-hook 'emmet-mode)
   (add-hook 'css-mode-hook  'emmet-mode))
   
-(use-package find-file-in-project
-  :bind ("C-c f" . find-file-in-project)
-  :commands (ffip find-file-in-project))
-
 
 (use-package markdown-mode
   :mode ("\\.\\(markdown|md\\)$" . markdown-mode))
