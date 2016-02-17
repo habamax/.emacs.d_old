@@ -15,7 +15,9 @@
 ;;   (setq ffip-project-root (ivy-read "Select project:" '("~/Projects/Test ground" "~/.emacs.d" "~/org")))
 ;;   (ffip))
 
-
+;; No new frames for files that are opened from OSX
+(when (eq system-type 'darwin)
+  (setq ns-pop-up-frames nil))
 
 ;; Non-Package setup
 (when window-system
