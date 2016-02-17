@@ -21,11 +21,11 @@
 
 ;; Non-Package setup
 (when window-system
+  (setq default-frame-alist '((fullscreen . maximized)))
   (tooltip-mode -1)
   (tool-bar-mode -1)
   (menu-bar-mode 1)
-  (scroll-bar-mode -1)
-  (setq default-frame-alist '((fullscreen . maximized))))
+  (scroll-bar-mode -1))
 
 (setq inhibit-startup-message t
       inhibit-splash-screen t
@@ -66,20 +66,10 @@
 ;; y/n for yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;;;; Backups
-(defvar --backup-directory (concat user-emacs-directory "backups"))
-(if (not (file-exists-p --backup-directory))
-    (make-directory --backup-directory t))
-(setq backup-directory-alist `(("." . ,--backup-directory)))
-
-(setq make-backup-files t
-      backup-by-copying t
-      version-control t
-      delete-old-versions t
-      delete-by-moving-to-trash t
-      kept-old-versions 6
-      kept-new-versions 9
-      auto-save-default t)
+;; Backups & Autosave
+;; Store all backup and autosave files in the tmp dir
+(setq backup-directory-alist `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
 
 ;; autosave position in file
@@ -91,7 +81,7 @@
 (setq set-mark-command-repeat-pop t)
 
 ;; Tab to indent or complete
-(setq tab-always-indent 'complete)
+;; (setq tab-always-indent 'complete)
 
 
 ;; Keep 'Customize' stuff separated
