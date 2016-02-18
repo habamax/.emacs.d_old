@@ -166,7 +166,8 @@
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-re-builders-alist
-	'((t . ivy--regex-fuzzy)))
+	;; '((t . ivy--regex-fuzzy)))
+	'((t . ivy--regex-ignore-order)))
   )
 
 (use-package smex :defer)
@@ -203,6 +204,13 @@
     
     (add-to-list 'company-backends 'company-omnisharp)
     (setq company-minimum-prefix-length 2)
+    
+    (define-key company-active-map [tab] 'company-complete-selection)
+    (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+    (define-key company-active-map (kbd "M-n") nil)
+    (define-key company-active-map (kbd "M-p") nil)
+    (define-key company-active-map (kbd "C-n") 'company-select-next)
+    (define-key company-active-map (kbd "C-p") 'company-select-previous)
     
     (global-company-mode)))
 
