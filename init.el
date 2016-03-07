@@ -226,12 +226,6 @@
 	  ("M-P" . mc/unmark-previous-like-this)))
 
 
-(use-package aggressive-indent
-  :init
-  (global-aggressive-indent-mode 1)
-  ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
-  )
-
 (use-package golden-ratio                 ; Auto resize windows
   :diminish golden-ratio-mode
   :init
