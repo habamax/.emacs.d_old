@@ -15,11 +15,13 @@
 ;;   (setq ffip-project-root (ivy-read "Select project:" '("~/Projects/Test ground" "~/.emacs.d" "~/org")))
 ;;   (ffip))
 
+
+;; Non-Package setup
+
 ;; No new frames for files that are opened from OSX
 (when (eq system-type 'darwin)
   (setq ns-pop-up-frames nil))
 
-;; Non-Package setup
 (when window-system
   (setq default-frame-alist '((fullscreen . maximized)))
   (tooltip-mode -1)
@@ -34,7 +36,7 @@
 (setq user-full-name "Maxim Kim"
       user-mail-address "habamax@gmail.com")
 
-;
+
 ;; RU stuff
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -121,10 +123,11 @@
 
 ;; Themes
 ;; Nighttime
-(use-package base16-theme :init (load-theme 'base16-eighties-dark t))
+;; (use-package base16-theme :init (load-theme 'base16-eighties-dark t))
 ;; (use-package base16-theme :init (load-theme 'base16-default-dark t))
 ;; Daytime
-;; (use-package leuven-theme :init (load-theme 'leuven t))
+(use-package leuven-theme :init (load-theme 'leuven t))
+;; (use-package gandalf-theme :init (load-theme 'gandalf t))
 
 
 
@@ -146,8 +149,8 @@
 (use-package expand-region
   :bind (("M-m" . er/expand-region))
   ;; :bind (:map html-mode-map
-	      ;; ("s-m" . er/mark-inner-tag)
-	      ;; ("s-M" . er/mark-outer-tag))
+  ;; 	      ("M-h" . er/mark-inner-tag)
+  ;; 	      ("M-H" . er/mark-outer-tag))
   :config
   (progn
     (setq expand-region-contract-fast-key "M")))
@@ -229,7 +232,12 @@
   ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
   )
 
-
+(use-package golden-ratio                 ; Auto resize windows
+  :diminish golden-ratio-mode
+  :init
+  (golden-ratio-mode 1)
+  (setq golden-ratio-auto-scale nil))
+  
 (use-package hydra
   :bind ("C-c n" . hydra-cycle-next/body)
   :bind ("C-x o" . hydra-cycle-windows/body)
