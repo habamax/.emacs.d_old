@@ -123,11 +123,13 @@
 
 ;; Themes
 ;; Nighttime
-;; (use-package base16-theme :init (load-theme 'base16-eighties-dark t))
-;; (use-package base16-theme :init (load-theme 'base16-default-dark t))
+;; (use-package cyberpunk-theme :init (load-theme 'cyberpunk t))
+(use-package tao-theme :init (load-theme 'tao-yin t))
+
 ;; Daytime
-(use-package leuven-theme :init (load-theme 'leuven t))
-;; (use-package gandalf-theme :init (load-theme 'gandalf t))
+;; (use-package leuven-theme :init (load-theme 'leuven t))
+;; (use-package tao-theme :init (load-theme 'tao-yang t))
+
 
 
 
