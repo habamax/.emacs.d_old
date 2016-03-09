@@ -2,19 +2,9 @@
 ;;; Maxim Kim <habamax@gmail.com>
 
 ;;; Commentary:
-;; No comments.
+;; Carefully crafted settings for alien's editor I become used to.
 
 ;;; Code:
-
-
-;; TODO: This should be tweaked to select my projects
-;; (progn
-;;   (cd (ivy-read "Select project:" '("~/work/unity/Dominion Master/" "~/.emacs.d" "~/org")))
-;;   (ffip))
-;; (progn
-;;   (setq ffip-project-root (ivy-read "Select project:" '("~/Projects/Test ground" "~/.emacs.d" "~/org")))
-;;   (ffip))
-
 
 ;; Non-Package setup
 
@@ -124,12 +114,11 @@
 ;; Themes
 ;; Nighttime
 ;; (use-package cyberpunk-theme :init (load-theme 'cyberpunk t))
-(use-package tao-theme :init (load-theme 'tao-yin t))
+(load-theme 'misterioso t)
 
 ;; Daytime
 ;; (use-package leuven-theme :init (load-theme 'leuven t))
-;; (use-package tao-theme :init (load-theme 'tao-yang t))
-
+;; (load-theme 'adwaita t)
 
 
 
@@ -385,7 +374,6 @@
 
 
 (use-package org
-  :ensure nil
   :mode ("\\.\\(org|txt\\)$" . org-mode)
   :bind (("C-c o a" . org-agenda)
 	 ("C-c o l" . org-store-link)
@@ -415,6 +403,8 @@
   ;; Show full paths for refiling
   (setq org-refile-use-outline-path t)
 
+  ;; Doesn't work
+  (setq org-image-actual-width 500)
   
   (setq org-todo-keywords
 	(quote ((sequence "TODO(t)" "|" "DONE(d)")
