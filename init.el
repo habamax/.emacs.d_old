@@ -114,12 +114,12 @@
 ;; Themes
 ;; Nighttime
 ;; (use-package cyberpunk-theme :init (load-theme 'cyberpunk t))
-(load-theme 'misterioso t)
+;; (use-package zenburn-theme :init (load-theme 'zenburn t))
+;; (load-theme 'misterioso t)
 
 ;; Daytime
 ;; (use-package leuven-theme :init (load-theme 'leuven t))
-;; (load-theme 'adwaita t)
-
+;; (use-package eclipse-theme :init (load-theme 'eclipse t))
 
 
 
