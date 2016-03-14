@@ -1,4 +1,4 @@
-;;; init.el -- Personal init file for Emacs
+;;; init.el -- Emacs initialization file
 ;;; Maxim Kim <habamax@gmail.com>
 
 ;;; Commentary:
@@ -113,14 +113,23 @@
 
 ;; Themes
 ;; Nighttime
-;; (use-package cyberpunk-theme :init (load-theme 'cyberpunk t))
-;; (use-package zenburn-theme :init (load-theme 'zenburn t))
+;; (use-package base16-theme :init (load-theme 'base16-tomorrow-dark t))
 ;; (load-theme 'misterioso t)
+;; (load-theme 'deeper-blue t)
+;; (use-package minimal-theme :init (load-theme 'minimal t))
+
+(load-theme 'chaplin t)
+
+
+;; (use-package solarized-theme
+  ;; :init
+  ;; (setq solarized-distinct-fringe-background nil
+	;; solarized-high-contrast-mode-line t)
+  ;; (load-theme 'solarized-dark t))
 
 ;; Daytime
 ;; (use-package leuven-theme :init (load-theme 'leuven t))
-;; (use-package eclipse-theme :init (load-theme 'eclipse t))
-
+;; (use-package minimal-theme :init (load-theme 'minimal-light t))
 
 
 
@@ -188,9 +197,11 @@
 
 
 
+
 ;; Complete Anything
 (use-package company
   :defer 1
+  :diminish company-mode
   :bind ("s-/" . company-complete)
   :config
   (progn
@@ -217,7 +228,8 @@
 	  ("M-P" . mc/unmark-previous-like-this)))
 
 
-(use-package golden-ratio                 ; Auto resize windows
+;; Auto resize windows
+(use-package golden-ratio
   :diminish golden-ratio-mode
   :init
   (golden-ratio-mode 1)
@@ -307,6 +319,7 @@
   :config
   (progn
     (use-package omnisharp
+      :diminish omnisharp-mode
       :config
       (setq omnisharp-company-match-type 'company-match-flx))
     (add-hook 'csharp-mode-hook 'omnisharp-mode)))
@@ -349,7 +362,7 @@
   
   :config
   (make-variable-buffer-local 'erc-fill-column)
-  (add-hook 'window-configuration-change-hook 
+  (add-hook 'window-configuration-change-hook
 	    '(lambda ()
 	       (save-excursion
 		 (walk-windows
