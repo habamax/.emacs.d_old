@@ -51,7 +51,7 @@
 (winner-mode 1)
 
 ;; tabs are evil but...
-(setq-default indent-tabs-mode t)
+(setq-default indent-tabs-mode nil)
 (setq tab-width 4)
 (defvaralias 'c-basic-offset 'tab-width)
 
@@ -110,26 +110,28 @@
   (haba/set-font '("Source Code Pro" "Roboto Mono" "Menlo" "Dejavu Sans Mono") 140))
 
 
+(when window-system
+    ;; (use-package zenburn-theme :init (load-theme 'zenburn t))
 
-;; Themes
-;; Nighttime
-;; (use-package base16-theme :init (load-theme 'base16-tomorrow-dark t))
-;; (load-theme 'misterioso t)
-;; (load-theme 'deeper-blue t)
-;; (use-package minimal-theme :init (load-theme 'minimal t))
-
-(load-theme 'chaplin t)
-
-
-;; (use-package solarized-theme
+  
+  ;; (use-package solarized-theme
   ;; :init
   ;; (setq solarized-distinct-fringe-background nil
 	;; solarized-high-contrast-mode-line t)
   ;; (load-theme 'solarized-dark t))
+  
+  ;; (use-package leuven-theme :init (load-theme 'leuven t))
+  ;; (use-package monokai-theme :init (load-theme 'monokai t))
 
-;; Daytime
-;; (use-package leuven-theme :init (load-theme 'leuven t))
-;; (use-package minimal-theme :init (load-theme 'minimal-light t))
+
+  )
+
+(defun reload-theme ()
+  (interactive)
+  (load-theme 'redeyemir t))
+
+(global-set-key (kbd "C-c y") 'reload-theme)
+(reload-theme)
 
 
 
@@ -229,11 +231,11 @@
 
 
 ;; Auto resize windows
-(use-package golden-ratio
-  :diminish golden-ratio-mode
-  :init
-  (golden-ratio-mode 1)
-  (setq golden-ratio-auto-scale nil))
+;; (use-package golden-ratio
+;;   :diminish golden-ratio-mode
+;;   :init
+;;   (golden-ratio-mode 1)
+;;   (setq golden-ratio-auto-scale nil))
   
 (use-package hydra
   :bind ("C-c n" . hydra-cycle-next/body)
