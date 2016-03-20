@@ -33,6 +33,8 @@
 
  '(show-paren-match ((t :background "Wheat" :foreground "black")))
 
+ '(dired-directory ((t (:inherit font-lock-keyword-face))))
+
  
  '(flycheck-warning ((t (:underline (:color "Wheat3" :style wave)))))
  '(flycheck-error ((t (:underline (:color "Coral" :style wave)))))
@@ -57,8 +59,6 @@
  '(erc-action-face ((nil (:slant italic))))
  '(erc-button ((t (:underlined on))))
  
-
-
 
  )
 

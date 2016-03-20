@@ -48,7 +48,13 @@
 (show-paren-mode t)
 (column-number-mode t)
 (recentf-mode 1)
+
+
+;; winner mode is a must
 (winner-mode 1)
+(global-set-key (kbd "s-1") 'winner-undo)
+(global-set-key (kbd "s-2") 'winner-redo)
+
 
 ;; tabs are evil but...
 (setq-default indent-tabs-mode nil)
@@ -79,6 +85,13 @@
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
+
+
+;; Use shell-like backspace C-h, rebind help to F1
+(define-key key-translation-map [?\C-h] [?\C-?])
+(global-set-key (kbd "<f1>") 'help-command)
+
+
 
 ;; Set up packaging system
 (setq package-enable-at-startup nil)
