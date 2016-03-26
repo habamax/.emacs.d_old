@@ -58,7 +58,14 @@
  '(erc-notice-face ((t (:inherit font-lock-comment-face))))
  '(erc-action-face ((nil (:slant italic))))
  '(erc-button ((t (:underlined on))))
- 
+
+ '(org-level-1 ((t (:foreground "Gray70" :height 1.6))))
+ '(org-level-2 ((t (:foreground "Gray70" :height 1.4))))
+ '(org-level-3 ((t (:foreground "Gray70" :height 1.4))))
+ '(org-level-4 ((t (:foreground "Gray70" :slant italic :height 1.2))))
+ '(org-level-5 ((t (:foreground "Gray70" :slant italic :height 1.2))))
+ '(org-level-6 ((t (:foreground "Gray70" :slant italic :height 1.2))))
+
 
  )
 

@@ -120,31 +120,16 @@
 	 ("M-j" . haba/join-line)
 	 ("C-c i" . haba/open-init-file))
   :config
-  (haba/set-font '("Source Code Pro" "Roboto Mono" "Menlo" "Dejavu Sans Mono") 140))
-
-
-(when window-system
-    ;; (use-package zenburn-theme :init (load-theme 'zenburn t))
-
-  
-  ;; (use-package solarized-theme
-  ;; :init
-  ;; (setq solarized-distinct-fringe-background nil
-	;; solarized-high-contrast-mode-line t)
-  ;; (load-theme 'solarized-dark t))
-  
-  ;; (use-package leuven-theme :init (load-theme 'leuven t))
-  ;; (use-package monokai-theme :init (load-theme 'monokai t))
-
-
+  (haba/set-font '("Menlo" "Roboto Mono" "Dejavu Sans Mono") 140)
   )
 
-(defun reload-theme ()
-  (interactive)
-  (load-theme 'redeyemir t))
 
-(global-set-key (kbd "C-c y") 'reload-theme)
-(reload-theme)
+(use-package haba-appearance
+  :ensure nil
+  :demand
+  :load-path "lisp/"
+  :bind (("s-t" . haba/toggle-theme))
+  :config (load-theme 'default-black t))
 
 
 
@@ -243,13 +228,6 @@
 	  ("M-P" . mc/unmark-previous-like-this)))
 
 
-;; Auto resize windows
-;; (use-package golden-ratio
-;;   :diminish golden-ratio-mode
-;;   :init
-;;   (golden-ratio-mode 1)
-;;   (setq golden-ratio-auto-scale nil))
-  
 (use-package hydra
   :bind ("C-c n" . hydra-cycle-next/body)
   :bind ("C-x o" . hydra-cycle-windows/body)
@@ -407,12 +385,6 @@
 	 ("C-c o l" . org-store-link)
 	 ("C-c o c" . org-capture))
   :config
-  (use-package org-bullets
-    :init
-    (setq org-bullets-bullet-list '("✺" "✹" "✸" "✷" "●" "○"))
-    ;; (setq org-bullets-bullet-list '("◉" "◎" "⚫" "○" "►" "◇"))
-    :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
     
   (setq org-src-fontify-natively t
 	org-fontify-whole-heading-line t
