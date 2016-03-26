@@ -98,7 +98,7 @@
 (setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
 			 ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
-
+                                   
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -118,9 +118,11 @@
   :bind (("M-;" . haba/toggle-comment)
 	 ("C-a" . haba/move-beginning-of-line)
 	 ("M-j" . haba/join-line)
+         ("s-d" . haba/duplicate-line)
 	 ("C-c i" . haba/open-init-file))
   :config
   (haba/set-font '("Menlo" "Roboto Mono" "Dejavu Sans Mono") 140)
+  ;; (haba/set-font '("Roboto Mono" "Menlo" "Dejavu Sans Mono") 140)
   )
 
 
@@ -235,14 +237,6 @@
   :bind ("s-l" . hydra-line/body)
 
   :config
-  (defhydra hydra-line ()
-    "Line operations"
-    ("d" haba/duplicate-line "Duplicate line")
-    ("n" haba/move-line-down "Move down")
-    ("p" haba/move-line-up "Move up")
-    ("SPC" nil "quit")
-    ("q" nil "quit"))
-
   (defhydra hydra-cycle-windows
     (:body-pre (other-window 1))
     "Windows"

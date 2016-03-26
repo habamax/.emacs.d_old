@@ -3,8 +3,10 @@
 
 (custom-theme-set-faces
  'default-light
- '(default ((t (:background "#DDE0DD" :foreground "black"))))
- ;; '(region ((nil (:background "#464740"))))
+ '(default ((t (:background "#D7DCD7" :foreground "black"))))
+ '(font-lock-comment-face ((t (:foreground "#707070"))))
+
+ '(region ((nil (:background "#AACCAA"))))
  ;; '(font-lock-warning-face ((nil (:foreground "#ff6666"))))
  ;; '(show-paren-match ((t (:foreground "white" :background "#333399"))))
  ;; '(show-paren-mismatch ((((class color)) (:background "lightred"))))
