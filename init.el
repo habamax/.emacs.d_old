@@ -131,7 +131,9 @@
   :demand
   :load-path "lisp/"
   :bind (("s-t" . haba/toggle-theme))
-  :config (load-theme 'default-black t))
+  :config
+  (use-package zenburn-theme))
+
 
 
 
@@ -420,6 +422,15 @@
 		 "* %?\n%U\n" :clock-in t :clock-resume t)
 		("w" "Org-protocol" entry (file org-default-notes-file)
 		 "* TODO Review %c\n%U\n" :immediate-finish t))))
+
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(
+     (plantuml . t)))
+  (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
+
+  
   )
 
 
