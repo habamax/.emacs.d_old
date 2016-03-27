@@ -132,7 +132,8 @@
   :load-path "lisp/"
   :bind (("s-t" . haba/toggle-theme))
   :config
-  (use-package zenburn-theme))
+  (use-package zenburn-theme :defer)
+  )
 
 
 
@@ -152,9 +153,6 @@
 
 (use-package expand-region
   :bind (("M-m" . er/expand-region))
-  ;; :bind (:map html-mode-map
-  ;; 	      ("M-h" . er/mark-inner-tag)
-  ;; 	      ("M-H" . er/mark-outer-tag))
   :config
   (progn
     (setq expand-region-contract-fast-key "M")))
@@ -428,6 +426,7 @@
    'org-babel-load-languages
    '(
      (plantuml . t)))
+
   (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
 
   

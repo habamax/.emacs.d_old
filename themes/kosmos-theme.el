@@ -1,39 +1,40 @@
-;;; redeyemir-theme.el --- Black and "white" theme.
+;;; kosmos-theme.el --- Black and "white" theme.
 
 ;;; Commentary:
 ;; TODO: fix colors
-;; `comments' too
 ;; (+) `erc' is too colorfull
 ;; erc modeline activity status is invisible
-;; (+) `smartparens' selection is ugly(helkjsf)(slkjsfd)
-;; (+) paired parens are ugly
 
 
 ;;; Code:
 
 
-(deftheme redeyemir
-  "Created 2016-03-16.")
+(deftheme kosmos "Have you set up filters for you space suit?")
+
+;; (defvar kosmos-use-italics t)
 
 (custom-theme-set-faces
- 'redeyemir
- '(default ((t (:background "black" :foreground "Gray90"))))
+ 'kosmos
+
+ '(default ((t (:background "black" :foreground "gray80"))))
  '(cursor ((t (:background "Coral3"))))
- '(region ((t (:background "DarkSlateGray" :foreground "Gray70"))))
+ '(region ((t (:background "cadetblue4" :foreground "black"))))
  '(highlight ((t (:background "LightSteelBlue4" :foreground "White"))))
  
- '(font-lock-constant-face ((t (:slant italic))))
- '(font-lock-keyword-face ((t (:foreground "Gray60" :slant italic))))
- '(font-lock-builtin-face ((t (:foreground "Gray60"))))
- '(font-lock-string-face ((t (:foreground "SlateGray3"))))
- '(font-lock-comment-face ((t (:foreground "Aquamarine4"))))
- '(font-lock-type-face ((t (:foreground "Gray60"))))
- '(font-lock-function-name-face ((t (:slant italic))))
+ 
+ '(font-lock-string-face ((t (:foreground "wheat3"))))
+ '(font-lock-comment-face ((t (:foreground "cyan3"))))
+ '(font-lock-keyword-face ((t (:foreground "white" :slant italic))))
+ 
+ '(font-lock-builtin-face ((t nil)))
+ '(font-lock-type-face ((t nil)))
+ '(font-lock-function-name-face ((t nil)))
  '(font-lock-variable-name-face ((t nil)))
+ '(font-lock-constant-face ((t nil)))
 
  '(show-paren-match ((t :background "Wheat" :foreground "black")))
 
- '(dired-directory ((t (:inherit font-lock-keyword-face))))
+ '(dired-directory ((t (:inherit font-lock-keyword-face :weight bold))))
 
  
  '(flycheck-warning ((t (:underline (:color "Wheat3" :style wave)))))
@@ -59,16 +60,16 @@
  '(erc-action-face ((nil (:slant italic))))
  '(erc-button ((t (:underlined on))))
 
- '(org-level-1 ((t (:foreground "Gray70" :height 1.6))))
- '(org-level-2 ((t (:foreground "Gray70" :height 1.4))))
- '(org-level-3 ((t (:foreground "Gray70" :height 1.4))))
- '(org-level-4 ((t (:foreground "Gray70" :slant italic :height 1.2))))
- '(org-level-5 ((t (:foreground "Gray70" :slant italic :height 1.2))))
- '(org-level-6 ((t (:foreground "Gray70" :slant italic :height 1.2))))
+ '(org-level-1 ((t (:height 1.5))))
+ '(org-level-2 ((t (:height 1.4))))
+ '(org-level-3 ((t (:height 1.3))))
+ '(org-level-4 ((t (:slant italic :height 1.2))))
+ '(org-level-5 ((t (:slant italic :height 1.2))))
+ '(org-level-6 ((t (:slant italic :height 1.2))))
 
 
  )
 
-(provide-theme 'redeyemir)
+(provide-theme 'kosmos)
 
-;;; redeyemir-theme.el ends here
+;;; kosmos-theme.el ends here

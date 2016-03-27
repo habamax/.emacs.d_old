@@ -7,6 +7,9 @@
  '(font-lock-comment-face ((t (:foreground "#707070"))))
 
  '(region ((nil (:background "#AACCAA"))))
+
+ '(erc-timestamp-face ((t (:foreground "#33AA33"))))
+ 
  ;; '(font-lock-warning-face ((nil (:foreground "#ff6666"))))
  ;; '(show-paren-match ((t (:foreground "white" :background "#333399"))))
  ;; '(show-paren-mismatch ((((class color)) (:background "lightred"))))

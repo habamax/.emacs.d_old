@@ -194,6 +194,3 @@ line instead."
            (line-beginning-position 2)))))
 
 
-(defadvice load-theme (before theme-dont-propagate activate)
-  "Disable theme before loading new one."
-  (mapcar #'disable-theme custom-enabled-themes))

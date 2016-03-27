@@ -1,12 +1,16 @@
-;; (defvar *haba-current-theme* 'default-black)
-
-(defvar *haba-theme-dark* 'zenburn)
+;; (defvar *haba-theme-dark* 'default-black)
+(defvar *haba-theme-dark* 'kosmos)
 (defvar *haba-theme-light* 'default-light)
 (defvar *haba-current-theme* *haba-theme-dark*)
 
 
 ;; Set custom theme path
 (setq custom-theme-directory (concat user-emacs-directory "themes"))
+
+
+(defadvice load-theme (before theme-dont-propagate activate)
+  "Disable theme before loading new one."
+  (mapcar #'disable-theme custom-enabled-themes))
 
 
 (defun haba/toggle-theme ()
