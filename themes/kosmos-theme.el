@@ -2,7 +2,6 @@
 
 ;;; Commentary:
 ;; TODO: fix colors
-;; (+) `erc' is too colorfull
 ;; erc modeline activity status is invisible
 
 
@@ -10,8 +9,6 @@
 
 
 (deftheme kosmos "Have you set up filters for you space suit?")
-
-;; (defvar kosmos-use-italics t)
 
 (custom-theme-set-faces
  'kosmos
@@ -56,7 +53,7 @@
  '(erc-current-nick-face ((t (:foreground "Gray60" :slant italic))))
 
  '(erc-timestamp-face ((t (:foreground "Wheat"))))
- '(erc-notice-face ((t (:inherit font-lock-comment-face))))
+ '(erc-notice-face ((t (:foreground "gray40"))))
  '(erc-action-face ((nil (:slant italic))))
  '(erc-button ((t (:underlined on))))
 
