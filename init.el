@@ -311,6 +311,11 @@
       (setq omnisharp-company-match-type 'company-match-flx))
     (add-hook 'csharp-mode-hook 'omnisharp-mode)))
 
+(use-package go-mode
+  :mode ("\\.\\(go\\)$" . go-mode)
+  )
+
+
 (use-package geiser
   ;; :ensure nil
   :init
