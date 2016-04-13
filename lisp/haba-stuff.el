@@ -9,7 +9,7 @@ Otherwise call well known `comment-dwim'"
   (if (and (not mark-active) (save-excursion (beginning-of-line) (not (looking-at "\\s-*$"))))
       (progn
         (comment-or-uncomment-region (line-beginning-position) (line-end-position))
-        (next-line))
+        (forward-line))
     (comment-dwim arg)))
 
 
