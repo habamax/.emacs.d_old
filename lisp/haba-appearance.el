@@ -1,6 +1,6 @@
 ;; (defvar *haba-theme-dark* 'default-black)
 (defvar *haba-theme-dark* 'kosmos)
-(defvar *haba-theme-light* 'default-light)
+(defvar *haba-theme-light* 'leuven)
 (defvar *haba-current-theme* *haba-theme-dark*)
 
 
