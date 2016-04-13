@@ -10,7 +10,6 @@
 ;;; There are many other things in Emacs that should be colored.
 
 ;; TODO: fix colors
-;; rcirc
 ;; package-list-packages
 ;; swiper
 ;; incremental search
@@ -29,14 +28,16 @@
 
  '(default ((t (:background "#000000" :foreground "#aaaaaa"))))
  '(cursor ((nil (:background "#f070f0"))))
- ;; '(region ((t (:background "#53868b" :foreground "#eeeeee"))))
  '(region ((t (:background "#668b8b" :foreground "#eeeeee"))))
  '(highlight ((t (:background "#c1cdc1" :foreground "#000000"))))
 
  ;; font-lock I care about
  '(font-lock-string-face ((t (:foreground "#77cc77"))))
  '(font-lock-comment-face ((t (:foreground "cyan3"))))
- '(font-lock-keyword-face ((t (:foreground "#eeeeee" :slant italic))))
+
+ ;; Do I need italics?
+ ;; '(font-lock-keyword-face ((t (:foreground "#eeeeee" :slant italic))))
+ '(font-lock-keyword-face ((t (:foreground "#eeeeee"))))
 
  ;; font-lock I don't care about
  '(font-lock-builtin-face ((t nil)))
@@ -49,8 +50,9 @@
  '(show-paren-match ((t :background "Wheat" :foreground "black")))
 
  ;; links
- ;; FIXME: link and link-visited
- 
+ ;; FIXME: link-visited
+ '(link ((t (:foreground "#eeeeee" :underline (:color "#eeeeee")))))
+
  ;; dired
  '(dired-directory ((t (:inherit font-lock-keyword-face :weight bold))))
 
@@ -87,15 +89,23 @@
  '(git-commit-summary ((t (:inherit font-lock-string-face))))
 
  ;; org
- '(org-document-title ((t (:weight bold :height 1.6))))
+ '(org-document-title ((t (:weight bold :height 1.8))))
  
- '(org-level-1 ((t (:height 1.4))))
- '(org-level-2 ((t (:height 1.2))))
- '(org-level-3 ((t (:height 1.1))))
+ '(org-level-1 ((t (:height 1.6))))
+ '(org-level-2 ((t (:height 1.4))))
+ '(org-level-3 ((t (:height 1.2))))
  
- '(org-level-4 ((t (:slant italic :height 1.0))))
- '(org-level-5 ((t (:slant italic :height 1.0))))
- '(org-level-6 ((t (:slant italic :height 1.0))))
+ '(org-level-4 ((t (:slant italic :height 1.1))))
+ '(org-level-5 ((t (:slant italic :height 1.1))))
+ '(org-level-6 ((t (:slant italic :height 1.1))))
+
+ '(org-meta-line ((t (:background "#171717" :foreground "#707070" ))))
+ '(org-document-info-keyword ((t (:inherit org-meta-line))))
+
+ '(org-block-begin-line ((t (:inherit org-meta-line))))
+ '(org-block-background ((t (:background "#101010"))))
+ '(org-block-end-line ((t (:inherit org-block-begin-line))))
+
 
 
  )
