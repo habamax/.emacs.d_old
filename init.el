@@ -164,7 +164,7 @@
 (use-package swiper
   :demand
   :diminish ivy-mode
-  :bind (("C-s" . swiper)
+  :bind (;("C-s" . swiper)
 	 ("C-c C-r" . ivy-recentf)
 	 ("C-x b" . ivy-switch-buffer))
   :config
@@ -408,13 +408,6 @@
   (setq org-todo-keywords
 	(quote ((sequence "TODO(t)" "|" "DONE(d)")
 		(sequence "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
-  ;; (setq org-todo-state-tags-triggers
-	;; (quote (("CANCELLED" ("CANCELLED" . t))
-		;; ("WAITING" ("WAITING" . t))
-		;; ("HOLD" ("WAITING" . t) ("HOLD" . t))
-		;; (done ("WAITING") ("HOLD"))
-		;; ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
-		;; ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
   (setq org-capture-templates
 	(quote (("t" "Todo" entry (file org-default-notes-file)
