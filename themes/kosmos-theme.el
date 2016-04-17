@@ -12,7 +12,6 @@
 ;; TODO: fix colors
 ;; package-list-packages
 ;; swiper
-;; incremental search
 ;; TODO: change color names to color codes
 ;; TODO: find color for git-commit-nonempty-second-line
 
@@ -31,12 +30,16 @@
  '(region ((t (:background "#668b8b" :foreground "#eeeeee"))))
  '(highlight ((t (:background "#c1cdc1" :foreground "#000000"))))
 
+ '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
+ '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
+
  ;; font-lock I care about
  '(font-lock-string-face ((t (:foreground "#77cc77"))))
- '(font-lock-comment-face ((t (:foreground "cyan3"))))
 
- ;; Do I need italics?
- ;; '(font-lock-keyword-face ((t (:foreground "#eeeeee" :slant italic))))
+ ;; can't decide if cyan of wheat is better for comments.
+ '(font-lock-comment-face ((t (:foreground "cyan3"))))
+ ;; '(font-lock-comment-face ((t (:foreground "wheat"))))
+
  '(font-lock-keyword-face ((t (:foreground "#eeeeee"))))
 
  ;; font-lock I don't care about
