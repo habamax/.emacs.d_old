@@ -22,10 +22,18 @@
 
 (deftheme kosmos "Have you set up filters for you space suit? I have...")
 
+(let
+    ((kosmos-fg "#bdbdbd")
+     (kosmos-bg "#000000")
+     (kosmos-kw "#ffffff")
+     (kosmos-str "#77cc77")
+     (kosmos-cmnt "#50abab"))
+
+
 (custom-theme-set-faces
  'kosmos
 
- '(default ((t (:background "#000000" :foreground "#aaaaaa"))))
+ `(default ((t (:background ,kosmos-bg :foreground ,kosmos-fg))))
  '(cursor ((nil (:background "#f070f0"))))
  '(region ((t (:background "#668b8b" :foreground "#eeeeee"))))
  '(highlight ((t (:background "#c1cdc1" :foreground "#000000"))))
@@ -34,13 +42,13 @@
  '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
 
  ;; font-lock I care about
- '(font-lock-string-face ((t (:foreground "#77cc77"))))
+ `(font-lock-string-face ((t (:foreground ,kosmos-str))))
 
  ;; can't decide if cyan of wheat is better for comments.
- '(font-lock-comment-face ((t (:foreground "cyan3"))))
+ `(font-lock-comment-face ((t (:foreground ,kosmos-cmnt))))
  ;; '(font-lock-comment-face ((t (:foreground "wheat"))))
 
- '(font-lock-keyword-face ((t (:foreground "#eeeeee"))))
+ `(font-lock-keyword-face ((t (:foreground ,kosmos-kw))))
 
  ;; font-lock I don't care about
  '(font-lock-builtin-face ((t nil)))
@@ -112,6 +120,7 @@
 
 
  )
+)
 
 (provide-theme 'kosmos)
 
