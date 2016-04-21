@@ -82,6 +82,7 @@
 ;; (setq tab-always-indent 'complete)
 
 
+
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
@@ -121,7 +122,8 @@
          ("s-d" . haba/duplicate-line)
 	 ("C-c i" . haba/open-init-file))
   :config
-  (haba/set-font '("Menlo" "Roboto Mono" "Dejavu Sans Mono") 140)
+  ;; (haba/set-font '("Menlo" "Roboto Mono" "Dejavu Sans Mono") 140)
+  (haba/set-font '("Iosevka" "Menlo" "Roboto Mono" "Dejavu Sans Mono") 140)
   ;; (haba/set-font '("Roboto Mono" "Menlo" "Dejavu Sans Mono") 140)
   )
 
@@ -164,7 +166,7 @@
 (use-package swiper
   :demand
   :diminish ivy-mode
-  :bind (;("C-s" . swiper)
+  :bind (("C-s" . swiper)
 	 ("C-c C-r" . ivy-recentf)
 	 ("C-x b" . ivy-switch-buffer))
   :config
