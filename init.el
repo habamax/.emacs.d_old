@@ -122,9 +122,7 @@
          ("s-d" . haba/duplicate-line)
 	 ("C-c i" . haba/open-init-file))
   :config
-  ;; (haba/set-font '("Menlo" "Roboto Mono" "Dejavu Sans Mono") 140)
-  (haba/set-font '("Iosevka" "Menlo" "Roboto Mono" "Dejavu Sans Mono") 140)
-  ;; (haba/set-font '("Roboto Mono" "Menlo" "Dejavu Sans Mono") 140)
+  (haba/set-font '("Menlo" "Roboto Mono" "Dejavu Sans Mono") 140)
   )
 
 
@@ -337,6 +335,26 @@
 
 
 
+
+
+
+;; music FTW
+(use-package emms
+  :bind (("C-c p m" . haba/emms-play-main)
+         ("C-c p s" . emms-stop))
+  :config
+  (emms-all)
+  (define-emms-simple-player afplay '(file)
+      (regexp-opt '(".mp3" ".m4a" ".aac"))
+      "afplay")
+  (setq emms-player-list `(,emms-player-afplay))
+  (setq emms-source-file-default-directory "~/Music/smusic")
+
+  (defun haba/emms-play-main ()
+    (interactive)
+    (emms-play-directory "~/Music/smusic/main")
+    (emms-shuffle))
+  )
 
 
 
