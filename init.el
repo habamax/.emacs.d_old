@@ -342,13 +342,22 @@
 ;; music FTW
 (use-package emms
   :bind (("C-c p m" . haba/emms-play-main)
+         ("C-c p c" . emms-playlist-mode-go)
+         ("C-c p p" . emms-pause)
+         ("C-c p n" . emms-next)
          ("C-c p s" . emms-stop))
   :config
+  ;; TODO: load only what you need to play directory
   (emms-all)
-  (define-emms-simple-player afplay '(file)
+
+  ;; OSX has simple afplay utility to play music
+  (when (eq system-type 'darwin)
+    (define-emms-simple-player afplay '(file)
       (regexp-opt '(".mp3" ".m4a" ".aac"))
       "afplay")
-  (setq emms-player-list `(,emms-player-afplay))
+    (setq emms-player-list `(,emms-player-afplay)))
+
+  ;; Not sure if this is needed
   (setq emms-source-file-default-directory "~/Music/smusic")
 
   (defun haba/emms-play-main ()
