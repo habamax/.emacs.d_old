@@ -17,6 +17,7 @@
 
 
 
+
 ;;; Code:
 
 
@@ -37,6 +38,7 @@
  '(cursor ((nil (:background "#f070f0"))))
  '(region ((t (:background "#668b8b" :foreground "#eeeeee"))))
  '(highlight ((t (:background "#c1cdc1" :foreground "#000000"))))
+ `(bold ((t (:foreground ,kosmos-kw))))
 
  '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
  '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
@@ -62,7 +64,7 @@
 
  ;; links
  ;; FIXME: link-visited
- '(link ((t (:foreground "#eeeeee" :underline (:color "#eeeeee")))))
+ `(link ((t (:foreground ,kosmos-kw :underline (:color ,kosmos-kw)))))
 
  ;; dired
  '(dired-directory ((t (:inherit font-lock-keyword-face :weight bold))))
@@ -72,6 +74,10 @@
  '(flycheck-error ((t (:underline (:color "Coral" :style wave)))))
  '(flycheck-fringe-warning ((t (:foreground "Wheat3"))))
  '(flycheck-fringe-error ((t (:foreground "Coral"))))
+
+ ;; which-key
+ '(which-key-key-face ((t (:foreground "#ffa500"))))
+ '(which-key-separator-face ((t (:foreground "#4d4d4d"))))
 
  ;; company
  '(company-tooltip ((t (:background "Gray20" :foreground "Gray80"))))
@@ -116,6 +122,10 @@
  '(org-block-begin-line ((t (:inherit org-meta-line))))
  '(org-block-background ((t (:background "#101010"))))
  '(org-block-end-line ((t (:inherit org-block-begin-line))))
+
+ ;; emms
+ '(emms-playlist-track-face ((t (:inherit default))))
+ '(emms-playlist-selected-face ((t (:background "#20408b" :foreground "white" :weight bold))))
 
 
 
