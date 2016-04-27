@@ -164,6 +164,17 @@
 
 (use-package smex :defer)
 
+(use-package ivy
+  :init
+  ;; clear default ^ for counsel-M-x and friends
+  (setq ivy-initial-inputs-alist '())
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-re-builders-alist
+	;; '((t . ivy--regex-fuzzy)))
+	'((t . ivy--regex-ignore-order))))
+
 (use-package counsel
   :diminish ivy-mode
   :bind (("M-x" . counsel-M-x)
@@ -171,19 +182,8 @@
 	 ("C-c k" . counsel-ag)
 	 ("C-c g" . counsel-git)
          ("C-s" . counsel-grep-or-swiper)
-	 ("C-c C-r" . ivy-recentf)
 	 ("C-x b" . ivy-switch-buffer))
-  :init
-  ;; clear default ^ for counsel-M-x and friends
-  (setq ivy-initial-inputs-alist '())
-  
   :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-re-builders-alist
-	;; '((t . ivy--regex-fuzzy)))
-	'((t . ivy--regex-ignore-order)))
-
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
 	(concat
@@ -346,7 +346,11 @@
   ;; (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
 
   :config
-  (emms-all)
+  ;; (emms-all)
+  (emms-setup)
+  ;; (require 'emms-history)
+  ;; (emms-history-load)
+  
   (setq emms-repeat-playlist t)
 
   ;; OSX has simple afplay utility to play music
