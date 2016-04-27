@@ -182,7 +182,8 @@
 	 ("C-c k" . counsel-ag)
 	 ("C-c g" . counsel-git)
          ("C-s" . counsel-grep-or-swiper)
-	 ("C-x b" . ivy-switch-buffer))
+	 ("C-x b" . ivy-switch-buffer)
+         ("s-b" . ivy-switch-buffer))
   :config
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
