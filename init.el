@@ -165,6 +165,7 @@
 (use-package smex :defer)
 
 (use-package ivy
+  :diminish ivy-mode
   :init
   ;; clear default ^ for counsel-M-x and friends
   (setq ivy-initial-inputs-alist '())
@@ -176,7 +177,6 @@
 	'((t . ivy--regex-ignore-order))))
 
 (use-package counsel
-  :diminish ivy-mode
   :bind (("M-x" . counsel-M-x)
 	 ("C-x C-f" . counsel-find-file)
 	 ("C-c k" . counsel-ag)
