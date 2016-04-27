@@ -162,34 +162,28 @@
   :diminish undo-tree-mode
   :config (global-undo-tree-mode 1))
 
-(use-package swiper
-  :demand
+(use-package smex :defer)
+
+(use-package counsel
   :diminish ivy-mode
-  :bind (("C-s" . swiper)
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x C-f" . counsel-find-file)
+	 ("C-c k" . counsel-ag)
+	 ("C-c g" . counsel-git)
+         ("C-s" . counsel-grep-or-swiper)
 	 ("C-c C-r" . ivy-recentf)
 	 ("C-x b" . ivy-switch-buffer))
+  :init
+  ;; clear default ^ for counsel-M-x and friends
+  (setq ivy-initial-inputs-alist '())
+  
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-re-builders-alist
 	;; '((t . ivy--regex-fuzzy)))
 	'((t . ivy--regex-ignore-order)))
-  )
 
-(use-package smex :defer)
-
-(use-package counsel
-  :bind (("M-x" . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file)
-	 ("C-h f" . counsel-describe-function)
-	 ("C-h v" . counsel-describe-variable)
-	 ("C-c k" . counsel-ag)
-	 ("C-c g" . counsel-git))
-  :init
-  ;; clear default ^ for counsel-M-x and friends
-  (setq ivy-initial-inputs-alist '())
-  
-  :config
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
 	(concat
@@ -197,39 +191,6 @@
 	 "\\(?:\\`[#.]\\)"
 	 ;; file names ending with # or ~
 	 "\\|\\(?:\\`.+?[#~]\\'\\)")))
-
-
-
-
-;; Complete Anything
-(use-package company
-  :defer 1
-  :diminish company-mode
-  :bind ("s-/" . company-complete)
-  :config
-  (progn
-    (use-package company-flx :config (company-flx-mode +1))
-    
-    (add-to-list 'company-backends 'company-omnisharp)
-    (setq company-minimum-prefix-length 2)
-    
-    (define-key company-active-map [tab] 'company-complete-selection)
-    (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-    (define-key company-active-map (kbd "M-n") nil)
-    (define-key company-active-map (kbd "M-p") nil)
-    (define-key company-active-map (kbd "C-n") 'company-select-next)
-    (define-key company-active-map (kbd "C-p") 'company-select-previous)
-    
-    (global-company-mode)))
-
-
-
-(use-package multiple-cursors
-  :bind* (("M-n" . mc/mark-next-like-this)
-	  ("M-p" . mc/mark-previous-like-this)
-	  ("M-N" . mc/unmark-next-like-this)
-	  ("M-P" . mc/unmark-previous-like-this)))
-
 
 (use-package hydra
   :bind ("C-c n" . hydra-cycle-next/body)
@@ -263,6 +224,39 @@
     ("k" kill-this-buffer "Kill buffer")
     ("SPC" nil "quit")
     ("q" nil "quit")))
+
+
+;; Complete Anything
+(use-package company
+  :defer 1
+  :diminish company-mode
+  :bind ("s-/" . company-complete)
+  :config
+  (progn
+    (use-package company-flx :config (company-flx-mode +1))
+    
+    (add-to-list 'company-backends 'company-omnisharp)
+    (setq company-minimum-prefix-length 2)
+    
+    (define-key company-active-map [tab] 'company-complete-selection)
+    (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+    (define-key company-active-map (kbd "M-n") nil)
+    (define-key company-active-map (kbd "M-p") nil)
+    (define-key company-active-map (kbd "C-n") 'company-select-next)
+    (define-key company-active-map (kbd "C-p") 'company-select-previous)
+    
+    (global-company-mode)))
+
+
+
+(use-package multiple-cursors
+  :bind* (("M-n" . mc/mark-next-like-this)
+	  ("M-p" . mc/mark-previous-like-this)
+	  ("M-N" . mc/unmark-next-like-this)
+	  ("M-P" . mc/unmark-previous-like-this)))
+
+
+
 
 (use-package rainbow-delimiters
   :defer
@@ -345,17 +339,22 @@
          ("C-c p c" . emms-playlist-mode-go)
          ("C-c p p" . emms-pause)
          ("C-c p n" . emms-next)
+         ("C-c p r" . emms-random)
          ("C-c p s" . emms-stop))
+  :init
+  ;; Well on OSX I get weird tramp error...
+  ;; (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
+
   :config
-  ;; TODO: load only what you need to play directory
   (emms-all)
+  (setq emms-repeat-playlist t)
 
   ;; OSX has simple afplay utility to play music
   (when (eq system-type 'darwin)
     (define-emms-simple-player afplay '(file)
-      (regexp-opt '(".mp3" ".m4a" ".aac"))
-      "afplay")
-    (setq emms-player-list `(,emms-player-afplay)))
+      (regexp-opt '(".mp3" ".m4a" ".aac")) "afplay")
+    (setq emms-player-list `(,emms-player-afplay))
+    (add-hook 'kill-emacs-hook 'emms-stop))
 
   ;; Not sure if this is needed
   (setq emms-source-file-default-directory "~/Music/smusic")
