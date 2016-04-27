@@ -329,10 +329,6 @@
 		ispell-extra-args '("--sug-mode=ultra")))
 
 
-
-
-
-
 ;; music FTW
 (use-package emms
   :bind (("C-c p m" . haba/emms-play-main)
@@ -346,10 +342,10 @@
   ;; (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
 
   :config
-  ;; (emms-all)
-  (emms-setup)
-  ;; (require 'emms-history)
-  ;; (emms-history-load)
+  (emms-all)
+
+  (require 'emms-history)
+  (emms-history-load)
   
   (setq emms-repeat-playlist t)
 
@@ -365,8 +361,7 @@
 
   (defun haba/emms-play-main ()
     (interactive)
-    (emms-play-directory "~/Music/smusic/main")
-    (emms-shuffle))
+    (emms-play-directory "~/Music/smusic/main"))
   )
 
 
