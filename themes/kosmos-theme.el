@@ -10,9 +10,8 @@
 ;;; There are many other things in Emacs that should be colored.
 
 ;; TODO: fix colors
-;; package-list-packages
 ;; swiper
-;; TODO: change color names to color codes
+
 ;; TODO: find color for git-commit-nonempty-second-line
 
 
@@ -43,6 +42,12 @@
  '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
  '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
 
+
+ ; cant' decide the way mode-line should look...
+ ;; `(mode-line ((t (:background ,kosmos-fg :foreground ,kosmos-bg :box (:line-width 1 :color "#555555")))))
+ ;; `(mode-line-inactive ((t (:background "#545454" :foreground ,kosmos-fg :box (:line-width 1 :color "#bdbdbd")))))
+
+ 
  ;; font-lock I care about
  `(font-lock-string-face ((t (:foreground ,kosmos-str))))
 
@@ -106,7 +111,7 @@
  '(git-commit-summary ((t (:inherit font-lock-string-face))))
 
  ;; org
- '(org-document-title ((t (:weight bold :height 1.8))))
+ '(org-document-title ((t (:weight bold :height 1.6))))
  
  '(org-level-1 ((t (:height 1.6))))
  '(org-level-2 ((t (:height 1.4))))
