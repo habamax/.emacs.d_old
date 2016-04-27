@@ -30,13 +30,14 @@
      (kosmos-cmnt "#50abab"))
 
 
+
 (custom-theme-set-faces
  'kosmos
 
  `(default ((t (:background ,kosmos-bg :foreground ,kosmos-fg))))
  '(cursor ((nil (:background "#f070f0"))))
- '(region ((t (:background "#668b8b" :foreground "#eeeeee"))))
- '(highlight ((t (:background "#c1cdc1" :foreground "#000000"))))
+ `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
+ '(highlight ((t (:background "#103010" :foreground "#bdbdbd"))))
  `(bold ((t (:foreground ,kosmos-kw))))
 
  '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
@@ -109,6 +110,12 @@
 
  ;; magit
  '(git-commit-summary ((t (:inherit font-lock-string-face))))
+
+ ;; ivy
+ '(ivy-modified-buffer ((t (:inherit font-lock-keyword-face))))
+ '(ivy-remote ((t (:inherit font-lock-comment-face))))
+ '(ivy-virtual ((t (:foreground "#787878"))))
+
 
  ;; org
  '(org-document-title ((t (:weight bold :height 1.6))))
