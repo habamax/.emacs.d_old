@@ -38,7 +38,7 @@
  '(cursor ((nil (:background "#f070f0"))))
  `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
  '(highlight ((t (:background "#103010" :foreground "#bdbdbd"))))
- `(bold ((t (:foreground ,kosmos-kw))))
+ `(bold ((t (:foreground ,kosmos-kw :weight bold))))
 
  '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
  '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
