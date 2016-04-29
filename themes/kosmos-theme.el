@@ -27,7 +27,8 @@
      (kosmos-bg "#000000")
      (kosmos-kw "#ffffff")
      (kosmos-str "#77cc77")
-     (kosmos-cmnt "#50abab"))
+     (kosmos-cmnt "#50abab")
+     (kosmos-g1 "#777777"))
 
 
 
@@ -44,9 +45,8 @@
  '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
 
 
- ; cant' decide the way mode-line should look...
- ;; `(mode-line ((t (:background ,kosmos-fg :foreground ,kosmos-bg :box (:line-width 1 :color "#555555")))))
- ;; `(mode-line-inactive ((t (:background "#545454" :foreground ,kosmos-fg :box (:line-width 1 :color "#bdbdbd")))))
+ `(mode-line ((t (:background ,kosmos-bg :foreground ,kosmos-kw :box (:line-width 1 :color "#ffffff")))))
+ `(mode-line-inactive ((t (:background ,kosmos-bg :foreground ,kosmos-g1 :box (:line-width 1 :color ,kosmos-g1)))))
 
  
  ;; font-lock I care about
