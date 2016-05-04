@@ -133,6 +133,7 @@
   :bind (("s-t" . haba/toggle-theme))
   :config
   (use-package zenburn-theme :defer)
+  (use-package eclipse-theme :defer)
   )
 
 
@@ -200,6 +201,7 @@
   :bind ("s-l" . hydra-line/body)
 
   :config
+
   (defhydra hydra-cycle-windows
     (:body-pre (other-window 1))
     "Windows"
