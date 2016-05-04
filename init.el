@@ -368,6 +368,9 @@
   )
 
 
+(use-package evil
+  :commands (evil-mode))
+
 
 ;; Built-in packages
 
