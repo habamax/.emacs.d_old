@@ -10,7 +10,7 @@
 ;;; There are many other things in Emacs that should be colored.
 
 ;; TODO: fix colors
-;; swiper
+;; Terminal modeline has no borders. Adjust background.
 
 ;; TODO: find color for git-commit-nonempty-second-line
 
