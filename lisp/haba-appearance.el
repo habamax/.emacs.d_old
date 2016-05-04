@@ -1,6 +1,7 @@
 ;; (defvar *haba-theme-dark* 'default-black)
 (defvar *haba-theme-dark* 'kosmos)
 (defvar *haba-theme-light* 'leuven)
+(defvar *haba-theme-light2* 'eclipse)
 (defvar *haba-current-theme* *haba-theme-dark*)
 
 
@@ -13,17 +14,15 @@
   (mapcar #'disable-theme custom-enabled-themes))
 
 
+(defun haba/next-theme (theme)
+  (load-theme theme t)
+  (setq *haba-current-theme* theme))
+
 (defun haba/toggle-theme ()
   (interactive)
-  (if (eq *haba-current-theme* *haba-theme-dark*)
-      (progn
-        (load-theme *haba-theme-light* t)
-        (setq *haba-current-theme* *haba-theme-light*))
-    (progn
-      (load-theme *haba-theme-dark* t)
-      (setq *haba-current-theme* *haba-theme-dark*))
-    )
-  )
+  (cond ((eq *haba-current-theme* *haba-theme-dark*) (haba/next-theme *haba-theme-light*))
+        ((eq *haba-current-theme* *haba-theme-light*) (haba/next-theme *haba-theme-light2*))
+        ((eq *haba-current-theme* *haba-theme-light2*) (haba/next-theme *haba-theme-dark*))))
 
 
 
