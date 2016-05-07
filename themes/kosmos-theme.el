@@ -11,7 +11,7 @@
 
 ;; TODO: fix colors
 ;; Terminal modeline has no borders. Adjust background.
-
+;; ORG selection background is bad for code blocks
 ;; TODO: find color for git-commit-nonempty-second-line
 
 
@@ -120,19 +120,24 @@
  ;; org
  '(org-document-title ((t (:weight bold :height 1.6))))
  
- '(org-level-1 ((t (:height 1.6))))
- '(org-level-2 ((t (:height 1.4))))
- '(org-level-3 ((t (:height 1.2))))
+ `(org-level-1 ((t (:foreground ,kosmos-kw :height 1.6))))
+ `(org-level-2 ((t (:foreground ,kosmos-kw :height 1.4))))
+ `(org-level-3 ((t (:foreground ,kosmos-kw :height 1.2))))
  
- '(org-level-4 ((t (:slant italic :height 1.1))))
- '(org-level-5 ((t (:slant italic :height 1.1))))
- '(org-level-6 ((t (:slant italic :height 1.1))))
+ `(org-level-4 ((t (:foreground ,kosmos-kw :slant italic :height 1.1))))
+ `(org-level-5 ((t (:foreground ,kosmos-kw :slant italic :height 1.1))))
+ `(org-level-6 ((t (:foreground ,kosmos-kw :slant italic :height 1.1))))
+ 
+ `(org-level-7 ((t (:foreground ,kosmos-kw :slant italic :height 1))))
+ `(org-level-8 ((t (:foreground ,kosmos-kw :slant italic :height 1))))
+ `(org-level-9 ((t (:foreground ,kosmos-kw :slant italic :height 1))))
+ `(org-level-10 ((t (:foreground ,kosmos-kw :slant italic :height 1))))
 
  '(org-meta-line ((t (:background "#171717" :foreground "#707070" ))))
  '(org-document-info-keyword ((t (:inherit org-meta-line))))
 
  '(org-block-begin-line ((t (:inherit org-meta-line))))
- '(org-block-background ((t (:background "#101010"))))
+ ;; '(org-block-background ((t (:background "#101010"))))
  '(org-block-end-line ((t (:inherit org-block-begin-line))))
 
  ;; emms
