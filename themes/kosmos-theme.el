@@ -25,10 +25,12 @@
 (let
     ((kosmos-fg "#bdbdbd")
      (kosmos-bg "#000000")
-     (kosmos-kw "#ffffff")
+     (kosmos-bg-active "#102040")
+     (kosmos-bg-inactive "#202020")
+     (kosmos-keyword "#ffffff")
      (kosmos-str "#77cc77")
-     (kosmos-cmnt "#50abab")
-     (kosmos-g1 "#777777"))
+     (kosmos-comment "#50abab")
+     (kosmos-gray "#777777"))
 
 
 
@@ -39,24 +41,24 @@
  '(cursor ((nil (:background "#f070f0"))))
  `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
  '(highlight ((t (:background "#103010" :foreground "#bdbdbd"))))
- `(bold ((t (:foreground ,kosmos-kw :weight bold))))
+ `(bold ((t (:foreground ,kosmos-keyword :weight bold))))
 
  '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
  '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
 
 
- `(mode-line ((t (:background ,kosmos-bg :foreground ,kosmos-kw :box (:line-width 1 :color "#ffffff")))))
- `(mode-line-inactive ((t (:background ,kosmos-bg :foreground ,kosmos-g1 :box (:line-width 1 :color ,kosmos-g1)))))
+ `(mode-line ((t (:background ,kosmos-bg-active :foreground ,kosmos-keyword :box (:line-width 1 :color "#ffffff")))))
+ `(mode-line-inactive ((t (:background ,kosmos-bg-inactive :foreground ,kosmos-gray :box (:line-width 1 :color ,kosmos-gray)))))
 
  
  ;; font-lock I care about
  `(font-lock-string-face ((t (:foreground ,kosmos-str))))
 
  ;; can't decide if cyan of wheat is better for comments.
- `(font-lock-comment-face ((t (:foreground ,kosmos-cmnt))))
+ `(font-lock-comment-face ((t (:foreground ,kosmos-comment))))
  ;; '(font-lock-comment-face ((t (:foreground "wheat"))))
 
- `(font-lock-keyword-face ((t (:foreground ,kosmos-kw))))
+ `(font-lock-keyword-face ((t (:foreground ,kosmos-keyword))))
 
  ;; font-lock I don't care about
  '(font-lock-builtin-face ((t nil)))
@@ -69,8 +71,8 @@
  '(show-paren-match ((t :background "Wheat" :foreground "black")))
 
  ;; links
- ;; FIXME: link-visited
- `(link ((t (:foreground ,kosmos-kw :underline (:color ,kosmos-kw)))))
+ `(link ((t (:foreground ,kosmos-keyword :underline (:color ,kosmos-keyword)))))
+ `(link-visited ((t (:foreground ,kosmos-fg :underline (:color ,kosmos-fg)))))
 
  ;; dired
  '(dired-directory ((t (:inherit font-lock-keyword-face :weight bold))))
@@ -120,18 +122,18 @@
  ;; org
  '(org-document-title ((t (:weight bold :height 1.6))))
  
- `(org-level-1 ((t (:foreground ,kosmos-kw :height 1.6))))
- `(org-level-2 ((t (:foreground ,kosmos-kw :height 1.4))))
- `(org-level-3 ((t (:foreground ,kosmos-kw :height 1.2))))
+ `(org-level-1 ((t (:foreground ,kosmos-keyword :height 1.6))))
+ `(org-level-2 ((t (:foreground ,kosmos-keyword :height 1.4))))
+ `(org-level-3 ((t (:foreground ,kosmos-keyword :height 1.2))))
  
- `(org-level-4 ((t (:foreground ,kosmos-kw :slant italic :height 1.1))))
- `(org-level-5 ((t (:foreground ,kosmos-kw :slant italic :height 1.1))))
- `(org-level-6 ((t (:foreground ,kosmos-kw :slant italic :height 1.1))))
+ `(org-level-4 ((t (:foreground ,kosmos-keyword :slant italic :height 1.1))))
+ `(org-level-5 ((t (:foreground ,kosmos-keyword :slant italic :height 1.1))))
+ `(org-level-6 ((t (:foreground ,kosmos-keyword :slant italic :height 1.1))))
  
- `(org-level-7 ((t (:foreground ,kosmos-kw :slant italic :height 1))))
- `(org-level-8 ((t (:foreground ,kosmos-kw :slant italic :height 1))))
- `(org-level-9 ((t (:foreground ,kosmos-kw :slant italic :height 1))))
- `(org-level-10 ((t (:foreground ,kosmos-kw :slant italic :height 1))))
+ `(org-level-7 ((t (:foreground ,kosmos-keyword :slant italic :height 1))))
+ `(org-level-8 ((t (:foreground ,kosmos-keyword :slant italic :height 1))))
+ `(org-level-9 ((t (:foreground ,kosmos-keyword :slant italic :height 1))))
+ `(org-level-10 ((t (:foreground ,kosmos-keyword :slant italic :height 1))))
 
  '(org-meta-line ((t (:background "#171717" :foreground "#707070" ))))
  '(org-document-info-keyword ((t (:inherit org-meta-line))))
