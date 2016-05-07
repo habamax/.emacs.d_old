@@ -105,7 +105,9 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(require 'use-package)
+(eval-when-compile
+  (require 'use-package))
+
 (setq use-package-always-ensure t)
 
 
@@ -368,8 +370,7 @@
   )
 
 
-(use-package evil
-  :commands (evil-mode))
+;; (use-package evil)
 
 
 ;; Built-in packages
@@ -457,6 +458,7 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '(
+     (sh . t)
      (plantuml . t)))
 
   (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
