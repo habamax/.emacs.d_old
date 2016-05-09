@@ -199,8 +199,6 @@
 (use-package hydra
   :bind ("C-c n" . hydra-cycle-next/body)
   :bind ("C-x o" . hydra-cycle-windows/body)
-  :bind ("C-c l" . hydra-line/body)
-  :bind ("s-l" . hydra-line/body)
 
   :config
 
@@ -372,6 +370,11 @@
 
 ;; (use-package evil)
 
+(use-package nyan-mode
+  :defer 3
+  :config
+  (nyan-mode))
+
 
 ;; Built-in packages
 
@@ -382,7 +385,7 @@
   (setq erc-fill-column (- (window-width) 2)
 	erc-nick '("habamax" "mxmkm")
 	erc-track-minor-mode t
-	erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#racket")))
+	erc-autojoin-channels-alist '(("freenode.net" "#emacs")))
   (defun erc-freenode ()
     (interactive)
     (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
