@@ -323,6 +323,7 @@
 
 ;; flycheck
 (use-package flycheck
+  :diminish 'flycheck-mode
   :config (global-flycheck-mode))
 
 ;; flyspell - use aspell instead of ispell
@@ -431,7 +432,7 @@
 
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/refile.org")
-  ;; (setq org-agenda-files '("~/org"))
+  (setq org-agenda-files '("~/org"))
 
   (setq org-refile-targets '((nil :maxlevel . 9)
 			     (org-agenda-files :maxlevel . 9)))
@@ -466,7 +467,6 @@
 
   (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
 
-  
   )
 
 
