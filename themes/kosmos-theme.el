@@ -30,7 +30,9 @@
      (kosmos-keyword "#ffffff")
      (kosmos-str "#77cc77")
      (kosmos-comment "#50abab")
-     (kosmos-gray "#777777"))
+     (kosmos-gray "#777777")
+     (kosmos-todo "#ff99aa")
+     (kosmos-done "#aaff99"))
 
 
 
@@ -120,7 +122,7 @@
 
 
  ;; org
- '(org-document-title ((t (:weight bold :height 1.6))))
+ `(org-document-title ((t (:foreground ,kosmos-keyword :weight bold :height 1.6))))
  
  `(org-level-1 ((t (:foreground ,kosmos-keyword :height 1.6))))
  `(org-level-2 ((t (:foreground ,kosmos-keyword :height 1.4))))
@@ -135,12 +137,21 @@
  `(org-level-9 ((t (:foreground ,kosmos-keyword :slant italic :height 1))))
  `(org-level-10 ((t (:foreground ,kosmos-keyword :slant italic :height 1))))
 
- '(org-meta-line ((t (:background "#171717" :foreground "#707070" ))))
+ `(org-tag ((t (:inherit default :foreground ,kosmos-comment :height 1.0))))
+
+ `(org-todo ((t (:inherit default :foreground ,kosmos-todo :height 1.0))))
+ `(org-done ((t (:inherit default :foreground ,kosmos-done :height 1.0))))
+ 
+
+ '(org-meta-line ((t (:foreground "#707070" ))))
  '(org-document-info-keyword ((t (:inherit org-meta-line))))
 
- '(org-block-begin-line ((t (:inherit org-meta-line))))
+ ;; '(org-block-begin-line ((t (:inherit org-meta-line))))
  ;; '(org-block-background ((t (:background "#101010"))))
- '(org-block-end-line ((t (:inherit org-block-begin-line))))
+ ;; '(org-block-end-line ((t (:inherit org-block-begin-line))))
+
+ '(org-block-begin-line ((t (:foreground "#a07070"))))
+ '(org-block-end-line ((t (:foreground "#a07070"))))
 
  ;; emms
  '(emms-playlist-track-face ((t (:inherit default))))
