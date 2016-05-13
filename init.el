@@ -434,12 +434,12 @@
   (setq org-default-notes-file "~/org/refile.org")
   (setq org-agenda-files '("~/org"))
 
-  (setq org-refile-targets '((nil :maxlevel . 9)
-			     (org-agenda-files :maxlevel . 9)))
+  (setq org-refile-targets '((nil :maxlevel . 3)
+			     (org-agenda-files :maxlevel . 3)))
   ;; Refile in a single go
   (setq org-outline-path-complete-in-steps nil)
   ;; Show full paths for refiling
-  (setq org-refile-use-outline-path t)
+  (setq org-refile-use-outline-path 'file)
 
   ;; Doesn't work
   (setq org-image-actual-width 500)
@@ -447,6 +447,8 @@
   (setq org-todo-keywords
 	(quote ((sequence "TODO(t)" "|" "DONE(d)")
 		(sequence "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+
+  (setq org-tag-alist '(("work" . ?w) ("home" . ?h)))
 
   (setq org-capture-templates
 	(quote (("t" "Todo" entry (file org-default-notes-file)
