@@ -314,10 +314,10 @@
   )
 
 
-(use-package geiser
-  ;; :ensure nil
-  :init
-  (setq geiser-active-implementations '(racket)))
+;; (use-package geiser
+;;   ;; :ensure nil
+;;   :init
+;;   (setq geiser-active-implementations '(racket)))
 
 
 
@@ -346,6 +346,8 @@
   ;; (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
 
   :config
+  (setq emms-mode-line-icon-color "yellow")
+
   (emms-all)
 
   (require 'emms-history)
