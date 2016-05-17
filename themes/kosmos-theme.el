@@ -9,10 +9,10 @@
 ;;;
 ;;; There are many other things in Emacs that should be colored.
 
-;; TODO: fix colors
-;; ORG selection background is bad for code blocks
 ;; TODO: find color for git-commit-nonempty-second-line
 ;; make docstrings the same as comments
+;; calendar mode
+;; org agenda
 
 
 
@@ -146,12 +146,8 @@
  '(org-meta-line ((t (:foreground "#707070" ))))
  '(org-document-info-keyword ((t (:inherit org-meta-line))))
 
- ;; '(org-block-begin-line ((t (:inherit org-meta-line))))
- ;; '(org-block-background ((t (:background "#101010"))))
- ;; '(org-block-end-line ((t (:inherit org-block-begin-line))))
-
- '(org-block-begin-line ((t (:foreground "#a07070"))))
- '(org-block-end-line ((t (:foreground "#a07070"))))
+ `(org-block-begin-line ((t :foreground ,kosmos-comment)))
+ `(org-block-end-line ((t (:foreground ,kosmos-comment))))
 
  ;; emms
  '(emms-playlist-track-face ((t (:inherit default))))
