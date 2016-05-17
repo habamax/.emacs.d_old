@@ -124,7 +124,7 @@
          ("s-d" . haba/duplicate-line)
 	 ("C-c i" . haba/open-init-file))
   :config
-  (haba/set-font '("Menlo" "Roboto Mono" "Dejavu Sans Mono") 140)
+  (haba/set-font '("Menlo" "Roboto Mono" "Dejavu Sans Mono" "Consolas") 140)
   )
 
 
@@ -434,7 +434,7 @@
 
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/refile.org")
-  (setq org-agenda-files '("~/org"))
+  ;; (setq org-agenda-files '("~/org"))
 
   (setq org-refile-targets '((nil :maxlevel . 3)
 			     (org-agenda-files :maxlevel . 3)))
@@ -471,7 +471,153 @@
 
   (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
 
+
+
+  ;; Latex
+  (require 'ox-latex)
+  
+  (add-to-list 'org-latex-classes
+               '("article"
+                 "\\documentclass[a4paper,12pt]{scrartcl}
+                 \\usepackage{cmap}
+                 \\usepackage[utf8]{inputenc}
+                 \\usepackage[english,russian]{babel}
+                 \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
+                 \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
+                 \\usepackage{misccorr}      % точка в номерах заголовков
+                 \\usepackage[onehalfspacing]{setspace}
+                 \\usepackage[T2A]{fontenc}
+                 \\usepackage[scaled]{beraserif}
+                 \\usepackage[scaled]{berasans}
+                 \\usepackage[scaled]{beramono}
+
+                 \\usepackage{graphicx}
+                 \\usepackage{grffile}
+                 \\usepackage{longtable}
+                 \\usepackage{wrapfig}
+                 \\usepackage{rotating}
+                 \\usepackage[normalem]{ulem}
+                 \\usepackage{amsmath}
+                 \\usepackage{textcomp}
+                 \\usepackage{amssymb}
+                 \\usepackage{capt-of}
+                 \\usepackage{hyperref}
+                 [NO-DEFAULT-PACKAGES]
+                 [NO-PACKAGES]"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+  (add-to-list 'org-latex-classes
+               '("report"
+                 "\\documentclass[a4paper,12pt]{report}
+                 \\usepackage{cmap}
+                 \\usepackage[utf8]{inputenc}
+                 \\usepackage[english,russian]{babel}
+                 \\usepackage[top=30mm, left=30mm, right=20mm, bottom=20mm]{geometry}
+                 \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
+                 \\usepackage{misccorr}      % точка в номерах заголовков
+                 \\usepackage[onehalfspacing]{setspace}
+                 \\usepackage[T2A]{fontenc}
+                 \\usepackage[scaled]{beraserif}
+                 \\usepackage[scaled]{berasans}
+                 \\usepackage[scaled]{beramono}
+
+                 \\usepackage{fancyhdr}
+                 \\pagestyle{fancy}
+                 \\fancypagestyle{plain}{\\pagestyle{fancy}}
+                 \\lhead{Максим Ким}
+                 \\chead{}
+                 \\rhead{\\today}
+                 \\lfoot{}
+                 \\cfoot{}
+                 \\rfoot{\\thepage}
+                 \\renewcommand{\\headrulewidth}{0.4pt}
+                 \\renewcommand{\\footrulewidth}{0.4pt}
+
+                 % Главы без глав
+                 \\usepackage{titlesec}
+                 \\titleformat{\\chapter}
+                   {\\normalfont\\LARGE\\bfseries}{\\thechapter.}{1em}{}
+                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+
+                 \\usepackage{graphicx}
+                 \\usepackage{grffile}
+                 \\usepackage{longtable}
+                 \\usepackage{wrapfig}
+                 \\usepackage{rotating}
+                 \\usepackage[normalem]{ulem}
+                 \\usepackage{amsmath}
+                 \\usepackage{textcomp}
+                 \\usepackage{amssymb}
+                 \\usepackage{capt-of}
+                 \\usepackage{hyperref}
+                 [NO-DEFAULT-PACKAGES]
+                 [NO-PACKAGES]"
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  
+
+  (add-to-list 'org-latex-classes
+               '("report-sberbank"
+                 "\\documentclass[a4paper,12pt]{report}
+                 \\usepackage{cmap}
+                 \\usepackage[utf8]{inputenc}
+                 \\usepackage[english,russian]{babel}
+                 \\usepackage[top=30mm, left=30mm, right=20mm, bottom=20mm]{geometry}
+                 \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
+                 \\usepackage{misccorr}      % точка в номерах заголовков
+                 \\usepackage[onehalfspacing]{setspace}
+                 \\usepackage[T2A]{fontenc}
+                 \\usepackage[scaled]{beraserif}
+                 \\usepackage[scaled]{berasans}
+                 \\usepackage[scaled]{beramono}
+
+                 \\usepackage{fancyhdr}
+                 \\pagestyle{fancy}
+                 \\fancypagestyle{plain}{\\pagestyle{fancy}}
+                 \\lhead{\\raisebox{-0.4\\height}{\\includegraphics[scale=1]{logo/logo_sberbank.png}}}
+                 \\chead{}
+                 \\rhead{\\includegraphics[scale=1]{logo/logo_adastra.png}}
+                 \\lfoot{}
+                 \\cfoot{}
+                 \\rfoot{\\thepage}
+                 \\renewcommand{\\headrulewidth}{0.0pt}
+                 \\renewcommand{\\footrulewidth}{0.0pt}
+
+                 % Главы без глав
+                 \\usepackage{titlesec}
+                 \\titleformat{\\chapter}
+                   {\\normalfont\\LARGE\\bfseries}{\\thechapter.}{1em}{}
+                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+
+                 \\usepackage{graphicx}
+                 \\usepackage{grffile}
+                 \\usepackage{longtable}
+                 \\usepackage{wrapfig}
+                 \\usepackage{rotating}
+                 \\usepackage[normalem]{ulem}
+                 \\usepackage{amsmath}
+                 \\usepackage{textcomp}
+                 \\usepackage{amssymb}
+                 \\usepackage{capt-of}
+                 \\usepackage{hyperref}
+                 [NO-DEFAULT-PACKAGES]
+                 [NO-PACKAGES]"
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   )
+
 
 
 
