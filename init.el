@@ -473,9 +473,13 @@
      (sh . t)
      (plantuml . t)))
 
+
+  ;; this has to be set up for different machines
   (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
 
 
+  ;; Pandoc
+  (use-package ox-pandoc)
 
   ;; Latex
   (require 'ox-latex)
