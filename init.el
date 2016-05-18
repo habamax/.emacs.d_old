@@ -129,7 +129,7 @@
          ("s-d" . haba/duplicate-line)
 	 ("C-c i" . haba/open-init-file))
   :config
-  (haba/set-font '("Menlo" "Roboto Mono" "Dejavu Sans Mono" "Consolas") 140)
+  (haba/set-font '("Menlo" "Roboto Mono" "Dejavu Sans Mono" "Consolas") 120)
   )
 
 
