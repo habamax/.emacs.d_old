@@ -96,8 +96,13 @@
 
 ;; Set up packaging system
 (setq package-enable-at-startup nil)
-(setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")))
+;; This is dumb but...
+(if (eq system-type 'windows-nt)
+    (setq package-archives '(("elpa" .  "http://elpa.gnu.org/packages/")
+                             ("melpa" . "http://melpa.org/packages/")))
+  (setq package-archives '(("elpa" .  "https://elpa.gnu.org/packages/")
+                           ("melpa" . "https://melpa.org/packages/"))))
+
 (package-initialize)
                                    
 ;; Bootstrap `use-package'
