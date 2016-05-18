@@ -439,7 +439,6 @@
 
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/refile.org")
-  ;; (setq org-agenda-files '("~/org"))
 
   (setq org-refile-targets '((nil :maxlevel . 3)
 			     (org-agenda-files :maxlevel . 3)))
@@ -455,7 +454,7 @@
 	(quote ((sequence "TODO(t)" "|" "DONE(d)")
 		(sequence "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
 
-  (setq org-tag-alist '(("work" . ?w) ("home" . ?h)))
+  (setq org-tag-alist '(("adastra" . ?a) ("tax" . ?t)))
 
   (setq org-capture-templates
 	(quote (("t" "Todo" entry (file org-default-notes-file)
