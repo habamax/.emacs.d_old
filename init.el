@@ -95,13 +95,9 @@
 
 
 ;; Set up packaging system
-(setq package-enable-at-startup nil)
-;; This is dumb but...
-(if (eq system-type 'windows-nt)
-    (setq package-archives '(("elpa" .  "http://elpa.gnu.org/packages/")
-                             ("melpa" . "http://melpa.org/packages/")))
-  (setq package-archives '(("elpa" .  "https://elpa.gnu.org/packages/")
-                           ("melpa" . "https://melpa.org/packages/"))))
+(let ((package-protocol (if (eq system-type 'windows-nt) "http://" "https://")))
+  (setq package-archives `(("elpa" .  ,(concat package-protocol "elpa.gnu.org/packages/"))
+                           ("melpa" . ,(concat package-protocol "melpa.org/packages/")))))
 
 (package-initialize)
                                    
