@@ -12,7 +12,6 @@
 ;; TODO: find color for git-commit-nonempty-second-line
 ;; make docstrings the same as comments
 ;; calendar mode
-;; org agenda
 ;; ivy?
 ;; swiper
 
@@ -168,6 +167,14 @@
  `(org-block-begin-line ((t :foreground ,kosmos-comment)))
  `(org-block-end-line ((t (:foreground ,kosmos-comment))))
 
+
+ ;; calendar
+ `(calendar-month-header ((t (:foreground ,kosmos-keyword :weight bold))))
+ `(calendar-weekday-header ((t (:foreground ,kosmos-comment))))
+ `(calendar-weekend-header ((t (:foreground ,kosmos-str :weight bold))))
+ `(calendar-today ((t (:foreground ,kosmos-keyword :weight bold))))
+
+ 
  ;; emms
  '(emms-playlist-track-face ((t (:inherit default))))
  '(emms-playlist-selected-face ((t (:background "#20408b" :foreground "white" :weight bold))))
