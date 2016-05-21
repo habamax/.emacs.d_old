@@ -52,8 +52,6 @@
 
 ;; winner mode is a must
 (winner-mode 1)
-(global-set-key (kbd "s-1") 'winner-undo)
-(global-set-key (kbd "s-2") 'winner-redo)
 
 
 ;; tabs are evil but...
@@ -135,7 +133,8 @@
   :ensure nil
   :demand
   :load-path "lisp/"
-  :bind (("s-t" . haba/toggle-theme))
+  :bind (("s-t" . haba/toggle-theme)
+         ("C-c t" . haba/toggle-theme))
   :config
   (use-package zenburn-theme :defer)
   (use-package eclipse-theme :defer)
@@ -200,16 +199,16 @@
 	 "\\|\\(?:\\`.+?[#~]\\'\\)")))
 
 (use-package hydra
-  :bind ("C-c n" . hydra-cycle-next/body)
-  :bind ("C-x o" . hydra-cycle-windows/body)
+  :bind ("C-c w" . hydra-windows/body)
+  :bind ("C-c t" . hydra-toggle-theme/body)
+  :bind ("C-x o" . hydra-other-window/body)
 
   :config
 
-  (defhydra hydra-cycle-windows
-    (:body-pre (other-window 1))
+  (defhydra hydra-windows ()
     "Windows"
-    ("o" (other-window 1) "Next")
-    ("O" (other-window -1) "Previous")
+    ("w" winner-undo "Winner undo")
+    ("W" winner-redo "Winner redo")
     ("t" haba/toggle-window-split "Toggle split")
     ("]" enlarge-window-horizontally "Enlarge horizontal")
     ("[" shrink-window-horizontally "Shrink horizontal")
@@ -220,17 +219,22 @@
     ("c" delete-window "Close window")
     ("SPC" nil "quit")
     ("q" nil "quit"))
-  
-  (defhydra hydra-cycle-next ()
-    "Frames, Buffers"
-    ("f" other-frame "Next frame")
-    ("F" (other-frame -1) "Previous frame")
-    ("b" haba/next-buffer "Next buffer")
-    ("B" haba/previous-buffer "Previous buffer")
-    ("k" kill-this-buffer "Kill buffer")
-    ("SPC" nil "quit")
-    ("q" nil "quit")))
 
+  (defhydra hydra-toggle-theme
+    (:body-pre (haba/toggle-theme))
+    "Themes"
+    ("t" (haba/toggle-theme) "Toggle next theme")
+    ("SPC" nil "quit")
+    ("q" nil "quit"))
+
+  (defhydra hydra-other-window
+    (:body-pre (other-window 1))
+    "Other window"
+    ("o" (other-window 1) "Next")
+    ("O" (other-window -1) "Previous")
+    ("SPC" nil "quit")
+    ("q" nil "quit"))
+  )
 
 ;; Complete Anything
 (use-package company
