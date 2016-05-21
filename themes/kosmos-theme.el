@@ -13,6 +13,8 @@
 ;; make docstrings the same as comments
 ;; calendar mode
 ;; org agenda
+;; ivy?
+;; swiper
 
 
 
@@ -32,17 +34,19 @@
      (kosmos-comment "#50abab")
      (kosmos-gray "#777777")
      (kosmos-todo "#ff99aa")
-     (kosmos-done "#aaff99"))
+     (kosmos-done "#aaff99")
+    )
 
 
 
 (custom-theme-set-faces
  'kosmos
-
+ 
  `(default ((t (:background ,kosmos-bg :foreground ,kosmos-fg))))
  '(cursor ((nil (:background "#f070f0"))))
  `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
- '(highlight ((t (:background "#103010" :foreground "#bdbdbd"))))
+ ;; '(highlight ((t (:background "#65a7e2" :foreground "#000000"))))
+ '(highlight ((t (:background "#202090" :foreground "#bdbdbd"))))
  `(bold ((t (:foreground ,kosmos-keyword :weight bold))))
 
  '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
@@ -142,6 +146,10 @@
  `(org-todo ((t (:inherit default :foreground ,kosmos-todo :height 1.0))))
  `(org-done ((t (:inherit default :foreground ,kosmos-done :height 1.0))))
  
+ '(org-table ((t (:inherit default))))
+
+ `(org-verbatim ((t (:inherit default :foreground ,kosmos-keyword))))
+
 
  '(org-meta-line ((t (:foreground "#707070" ))))
  '(org-document-info-keyword ((t (:inherit org-meta-line))))
