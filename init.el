@@ -123,9 +123,11 @@
 	 ("C-a" . haba/move-beginning-of-line)
 	 ("M-j" . haba/join-line)
          ("s-d" . haba/duplicate-line)
-	 ("C-c i" . haba/open-init-file))
+	 ("C-c o i" . haba/open-init-file))
   :config
-  (haba/set-font '("Menlo" "Roboto Mono" "Dejavu Sans Mono" "Consolas") 120)
+  (haba/set-font '("Iosevka" "Menlo" "Roboto Mono"
+                   "Dejavu Sans Mono" "Consolas")
+                 110)
   )
 
 
@@ -315,13 +317,6 @@
   )
 
 
-;; (use-package geiser
-;;   ;; :ensure nil
-;;   :init
-;;   (setq geiser-active-implementations '(racket)))
-
-
-
 ;; flycheck
 (use-package flycheck
   :diminish 'flycheck-mode
@@ -386,7 +381,7 @@
   :defer
   :ensure nil
   :init
-  (setq erc-fill-column (- (window-width) 2)
+  (setq ;erc-fill-column (- (window-width) 2)
 	erc-nick '("habamax" "mxmkm")
 	erc-track-minor-mode t
 	erc-autojoin-channels-alist '(("freenode.net" "#emacs")))
@@ -395,16 +390,16 @@
     (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
   
   :config
-  (make-variable-buffer-local 'erc-fill-column)
-  (add-hook 'window-configuration-change-hook
-	    '(lambda ()
-	       (save-excursion
-		 (walk-windows
-		  (lambda (w)
-		    (let ((buffer (window-buffer w)))
-		      (set-buffer buffer)
-		      (when (eq major-mode 'erc-mode)
-			(setq erc-fill-column (- (window-width w) 2)))))))))
+  ;; (make-variable-buffer-local 'erc-fill-column)
+  ;; (add-hook 'window-configuration-change-hook
+	    ;; '(lambda ()
+	       ;; (save-excursion
+		 ;; (walk-windows
+		  ;; (lambda (w)
+		    ;; (let ((buffer (window-buffer w)))
+		      ;; (set-buffer buffer)
+		      ;; (when (eq major-mode 'erc-mode)
+			;; (setq erc-fill-column (- (window-width w) 2)))))))))
   )
 
 
@@ -586,9 +581,9 @@
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
                  \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{\\raisebox{-0.4\\height}{\\includegraphics[scale=1]{logo/logo_sberbank.png}}}
+                 \\lhead{\\raisebox{-1\\height}{\\includegraphics[scale=1]{logo/logo_sberbank.png}}}
                  \\chead{}
-                 \\rhead{\\includegraphics[scale=1]{logo/logo_adastra.png}}
+                 \\rhead{\\raisebox{-1\\height}{\\includegraphics[scale=1]{logo/logo_adastra.png}}}
                  \\lfoot{}
                  \\cfoot{}
                  \\rfoot{\\thepage}
