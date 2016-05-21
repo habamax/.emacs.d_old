@@ -150,6 +150,17 @@
 
  `(org-verbatim ((t (:inherit default :foreground ,kosmos-keyword))))
 
+ `(org-agenda-structure ((t (:foreground ,kosmos-keyword :height 1.6))))
+ `(org-agenda-date ((t (:foreground ,kosmos-fg :height 1.4))))
+ `(org-agenda-date-today ((t (:foreground ,kosmos-keyword :height 1.6 :weight bold))))
+ `(org-agenda-date-weekend ((t (:foreground ,kosmos-str :height 1.4))))
+
+ '(org-scheduled ((t (:inherit :default))))
+ `(org-scheduled-today ((t (:inherit :default :foreground ,kosmos-keyword))))
+ `(org-scheduled-previously ((t (:inherit :default :foreground "#d05050"))))
+ `(org-agenda-done ((t (:inherit :default :foreground ,kosmos-gray))))
+ `(org-warning ((t (:foreground "#d0a000"))))
+
 
  '(org-meta-line ((t (:foreground "#707070" ))))
  '(org-document-info-keyword ((t (:inherit org-meta-line))))
