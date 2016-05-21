@@ -10,8 +10,6 @@
 ;;; There are many other things in Emacs that should be colored.
 
 ;; TODO: find color for git-commit-nonempty-second-line
-;; make docstrings the same as comments
-;; calendar mode
 ;; ivy?
 ;; swiper
 
@@ -147,19 +145,22 @@
  
  '(org-table ((t (:inherit default))))
 
+ `(org-date ((t (:foreground ,kosmos-comment :underline (:color ,kosmos-comment)))))
+
  `(org-verbatim ((t (:inherit default :foreground ,kosmos-keyword))))
+
+ `(org-special-keyword ((t (:foreground ,kosmos-gray :background ,kosmos-bg-inactive))))
 
  `(org-agenda-structure ((t (:foreground ,kosmos-keyword :height 1.6))))
  `(org-agenda-date ((t (:foreground ,kosmos-fg :height 1.4))))
  `(org-agenda-date-today ((t (:foreground ,kosmos-keyword :height 1.6 :weight bold))))
- `(org-agenda-date-weekend ((t (:foreground ,kosmos-str :height 1.4))))
+ `(org-agenda-date-weekend ((t (:foreground ,kosmos-keyword :height 1.4))))
 
  '(org-scheduled ((t (:inherit :default))))
  `(org-scheduled-today ((t (:inherit :default :foreground ,kosmos-keyword))))
  `(org-scheduled-previously ((t (:inherit :default :foreground "#d05050"))))
  `(org-agenda-done ((t (:inherit :default :foreground ,kosmos-gray))))
  `(org-warning ((t (:foreground "#d0a000"))))
-
 
  '(org-meta-line ((t (:foreground "#707070" ))))
  '(org-document-info-keyword ((t (:inherit org-meta-line))))
