@@ -365,7 +365,7 @@
     (add-hook 'kill-emacs-hook 'emms-stop))
 
   ;; Not sure if this is needed
-  (setq emms-source-file-default-directory "~/Music/smusic")
+  (setq emms-source-file-default-directory "~/Music")
 
   (defun haba/emms-play-main ()
     (interactive)
