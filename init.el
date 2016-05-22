@@ -123,9 +123,11 @@
          ("s-d" . haba/duplicate-line)
 	 ("C-c o i" . haba/open-init-file))
   :config
-  (haba/set-font '("Iosevka" "Menlo" "Roboto Mono"
-                   "Dejavu Sans Mono" "Consolas")
-                 110)
+
+  (let ((font-size (if (string-equal (system-name) "MKIM") 110 120)))
+    (haba/set-font '("Iosevka" "Menlo" "Roboto Mono" "Dejavu Sans Mono" "Consolas")
+                   font-size))
+  
   )
 
 
