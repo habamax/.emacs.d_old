@@ -56,6 +56,9 @@
  
  ;; font-lock I care about
  `(font-lock-string-face ((t (:foreground ,kosmos-str))))
+ ;; review this later.
+ `(font-lock-regexp-grouping-backslash ((t (:foreground ,kosmos-str :weight bold))))
+ `(font-lock-regexp-grouping-construct ((t (:foreground ,kosmos-str :weight bold :slant italic))))
 
  ;; can't decide if cyan of wheat is better for comments.
  `(font-lock-comment-face ((t (:foreground ,kosmos-comment))))
@@ -63,12 +66,15 @@
 
  `(font-lock-keyword-face ((t (:foreground ,kosmos-keyword))))
 
+ 
+ 
  ;; font-lock I don't care about
  '(font-lock-builtin-face ((t nil)))
  '(font-lock-type-face ((t nil)))
  '(font-lock-function-name-face ((t nil)))
  '(font-lock-variable-name-face ((t nil)))
  '(font-lock-constant-face ((t nil)))
+
 
  ;; parenthesis
  '(show-paren-match ((t :background "Wheat" :foreground "black")))
