@@ -186,7 +186,8 @@
  '(emms-playlist-track-face ((t (:inherit default))))
  '(emms-playlist-selected-face ((t (:background "#20408b" :foreground "white" :weight bold))))
 
-
+ ;; widget
+ '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
 
  )
 )
