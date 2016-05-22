@@ -43,7 +43,8 @@
  '(cursor ((nil (:background "#f070f0"))))
  `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
  ;; '(highlight ((t (:background "#65a7e2" :foreground "#000000"))))
- '(highlight ((t (:background "#202090" :foreground "#bdbdbd"))))
+ ;; '(highlight ((t (:background "#202090" :foreground "#bdbdbd"))))
+ '(highlight ((nil (:background "#304050"))))
  `(bold ((t (:foreground ,kosmos-keyword :weight bold))))
 
  '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
@@ -123,10 +124,25 @@
  '(git-commit-summary ((t (:inherit font-lock-string-face))))
 
  ;; ivy
+ '(ivy-current-match ((nil (:inherit highlight))))
+ '(ivy-minibuffer-match-face-1 ((nil (:inherit highlight))))
+ '(ivy-minibuffer-match-face-2 ((nil (:weight bold))))
+ '(ivy-minibuffer-match-face-3 ((nil (:weight bold))))
+ '(ivy-minibuffer-match-face-4 ((nil (:weight bold))))
+ ;; '(ivy-minibuffer-match-face-2 ((nil (:background "#202020" :weight bold))))
+ ;; '(ivy-minibuffer-match-face-3 ((nil (:background "#303030" :weight bold))))
+ ;; '(ivy-minibuffer-match-face-4 ((nil (:background "#404040" :weight bold))))
  '(ivy-modified-buffer ((t (:inherit font-lock-keyword-face))))
  '(ivy-remote ((t (:inherit font-lock-comment-face))))
  '(ivy-virtual ((t (:foreground "#787878"))))
 
+ ;; swiper
+ '(swiper-match-face-1 ((nil (:inherit ivy-minibuffer-match-face-1))))
+ '(swiper-match-face-2 ((nil (:inherit ivy-minibuffer-match-face-2))))
+ '(swiper-match-face-3 ((nil (:inherit ivy-minibuffer-match-face-3))))
+ '(swiper-match-face-4 ((nil (:inherit ivy-minibuffer-match-face-4))))
+
+ 
 
  ;; org
  `(org-document-title ((t (:foreground ,kosmos-keyword :weight bold :height 1.6))))
