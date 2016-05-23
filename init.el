@@ -451,7 +451,15 @@
 	(quote ((sequence "TODO(t)" "|" "DONE(d)")
 		(sequence "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
 
-  (setq org-tag-alist '(("adastra" . ?a) ("tax" . ?t)))
+  (setq org-tag-alist '(("work" . ?w) ("tax" . ?t)("adastra" . ?a) ("tax" . ?t)))
+  ;; C-u C-c C-c to realign all tags
+  (setq org-tags-column 50)
+  ;; Place tags close to the right-hand side of the window
+  (add-hook 'org-finalize-agenda-hook 'place-agenda-tags)
+  (defun place-agenda-tags ()
+    "Put the agenda tags by the right border of the agenda window."
+    (setq org-agenda-tags-column (- 4 (window-width)))
+    (org-agenda-align-tags))
 
   (setq org-capture-templates
 	(quote (("t" "Todo" entry (file org-default-notes-file)
