@@ -436,7 +436,7 @@
 
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/refile.org")
-
+  
   (setq org-refile-targets '((nil :maxlevel . 3)
 			     (org-agenda-files :maxlevel . 3)))
   ;; Refile in a single go
