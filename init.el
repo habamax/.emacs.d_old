@@ -335,6 +335,15 @@
 		ispell-extra-args '("--sug-mode=ultra")))
 
 
+
+(use-package auctex
+  :mode ("\\.\\(go\\)$" . TeX-mode)
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+)
+
 ;; music FTW
 (use-package emms
   :bind (("C-c p m" . haba/emms-play-main)
@@ -501,17 +510,15 @@
   (add-to-list 'org-latex-classes
                '("article"
                  "\\documentclass[a4paper,12pt]{scrartcl}
-                 \\usepackage{cmap}
+                 \\usepackage[T2A]{fontenc}
                  \\usepackage[utf8]{inputenc}
+                 \\usepackage{cmap}
                  \\usepackage[english,russian]{babel}
                  \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
                  \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
                  \\usepackage{misccorr}      % точка в номерах заголовков
                  \\usepackage[onehalfspacing]{setspace}
-                 \\usepackage[T2A]{fontenc}
-                 \\usepackage[scaled]{beraserif}
-                 \\usepackage[scaled]{berasans}
-                 \\usepackage[scaled]{beramono}
+
 
                  \\usepackage{graphicx}
                  \\usepackage{grffile}
@@ -535,17 +542,14 @@
   (add-to-list 'org-latex-classes
                '("report"
                  "\\documentclass[a4paper,12pt]{report}
-                 \\usepackage{cmap}
+                 \\usepackage[T2A]{fontenc}
                  \\usepackage[utf8]{inputenc}
+                 \\usepackage{cmap}
                  \\usepackage[english,russian]{babel}
-                 \\usepackage[top=30mm, left=30mm, right=20mm, bottom=20mm]{geometry}
+                 \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
                  \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
                  \\usepackage{misccorr}      % точка в номерах заголовков
                  \\usepackage[onehalfspacing]{setspace}
-                 \\usepackage[T2A]{fontenc}
-                 \\usepackage[scaled]{beraserif}
-                 \\usepackage[scaled]{berasans}
-                 \\usepackage[scaled]{beramono}
 
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
@@ -589,17 +593,14 @@
   (add-to-list 'org-latex-classes
                '("report-sberbank"
                  "\\documentclass[a4paper,12pt]{report}
-                 \\usepackage{cmap}
+                 \\usepackage[T2A]{fontenc}
                  \\usepackage[utf8]{inputenc}
+                 \\usepackage{cmap}
                  \\usepackage[english,russian]{babel}
                  \\usepackage[top=30mm, left=30mm, right=20mm, bottom=20mm]{geometry}
                  \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
                  \\usepackage{misccorr}      % точка в номерах заголовков
                  \\usepackage[onehalfspacing]{setspace}
-                 \\usepackage[T2A]{fontenc}
-                 \\usepackage[scaled]{beraserif}
-                 \\usepackage[scaled]{berasans}
-                 \\usepackage[scaled]{beramono}
 
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
