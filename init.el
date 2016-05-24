@@ -451,7 +451,8 @@
 	(quote ((sequence "TODO(t)" "|" "DONE(d)")
 		(sequence "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
 
-  (setq org-tag-alist '(("work" . ?w) ("tax" . ?t)("adastra" . ?a) ("tax" . ?t)))
+  (setq org-tag-alist '(("work" . ?w) ("tax" . ?t)
+                        ("adastra" . ?a) ("sber" . ?s) ("REB" . ?r)))
   ;; C-u C-c C-c to realign all tags
   (setq org-tags-column 60)
   ;; Place tags close to the right-hand side of the window
