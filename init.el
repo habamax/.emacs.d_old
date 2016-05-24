@@ -453,7 +453,7 @@
 
   (setq org-tag-alist '(("work" . ?w) ("tax" . ?t)("adastra" . ?a) ("tax" . ?t)))
   ;; C-u C-c C-c to realign all tags
-  (setq org-tags-column 50)
+  (setq org-tags-column 60)
   ;; Place tags close to the right-hand side of the window
   (add-hook 'org-finalize-agenda-hook 'place-agenda-tags)
   (defun place-agenda-tags ()
