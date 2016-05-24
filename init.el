@@ -438,7 +438,7 @@
   (setq org-default-notes-file "~/org/refile.org")
   
   (setq org-refile-targets '((nil :maxlevel . 3)
-			     (org-agenda-files :maxlevel . 3)))
+			     (org-agenda-files :maxlevel . 2)))
   ;; Refile in a single go
   (setq org-outline-path-complete-in-steps nil)
   ;; Show full paths for refiling
