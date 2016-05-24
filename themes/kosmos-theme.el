@@ -147,9 +147,9 @@
  ;; org
  `(org-document-title ((t (:foreground ,kosmos-keyword :weight bold :height 1.6))))
  
- `(org-level-1 ((t (:foreground ,kosmos-keyword :height 1.6))))
- `(org-level-2 ((t (:foreground ,kosmos-keyword :height 1.4))))
- `(org-level-3 ((t (:foreground ,kosmos-keyword :height 1.2))))
+ `(org-level-1 ((t (:foreground ,kosmos-keyword :height 1.5))))
+ `(org-level-2 ((t (:foreground ,kosmos-keyword :height 1.3))))
+ `(org-level-3 ((t (:foreground ,kosmos-keyword :height 1.1))))
  
  `(org-level-4 ((t (:foreground ,kosmos-keyword :slant italic :height 1.1))))
  `(org-level-5 ((t (:foreground ,kosmos-keyword :slant italic :height 1.1))))
