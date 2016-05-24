@@ -444,6 +444,14 @@
   ;; Show full paths for refiling
   (setq org-refile-use-outline-path 'file)
 
+  ;; open docx files in default application (ie msword)
+  (setq org-file-apps
+        '(("\\.docx\\'" . default)
+          ("\\.mm\\'" . default)
+          ("\\.x?html?\\'" . default)
+          ("\\.pdf\\'" . default)
+          (auto-mode . emacs)))
+  
   ;; Doesn't work
   (setq org-image-actual-width 500)
   
