@@ -32,6 +32,7 @@
      (kosmos-gray "#777777")
      (kosmos-todo "#ff99aa")
      (kosmos-done "#aaff99")
+     (kosmos-h1 "#d1d2d3")
     )
 
 
@@ -147,23 +148,24 @@
  ;; org
  `(org-document-title ((t (:foreground ,kosmos-keyword :weight bold :height 1.6))))
  
- `(org-level-1 ((t (:foreground ,kosmos-keyword :height 1.5))))
- `(org-level-2 ((t (:foreground ,kosmos-keyword :height 1.3))))
- `(org-level-3 ((t (:foreground ,kosmos-keyword :height 1.1))))
- 
- `(org-level-4 ((t (:foreground ,kosmos-keyword :slant italic :height 1.1))))
- `(org-level-5 ((t (:foreground ,kosmos-keyword :slant italic :height 1.1))))
- `(org-level-6 ((t (:foreground ,kosmos-keyword :slant italic :height 1.1))))
- 
- `(org-level-7 ((t (:foreground ,kosmos-keyword :slant italic :height 1))))
- `(org-level-8 ((t (:foreground ,kosmos-keyword :slant italic :height 1))))
- `(org-level-9 ((t (:foreground ,kosmos-keyword :slant italic :height 1))))
- `(org-level-10 ((t (:foreground ,kosmos-keyword :slant italic :height 1))))
+ `(org-level-1 ((t (:foreground ,kosmos-h1 :weight bold :height 1.3 :overline ,kosmos-gray))))
+ `(org-level-2 ((t (:foreground ,kosmos-h1 :weight bold :height 1.2))))
+ `(org-level-3 ((t (:foreground ,kosmos-h1 :weight bold :height 1.1))))
 
- `(org-tag ((t (:inherit default :foreground ,kosmos-comment :height 1.0))))
+ `(org-level-4 ((t (:foreground ,kosmos-h1 :slant italic :height 1.1))))
+ `(org-level-5 ((t (:foreground ,kosmos-h1 :slant italic :height 1.1))))
+ `(org-level-6 ((t (:foreground ,kosmos-h1 :slant italic :height 1.1))))
+ 
+ `(org-level-7 ((t (:foreground ,kosmos-h1 :slant italic :height 1))))
+ `(org-level-8 ((t (:foreground ,kosmos-h1 :slant italic :height 1))))
+ `(org-level-9 ((t (:foreground ,kosmos-h1 :slant italic :height 1))))
+ `(org-level-10 ((t (:foreground ,kosmos-h1 :slant italic :height 1))))
 
- `(org-todo ((t (:inherit default :foreground ,kosmos-todo :height 1.0))))
- `(org-done ((t (:inherit default :foreground ,kosmos-done :height 1.0))))
+ `(org-tag ((nil (:foreground ,kosmos-comment))))
+
+ ;; todo: play with colors of the box
+ `(org-todo ((nil (:foreground ,kosmos-todo :box (:line-width 1 :color "#D8ABA7")))))
+ `(org-done ((nil (:foreground ,kosmos-done :box (:line-width 1 :color "#D8ABA7")))))
  
  '(org-table ((t (:inherit default))))
 
