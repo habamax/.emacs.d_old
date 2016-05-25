@@ -49,6 +49,8 @@
 (column-number-mode t)
 (recentf-mode 1)
 
+;; fill text with M-q or auto-fill-mode
+(setq-default fill-column 80)
 
 ;; winner mode is a must
 (winner-mode 1)
