@@ -443,6 +443,8 @@
 	org-special-ctrl-a/e t
 	org-special-ctrl-k t)
 
+  (add-hook 'org-mode-hook 'auto-fill-mode)
+
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/refile.org")
   
@@ -500,6 +502,10 @@
   ;; this has to be set up for different machines
   (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
 
+  ;; default export options
+  (setq org-export-with-smart-quotes t
+        org-export-with-emphasize t
+        org-export-with-todo-keywords nil)
 
   ;; Pandoc
   (use-package ox-pandoc)
