@@ -140,8 +140,9 @@
   :bind (("s-t" . haba/toggle-theme)
          ("C-c t" . haba/toggle-theme))
   :config
-  (use-package zenburn-theme :defer)
-  (use-package eclipse-theme :defer)
+    (use-package leuven-theme :defer)
+    (use-package eclipse-theme :defer)
+  
   )
 
 
@@ -475,7 +476,7 @@
   (setq org-tag-alist '(("work" . ?w) ("tax" . ?t)
                         ("adastra" . ?a) ("sber" . ?s) ("REB" . ?r)))
   ;; C-u C-c C-c to realign all tags
-  (setq org-tags-column 60)
+  (setq org-tags-column 65)
   ;; Place tags close to the right-hand side of the window
   (add-hook 'org-finalize-agenda-hook 'place-agenda-tags)
   (defun place-agenda-tags ()
