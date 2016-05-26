@@ -446,8 +446,12 @@
 	org-special-ctrl-a/e t
 	org-special-ctrl-k t)
 
+  ;; auto-fill mode on for org
   (add-hook 'org-mode-hook 'auto-fill-mode)
 
+  ;; unbind C-' as I often miss a key with C-\
+  (define-key org-mode-map (kbd "C-'") nil)
+  
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/refile.org")
   
