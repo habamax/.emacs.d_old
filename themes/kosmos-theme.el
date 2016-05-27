@@ -175,10 +175,10 @@
 
  `(org-special-keyword ((t (:foreground ,kosmos-gray :background ,kosmos-bg-inactive))))
 
- `(org-agenda-structure ((t (:foreground ,kosmos-keyword :height 1.6))))
+ `(org-agenda-structure ((t (:foreground ,kosmos-fg :height 1.6 :weight bold))))
  `(org-agenda-date ((t (:foreground ,kosmos-fg :height 1.4))))
- `(org-agenda-date-today ((t (:foreground ,kosmos-keyword :height 1.6 :weight bold))))
- `(org-agenda-date-weekend ((t (:foreground ,kosmos-keyword :height 1.4))))
+ `(org-agenda-date-today ((t (:foreground ,kosmos-keyword :height 1.6 :weight bold :underline ,kosmos-keyword))))
+ `(org-agenda-date-weekend ((t (:foreground ,kosmos-keyword :height 1.2))))
 
  '(org-scheduled ((t (:inherit :default))))
  `(org-scheduled-today ((t (:inherit :default :foreground ,kosmos-keyword))))
