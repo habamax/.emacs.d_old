@@ -164,8 +164,8 @@
  `(org-tag ((nil (:foreground ,kosmos-comment))))
 
  ;; todo: play with colors of the box
- `(org-todo ((nil (:foreground ,kosmos-todo :box (:line-width 1 :color "#D8ABA7")))))
- `(org-done ((nil (:foreground ,kosmos-done :box (:line-width 1 :color "#D8ABA7")))))
+ `(org-todo ((nil (:foreground ,kosmos-todo :weight bold :box (:line-width 1 :color ,kosmos-todo)))))
+ `(org-done ((nil (:foreground ,kosmos-done :weight bold :box (:line-width 1 :color ,kosmos-done)))))
  
  '(org-table ((t (:inherit default))))
 
@@ -185,6 +185,8 @@
  `(org-scheduled-previously ((t (:inherit :default :foreground "#d05050"))))
  `(org-agenda-done ((t (:inherit :default :foreground ,kosmos-gray))))
  `(org-warning ((t (:foreground "#d0a000"))))
+
+ `(org-agenda-clocking ((t (:background "#303030"))))
 
  '(org-meta-line ((t (:foreground "#707070" ))))
  '(org-document-info-keyword ((t (:inherit org-meta-line))))
