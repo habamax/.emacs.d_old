@@ -523,10 +523,10 @@
   (add-to-list 'org-latex-classes
                '("article"
                  "\\documentclass[a4paper,12pt]{scrartcl}
+                 \\usepackage[english,russian]{babel}
                  \\usepackage[T2A]{fontenc}
                  \\usepackage[utf8]{inputenc}
                  \\usepackage{cmap}
-                 \\usepackage[english,russian]{babel}
                  \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
                  \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
                  \\usepackage{misccorr}      % точка в номерах заголовков
@@ -555,10 +555,10 @@
   (add-to-list 'org-latex-classes
                '("report"
                  "\\documentclass[a4paper,12pt]{report}
+                 \\usepackage[english,russian]{babel}
                  \\usepackage[T2A]{fontenc}
                  \\usepackage[utf8]{inputenc}
                  \\usepackage{cmap}
-                 \\usepackage[english,russian]{babel}
                  \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
                  \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
                  \\usepackage{misccorr}      % точка в номерах заголовков
@@ -606,10 +606,10 @@
   (add-to-list 'org-latex-classes
                '("report-sberbank"
                  "\\documentclass[a4paper,12pt]{report}
+                 \\usepackage[english,russian]{babel}
                  \\usepackage[T2A]{fontenc}
                  \\usepackage[utf8]{inputenc}
                  \\usepackage{cmap}
-                 \\usepackage[english,russian]{babel}
                  \\usepackage[top=30mm, left=30mm, right=20mm, bottom=20mm]{geometry}
                  \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
                  \\usepackage{misccorr}      % точка в номерах заголовков
