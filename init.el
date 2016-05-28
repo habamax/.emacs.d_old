@@ -519,33 +519,59 @@
 
   ;; Latex
   (require 'ox-latex)
+
+  (setq org-latex-default-packages-alist
+        '(("T2A" "fontenc" t)
+          ("utf8" "inputenc" t)
+          ("english, russian" "babel" t) ; переносы и всякое
+          ("" "cmap" t) ; русский поиск в pdf
+          ("" "indentfirst" t) ; первая строка параграфа сдвинута
+          ("" "misccorr" t) ; точка в номерах заголовков
+          ("onehalfspacing" "setspace" t) ; межстрочный интервал
+          ("" "fixltx2e" nil)
+          ("" "graphicx" t)
+          ("" "grffile" t)
+          ("" "longtable" nil)
+          ("" "wrapfig" nil)
+          ("" "rotating" nil)
+          ("normalem" "ulem" t)
+          ("" "amsmath" t)
+          ("" "textcomp" t)
+          ("" "amssymb" t)
+          ("" "capt-of" nil)
+          ("" "hyperref" nil)))
+
   
   (add-to-list 'org-latex-classes
                '("article"
                  "\\documentclass[a4paper,12pt]{scrartcl}
-                 \\usepackage[english,russian]{babel}
-                 \\usepackage[T2A]{fontenc}
-                 \\usepackage[utf8]{inputenc}
-                 \\usepackage{cmap}
                  \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
-                 \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
-                 \\usepackage{misccorr}      % точка в номерах заголовков
-                 \\usepackage[onehalfspacing]{setspace}
+                 \\usepackage{fancyhdr}
+                 \\pagestyle{fancy}
+                 \\fancypagestyle{plain}{\\pagestyle{fancy}}
+                 \\lhead{} \\chead{} \\rhead{\\today}
+                 \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
+                 "
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
+  (add-to-list 'org-latex-classes
+               '("article-sberbank"
+                 "\\documentclass[a4paper,12pt]{scrartcl}
+                 \\usepackage[top=25mm, left=20mm, right=20mm, bottom=35mm]{geometry}
 
-                 \\usepackage{graphicx}
-                 \\usepackage{grffile}
-                 \\usepackage{longtable}
-                 \\usepackage{wrapfig}
-                 \\usepackage{rotating}
-                 \\usepackage[normalem]{ulem}
-                 \\usepackage{amsmath}
-                 \\usepackage{textcomp}
-                 \\usepackage{amssymb}
-                 \\usepackage{capt-of}
-                 \\usepackage{hyperref}
-                 [NO-DEFAULT-PACKAGES]
-                 [NO-PACKAGES]"
+                 \\usepackage{fancyhdr}
+                 \\pagestyle{fancy}
+                 \\fancypagestyle{plain}{\\pagestyle{fancy}}
+                 \\lhead{\\raisebox{-1\\height}{\\includegraphics[scale=1]{logo/logo_sberbank.png}}}
+                 \\chead{}
+                 \\rhead{\\raisebox{-1\\height}{\\includegraphics[scale=1]{logo/logo_adastra.png}}}
+                 \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
+                 \\renewcommand{\\headrulewidth}{0.0pt}
+                 \\renewcommand{\\footrulewidth}{0.0pt}"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -554,47 +580,22 @@
 
   (add-to-list 'org-latex-classes
                '("report"
-                 "\\documentclass[a4paper,12pt]{report}
-                 \\usepackage[english,russian]{babel}
-                 \\usepackage[T2A]{fontenc}
-                 \\usepackage[utf8]{inputenc}
-                 \\usepackage{cmap}
+                 "\\documentclass[a4paper,12pt]{scrreprt}
                  \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
-                 \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
-                 \\usepackage{misccorr}      % точка в номерах заголовков
-                 \\usepackage[onehalfspacing]{setspace}
-
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
                  \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{Максим Ким}
-                 \\chead{}
-                 \\rhead{\\today}
-                 \\lfoot{}
-                 \\cfoot{}
-                 \\rfoot{\\thepage}
+                 \\lhead{} \\chead{} \\rhead{\\today}
+                 \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
                  \\renewcommand{\\headrulewidth}{0.4pt}
                  \\renewcommand{\\footrulewidth}{0.4pt}
 
                  % Главы без глав
+                 \\usepackage{misccorr} % Точка в номерах заголовков
                  \\usepackage{titlesec}
                  \\titleformat{\\chapter}
                    {\\normalfont\\LARGE\\bfseries}{\\thechapter.}{1em}{}
-                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-
-                 \\usepackage{graphicx}
-                 \\usepackage{grffile}
-                 \\usepackage{longtable}
-                 \\usepackage{wrapfig}
-                 \\usepackage{rotating}
-                 \\usepackage[normalem]{ulem}
-                 \\usepackage{amsmath}
-                 \\usepackage{textcomp}
-                 \\usepackage{amssymb}
-                 \\usepackage{capt-of}
-                 \\usepackage{hyperref}
-                 [NO-DEFAULT-PACKAGES]
-                 [NO-PACKAGES]"
+                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}"
                  ("\\chapter{%s}" . "\\chapter*{%s}")
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -605,15 +606,8 @@
 
   (add-to-list 'org-latex-classes
                '("report-sberbank"
-                 "\\documentclass[a4paper,12pt]{report}
-                 \\usepackage[english,russian]{babel}
-                 \\usepackage[T2A]{fontenc}
-                 \\usepackage[utf8]{inputenc}
-                 \\usepackage{cmap}
-                 \\usepackage[top=30mm, left=30mm, right=20mm, bottom=20mm]{geometry}
-                 \\usepackage{indentfirst}   % русский стиль: отступ первого абзаца раздела
-                 \\usepackage{misccorr}      % точка в номерах заголовков
-                 \\usepackage[onehalfspacing]{setspace}
+                 "\\documentclass[a4paper,12pt]{scrreprt}
+                 \\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}
 
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
@@ -621,31 +615,16 @@
                  \\lhead{\\raisebox{-1\\height}{\\includegraphics[scale=1]{logo/logo_sberbank.png}}}
                  \\chead{}
                  \\rhead{\\raisebox{-1\\height}{\\includegraphics[scale=1]{logo/logo_adastra.png}}}
-                 \\lfoot{}
-                 \\cfoot{}
-                 \\rfoot{\\thepage}
+                 \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
                  \\renewcommand{\\headrulewidth}{0.0pt}
                  \\renewcommand{\\footrulewidth}{0.0pt}
 
                  % Главы без глав
+                 \\usepackage{misccorr} % Точка в номерах заголовков
                  \\usepackage{titlesec}
                  \\titleformat{\\chapter}
                    {\\normalfont\\LARGE\\bfseries}{\\thechapter.}{1em}{}
-                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-
-                 \\usepackage{graphicx}
-                 \\usepackage{grffile}
-                 \\usepackage{longtable}
-                 \\usepackage{wrapfig}
-                 \\usepackage{rotating}
-                 \\usepackage[normalem]{ulem}
-                 \\usepackage{amsmath}
-                 \\usepackage{textcomp}
-                 \\usepackage{amssymb}
-                 \\usepackage{capt-of}
-                 \\usepackage{hyperref}
-                 [NO-DEFAULT-PACKAGES]
-                 [NO-PACKAGES]"
+                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}"
                  ("\\chapter{%s}" . "\\chapter*{%s}")
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
