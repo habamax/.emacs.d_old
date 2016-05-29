@@ -590,6 +590,48 @@
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
   (add-to-list 'org-latex-classes
+               '("article-en"
+                 "\\documentclass[a4paper,12pt]{article}
+                 \\usepackage{fontspec}
+                 \\defaultfontfeatures{Ligatures=TeX}
+                 \\setmainfont{DejaVu Serif}
+                 \\setsansfont{DejaVu Sans}
+                 \\newfontfamily{\\cyrillicfonttt}{Input}
+                 \\setmonofont{Input}
+                 \\usepackage{polyglossia}
+                 \\setdefaultlanguage{english}
+                 \\setotherlanguages{russian}
+
+                 \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
+                 \\usepackage{fancyhdr}
+                 \\pagestyle{fancy}
+                 \\fancypagestyle{plain}{\\pagestyle{fancy}}
+                 \\lhead{} \\chead{} \\rhead{\\today}
+                 \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
+
+
+                 \\usepackage{titling}
+                 \\pretitle{\\begin{center}\\LARGE\\bfseries\\sffamily}
+                 \\posttitle{\\par\\end{center}\\vspace{24bp}}
+                 \\preauthor{\\begin{center}\\normalsize\\sffamily}
+                 \\postauthor{\\par\\end{center}}
+                 \\predate{\\begin{center}\\normalsize\\sffamily}
+                 \\date{}
+                 \\postdate{\\par\\end{center}}
+
+
+                 \\usepackage{misccorr} % Точка в номерах заголовков
+                 \\usepackage{titlesec}
+                 \\titleformat*{\\section}{\\LARGE\\bfseries\\sffamily}
+                 \\titleformat*{\\subsection}{\\Large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsubsection}{\\large\\bfseries\\sffamily}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+  (add-to-list 'org-latex-classes
                '("article-sberbank"
                  "\\documentclass[a4paper,12pt]{article}
 
