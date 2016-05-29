@@ -148,8 +148,8 @@
  ;; org
  `(org-document-title ((t (:foreground ,kosmos-keyword :weight bold :height 1.6))))
  
- `(org-level-1 ((t (:foreground ,kosmos-h1 :weight bold :height 1.3 :overline ,kosmos-gray))))
- `(org-level-2 ((t (:foreground ,kosmos-h1 :weight bold :height 1.2))))
+ `(org-level-1 ((t (:foreground ,kosmos-h1 :weight bold :height 1.3 :overline ,kosmos-h1))))
+ `(org-level-2 ((t (:foreground ,kosmos-h1 :weight bold :height 1.2 :overline ,kosmos-gray))))
  `(org-level-3 ((t (:foreground ,kosmos-h1 :weight bold :height 1.1))))
 
  `(org-level-4 ((t (:foreground ,kosmos-h1 :slant italic :height 1.1))))
