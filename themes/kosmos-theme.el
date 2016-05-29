@@ -46,7 +46,7 @@
  ;; '(highlight ((t (:background "#65a7e2" :foreground "#000000"))))
  ;; '(highlight ((t (:background "#202090" :foreground "#bdbdbd"))))
  '(highlight ((nil (:background "#304050"))))
- `(bold ((t (:foreground ,kosmos-keyword :weight bold))))
+ '(bold ((t (:weight bold))))
 
  '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
  '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
@@ -209,6 +209,15 @@
  ;; widget
  '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
 
+
+ ;; LaTeX
+ '(font-latex-sectioning-1-face ((t (:inherit org-level-1))))
+ '(font-latex-sectioning-2-face ((t (:inherit org-level-2))))
+ '(font-latex-sectioning-3-face ((t (:inherit org-level-3))))
+ '(font-latex-string-face ((t (:inherit font-lock-string-face))))
+ '(font-latex-bold-face ((t (:inherit bold))))
+ 
+ 
  )
 )
 
