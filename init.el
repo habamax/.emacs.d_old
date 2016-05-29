@@ -340,11 +340,14 @@
 
 
 (use-package auctex
-  :mode ("\\.\\(go\\)$" . TeX-mode)
-  :config
+  :mode ("\\.\\(tex\\)$" . latex-mode)
+  :init
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq-default TeX-master nil)
+  (setq-default TeX-engine 'xetex)
+  (setq-default TeX-PDF-mode t)
+  (setq TeX-PDF-mode t)
 )
 
 ;; music FTW
@@ -520,12 +523,14 @@
   ;; Latex
   (require 'ox-latex)
 
+
+  (setq org-latex-pdf-process
+        '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  
   (setq org-latex-default-packages-alist
-        '(("T2A" "fontenc" t)
-          ("utf8" "inputenc" t)
-          ("english, russian" "babel" t) ; переносы и всякое
-          ("" "cmap" t) ; русский поиск в pdf
-          ("" "indentfirst" t) ; первая строка параграфа сдвинута
+        '(("" "indentfirst" t) ; первая строка параграфа сдвинута
           ("" "misccorr" t) ; точка в номерах заголовков
           ("onehalfspacing" "setspace" t) ; межстрочный интервал
           ("" "fixltx2e" nil)
@@ -540,18 +545,44 @@
           ("" "amssymb" t)
           ("" "capt-of" nil)
           ("" "hyperref" nil)))
-
+  
   
   (add-to-list 'org-latex-classes
                '("article"
-                 "\\documentclass[a4paper,12pt]{scrartcl}
+                 "\\documentclass[a4paper,12pt]{article}
+                 \\usepackage{fontspec}
+                 \\defaultfontfeatures{Ligatures=TeX}
+                 \\setmainfont{DejaVu Serif}
+                 \\setsansfont{DejaVu Sans}
+                 \\newfontfamily{\\cyrillicfonttt}{Input}
+                 \\setmonofont{Input}
+                 \\usepackage{polyglossia}
+                 \\setdefaultlanguage{russian}
+                 \\setotherlanguages{english}
+
                  \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
                  \\fancypagestyle{plain}{\\pagestyle{fancy}}
                  \\lhead{} \\chead{} \\rhead{\\today}
                  \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
-                 "
+
+
+                 \\usepackage{titling}
+                 \\pretitle{\\begin{center}\\LARGE\\bfseries\\sffamily}
+                 \\posttitle{\\par\\end{center}\\vspace{24bp}}
+                 \\preauthor{\\begin{center}\\normalsize\\sffamily}
+                 \\postauthor{\\par\\end{center}}
+                 \\predate{\\begin{center}\\normalsize\\sffamily}
+                 \\date{}
+                 \\postdate{\\par\\end{center}}
+
+
+                 \\usepackage{misccorr} % Точка в номерах заголовков
+                 \\usepackage{titlesec}
+                 \\titleformat*{\\section}{\\LARGE\\bfseries\\sffamily}
+                 \\titleformat*{\\subsection}{\\Large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsubsection}{\\large\\bfseries\\sffamily}"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -560,18 +591,45 @@
 
   (add-to-list 'org-latex-classes
                '("article-sberbank"
-                 "\\documentclass[a4paper,12pt]{scrartcl}
-                 \\usepackage[top=25mm, left=20mm, right=20mm, bottom=35mm]{geometry}
+                 "\\documentclass[a4paper,12pt]{article}
 
+                 \\usepackage{fontspec}
+                 \\defaultfontfeatures{Ligatures=TeX}
+                 \\setmainfont{DejaVu Serif}
+                 \\setsansfont{DejaVu Sans}
+                 \\newfontfamily{\\cyrillicfonttt}{Input}
+                 \\setmonofont{Input}
+                 \\usepackage{polyglossia}
+                 \\setdefaultlanguage{russian}
+                 \\setotherlanguages{english}
+
+                 \\usepackage[top=25mm, left=20mm, right=20mm, bottom=35mm]{geometry}
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
                  \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{\\raisebox{-1\\height}{\\includegraphics[scale=1]{logo/logo_sberbank.png}}}
+                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank.png}}
                  \\chead{}
-                 \\rhead{\\raisebox{-1\\height}{\\includegraphics[scale=1]{logo/logo_adastra.png}}}
+                 \\rhead{\\includegraphics[scale=1,trim=0 -0.4cm 0 0]{logo/logo_adastra.png}}
                  \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
                  \\renewcommand{\\headrulewidth}{0.0pt}
-                 \\renewcommand{\\footrulewidth}{0.0pt}"
+                 \\renewcommand{\\footrulewidth}{0.0pt}
+
+
+                 \\usepackage{titling}
+                 \\pretitle{\\begin{center}\\LARGE\\bfseries\\sffamily}
+                 \\posttitle{\\par\\end{center}\\vspace{24bp}}
+                 \\preauthor{\\begin{center}\\normalsize\\sffamily}
+                 \\postauthor{\\par\\end{center}}
+                 \\predate{\\begin{center}\\normalsize\\sffamily}
+                 \\date{}
+                 \\postdate{\\par\\end{center}}
+
+
+                 \\usepackage{misccorr} % Точка в номерах заголовков
+                 \\usepackage{titlesec}
+                 \\titleformat*{\\section}{\\LARGE\\bfseries\\sffamily}
+                 \\titleformat*{\\subsection}{\\Large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsubsection}{\\large\\bfseries\\sffamily}"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -580,7 +638,18 @@
 
   (add-to-list 'org-latex-classes
                '("report"
-                 "\\documentclass[a4paper,12pt]{scrreprt}
+                 "\\documentclass[a4paper,12pt]{report}
+
+                 \\usepackage{fontspec}
+                 \\defaultfontfeatures{Ligatures=TeX}
+                 \\setmainfont{DejaVu Serif}
+                 \\setsansfont{DejaVu Sans}
+                 \\newfontfamily{\\cyrillicfonttt}{Input}
+                 \\setmonofont{Input}
+                 \\usepackage{polyglossia}
+                 \\setdefaultlanguage{russian}
+                 \\setotherlanguages{english}
+
                  \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
@@ -590,12 +659,25 @@
                  \\renewcommand{\\headrulewidth}{0.4pt}
                  \\renewcommand{\\footrulewidth}{0.4pt}
 
-                 % Главы без глав
+
+                 \\usepackage{titling}
+                 \\pretitle{\\begin{center}\\LARGE\\bfseries\\sffamily}
+                 \\posttitle{\\par\\end{center}\\vspace{24bp}}
+                 \\preauthor{\\begin{center}\\normalsize\\sffamily}
+                 \\postauthor{\\par\\end{center}}
+                 \\predate{\\begin{center}\\normalsize\\sffamily}
+                 \\date{}
+                 \\postdate{\\par\\end{center}}
+
+
                  \\usepackage{misccorr} % Точка в номерах заголовков
+                 % Главы без глав
                  \\usepackage{titlesec}
-                 \\titleformat{\\chapter}
-                   {\\normalfont\\LARGE\\bfseries}{\\thechapter.}{1em}{}
-                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}"
+                 \\titleformat{\\chapter}{\\normalfont\\LARGE\\bfseries\\sffamily}{\\thechapter.}{1em}{}
+                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+                 \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}"
                  ("\\chapter{%s}" . "\\chapter*{%s}")
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -606,25 +688,55 @@
 
   (add-to-list 'org-latex-classes
                '("report-sberbank"
-                 "\\documentclass[a4paper,12pt]{scrreprt}
+                 "\\documentclass[a4paper,12pt]{report}
+                 \\usepackage{fontspec}
+                 \\defaultfontfeatures{Ligatures=TeX}
+                 \\setmainfont{DejaVu Serif}
+                 \\setsansfont{DejaVu Sans}
+                 \\newfontfamily{\\cyrillicfonttt}{Input}
+                 \\setmonofont{Input}
+
+                 \\usepackage{polyglossia}
+                 \\setdefaultlanguage{russian}
+                 \\setotherlanguages{english}
+
                  \\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}
 
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
                  \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{\\raisebox{-1\\height}{\\includegraphics[scale=1]{logo/logo_sberbank.png}}}
+                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank.png}}
                  \\chead{}
-                 \\rhead{\\raisebox{-1\\height}{\\includegraphics[scale=1]{logo/logo_adastra.png}}}
+                 \\rhead{\\includegraphics[scale=1,trim=0 -0.4cm 0 0]{logo/logo_adastra.png}}
                  \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
                  \\renewcommand{\\headrulewidth}{0.0pt}
                  \\renewcommand{\\footrulewidth}{0.0pt}
 
-                 % Главы без глав
+
+                 \\usepackage{titling}
+                 \\pretitle{
+                   \\vspace{-8cm}\\hspace{-1cm}
+                   \\includegraphics[scale=1]{logo/logo_sberbank.png}
+                   \\hspace{7.5cm}
+                   \\includegraphics[scale=1,trim=0 -0.4cm 0 0]{logo/logo_adastra.png}
+                   \\vspace{7cm}
+                   \\begin{center}\\LARGE\\bfseries\\sffamily}
+                 \\posttitle{\\par\\end{center}\\vspace{24bp}}
+                 \\preauthor{\\begin{center}\\normalsize\\sffamily}
+                 \\postauthor{\\par\\end{center}}
+                 \\predate{\\begin{center}\\normalsize\\sffamily}
+                 \\date{}
+                 \\postdate{\\par\\end{center}}
+
+
                  \\usepackage{misccorr} % Точка в номерах заголовков
+                 % Главы без глав
                  \\usepackage{titlesec}
-                 \\titleformat{\\chapter}
-                   {\\normalfont\\LARGE\\bfseries}{\\thechapter.}{1em}{}
-                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}"
+                 \\titleformat{\\chapter}{\\normalfont\\LARGE\\bfseries\\sffamily}{\\thechapter.}{1em}{}
+                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+                 \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}"
                  ("\\chapter{%s}" . "\\chapter*{%s}")
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
