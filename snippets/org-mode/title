@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: org title
+# key: title
+# --
+#+TITLE: ${1:title}
+#+DATE: ${2:\today}
+#+AUTHOR: ${3:Максим Ким}
+#+EMAIL: maksim.kim@adastragrp.com
+#+LANGUAGE: ru
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+LATEX_CLASS: report

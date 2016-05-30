@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: org verse
+# key: verse
+# --
+#+BEGIN_VERSE
+$0
+#+END_VERSE
