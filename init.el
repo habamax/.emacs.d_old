@@ -588,9 +588,9 @@
 
                  \\usepackage{misccorr} % Точка в номерах заголовков
                  \\usepackage{titlesec}
-                 \\titleformat*{\\section}{\\LARGE\\bfseries\\sffamily}
-                 \\titleformat*{\\subsection}{\\Large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsubsection}{\\large\\bfseries\\sffamily}"
+                 \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -630,9 +630,9 @@
 
                  \\usepackage{misccorr} % Точка в номерах заголовков
                  \\usepackage{titlesec}
-                 \\titleformat*{\\section}{\\LARGE\\bfseries\\sffamily}
-                 \\titleformat*{\\subsection}{\\Large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsubsection}{\\large\\bfseries\\sffamily}"
+                 \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -677,9 +677,9 @@
 
                  \\usepackage{misccorr} % Точка в номерах заголовков
                  \\usepackage{titlesec}
-                 \\titleformat*{\\section}{\\LARGE\\bfseries\\sffamily}
-                 \\titleformat*{\\subsection}{\\Large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsubsection}{\\large\\bfseries\\sffamily}"
+                 \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
+                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
