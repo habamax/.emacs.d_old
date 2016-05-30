@@ -81,7 +81,10 @@
 ;; Tab to indent or complete
 ;; (setq tab-always-indent 'complete)
 
-
+;; abbrev
+(setq abbrev-file-name (concat user-emacs-directory "abbrev_defs"))
+;; (setq save-abbrevs t)
+(setq-default abbrev-mode t)
 
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
