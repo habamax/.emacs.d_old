@@ -338,6 +338,11 @@
 		ispell-extra-args '("--sug-mode=ultra")))
 
 
+;; yasnippets
+(use-package yasnippet
+  :defer 2
+  :config
+  (yas-global-mode t))
 
 (use-package auctex
   :mode ("\\.\\(tex\\)$" . latex-mode)
