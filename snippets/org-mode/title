@@ -3,10 +3,11 @@
 # key: title
 # --
 #+TITLE: ${1:title}
-#+DATE: ${2:\today}
-#+AUTHOR: ${3:Максим Ким}
+#+SUBTITLE: $2
+#+DATE: ${3:\today}
+#+AUTHOR: ${4:Максим Ким}
 #+EMAIL: maksim.kim@adastragrp.com
-#+LANGUAGE: ru
+#+LANGUAGE: ${5:ru}
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
-#+LATEX_CLASS: report
+#+LATEX_CLASS: ${6:report}
