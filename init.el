@@ -541,6 +541,7 @@
         '(("" "indentfirst" t) ; первая строка параграфа сдвинута
           ("" "misccorr" t) ; точка в номерах заголовков
           ("onehalfspacing" "setspace" t) ; межстрочный интервал
+          ("" "tabulary" t) ; Таблицы с возможностью "спана"
           ("" "fixltx2e" nil)
           ("" "graphicx" t)
           ("" "grffile" t)
@@ -657,9 +658,9 @@
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
                  \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank.png}}
+                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank_simple.png}}
                  \\chead{}
-                 \\rhead{\\includegraphics[scale=1,trim=0 -0.4cm 0 0]{logo/logo_adastra.png}}
+                 \\rhead{\\includegraphics[scale=1,trim=0 -30mm 0 0]{logo/logo_adastra.png}}
                  \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
                  \\renewcommand{\\headrulewidth}{0.0pt}
                  \\renewcommand{\\footrulewidth}{0.0pt}
@@ -755,9 +756,9 @@
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
                  \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank.png}}
+                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank_simple.png}}
                  \\chead{}
-                 \\rhead{\\includegraphics[scale=1,trim=0 -0.4cm 0 0]{logo/logo_adastra.png}}
+                 \\rhead{\\includegraphics[scale=1,trim=0 -30mm 0 0]{logo/logo_adastra.png}}
                  \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
                  \\renewcommand{\\headrulewidth}{0.0pt}
                  \\renewcommand{\\footrulewidth}{0.0pt}
@@ -765,18 +766,18 @@
 
                  \\usepackage{titling}
                  \\pretitle{
-                   \\vspace{-8cm}\\hspace{-1cm}
-                   \\includegraphics[scale=1]{logo/logo_sberbank.png}
-                   \\hspace{7.5cm}
-                   \\includegraphics[scale=1,trim=0 -0.4cm 0 0]{logo/logo_adastra.png}
-                   \\vspace{7cm}
+                   \\vspace{-35mm}\\hspace{-5mm}
+                   \\includegraphics[scale=1]{logo/logo_sberbank_simple.png}
+                   \\\hspace{\\stretch{1}}
+                   \\includegraphics[scale=1,trim=0 -30mm 0 0]{logo/logo_adastra.png}
+                   \\vspace{35mm}\\vspace{\\stretch{1}}
                    \\begin{center}\\LARGE\\bfseries\\sffamily}
-                 \\posttitle{\\par\\end{center}\\vspace{24bp}}
-                 \\preauthor{\\begin{center}\\normalsize\\sffamily}
-                 \\postauthor{\\par\\end{center}}
-                 \\predate{\\begin{center}\\normalsize\\sffamily}
-                 \\date{}
-                 \\postdate{\\par\\end{center}}
+                   \\posttitle{\\par\\end{center}\\vspace{\\stretch{1.5}}}
+                   \\preauthor{\\begin{center}\\normalsize\\sffamily}
+                   \\postauthor{\\par\\end{center}}
+                   \\predate{\\begin{center}\\normalsize\\sffamily}
+                   \\date{}
+                   \\postdate{\\par\\end{center}}
 
 
                  \\usepackage{misccorr} % Точка в номерах заголовков
