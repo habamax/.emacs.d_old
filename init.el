@@ -523,13 +523,15 @@
   ;; default export options
   (setq org-export-with-smart-quotes t
         org-export-with-emphasize t
-        org-export-with-todo-keywords nil)
+        org-export-with-todo-keywords nil
+        org-latex-default-table-environment "tabulary")
 
   ;; Pandoc
   (use-package ox-pandoc)
 
   ;; Latex
   (require 'ox-latex)
+
 
 
   (setq org-latex-pdf-process
