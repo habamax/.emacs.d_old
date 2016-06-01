@@ -488,7 +488,7 @@
 	(quote ((sequence "TODO(t)" "|" "DONE(d)")
 		(sequence "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
 
-  (setq org-tag-alist '(("work" . ?w) ("tax" . ?t)
+  (setq org-tag-alist '(("misc" . ?m) ("tax" . ?t)
                         ("adastra" . ?a) ("sber" . ?s) ("REB" . ?r)))
   ;; C-u C-c C-c to realign all tags
   (setq org-tags-column 65)
@@ -557,7 +557,7 @@
           ("" "capt-of" nil)
           ("" "hyperref" nil)))
   
-  
+
   (add-to-list 'org-latex-classes
                '("article"
                  "\\documentclass[a4paper,12pt]{article}
@@ -652,17 +652,19 @@
                  \\setsansfont{DejaVu Sans}
                  \\newfontfamily{\\cyrillicfonttt}{Input}
                  \\setmonofont{Input}
+                 \\newcommand\\quotefont{\\fontspec[Colour=55555500]{DejaVu Sans}}
+
                  \\usepackage{polyglossia}
                  \\setdefaultlanguage{russian}
                  \\setotherlanguages{english}
 
-                 \\usepackage[top=25mm, left=20mm, right=20mm, bottom=35mm]{geometry}
+                 \\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
                  \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank_simple.png}}
+                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank_simple_50_opacity.png}}
                  \\chead{}
-                 \\rhead{\\includegraphics[scale=1,trim=0 -30mm 0 0]{logo/logo_adastra.png}}
+                 \\rhead{\\includegraphics[scale=1,trim=0 -3mm 0 0]{logo/logo_adastra_50_opacity.png}}
                  \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
                  \\renewcommand{\\headrulewidth}{0.0pt}
                  \\renewcommand{\\footrulewidth}{0.0pt}
@@ -682,7 +684,15 @@
                  \\usepackage{titlesec}
                  \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
                  \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}"
+                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}
+
+                 \\newcommand*\\openquote{\\makebox(25,7){\\scalebox{2}{<<}}}
+                 \\newcommand*\\closequote{\\makebox(25,7){\\scalebox{2}{>>}}}
+                 \\renewenvironment{quote}
+                 {\\list{}{\\rightmargin\\leftmargin}%
+                 \\item\\quotefont\\openquote\\relax\\ignorespaces}
+                 {\\unskip\\unskip\\closequote\\endlist}
+                  "
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -758,9 +768,9 @@
                  \\usepackage{fancyhdr}
                  \\pagestyle{fancy}
                  \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank_simple.png}}
+                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank_simple_50_opacity.png}}
                  \\chead{}
-                 \\rhead{\\includegraphics[scale=1,trim=0 -30mm 0 0]{logo/logo_adastra.png}}
+                 \\rhead{\\includegraphics[scale=1,trim=0 -3mm 0 0]{logo/logo_adastra_50_opacity.png}}
                  \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
                  \\renewcommand{\\headrulewidth}{0.0pt}
                  \\renewcommand{\\footrulewidth}{0.0pt}
@@ -769,9 +779,9 @@
                  \\usepackage{titling}
                  \\pretitle{
                    \\vspace{-35mm}\\hspace{-5mm}
-                   \\includegraphics[scale=1]{logo/logo_sberbank_simple.png}
+                   \\includegraphics[scale=1]{logo/logo_sberbank_simple_50_opacity.png}
                    \\\hspace{\\stretch{1}}
-                   \\includegraphics[scale=1,trim=0 -30mm 0 0]{logo/logo_adastra.png}
+                   \\includegraphics[scale=1,trim=0 -3mm 0 0]{logo/logo_adastra_50_opacity.png}
                    \\vspace{35mm}\\vspace{\\stretch{1}}
                    \\begin{center}\\LARGE\\bfseries\\sffamily}
                    \\posttitle{\\par\\end{center}\\vspace{\\stretch{1.5}}}
