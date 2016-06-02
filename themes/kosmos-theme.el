@@ -1,4 +1,4 @@
-;;; kosmos-theme.el --- Have you set up filters for you space suit? I have...
+;;; kosmos-theme.el --- Have you set up optical filters for you space suit? I have...
 
 ;;; Commentary:
 ;;; Sometimes I feel there are too many colors for the code I stare at.
@@ -19,7 +19,7 @@
 ;;; Code:
 
 
-(deftheme kosmos "Have you set up filters for you space suit? I have...")
+(deftheme kosmos "Have you set up optical filters for you space suit? I have...")
 
 (let
     ((kosmos-fg "#bdbdbd")
