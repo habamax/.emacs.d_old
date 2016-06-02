@@ -30,8 +30,10 @@
      (kosmos-str "#77cc77")
      (kosmos-comment "#50abab")
      (kosmos-gray "#777777")
-     (kosmos-todo "#ff99aa")
-     (kosmos-done "#aaff99")
+     (kosmos-fg-todo "#aa5555")
+     (kosmos-bg-todo "#331111")
+     (kosmos-fg-done "#55aa55")
+     (kosmos-bg-done "#113311")
      (kosmos-h1 "#d1d2d3")
     )
 
@@ -164,8 +166,8 @@
  `(org-tag ((nil (:foreground ,kosmos-comment))))
 
  ;; todo: play with colors of the box
- `(org-todo ((nil (:foreground ,kosmos-todo :weight bold :box (:line-width 1 :color ,kosmos-todo)))))
- `(org-done ((nil (:foreground ,kosmos-done :weight bold :box (:line-width 1 :color ,kosmos-done)))))
+ `(org-todo ((nil (:background ,kosmos-bg-todo :foreground ,kosmos-fg-todo :weight bold :box (:line-width 1 :color ,kosmos-fg-todo)))))
+ `(org-done ((nil (:background ,kosmos-bg-done :foreground ,kosmos-fg-done :weight bold :box (:line-width 1 :color ,kosmos-fg-done)))))
  
  '(org-table ((t (:inherit default))))
 
