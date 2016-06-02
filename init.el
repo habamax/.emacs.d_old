@@ -525,7 +525,7 @@
 
   ;; this has to be set up for different machines
   (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
-
+  
   ;; default export options
   (setq org-export-with-smart-quotes t
         org-export-with-emphasize t
@@ -580,7 +580,7 @@
              \\pagestyle{fancy}
              \\fancypagestyle{plain}{\\pagestyle{fancy}}
              \\lhead{\\includegraphics[scale=1]{%s/logo/%s}}
-             \\chead{}
+             \\chead{}p
              \\rhead{\\includegraphics[scale=1,trim=0 -3mm 0 0]{%s/logo/%s}}
              \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
              \\renewcommand{\\headrulewidth}{0.0pt}
@@ -595,6 +595,12 @@
          \\predate{\\begin{center}\\normalsize\\sffamily}
          \\date{}
          \\postdate{\\par\\end{center}}")
+  (setq haba/org-latex-class-hf-std
+        "\\usepackage{fancyhdr}
+         \\pagestyle{fancy}
+         \\fancypagestyle{plain}{\\pagestyle{fancy}}
+         \\lhead{} \\chead{} \\rhead{\\today}
+         \\lfoot{} \\cfoot{} \\rfoot{\\thepage}")
   (setq haba/org-latex-class-dot-in-chapters
         "\\usepackage{misccorr} % Точка в номерах заголовков
          \\usepackage{titlesec}
@@ -608,43 +614,37 @@
          {\\list{}{\\rightmargin\\leftmargin}%
          \\item\\quotefont\\openquote\\relax\\ignorespaces}
          {\\unskip\\unskip\\closequote\\endlist}")
+  (setq haba/org-latex-class-no-chapters
+        "% Главы без глав
+         \\usepackage{titlesec}
+         \\titleformat{\\chapter}{\\normalfont\\LARGE\\bfseries\\sffamily}{\\thechapter.}{1em}{}
+         \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex} ")
+  (defun haba/org-latex-class-titling-logo-2 (logo-left logo-right)
+    (format "\\usepackage{titling}
+             \\pretitle{
+             \\vspace{-35mm}\\hspace{-5mm}
+             \\includegraphics[scale=1]{%s/logo/%s}
+             \\\hspace{\\stretch{1}}
+             \\includegraphics[scale=1,trim=0 -3mm 0 0]{%s/logo/%s}
+             \\vspace{35mm}\\vspace{\\stretch{1}}
+             \\begin{center}\\LARGE\\bfseries\\sffamily}
+             \\posttitle{\\par\\end{center}\\vspace{\\stretch{1.5}}}
+             \\preauthor{\\begin{center}\\normalsize\\sffamily}
+             \\postauthor{\\par\\end{center}}
+             \\predate{\\begin{center}\\normalsize\\sffamily}
+             \\date{}
+             \\postdate{\\par\\end{center}}" 
+            org-directory logo-left org-directory logo-right))
   
   (add-to-list 'org-latex-classes
-               '("article"
-                 "\\documentclass[a4paper,12pt]{article}
-                 \\usepackage{fontspec}
-                 \\defaultfontfeatures{Ligatures=TeX}
-                 \\setmainfont{DejaVu Serif}
-                 \\setsansfont{DejaVu Sans}
-                 \\newfontfamily{\\cyrillicfonttt}{Input}
-                 \\setmonofont{Input}
-                 \\usepackage{polyglossia}
-                 \\setdefaultlanguage{russian}
-                 \\setotherlanguages{english}
-
-                 \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
-                 \\usepackage{fancyhdr}
-                 \\pagestyle{fancy}
-                 \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{} \\chead{} \\rhead{\\today}
-                 \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
-
-
-                 \\usepackage{titling}
-                 \\pretitle{\\begin{center}\\LARGE\\bfseries\\sffamily}
-                 \\posttitle{\\par\\end{center}\\vspace{24bp}}
-                 \\preauthor{\\begin{center}\\normalsize\\sffamily}
-                 \\postauthor{\\par\\end{center}}
-                 \\predate{\\begin{center}\\normalsize\\sffamily}
-                 \\date{}
-                 \\postdate{\\par\\end{center}}
-
-
-                 \\usepackage{misccorr} % Точка в номерах заголовков
-                 \\usepackage{titlesec}
-                 \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}"
+               `("article"
+                 ,(concat "\\documentclass[a4paper,12pt]{article}"
+                 (haba/org-latex-class-common "russian" "english")
+                 "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
+                 haba/org-latex-class-hf-std
+                 haba/org-latex-class-titling
+                 haba/org-latex-class-dot-in-chapters
+                 haba/org-latex-class-fancy-quoteblock)
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -652,41 +652,14 @@
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
   (add-to-list 'org-latex-classes
-               '("article-en"
-                 "\\documentclass[a4paper,12pt]{article}
-                 \\usepackage{fontspec}
-                 \\defaultfontfeatures{Ligatures=TeX}
-                 \\setmainfont{DejaVu Serif}
-                 \\setsansfont{DejaVu Sans}
-                 \\newfontfamily{\\cyrillicfonttt}{Input}
-                 \\setmonofont{Input}
-                 \\usepackage{polyglossia}
-                 \\setdefaultlanguage{english}
-                 \\setotherlanguages{russian}
-
-                 \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
-                 \\usepackage{fancyhdr}
-                 \\pagestyle{fancy}
-                 \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{} \\chead{} \\rhead{\\today}
-                 \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
-
-
-                 \\usepackage{titling}
-                 \\pretitle{\\begin{center}\\LARGE\\bfseries\\sffamily}
-                 \\posttitle{\\par\\end{center}\\vspace{24bp}}
-                 \\preauthor{\\begin{center}\\normalsize\\sffamily}
-                 \\postauthor{\\par\\end{center}}
-                 \\predate{\\begin{center}\\normalsize\\sffamily}
-                 \\date{}
-                 \\postdate{\\par\\end{center}}
-
-
-                 \\usepackage{misccorr} % Точка в номерах заголовков
-                 \\usepackage{titlesec}
-                 \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}"
+               `("article-en"
+                 ,(concat "\\documentclass[a4paper,12pt]{article}"
+                 (haba/org-latex-class-common "english" "russian")
+                 "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
+                 haba/org-latex-class-hf-std
+                 haba/org-latex-class-titling
+                 haba/org-latex-class-dot-in-chapters
+                 haba/org-latex-class-fancy-quoteblock)
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -698,7 +671,7 @@
                `("article-sberbank"
                  ,(concat "\\documentclass[a4paper,12pt]{article}"
                  (haba/org-latex-class-common "russian" "english")
-                 "\\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}"
+                 "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
                  (haba/org-latex-class-logo-2 "logo_sberbank_simple_50_opacity.png" "logo_adastra_50_opacity.png")
                  haba/org-latex-class-titling
                  haba/org-latex-class-dot-in-chapters
@@ -710,47 +683,17 @@
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
   (add-to-list 'org-latex-classes
-               '("report"
-                 "\\documentclass[a4paper,12pt]{report}
+               `("report"
+                 ,(concat "\\documentclass[a4paper,12pt]{report}"
+                 (haba/org-latex-class-common "russian" "english")
+                 "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
 
-                 \\usepackage{fontspec}
-                 \\defaultfontfeatures{Ligatures=TeX}
-                 \\setmainfont{DejaVu Serif}
-                 \\setsansfont{DejaVu Sans}
-                 \\newfontfamily{\\cyrillicfonttt}{Input}
-                 \\setmonofont{Input}
-                 \\usepackage{polyglossia}
-                 \\setdefaultlanguage{russian}
-                 \\setotherlanguages{english}
+                 haba/org-latex-class-hf-std
+                 haba/org-latex-class-titling
+                 haba/org-latex-class-dot-in-chapters
+                 haba/org-latex-class-fancy-quoteblock
+                 haba/org-latex-class-no-chapters)
 
-                 \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
-                 \\usepackage{fancyhdr}
-                 \\pagestyle{fancy}
-                 \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{} \\chead{} \\rhead{\\today}
-                 \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
-                 \\renewcommand{\\headrulewidth}{0.4pt}
-                 \\renewcommand{\\footrulewidth}{0.4pt}
-
-
-                 \\usepackage{titling}
-                 \\pretitle{\\begin{center}\\LARGE\\bfseries\\sffamily}
-                 \\posttitle{\\par\\end{center}\\vspace{24bp}}
-                 \\preauthor{\\begin{center}\\normalsize\\sffamily}
-                 \\postauthor{\\par\\end{center}}
-                 \\predate{\\begin{center}\\normalsize\\sffamily}
-                 \\date{}
-                 \\postdate{\\par\\end{center}}
-
-
-                 \\usepackage{misccorr} % Точка в номерах заголовков
-                 % Главы без глав
-                 \\usepackage{titlesec}
-                 \\titleformat{\\chapter}{\\normalfont\\LARGE\\bfseries\\sffamily}{\\thechapter.}{1em}{}
-                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-                 \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}"
                  ("\\chapter{%s}" . "\\chapter*{%s}")
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -760,56 +703,16 @@
   
 
   (add-to-list 'org-latex-classes
-               '("report-sberbank"
-                 "\\documentclass[a4paper,12pt]{report}
-                 \\usepackage{fontspec}
-                 \\defaultfontfeatures{Ligatures=TeX}
-                 \\setmainfont{DejaVu Serif}
-                 \\setsansfont{DejaVu Sans}
-                 \\newfontfamily{\\cyrillicfonttt}{Input}
-                 \\setmonofont{Input}
+               `("report-sberbank"
+                 ,(concat "\\documentclass[a4paper,12pt]{report}"
+                 (haba/org-latex-class-common "russian" "english")
+                 "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
+                 (haba/org-latex-class-logo-2 "logo_sberbank_simple_50_opacity.png" "logo_adastra_50_opacity.png")
+                 (haba/org-latex-class-titling-logo-2 "logo_sberbank_simple_50_opacity.png" "logo_adastra_50_opacity.png")
+                 haba/org-latex-class-dot-in-chapters
+                 haba/org-latex-class-fancy-quoteblock
+                 haba/org-latex-class-no-chapters)
 
-                 \\usepackage{polyglossia}
-                 \\setdefaultlanguage{russian}
-                 \\setotherlanguages{english}
-
-                 \\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}
-
-                 \\usepackage{fancyhdr}
-                 \\pagestyle{fancy}
-                 \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank_simple_50_opacity.png}}
-                 \\chead{}
-                 \\rhead{\\includegraphics[scale=1,trim=0 -3mm 0 0]{logo/logo_adastra_50_opacity.png}}
-                 \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
-                 \\renewcommand{\\headrulewidth}{0.0pt}
-                 \\renewcommand{\\footrulewidth}{0.0pt}
-
-
-                 \\usepackage{titling}
-                 \\pretitle{
-                   \\vspace{-35mm}\\hspace{-5mm}
-                   \\includegraphics[scale=1]{logo/logo_sberbank_simple_50_opacity.png}
-                   \\\hspace{\\stretch{1}}
-                   \\includegraphics[scale=1,trim=0 -3mm 0 0]{logo/logo_adastra_50_opacity.png}
-                   \\vspace{35mm}\\vspace{\\stretch{1}}
-                   \\begin{center}\\LARGE\\bfseries\\sffamily}
-                   \\posttitle{\\par\\end{center}\\vspace{\\stretch{1.5}}}
-                   \\preauthor{\\begin{center}\\normalsize\\sffamily}
-                   \\postauthor{\\par\\end{center}}
-                   \\predate{\\begin{center}\\normalsize\\sffamily}
-                   \\date{}
-                   \\postdate{\\par\\end{center}}
-
-
-                 \\usepackage{misccorr} % Точка в номерах заголовков
-                 % Главы без глав
-                 \\usepackage{titlesec}
-                 \\titleformat{\\chapter}{\\normalfont\\LARGE\\bfseries\\sffamily}{\\thechapter.}{1em}{}
-                 \\titlespacing*{\\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-                 \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}"
                  ("\\chapter{%s}" . "\\chapter*{%s}")
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
