@@ -1,7 +1,5 @@
-;; (defvar *haba-theme-dark* 'default-black)
 (defvar *haba-theme-dark* 'kosmos)
 (defvar *haba-theme-light* 'leuven)
-(defvar *haba-theme-light2* 'eclipse)
 (defvar *haba-current-theme* *haba-theme-dark*)
 
 
@@ -21,13 +19,27 @@
 (defun haba/toggle-theme ()
   (interactive)
   (cond ((eq *haba-current-theme* *haba-theme-dark*) (haba/next-theme *haba-theme-light*))
-        ((eq *haba-current-theme* *haba-theme-light*) (haba/next-theme *haba-theme-light2*))
-        ((eq *haba-current-theme* *haba-theme-light2*) (haba/next-theme *haba-theme-dark*))))
+        ((eq *haba-current-theme* *haba-theme-light*) (haba/next-theme *haba-theme-dark*))))
 
 
+(defun haba/read-current-theme ()
+  (ignore-errors
+    (with-temp-buffer
+      (insert-file-contents (concat user-emacs-directory "current-theme"))
+      (buffer-string))))
 
-(load-theme *haba-current-theme* t)
+(defun haba/save-current-theme ()
+  (ignore-errors
+    (with-temp-file (concat user-emacs-directory "current-theme")
+      (insert (symbol-name *haba-current-theme*)))))
 
 
+(let ((theme-name (haba/read-current-theme)))
+  (if theme-name
+      (haba/next-theme (intern theme-name))
+    (haba/next-theme *haba-current-theme* t)))
+
+
+(add-hook 'kill-emacs-hook 'haba/save-current-theme)
 
 (provide 'haba-appearance)
