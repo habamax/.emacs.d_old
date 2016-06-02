@@ -286,12 +286,21 @@
   :diminish smartparens-mode
   :defer 1
   :config
-  (progn
-    (require 'smartparens-config)
-    (setq sp-base-key-bindings 'sp)
-    (sp-use-smartparens-bindings)
-    (smartparens-global-mode)
-    (show-smartparens-global-mode)))
+  (require 'smartparens-config)
+  (setq sp-base-key-bindings 'sp)
+  (sp-use-smartparens-bindings)
+  (smartparens-global-mode)
+  (show-smartparens-global-mode)
+
+  ;; useful for org-mode and others
+  (sp-pair "*" "*" :actions '(wrap))
+  (sp-pair "_" "_" :actions '(wrap))
+  (sp-pair "=" "=" :actions '(wrap))
+  (sp-pair "+" "+" :actions '(wrap))
+  (sp-pair "/" "/" :actions '(wrap))
+  (sp-pair "$" "$" :actions '(wrap))
+  (sp-pair "-" "-" :actions '(wrap))
+)
 
 (use-package magit
   :commands (magit-status)
