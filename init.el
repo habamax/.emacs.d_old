@@ -566,7 +566,52 @@
           ("" "capt-of" nil)
           ("" "hyperref" nil)))
   
-
+ (defun haba/org-latex-class-common (lang-main lang-other)
+        (concat "\\usepackage{fontspec}
+         \\defaultfontfeatures{Ligatures=TeX}
+         \\setmainfont{DejaVu Serif}
+         \\setsansfont{DejaVu Sans}
+         \\newfontfamily{\\cyrillicfonttt}{Input}
+         \\setmonofont{Input}
+         \\newcommand\\quotefont{\\fontspec[Colour=55555500]{DejaVu Sans}}
+         \\usepackage{polyglossia}
+         \\setdefaultlanguage{" lang-main "}
+         \\setotherlanguages{" lang-other "}"))
+  (defun haba/org-latex-class-logo-2(logo-left logo-right)
+    (interactive "P")
+    (format "\\usepackage{fancyhdr}
+             \\pagestyle{fancy}
+             \\fancypagestyle{plain}{\\pagestyle{fancy}}
+             \\lhead{\\includegraphics[scale=1]{%s/logo/%s}}
+             \\chead{}
+             \\rhead{\\includegraphics[scale=1,trim=0 -3mm 0 0]{%s/logo/%s}}
+             \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
+             \\renewcommand{\\headrulewidth}{0.0pt}
+             \\renewcommand{\\footrulewidth}{0.0pt}"
+            org-directory logo-left org-directory logo-right))
+  (setq haba/org-latex-class-titling
+        "\\usepackage{titling}
+         \\pretitle{\\begin{center}\\LARGE\\bfseries\\sffamily}
+         \\posttitle{\\par\\end{center}\\vspace{24bp}}
+         \\preauthor{\\begin{center}\\normalsize\\sffamily}
+         \\postauthor{\\par\\end{center}}
+         \\predate{\\begin{center}\\normalsize\\sffamily}
+         \\date{}
+         \\postdate{\\par\\end{center}}")
+  (setq haba/org-latex-class-dot-in-chapters
+        "\\usepackage{misccorr} % Точка в номерах заголовков
+         \\usepackage{titlesec}
+         \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
+         \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
+         \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}")
+  (setq haba/org-latex-class-fancy-quoteblock
+        "\\newcommand*\\openquote{\\makebox(25,7){\\scalebox{2}{<<}}}
+         \\newcommand*\\closequote{\\makebox(25,7){\\scalebox{2}{>>}}}
+         \\renewenvironment{quote}
+         {\\list{}{\\rightmargin\\leftmargin}%
+         \\item\\quotefont\\openquote\\relax\\ignorespaces}
+         {\\unskip\\unskip\\closequote\\endlist}")
+  
   (add-to-list 'org-latex-classes
                '("article"
                  "\\documentclass[a4paper,12pt]{article}
@@ -650,58 +695,17 @@
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-  (add-to-list 'org-latex-classes
-               '("article-sberbank"
-                 "\\documentclass[a4paper,12pt]{article}
-
-                 \\usepackage{fontspec}
-                 \\defaultfontfeatures{Ligatures=TeX}
-                 \\setmainfont{DejaVu Serif}
-                 \\setsansfont{DejaVu Sans}
-                 \\newfontfamily{\\cyrillicfonttt}{Input}
-                 \\setmonofont{Input}
-                 \\newcommand\\quotefont{\\fontspec[Colour=55555500]{DejaVu Sans}}
-
-                 \\usepackage{polyglossia}
-                 \\setdefaultlanguage{russian}
-                 \\setotherlanguages{english}
-
-                 \\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}
-                 \\usepackage{fancyhdr}
-                 \\pagestyle{fancy}
-                 \\fancypagestyle{plain}{\\pagestyle{fancy}}
-                 \\lhead{\\includegraphics[scale=1]{logo/logo_sberbank_simple_50_opacity.png}}
-                 \\chead{}
-                 \\rhead{\\includegraphics[scale=1,trim=0 -3mm 0 0]{logo/logo_adastra_50_opacity.png}}
-                 \\lfoot{} \\cfoot{} \\rfoot{\\thepage}
-                 \\renewcommand{\\headrulewidth}{0.0pt}
-                 \\renewcommand{\\footrulewidth}{0.0pt}
-
-
-                 \\usepackage{titling}
-                 \\pretitle{\\begin{center}\\LARGE\\bfseries\\sffamily}
-                 \\posttitle{\\par\\end{center}\\vspace{24bp}}
-                 \\preauthor{\\begin{center}\\normalsize\\sffamily}
-                 \\postauthor{\\par\\end{center}}
-                 \\predate{\\begin{center}\\normalsize\\sffamily}
-                 \\date{}
-                 \\postdate{\\par\\end{center}}
-
-
-                 \\usepackage{misccorr} % Точка в номерах заголовков
-                 \\usepackage{titlesec}
-                 \\titleformat*{\\section}{\\Large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsection}{\\large\\bfseries\\sffamily}
-                 \\titleformat*{\\subsubsection}{\\normalsize\\bfseries\\sffamily}
-
-                 \\newcommand*\\openquote{\\makebox(25,7){\\scalebox{2}{<<}}}
-                 \\newcommand*\\closequote{\\makebox(25,7){\\scalebox{2}{>>}}}
-                 \\renewenvironment{quote}
-                 {\\list{}{\\rightmargin\\leftmargin}%
-                 \\item\\quotefont\\openquote\\relax\\ignorespaces}
-                 {\\unskip\\unskip\\closequote\\endlist}
-                  "
+ 
+  
+(add-to-list 'org-latex-classes
+               `("article-sberbank"
+                 ,(concat "\\documentclass[a4paper,12pt]{article}"
+                 (haba/org-latex-class-common "russian" "english")
+                 "\\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}"
+                 (haba/org-latex-class-logo-2 "logo_sberbank_simple_50_opacity.png" "logo_adastra_50_opacity.png")
+                 haba/org-latex-class-titling
+                 haba/org-latex-class-dot-in-chapters
+                 haba/org-latex-class-fancy-quoteblock)
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
