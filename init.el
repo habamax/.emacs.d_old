@@ -97,6 +97,9 @@
 
 
 
+(desktop-save-mode 1)
+
+
 ;; Set up packaging system
 (let ((package-protocol (if (eq system-type 'windows-nt) "http://" "https://")))
   (setq package-archives `(("elpa" .  ,(concat package-protocol "elpa.gnu.org/packages/"))
