@@ -36,11 +36,11 @@
 (defun haba/org-latex-class-common (lang-main lang-other)
   (concat "\\usepackage{fontspec}
          \\defaultfontfeatures{Ligatures=TeX}
-         \\setmainfont{DejaVu Serif}
-         \\setsansfont{DejaVu Sans}
+         \\setmainfont{PT Serif}
+         \\setsansfont{PT Sans}
          \\newfontfamily{\\cyrillicfonttt}{Input}
          \\setmonofont{Input}
-         \\newcommand\\quotefont{\\fontspec[Colour=55555500]{DejaVu Sans}}
+         \\newcommand\\quotefont{\\fontspec[Colour=55555500]{PT Sans}}
          \\usepackage{polyglossia}
          \\setdefaultlanguage{" lang-main "}
          \\setotherlanguages{" lang-other "}"))
