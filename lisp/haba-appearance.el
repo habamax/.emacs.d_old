@@ -37,7 +37,7 @@
 (let ((theme-name (haba/read-current-theme)))
   (if theme-name
       (haba/next-theme (intern theme-name))
-    (haba/next-theme *haba-current-theme* t)))
+    (haba/next-theme *haba-current-theme*)))
 
 
 (add-hook 'kill-emacs-hook 'haba/save-current-theme)
