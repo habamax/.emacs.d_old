@@ -428,17 +428,16 @@
     (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
   
   :config
-  ;; (make-variable-buffer-local 'erc-fill-column)
-  ;; (add-hook 'window-configuration-change-hook
-	    ;; '(lambda ()
-	       ;; (save-excursion
-		 ;; (walk-windows
-		  ;; (lambda (w)
-		    ;; (let ((buffer (window-buffer w)))
-		      ;; (set-buffer buffer)
-		      ;; (when (eq major-mode 'erc-mode)
-			;; (setq erc-fill-column (- (window-width w) 2)))))))))
-  )
+  (ignore-errors
+    (load (concat user-emacs-directory "ercpwd"))
+    (require 'erc-services)
+    (erc-services-mode 1)
+
+    (setq erc-prompt-for-nickserv-password nil)
+    (setq erc-nickserv-passwords
+          `((freenode (("habamax" . ,freenode-habamax-pass))))))
+
+    )
 
 
 (use-package calendar

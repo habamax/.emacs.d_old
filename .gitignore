@@ -25,3 +25,5 @@ ido.*
 /emms/
 /*.lock
 /.emacs.desktop
+/ercpwd
+/emacs_backtrace.txt
