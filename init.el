@@ -133,9 +133,8 @@
   :config
 
   (let ((font-size (if (string-equal (system-name) "MKIM") 110 140)))
-    (haba/set-font '("Input" "Menlo" "Roboto Mono" "Dejavu Sans Mono" "Consolas")
+    (haba/set-font '("Input" "Menlo" "Roboto Mono" "Dejavu Sans Mono" "Fira Mono" "Consolas")
                    font-size))
-  
   )
 
 
