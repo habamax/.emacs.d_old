@@ -13,13 +13,17 @@
 
 
 (defun haba/next-theme (theme)
-  (load-theme theme t)
+  (if (eq theme 'default)
+      (disable-theme *haba-current-theme*)
+    (progn
+      (load-theme theme t)))
   (setq *haba-current-theme* theme))
 
 (defun haba/toggle-theme ()
   (interactive)
   (cond ((eq *haba-current-theme* *haba-theme-dark*) (haba/next-theme *haba-theme-light*))
-        ((eq *haba-current-theme* *haba-theme-light*) (haba/next-theme *haba-theme-dark*))))
+        ((eq *haba-current-theme* *haba-theme-light*) (haba/next-theme 'default))
+        ((eq *haba-current-theme* 'default) (haba/next-theme *haba-theme-dark*))))
 
 
 (defun haba/read-current-theme ()
