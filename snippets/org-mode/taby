@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org tabulary
+# key: taby
+# --
+#+ATTR_LATEX: :environment tabulary :width \textwidth :align ${1:l}
