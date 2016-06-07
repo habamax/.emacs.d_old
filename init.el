@@ -352,6 +352,17 @@
   :config
   (yas-global-mode t))
 
+
+(use-package clojure-mode
+  :mode ("\\.\\(clj\\)$" . clojure-mode)
+  :config
+  (use-package cider
+    :config
+    (setq cider-repl-display-help-banner nil)))
+
+
+
+
 (use-package auctex
   :mode ("\\.\\(tex\\)$" . latex-mode)
   :init
