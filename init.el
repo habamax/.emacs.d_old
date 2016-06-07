@@ -116,19 +116,18 @@
 
 
 ;; Local packages
-
 (use-package haba-stuff
   :ensure nil
   :demand
-  :commands (haba/next-buffer haba/previous-buffer haba/toggle-window-split)
+  :commands (haba/next-buffer haba/previous-buffer haba/toggle-window-split haba/fill-or-unfill)
   :load-path "lisp/"
   :bind (("M-;" . haba/toggle-comment)
 	 ("C-a" . haba/move-beginning-of-line)
 	 ("M-j" . haba/join-line)
          ("s-d" . haba/duplicate-line)
-	 ("C-c o i" . haba/open-init-file))
+	 ("C-c o i" . haba/open-init-file)
+         ([remap fill-paragraph] . haba/fill-or-unfill))
   :config
-
   (let ((font-size (if (string-equal (system-name) "MKIM") 110 140)))
     (haba/set-font '("Input" "Menlo" "Roboto Mono" "Dejavu Sans Mono" "Fira Mono" "Consolas")
                    font-size))

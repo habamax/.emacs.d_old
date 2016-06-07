@@ -174,6 +174,17 @@ point reaches the beginning or end of the buffer, stop there."
          (not (equal bread-crumb (buffer-name))))
       (previous-buffer))))
 
+;; Sequence of M-q fill or unfill paragraphs
+;; Doesn't work for all modes
+(defun haba/fill-or-unfill ()
+  "Like `fill-paragraph', but unfill if used twice."
+  (interactive)
+  (let ((fill-column
+         (if (eq last-command 'haba/fill-or-unfill)
+             (progn (setq this-command nil)
+                    (point-max))
+           fill-column)))
+    (call-interactively #'fill-paragraph)))
 
 
 (defadvice kill-ring-save (before slick-copy activate compile)
