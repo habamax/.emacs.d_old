@@ -8,9 +8,13 @@
 
 ;; Non-Package setup
 
-;; No new frames for files that are opened from OSX
+;; General OSX setup
 (when (eq system-type 'darwin)
-  (setq ns-pop-up-frames nil))
+  ;; No new frames for files that are opened from OSX
+  (setq ns-pop-up-frames nil)
+  ;; command to meta, option to control
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'control))
 
 (when window-system
   (setq default-frame-alist '((fullscreen . maximized)))
