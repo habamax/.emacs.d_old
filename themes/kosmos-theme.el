@@ -12,6 +12,7 @@
 ;; TODO: find color for git-commit-nonempty-second-line
 ;; ivy?
 ;; swiper
+;; clojure (font-lock-warning-face --> cider-repl-stderr-face) is ugly
 
 
 
@@ -33,7 +34,8 @@
      (kosmos-fg-todo "#bdabab")
      (kosmos-bg-todo "#775555")
      (kosmos-fg-done "#abbdab")
-     (kosmos-bg-done "#557755")
+     ;; (kosmos-bg-done "#557755")
+     (kosmos-bg-done "#777777")
      (kosmos-h1 "#d1d2d3")
     )
 
@@ -179,7 +181,7 @@
 
  `(org-agenda-structure ((t (:foreground ,kosmos-fg :height 1.6 :weight bold))))
  `(org-agenda-date ((t (:foreground ,kosmos-fg :height 1.3))))
- `(org-agenda-date-today ((t (:foreground ,kosmos-keyword :height 1.5 :weight bold :underline ,kosmos-keyword))))
+ `(org-agenda-date-today ((t (:foreground ,kosmos-keyword :height 1.5 :weight bold :overline ,kosmos-keyword))))
  `(org-agenda-date-weekend ((t (:foreground ,kosmos-keyword :height 1.3))))
 
  '(org-scheduled ((t (:inherit :default))))
