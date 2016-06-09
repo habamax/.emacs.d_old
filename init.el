@@ -166,9 +166,7 @@
 
 (use-package expand-region
   :bind (("M-m" . er/expand-region))
-  :config
-  (progn
-    (setq expand-region-contract-fast-key "M")))
+  :config (setq expand-region-contract-fast-key "M"))
 
 (use-package undo-tree
   :diminish undo-tree-mode
@@ -334,8 +332,7 @@
 ;;     (add-hook 'csharp-mode-hook 'omnisharp-mode)))
 
 (use-package go-mode
-  :mode ("\\.\\(go\\)$" . go-mode)
-  )
+  :mode ("\\.\\(go\\)$" . go-mode))
 
 
 ;; flycheck
