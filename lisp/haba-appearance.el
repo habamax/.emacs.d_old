@@ -3,6 +3,16 @@
 (defvar *haba-current-theme* *haba-theme-dark*)
 
 
+(defun haba/set-font (fonts-list font-size)
+  (catch 'loop
+    (dolist (font fonts-list)
+      (when (find-font (font-spec :name font))
+        (progn
+          (set-face-attribute 'default nil :family font :height font-size)
+          (throw 'loop font))))))
+
+
+
 ;; Set custom theme path
 (setq custom-theme-directory (concat user-emacs-directory "themes"))
 
@@ -42,6 +52,19 @@
   (if theme-name
       (haba/next-theme (intern theme-name))
     (haba/next-theme *haba-current-theme*)))
+
+
+(when window-system
+  (setq default-frame-alist '((fullscreen . maximized)))
+  (tooltip-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode 1)
+  (scroll-bar-mode -1)
+  (let ((font-size (if (string-equal (system-name) "MKIM") 110 140)))
+    (haba/set-font '("Input" "Menlo" "Roboto Mono" "Dejavu Sans Mono" "Fira Mono" "Consolas")
+                   font-size))
+  )
+
 
 
 (add-hook 'kill-emacs-hook 'haba/save-current-theme)

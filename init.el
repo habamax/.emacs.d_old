@@ -16,20 +16,12 @@
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'control))
 
-(when window-system
-  (setq default-frame-alist '((fullscreen . maximized)))
-  (tooltip-mode -1)
-  (tool-bar-mode -1)
-  (menu-bar-mode 1)
-  (scroll-bar-mode -1))
-
 (setq inhibit-startup-message t
       inhibit-splash-screen t
       initial-scratch-message "")
 
 (setq user-full-name "Maxim Kim"
       user-mail-address "habamax@gmail.com")
-
 
 ;; RU stuff
 (set-language-environment 'utf-8)
@@ -132,9 +124,6 @@
 	 ("C-c o i" . haba/open-init-file)
          ([remap fill-paragraph] . haba/fill-or-unfill))
   :config
-  (let ((font-size (if (string-equal (system-name) "MKIM") 110 140)))
-    (haba/set-font '("Input" "Menlo" "Roboto Mono" "Dejavu Sans Mono" "Fira Mono" "Consolas")
-                   font-size))
   )
 
 

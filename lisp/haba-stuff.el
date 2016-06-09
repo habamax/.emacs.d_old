@@ -82,14 +82,6 @@ remove the comment characters from that line."
   (forward-line -1)
   (indent-according-to-mode))
 
-(defun haba/set-font (fonts-list font-size)
-  (catch 'loop
-    (dolist (font fonts-list)
-      (when (find-font (font-spec :name font))
-        (progn
-          (set-face-attribute 'default nil :family font :height font-size)
-          (throw 'loop font))))))
-
 
 
 (defun haba/move-beginning-of-line (arg)
