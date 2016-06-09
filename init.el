@@ -29,6 +29,9 @@
 (set-terminal-coding-system 'utf-8)
 (setq default-input-method 'russian-computer)
 
+;; make unix lineendings default
+(setq default-buffer-file-coding-system 'utf-8-unix)
+
 ;; scroll to the top or bottom with C-v and M-v
 (setq scroll-error-top-bottom t)
 
