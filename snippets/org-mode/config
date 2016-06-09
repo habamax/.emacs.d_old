@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: org export configuration
+# key: config
+# --
+* Export configuration      :noexport:ARCHIVE:
+  #+TITLE: ${1:title}
+  #+SUBTITLE: $2
+  #+DATE: ${3:\today}
+  #+AUTHOR: ${4:Максим Ким}
+  #+EMAIL: maksim.kim@adastragrp.com
+  #+LANGUAGE: ${5:ru}
+  #+SELECT_TAGS: export
+  #+EXCLUDE_TAGS: noexport
+  #+LATEX_CLASS: ${6:article}
