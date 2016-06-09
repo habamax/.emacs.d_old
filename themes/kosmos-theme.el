@@ -167,6 +167,7 @@
 
  `(org-tag ((nil (:foreground ,kosmos-comment))))
 
+ `(org-archived ((nil (:foreground ,kosmos-gray))))
  ;; todo: play with colors of the box
  `(org-todo ((nil (:background ,kosmos-bg-todo :foreground ,kosmos-fg-todo :weight bold :box (:line-width 1 :color ,kosmos-fg-todo)))))
  `(org-done ((nil (:background ,kosmos-bg-done :foreground ,kosmos-fg-done :weight bold :box (:line-width 1 :color ,kosmos-fg-done)))))
