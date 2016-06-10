@@ -125,9 +125,7 @@
 	 ("M-j" . haba/join-line)
          ("s-d" . haba/duplicate-line)
 	 ("C-c o i" . haba/open-init-file)
-         ([remap fill-paragraph] . haba/fill-or-unfill))
-  :config
-  )
+         ([remap fill-paragraph] . haba/fill-or-unfill)))
 
 
 (use-package haba-appearance
