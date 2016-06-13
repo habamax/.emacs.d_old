@@ -181,7 +181,8 @@
 	 ("C-x C-f" . counsel-find-file)
 	 ("C-c k" . counsel-ag)
 	 ("C-c g" . counsel-git)
-         ;; ("C-s" . counsel-grep-or-swiper)
+         ("C-s" . counsel-grep-or-swiper)
+         ("C-r" . counsel-grep-or-swiper)
 	 ("C-x b" . ivy-switch-buffer)
          ("s-b" . ivy-switch-buffer))
   :config
