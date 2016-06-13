@@ -235,3 +235,25 @@
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
+;; (add-to-list 'org-latex-classes
+             ;; `("beamer"
+               ;; ,(concat "\\documentclass[a4paper,12pt]{report}"
+                        ;; (haba/org-latex-class-common "russian" "english")
+                        ;; "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
+                        ;; haba/org-latex-class-no-chapters
+                ;; "\\mode<{beamermode}>
+                 ;; \\usetheme{beamertheme}
+                 ;; \\usecolortheme{{{{beamercolortheme}}}}
+                 ;; \\beamertemplateballitem
+                 ;; \\setbeameroption{show note
+                 ;; \\institute{{{{beamerinstitute}}}}
+                 ;; \\subject{{{{beamersubject}}}}")
+
+             ;; ("\\section{%s}" . "\\section*{%s}")
+
+             ;; ("\\begin{frame}[fragile]\\frametitle{%s}"
+               ;; "\\end{frame}"
+               ;; "\\begin{frame}[fragile]\\frametitle{%s}"
+               ;; "\\end{frame}")))
+
+
