@@ -102,7 +102,7 @@
                            ("melpa" . ,(concat package-protocol "melpa.org/packages/")))))
 
 (package-initialize)
-                                   
+
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -121,10 +121,10 @@
   :commands (haba/next-buffer haba/previous-buffer haba/toggle-window-split haba/fill-or-unfill)
   :load-path "lisp/"
   :bind (("M-;" . haba/toggle-comment)
-	 ("C-a" . haba/move-beginning-of-line)
-	 ("M-j" . haba/join-line)
+         ("C-a" . haba/move-beginning-of-line)
+         ("M-j" . haba/join-line)
          ("s-d" . haba/duplicate-line)
-	 ("C-c o i" . haba/open-init-file)
+         ("C-c o i" . haba/open-init-file)
          ([remap fill-paragraph] . haba/fill-or-unfill)))
 
 
@@ -173,26 +173,26 @@
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-re-builders-alist
-	;; '((t . ivy--regex-fuzzy)))
-	'((t . ivy--regex-ignore-order))))
+        ;; '((t . ivy--regex-fuzzy)))
+        '((t . ivy--regex-ignore-order))))
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file)
-	 ("C-c k" . counsel-ag)
-	 ("C-c g" . counsel-git)
+         ("C-x C-f" . counsel-find-file)
+         ("C-c k" . counsel-ag)
+         ("C-c g" . counsel-git)
          ("C-s" . counsel-grep-or-swiper)
          ("C-r" . counsel-grep-or-swiper)
-	 ("C-x b" . ivy-switch-buffer)
+         ("C-x b" . ivy-switch-buffer)
          ("s-b" . ivy-switch-buffer))
   :config
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
-	(concat
-	 ;; file names beginning with # or .
-	 "\\(?:\\`[#.]\\)"
-	 ;; file names ending with # or ~
-	 "\\|\\(?:\\`.+?[#~]\\'\\)")))
+        (concat
+         ;; file names beginning with # or .
+         "\\(?:\\`[#.]\\)"
+         ;; file names ending with # or ~
+         "\\|\\(?:\\`.+?[#~]\\'\\)")))
 
 (use-package hydra
   :bind ("C-c w" . hydra-windows/body)
@@ -244,23 +244,23 @@
     ;; I don't think I will be using csharp
     ;; (add-to-list 'company-backends 'company-omnisharp)
     (setq company-minimum-prefix-length 2)
-    
+
     (define-key company-active-map [tab] 'company-complete-selection)
     (define-key company-active-map (kbd "TAB") 'company-complete-selection)
     (define-key company-active-map (kbd "M-n") nil)
     (define-key company-active-map (kbd "M-p") nil)
     (define-key company-active-map (kbd "C-n") 'company-select-next)
     (define-key company-active-map (kbd "C-p") 'company-select-previous)
-    
+
     (global-company-mode)))
 
 
 
 (use-package multiple-cursors
   :bind* (("M-n" . mc/mark-next-like-this)
-	  ("M-p" . mc/mark-previous-like-this)
-	  ("M-N" . mc/unmark-next-like-this)
-	  ("M-P" . mc/unmark-previous-like-this)))
+          ("M-p" . mc/mark-previous-like-this)
+          ("M-N" . mc/unmark-next-like-this)
+          ("M-P" . mc/unmark-previous-like-this)))
 
 
 
@@ -296,9 +296,9 @@
   :bind ("C-c m" . magit-status)
   :config
   (setq magit-log-arguments '("--graph" "--show-signature")
-	magit-push-always-verify nil
-	magit-popup-use-prefix-argument 'default
-	magit-revert-buffers t))
+        magit-push-always-verify nil
+        magit-popup-use-prefix-argument 'default
+        magit-revert-buffers t))
 
 
 (use-package emmet-mode
@@ -307,7 +307,7 @@
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'html-mode-hook 'emmet-mode)
   (add-hook 'css-mode-hook  'emmet-mode))
-  
+
 
 (use-package markdown-mode
   :mode ("\\.\\(markdown|md\\)$" . markdown-mode))
@@ -337,7 +337,7 @@
   :defer
   :commands (flyspell-mode flyspell-prog-mode)
   :config (setq ispell-program-name (executable-find "aspell")
-		ispell-extra-args '("--sug-mode=ultra")))
+                ispell-extra-args '("--sug-mode=ultra")))
 
 
 ;; yasnippets
@@ -387,7 +387,7 @@
 
   (require 'emms-history)
   (emms-history-load)
-  
+
   (setq emms-repeat-playlist t)
 
   ;; OSX has simple afplay utility to play music
@@ -421,13 +421,13 @@
   :ensure nil
   :init
   (setq ;erc-fill-column (- (window-width) 2)
-	erc-nick '("habamax" "mxmkm")
-	erc-track-minor-mode t
-	erc-autojoin-channels-alist '(("freenode.net" "#emacs")))
+        erc-nick '("habamax" "mxmkm")
+        erc-track-minor-mode t
+        erc-autojoin-channels-alist '(("freenode.net" "#emacs")))
   (defun erc-freenode ()
     (interactive)
     (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
-  
+
   :config
   (ignore-errors
     (load (concat user-emacs-directory "ercpwd"))
@@ -446,37 +446,37 @@
   :init
   ;; Calendar -- говорим и показываем по русски.
   (setq calendar-date-style 'iso
-	calendar-week-start-day 1
-	calendar-day-name-array ["Вс" "Пн" "Вт" "Ср" "Чт" "Пт" "Сб"]
-	calendar-month-name-array ["Январь" "Февраль" "Март" "Апрель"
-				   "Май" "Июнь" "Июль" "Август"
-				   "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"]))
+        calendar-week-start-day 1
+        calendar-day-name-array ["Вс" "Пн" "Вт" "Ср" "Чт" "Пт" "Сб"]
+        calendar-month-name-array ["Январь" "Февраль" "Март" "Апрель"
+                                   "Май" "Июнь" "Июль" "Август"
+                                   "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"]))
 
 
 (use-package org
   :mode ("\\.\\(org|txt\\)$" . org-mode)
   :bind (("C-c o a" . org-agenda)
-	 ("C-c o l" . org-store-link)
-	 ("C-c o c" . org-capture))
+         ("C-c o l" . org-store-link)
+         ("C-c o c" . org-capture))
   :config
-    
+
   (setq org-src-fontify-natively t
-	org-fontify-whole-heading-line t
-	org-return-follows-link t
-	org-special-ctrl-a/e t
-	org-special-ctrl-k t)
+        org-fontify-whole-heading-line t
+        org-return-follows-link t
+        org-special-ctrl-a/e t
+        org-special-ctrl-k t)
 
   ;; auto-fill mode on for org
   (add-hook 'org-mode-hook 'auto-fill-mode)
 
   ;; unbind C-' as I often miss a key with C-\
   (define-key org-mode-map (kbd "C-'") nil)
-  
+
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/refile.org")
-  
+
   (setq org-refile-targets '((nil :maxlevel . 3)
-			     (org-agenda-files :maxlevel . 2)))
+                             (org-agenda-files :maxlevel . 2)))
   ;; Refile in a single go
   (setq org-outline-path-complete-in-steps nil)
   ;; Show full paths for refiling
@@ -490,13 +490,13 @@
           ("\\.x?html?\\'" . default)
           ("\\.pdf\\'" . default)
           (auto-mode . emacs)))
-  
+
   ;; Doesn't work
   (setq org-image-actual-width 500)
-  
+
   (setq org-todo-keywords
-	(quote ((sequence "TODO(t)" "|" "DONE(d)")
-		(sequence "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+        (quote ((sequence "TODO(t)" "|" "DONE(d)")
+                (sequence "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
 
   (setq org-tag-alist '(("misc" . ?m) ("tax" . ?t)
                         ("adastra" . ?a) ("sber" . ?s) ("REB" . ?r)))
@@ -510,14 +510,14 @@
     (org-agenda-align-tags))
 
   (setq org-capture-templates
-	(quote (("t" "Todo" entry (file org-default-notes-file)
-		 "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-		("n" "Note" entry (file org-default-notes-file)
-		 "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-		("j" "Journal" entry (file+datetree "~/org/diary.org")
-		 "* %?\n%U\n" :clock-in t :clock-resume t)
-		("w" "Org-protocol" entry (file org-default-notes-file)
-		 "* TODO Review %c\n%U\n" :immediate-finish t))))
+        (quote (("t" "Todo" entry (file org-default-notes-file)
+                 "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+                ("n" "Note" entry (file org-default-notes-file)
+                 "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+                ("j" "Journal" entry (file+datetree "~/org/diary.org")
+                 "* %?\n%U\n" :clock-in t :clock-resume t)
+                ("w" "Org-protocol" entry (file org-default-notes-file)
+                 "* TODO Review %c\n%U\n" :immediate-finish t))))
 
 
   (org-babel-do-load-languages
@@ -529,13 +529,13 @@
 
   ;; this has to be set up for different machines
   (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
-  
+
   ;; default export options
   (setq org-export-with-smart-quotes t
         org-export-with-emphasize t
         org-export-with-todo-keywords nil)
-  
-  
+
+
 
   (use-package haba-latex
     :ensure nil
