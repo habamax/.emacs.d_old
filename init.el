@@ -485,6 +485,7 @@
   ;; open docx files in default application (ie msword)
   (setq org-file-apps
         '(("\\.docx\\'" . default)
+          ("\\.odt\\'" . default)
           ("\\.mm\\'" . default)
           ("\\.x?html?\\'" . default)
           ("\\.pdf\\'" . default)
