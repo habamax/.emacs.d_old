@@ -1,7 +1,7 @@
 (provide 'haba-latex)
 
 
-(setq org-latex-default-table-environment "tabulary")
+;; (setq org-latex-default-table-environment "tabulary")
 ;; Pandoc
 (use-package ox-pandoc)
 
