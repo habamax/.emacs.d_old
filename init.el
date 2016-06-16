@@ -499,7 +499,7 @@
                 (sequence "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
 
   (setq org-tag-alist '(("misc" . ?m) ("tax" . ?t)
-                        ("adastra" . ?a) ("sber" . ?s) ("REB" . ?r)))
+                        ("adastra" . ?a) ("sber" . ?s) ("REB" . ?r) ("pochta" . ?p)))
   ;; C-u C-c C-c to realign all tags
   (setq org-tags-column 65)
   ;; Place tags close to the right-hand side of the window
