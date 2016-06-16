@@ -179,7 +179,7 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-c k" . counsel-ag)
+         ("C-c s" . counsel-pt)
          ("C-c g" . counsel-git)
          ("C-s" . counsel-grep-or-swiper)
          ("C-r" . counsel-grep-or-swiper)
