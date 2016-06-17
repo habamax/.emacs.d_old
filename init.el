@@ -196,7 +196,12 @@
 
   (defun counsel-pt-project-root ()
     (interactive)
-    (setq counsel--git-grep-dir (or  (locate-dominating-file default-directory ".git") default-directory))
+    (setq project-root
+          (locate-dominating-file default-directory
+                                  (lambda (parent)
+                                    (directory-files parent nil
+                                                     "\\(.git\\)\\|\\(project.clj\\)"))))
+    (setq counsel--git-grep-dir (or project-root default-directory))
     (let ((counsel-ag-base-command counsel-pt-base-command))
       (ivy-read "pt :"
                 'counsel-ag-function
