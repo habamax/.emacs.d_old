@@ -196,7 +196,10 @@
 
   (defun counsel-pt-project-root ()
     (interactive)
-    (setq project-marker-regex "\\(.git\\)\\|\\(project.clj\\)")
+    (setq project-marker-regex 
+          (mapconcat 'identity
+                     '("\\(.git\\)" "\\(project.clj\\)")
+                     "\\|"))
     (setq project-root
           (locate-dominating-file
            default-directory
