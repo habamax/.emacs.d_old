@@ -179,7 +179,7 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-c s" . counsel-pt)
+         ("C-c s" . counsel-pt-project-root)
          ("C-c g" . counsel-git)
          ("C-s" . counsel-grep-or-swiper)
          ("C-r" . counsel-grep-or-swiper)
@@ -192,8 +192,26 @@
          ;; file names beginning with # or .
          "\\(?:\\`[#.]\\)"
          ;; file names ending with # or ~
-         "\\|\\(?:\\`.+?[#~]\\'\\)")))
+         "\\|\\(?:\\`.+?[#~]\\'\\)"))
 
+  (defun counsel-pt-project-root ()
+    (interactive)
+    (setq counsel--git-grep-dir (or  (locate-dominating-file default-directory ".git") default-directory))
+    (let ((counsel-ag-base-command counsel-pt-base-command))
+      (ivy-read "pt :"
+                'counsel-ag-function
+                :initial-input ""
+                :dynamic-collection t
+                :keymap counsel-ag-map
+                :history 'counsel-git-grep-history
+                :action #'counsel-git-grep-action
+                :unwind (lambda ()
+                          (counsel-delete-process)
+                          (swiper--cleanup))
+                :caller 'counsel-ag)))
+
+  )
+;; привет
 (use-package hydra
   :bind ("C-c w" . hydra-windows/body)
   :bind ("C-c t" . hydra-toggle-theme/body)
