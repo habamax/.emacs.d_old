@@ -196,12 +196,15 @@
 
   (defun counsel-pt-project-root ()
     (interactive)
+    (setq project-marker-regex "\\(.git\\)\\|\\(project.clj\\)")
     (setq project-root
-          (locate-dominating-file default-directory
-                                  (lambda (parent)
-                                    (directory-files parent nil
-                                                     "\\(.git\\)\\|\\(project.clj\\)"))))
+          (locate-dominating-file
+           default-directory
+           (lambda (parent)
+             (directory-files parent nil project-marker-regex))))
     (setq counsel--git-grep-dir (or project-root default-directory))
+
+    (setq counsel-pt-base-command "pt --nocolor --nogroup -e -S %s -- .")
     (let ((counsel-ag-base-command counsel-pt-base-command))
       (ivy-read "pt :"
                 'counsel-ag-function
@@ -216,7 +219,7 @@
                 :caller 'counsel-ag)))
 
   )
-;; привет
+
 (use-package hydra
   :bind ("C-c w" . hydra-windows/body)
   :bind ("C-c t" . hydra-toggle-theme/body)
