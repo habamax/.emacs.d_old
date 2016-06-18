@@ -221,8 +221,11 @@
  '(font-latex-sectioning-3-face ((t (:inherit org-level-3))))
  '(font-latex-string-face ((t (:inherit font-lock-string-face))))
  '(font-latex-bold-face ((t (:inherit bold))))
- 
- 
+
+ ;; CSS
+ '(css-selector ((t (:inherit font-lock-keyword-face))))
+ ;; '(css-property ((t (:inherit font-lock-keyword-face))))
+
  )
 )
 
