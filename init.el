@@ -437,10 +437,10 @@
 
 ;; (use-package evil)
 
-(use-package nyan-mode
-  :defer 3
-  :config
-  (nyan-mode))
+;; (use-package nyan-mode
+  ;; :defer 3
+  ;; :config
+  ;; (nyan-mode))
 
 
 ;; Built-in packages
