@@ -521,7 +521,7 @@
           (auto-mode . emacs)))
 
   ;; Doesn't work
-  (setq org-image-actual-width 500)
+  ;; (setq org-image-actual-width 500)
 
   (setq org-todo-keywords
         (quote ((sequence "TODO(t)" "|" "DONE(d)")
