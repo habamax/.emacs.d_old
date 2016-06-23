@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Org Latex Caption
+# key: caption
+# --
+#+CAPTION: $0
