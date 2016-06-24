@@ -25,8 +25,7 @@
 (defun haba/next-theme (theme)
   (if (eq theme 'default)
       (disable-theme *haba-current-theme*)
-    (progn
-      (load-theme theme t)))
+    (load-theme theme t))
   (setq *haba-current-theme* theme))
 
 (defun haba/toggle-theme ()
