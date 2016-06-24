@@ -270,8 +270,6 @@
   (progn
     (use-package company-flx :config (company-flx-mode +1))
 
-    ;; I don't think I will be using csharp
-    ;; (add-to-list 'company-backends 'company-omnisharp)
     (setq company-minimum-prefix-length 2)
 
     (define-key company-active-map [tab] 'company-complete-selection)
@@ -340,16 +338,6 @@
 
 (use-package markdown-mode
   :mode ("\\.\\(markdown|md\\)$" . markdown-mode))
-
-;; (use-package csharp-mode
-;;   :mode ("\\.\\(cs|sln\\)$" . csharp-mode)
-;;   :config
-;;   (progn
-;;     (use-package omnisharp
-;;       :diminish omnisharp-mode
-;;       :config
-;;       (setq omnisharp-company-match-type 'company-match-flx))
-;;     (add-hook 'csharp-mode-hook 'omnisharp-mode)))
 
 (use-package go-mode
   :mode ("\\.\\(go\\)$" . go-mode))
