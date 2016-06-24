@@ -90,12 +90,6 @@
 (load custom-file 'noerror)
 
 
-;; Use shell-like backspace C-h, rebind help to F1
-(define-key key-translation-map [?\C-h] [?\C-?])
-(global-set-key (kbd "<f1>") 'help-command)
-
-
-
 ;; Set up packaging system
 (let ((package-protocol (if (eq system-type 'windows-nt) "http://" "https://")))
   (setq package-archives `(("elpa" .  ,(concat package-protocol "elpa.gnu.org/packages/"))
