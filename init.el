@@ -149,12 +149,19 @@
   :config (which-key-mode))
 
 (use-package expand-region
-  :bind (("M-m" . er/expand-region))
-  :config (setq expand-region-contract-fast-key "M"))
+  :bind (("C-M-SPC" . er/expand-region))
+  :config (setq expand-region-contract-fast-key "S-SPC"))
 
 (use-package undo-tree
   :diminish undo-tree-mode
   :config (global-undo-tree-mode 1))
+
+(use-package avy
+  :diminish avy-mode
+  :bind (("C-;" . avy-goto-char-timer)
+         ("M-g g" . avy-goto-line)
+         ("M-g w" . avy-goto-word-1))
+  )
 
 (use-package smex :defer)
 
