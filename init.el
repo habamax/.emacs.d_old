@@ -542,11 +542,20 @@
    'org-babel-load-languages
    '(
      (sh . t)
-     (plantuml . t)))
+     (plantuml . t)
+     (ditaa . t)
+     (dot . t)))
 
+  (defun haba/org-confirm-babel-evaluate (lang body)
+    (not (or (string= lang "ditaa") (string= lang "dot"))))
+  (setq org-confirm-babel-evaluate 'haba/org-confirm-babel-evaluate)
 
   ;; this has to be set up for different machines
+  ;; XXX: refactor this
   (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
+  (setq org-ditaa-jar-path "c:/prg/bin/ditaa0_9.jar")
+  (setq org-ditaa-jar-path "c:/prg/bin/ditaa0_9.jar")
+  
 
   ;; default export options
   (setq org-export-with-smart-quotes t
