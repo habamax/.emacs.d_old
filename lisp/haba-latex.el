@@ -179,6 +179,21 @@
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
+(add-to-list 'org-latex-classes
+             `("article-adastra-en"
+               ,(concat "\\documentclass[a4paper,12pt]{article}"
+                        (haba/org-latex-class-common "english" "russian")
+                        "\\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}"
+                        (haba/org-latex-class-hf-logo-2 "logo_adastra_50_opacity.png" "" "" "")
+                        haba/org-latex-class-titling
+                        haba/org-latex-class-dot-in-chapters
+                        haba/org-latex-class-fancy-quoteblock)
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 
 (add-to-list 'org-latex-classes
              `("article-sberbank"
