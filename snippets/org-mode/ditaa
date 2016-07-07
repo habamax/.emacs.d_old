@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: org ditaa
+# key: ditaa
+# --
+#+BEGIN_SRC ditaa :file ${1:some_filename}.png :cmdline -r
+$0
+#+END_SRC
