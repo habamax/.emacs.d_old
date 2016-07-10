@@ -126,8 +126,8 @@
   :ensure nil
   :demand
   :load-path "lisp/"
-  :bind (("s-t" . haba/toggle-theme)
-         ("C-c t" . haba/toggle-theme))
+  ;; :bind (("s-t" . haba/toggle-theme)
+         ;; ("C-c t" . haba/toggle-theme))
   :config
     (use-package leuven-theme :defer))
 
@@ -149,8 +149,8 @@
   :config (which-key-mode))
 
 (use-package expand-region
-  :bind (("C-M-SPC" . er/expand-region))
-  :config (setq expand-region-contract-fast-key "S-SPC"))
+  :bind (("M-m" . er/expand-region))
+  :config (setq expand-region-contract-fast-key "M"))
 
 (use-package undo-tree
   :diminish undo-tree-mode
@@ -371,8 +371,6 @@
   (use-package cider
     :config
     (setq cider-repl-display-help-banner nil)))
-
-
 
 
 (use-package auctex
