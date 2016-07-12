@@ -2,6 +2,6 @@
 # name: org ditaa
 # key: ditaa
 # --
-#+BEGIN_SRC ditaa :file ${1:some_filename}.png :cmdline -r
+#+BEGIN_SRC ditaa :file ${1:ditaa_filename}.png
 $0
 #+END_SRC
