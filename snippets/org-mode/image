@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org image placement
+# key: image
+# --
+#+ATTR_LATEX: :float nil :placement [h!t]

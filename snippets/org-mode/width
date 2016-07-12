@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: org image width
+# key: width
+# --
+#+ATTR_LATEX: :width ${1:5cm}
+#+ATTR_HTML: :width ${2:400}
