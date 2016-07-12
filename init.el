@@ -180,7 +180,7 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-c s" . counsel-pt-project-root)
+         ("C-c s" . haba/counsel-pt-choose-dir)
          ("C-c g" . counsel-git)
          ("C-s" . counsel-grep-or-swiper)
          ("C-r" . counsel-grep-or-swiper)
@@ -195,34 +195,12 @@
          ;; file names ending with # or ~
          "\\|\\(?:\\`.+?[#~]\\'\\)"))
 
-  (defun counsel-pt-project-root ()
+  (defun haba/counsel-pt-choose-dir ()
     (interactive)
-    (setq project-marker-regex 
-          (mapconcat 'identity
-                     '("\\(.git\\)" "\\(project.clj\\)")
-                     "\\|"))
-    (setq project-root
-          (locate-dominating-file
-           default-directory
-           (lambda (parent)
-             (directory-files parent nil project-marker-regex))))
-    (setq counsel--git-grep-dir (or project-root default-directory))
-
-    (setq counsel-pt-base-command "pt --nocolor --nogroup -e -S %s -- .")
-    (let ((counsel-ag-base-command counsel-pt-base-command))
-      (ivy-read "pt :"
-                'counsel-ag-function
-                :initial-input ""
-                :dynamic-collection t
-                :keymap counsel-ag-map
-                :history 'counsel-git-grep-history
-                :action #'counsel-git-grep-action
-                :unwind (lambda ()
-                          (counsel-delete-process)
-                          (swiper--cleanup))
-                :caller 'counsel-ag)))
-
+    (setq current-prefix-arg '(4))
+    (counsel-pt))
   )
+
 
 (use-package hydra
   :bind ("C-c w" . hydra-windows/body)
@@ -539,6 +517,7 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '(
+     (python . t)
      (sh . t)
      (plantuml . t)
      (ditaa . t)

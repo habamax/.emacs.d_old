@@ -179,6 +179,21 @@ point reaches the beginning or end of the buffer, stop there."
     (call-interactively #'fill-paragraph)))
 
 
+;; Return path to the project root defined by markers
+(defun haba/locate-project-root ()
+  (interactive)
+  (setq project-marker-regex 
+        (mapconcat 'identity
+                   '("\\(.git\\)"
+                     "\\(.hg\\)"
+                     "\\(build.boot\\)")
+                   "\\|"))
+  (locate-dominating-file
+   default-directory
+   (lambda (parent)
+     (directory-files parent nil project-marker-regex))))
+
+
 (defadvice kill-ring-save (before slick-copy activate compile)
   "When called interactively with no active region, copy a single
 line instead."
