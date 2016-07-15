@@ -276,11 +276,18 @@
 
 
 (use-package multiple-cursors
-  :bind* (("M-n" . mc/mark-next-like-this)
-          ("M-p" . mc/mark-previous-like-this)
-          ("M-N" . mc/unmark-next-like-this)
-          ("M-P" . mc/unmark-previous-like-this)
-          ("C-c m d" . mc/mark-all-like-this-dwim)))
+  :bind-keymap (("C-x m" . haba/mc-map))
+  :bind (("M-n" . mc/mark-next-like-this)
+         ("M-p" . mc/mark-previous-like-this)
+         ("M-N" . mc/unmark-next-like-this)
+         ("M-P" . mc/unmark-previous-like-this)
+         :map haba/mc-map
+         ("m" . mc/mark-all-like-this-dwim)
+         ("i" . mc/insert-numbers))
+  :init
+  (define-prefix-command 'haba/mc-map)
+  (define-key ctl-x-map "m" 'haba/mc-map))
+
 
 
 
