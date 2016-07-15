@@ -9,7 +9,7 @@
 (require 'ox-latex)
 
 
-(setq org-latex-image-default-width nil)
+;; (setq org-latex-image-default-width nil)
 (setq org-latex-pdf-process
       '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
         "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
