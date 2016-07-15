@@ -163,43 +163,56 @@
          ("M-g w" . avy-goto-word-1))
   )
 
-(use-package smex :defer)
+(use-package smex
+  :bind (("M-x" . smex)))
 
-(use-package ivy
-  :diminish ivy-mode
+(use-package ido
   :init
-  ;; clear default ^ for counsel-M-x and friends
-  (setq ivy-initial-inputs-alist '())
+  ;; display any item that contains the chars you typed
+  (setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+  (setq ido-use-virtual-buffers t)
+  (setq ido-use-filename-at-point 'guess)
+  (setq ido-create-new-buffer 'always)
   :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-re-builders-alist
-        ;; '((t . ivy--regex-fuzzy)))
-        '((t . ivy--regex-ignore-order))))
+  (ido-mode 1)
+  (use-package ido-ubiquitous :config (ido-ubiquitous-mode 1)))
 
-(use-package counsel
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-c s" . haba/counsel-pt-choose-dir)
-         ("C-c g" . counsel-git)
-         ("C-s" . counsel-grep-or-swiper)
-         ("C-r" . counsel-grep-or-swiper)
-         ("C-x b" . ivy-switch-buffer)
-         ("s-b" . ivy-switch-buffer))
-  :config
-  (setq counsel-find-file-at-point t)
-  (setq counsel-find-file-ignore-regexp
-        (concat
-         ;; file names beginning with # or .
-         "\\(?:\\`[#.]\\)"
-         ;; file names ending with # or ~
-         "\\|\\(?:\\`.+?[#~]\\'\\)"))
 
-  (defun haba/counsel-pt-choose-dir ()
-    (interactive)
-    (setq current-prefix-arg '(4))
-    (counsel-pt))
-  )
+;; (use-package ivy
+;;   :diminish ivy-mode
+;;   :init
+;;   ;; clear default ^ for counsel-M-x and friends
+;;   (setq ivy-initial-inputs-alist '())
+;;   :config
+;;   (ivy-mode 1)
+;;   (setq ivy-use-virtual-buffers t)
+;;   (setq ivy-re-builders-alist
+;;         ;; '((t . ivy--regex-fuzzy)))
+;;         '((t . ivy--regex-ignore-order))))
+
+;; (use-package counsel
+;;   :bind (("M-x" . counsel-M-x)
+;;          ("C-x C-f" . counsel-find-file)
+;;          ("C-c s" . haba/counsel-pt-choose-dir)
+;;          ("C-s" . counsel-grep-or-swiper)
+;;          ("C-r" . counsel-grep-or-swiper)
+;;          ("C-x b" . ivy-switch-buffer)
+;;          ("s-b" . ivy-switch-buffer))
+;;   :config
+;;   (setq counsel-find-file-at-point t)
+;;   (setq counsel-find-file-ignore-regexp
+;;         (concat
+;;          ;; file names beginning with # or .
+;;          "\\(?:\\`[#.]\\)"
+;;          ;; file names ending with # or ~
+;;          "\\|\\(?:\\`.+?[#~]\\'\\)"))
+
+;;   (defun haba/counsel-pt-choose-dir ()
+;;     (interactive)
+;;     (setq current-prefix-arg '(4))
+;;     (counsel-pt))
+;;   )
 
 
 (use-package hydra
@@ -266,7 +279,8 @@
   :bind* (("M-n" . mc/mark-next-like-this)
           ("M-p" . mc/mark-previous-like-this)
           ("M-N" . mc/unmark-next-like-this)
-          ("M-P" . mc/unmark-previous-like-this)))
+          ("M-P" . mc/unmark-previous-like-this)
+          ("C-c m d" . mc/mark-all-like-this-dwim)))
 
 
 
@@ -299,7 +313,7 @@
 
 (use-package magit
   :commands (magit-status)
-  :bind ("C-c m" . magit-status)
+  :bind ("C-c g" . magit-status)
   :config
   (setq magit-log-arguments '("--graph" "--show-signature")
         magit-push-always-verify nil
@@ -524,14 +538,15 @@
      (dot . t)))
 
   (defun haba/org-confirm-babel-evaluate (lang body)
-    (not (or (string= lang "ditaa") (string= lang "dot"))))
+    (not (or (string= lang "ditaa")
+             (string= lang "dot"))))
   (setq org-confirm-babel-evaluate 'haba/org-confirm-babel-evaluate)
 
   ;; this has to be set up for different machines
   ;; XXX: refactor this
   (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
   (setq org-ditaa-jar-path "c:/prg/bin/ditaa0_9.jar")
-  (setq org-ditaa-jar-path "c:/prg/bin/ditaa0_9.jar")
+
   
 
   ;; default export options
