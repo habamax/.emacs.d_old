@@ -385,6 +385,7 @@
   (setq TeX-PDF-mode t)
 )
 
+
 ;; music FTW
 (use-package emms
   :bind (("C-c p m" . haba/emms-play-main)
@@ -481,8 +482,9 @@
         org-fontify-whole-heading-line t
         org-return-follows-link t
         org-special-ctrl-a/e t
-        org-special-ctrl-k t)
-
+        org-special-ctrl-k t
+        org-src-tab-acts-natively t)
+  
   ;; auto-fill mode on for org
   (add-hook 'org-mode-hook 'auto-fill-mode)
 
@@ -491,6 +493,9 @@
 
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/refile.org")
+
+
+  
 
   (setq org-refile-targets '((nil :maxlevel . 3)
                              (org-agenda-files :maxlevel . 2)))
@@ -513,7 +518,7 @@
 
   (setq org-todo-keywords
         (quote ((sequence "TODO(t)" "|" "DONE(d)")
-                (sequence "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+                (sequence "HOLD(h@/!)" "|" "CANCELED(c@/!)"))))
 
   (setq org-tag-alist '(("misc" . ?m) ("tax" . ?t)
                         ("adastra" . ?a) ("sber" . ?s) ("REB" . ?r) ("pochta" . ?p)))
@@ -561,7 +566,8 @@
   ;; default export options
   (setq org-export-with-smart-quotes t
         org-export-with-emphasize t
-        org-export-with-todo-keywords nil)
+        org-export-with-todo-keywords nil
+        org-export-time-stamp-file nil)
 
 
 
