@@ -25,8 +25,8 @@
 (let
     ((kosmos-fg "#bdbdbd")
      (kosmos-bg "#000000")
-     (kosmos-bg-active "#102040")
-     (kosmos-bg-inactive "#202020")
+     (kosmos-bg-modeline-active "#2f4f4f")
+     (kosmos-bg-modeline-inactive "#202020")
      (kosmos-keyword "#ffffff")
      (kosmos-str "#77cc77")
      (kosmos-comment "#50abab")
@@ -56,8 +56,8 @@
  '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
 
 
- `(mode-line ((t (:background ,kosmos-bg-active :foreground ,kosmos-keyword :box (:line-width 1 :color "#ffffff")))))
- `(mode-line-inactive ((t (:background ,kosmos-bg-inactive :foreground ,kosmos-gray :box (:line-width 1 :color ,kosmos-gray)))))
+ `(mode-line ((t (:background ,kosmos-bg-modeline-active :foreground ,kosmos-keyword :box (:line-width 1 :color "#ffffff")))))
+ `(mode-line-inactive ((t (:background ,kosmos-bg-modeline-inactive :foreground ,kosmos-gray :box (:line-width 1 :color ,kosmos-gray)))))
 
  
  ;; font-lock I care about
@@ -178,7 +178,7 @@
 
  `(org-verbatim ((t (:inherit default :foreground ,kosmos-keyword))))
 
- `(org-special-keyword ((t (:foreground ,kosmos-gray :background ,kosmos-bg-inactive))))
+ `(org-special-keyword ((t (:foreground ,kosmos-gray :background ,kosmos-bg-modeline-inactive))))
 
  `(org-agenda-structure ((t (:foreground ,kosmos-fg :height 1.6 :weight bold))))
  `(org-agenda-date ((t (:foreground ,kosmos-fg :height 1.3))))
