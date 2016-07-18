@@ -135,7 +135,7 @@
 
 (add-to-list 'org-latex-classes
              `("article"
-               ,(concat "\\documentclass[a4paper,12pt]{article}"
+               ,(concat "\\documentclass[a4paper,10pt]{article}"
                         (haba/org-latex-class-common "russian" "english")
                         "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
                         haba/org-latex-class-hf-std
@@ -150,7 +150,7 @@
 
 (add-to-list 'org-latex-classes
              `("article-en"
-               ,(concat "\\documentclass[a4paper,12pt]{article}"
+               ,(concat "\\documentclass[a4paper,10pt]{article}"
                         (haba/org-latex-class-common "english" "russian")
                         "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
                         haba/org-latex-class-hf-std
@@ -166,7 +166,7 @@
 
 (add-to-list 'org-latex-classes
              `("article-adastra"
-               ,(concat "\\documentclass[a4paper,12pt]{article}"
+               ,(concat "\\documentclass[a4paper,10pt]{article}"
                         (haba/org-latex-class-common "russian" "english")
                         "\\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}"
                         (haba/org-latex-class-hf-logo-2 "logo_adastra_50_opacity.png" "" "" "")
@@ -181,7 +181,7 @@
 
 (add-to-list 'org-latex-classes
              `("article-adastra-en"
-               ,(concat "\\documentclass[a4paper,12pt]{article}"
+               ,(concat "\\documentclass[a4paper,10pt]{article}"
                         (haba/org-latex-class-common "english" "russian")
                         "\\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}"
                         (haba/org-latex-class-hf-logo-2 "logo_adastra_50_opacity.png" "" "" "")
@@ -197,7 +197,7 @@
 
 (add-to-list 'org-latex-classes
              `("article-sberbank"
-               ,(concat "\\documentclass[a4paper,12pt]{article}"
+               ,(concat "\\documentclass[a4paper,10pt]{article}"
                         (haba/org-latex-class-common "russian" "english")
                         "\\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}"
                         (haba/org-latex-class-hf-logo-2 "logo_sberbank_simple_50_opacity.png" "" "logo_adastra_50_opacity.png" "-3mm")
@@ -212,7 +212,7 @@
 
 (add-to-list 'org-latex-classes
              `("report"
-               ,(concat "\\documentclass[a4paper,12pt]{report}"
+               ,(concat "\\documentclass[a4paper,10pt]{report}"
                         (haba/org-latex-class-common "russian" "english")
                         "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
 
@@ -232,7 +232,7 @@
 
 (add-to-list 'org-latex-classes
              `("report-sberbank"
-               ,(concat "\\documentclass[a4paper,12pt]{report}"
+               ,(concat "\\documentclass[a4paper,10pt]{report}"
                         (haba/org-latex-class-common "russian" "english")
                         "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
                         (haba/org-latex-class-hf-logo-2 "logo_sberbank_simple_50_opacity.png" "" "logo_adastra_50_opacity.png" "-3mm")
@@ -250,7 +250,7 @@
 
 (add-to-list 'org-latex-classes
              `("report-adastra-ru"
-               ,(concat "\\documentclass[a4paper,12pt]{report}"
+               ,(concat "\\documentclass[a4paper,10pt]{report}"
                         (haba/org-latex-class-common "russian" "english")
                         "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
                         (haba/org-latex-class-hf-logo-2 "logo_adastra_50_opacity.png" "" "" "")
@@ -268,7 +268,7 @@
 
 ;; (add-to-list 'org-latex-classes
              ;; `("beamer"
-               ;; ,(concat "\\documentclass[a4paper,12pt]{report}"
+               ;; ,(concat "\\documentclass[a4paper,10pt]{report}"
                         ;; (haba/org-latex-class-common "russian" "english")
                         ;; "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
                         ;; haba/org-latex-class-no-chapters
