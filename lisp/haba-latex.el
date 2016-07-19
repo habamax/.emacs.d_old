@@ -43,7 +43,10 @@
          \\newcommand\\quotefont{\\fontspec[Colour=55555500]{PT Sans}}
          \\usepackage{polyglossia}
          \\setdefaultlanguage{" lang-main "}
-         \\setotherlanguages{" lang-other "}"))
+         \\setotherlanguages{" lang-other "}
+         \\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"))
+         ;; \\usepackage{enumitem}
+         ;; \\setlist{nosep}"))
 
 (defun haba/org-latex-class-hf-logo-2(logo-left vmove-left logo-right vmove-right)
   (interactive "P")
@@ -137,7 +140,6 @@
              `("article"
                ,(concat "\\documentclass[a4paper,10pt]{article}"
                         (haba/org-latex-class-common "russian" "english")
-                        "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
                         haba/org-latex-class-hf-std
                         haba/org-latex-class-titling
                         haba/org-latex-class-dot-in-chapters
@@ -168,7 +170,6 @@
              `("article-adastra"
                ,(concat "\\documentclass[a4paper,10pt]{article}"
                         (haba/org-latex-class-common "russian" "english")
-                        "\\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}"
                         (haba/org-latex-class-hf-logo-2 "logo_adastra_50_opacity.png" "" "" "")
                         haba/org-latex-class-titling
                         haba/org-latex-class-dot-in-chapters
@@ -183,7 +184,6 @@
              `("article-adastra-en"
                ,(concat "\\documentclass[a4paper,10pt]{article}"
                         (haba/org-latex-class-common "english" "russian")
-                        "\\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}"
                         (haba/org-latex-class-hf-logo-2 "logo_adastra_50_opacity.png" "" "" "")
                         haba/org-latex-class-titling
                         haba/org-latex-class-dot-in-chapters
@@ -199,7 +199,6 @@
              `("article-sberbank"
                ,(concat "\\documentclass[a4paper,10pt]{article}"
                         (haba/org-latex-class-common "russian" "english")
-                        "\\usepackage[top=30mm, left=30mm, right=20mm, bottom=35mm]{geometry}"
                         (haba/org-latex-class-hf-logo-2 "logo_sberbank_simple_50_opacity.png" "" "logo_adastra_50_opacity.png" "-3mm")
                         haba/org-latex-class-titling
                         haba/org-latex-class-dot-in-chapters
@@ -231,12 +230,28 @@
 
 
 (add-to-list 'org-latex-classes
+             `("report-sberbank-adastra"
+               ,(concat "\\documentclass[a4paper,10pt]{report}"
+                        (haba/org-latex-class-common "russian" "english")
+                        (haba/org-latex-class-hf-logo-2 "logo_sberbank_simple_50_opacity.png" "" "logo_adastra_50_opacity.png" "-3mm")
+                        (haba/org-latex-class-titling-logo-2 "logo_sberbank_simple_50_opacity.png" "" "logo_adastra_50_opacity.png" "-3mm")
+                        haba/org-latex-class-dot-in-chapters
+                        haba/org-latex-class-fancy-quoteblock
+                        haba/org-latex-class-no-chapters)
+
+               ("\\chapter{%s}" . "\\chapter*{%s}")
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(add-to-list 'org-latex-classes
              `("report-sberbank"
                ,(concat "\\documentclass[a4paper,10pt]{report}"
                         (haba/org-latex-class-common "russian" "english")
-                        "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
-                        (haba/org-latex-class-hf-logo-2 "logo_sberbank_simple_50_opacity.png" "" "logo_adastra_50_opacity.png" "-3mm")
-                        (haba/org-latex-class-titling-logo-2 "logo_sberbank_simple_50_opacity.png" "" "logo_adastra_50_opacity.png" "-3mm")
+                        (haba/org-latex-class-hf-logo-2 "logo_sberbank_simple_50_opacity.png" "" "" "")
+                        (haba/org-latex-class-titling-logo-2 "logo_sberbank_simple_50_opacity.png" "" "" "")
                         haba/org-latex-class-dot-in-chapters
                         haba/org-latex-class-fancy-quoteblock
                         haba/org-latex-class-no-chapters)
@@ -252,7 +267,6 @@
              `("report-adastra-ru"
                ,(concat "\\documentclass[a4paper,10pt]{report}"
                         (haba/org-latex-class-common "russian" "english")
-                        "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
                         (haba/org-latex-class-hf-logo-2 "logo_adastra_50_opacity.png" "" "" "")
                         (haba/org-latex-class-titling-logo-2 "logo_adastra_50_opacity.png" "" "" "")
                         haba/org-latex-class-dot-in-chapters
