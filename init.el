@@ -341,6 +341,9 @@
 (use-package markdown-mode
   :mode ("\\.\\(markdown|md\\)$" . markdown-mode))
 
+(use-package plantuml-mode
+  :mode ("\\.\\(uml\\)$" . plantuml-mode))
+
 (use-package go-mode
   :mode ("\\.\\(go\\)$" . go-mode))
 
@@ -483,7 +486,7 @@
         org-return-follows-link t
         org-special-ctrl-a/e t
         org-special-ctrl-k t
-        org-src-tab-acts-natively t)
+        org-src-tab-acts-natively nil)
   
   ;; auto-fill mode on for org
   (add-hook 'org-mode-hook 'auto-fill-mode)
@@ -553,12 +556,15 @@
 
   (defun haba/org-confirm-babel-evaluate (lang body)
     (not (or (string= lang "ditaa")
+             (string= lang "plantuml")
              (string= lang "dot"))))
   (setq org-confirm-babel-evaluate 'haba/org-confirm-babel-evaluate)
 
   ;; this has to be set up for different machines
   ;; XXX: refactor this
-  (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
+  ;; (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
+  (setq org-plantuml-jar-path "c:/prg/bin/plantuml.jar")
+
   (setq org-ditaa-jar-path "c:/prg/bin/ditaa0_9.jar")
 
   
@@ -568,6 +574,8 @@
         org-export-with-emphasize t
         org-export-with-todo-keywords nil
         org-export-time-stamp-file nil)
+
+  (setq org-html-postamble t)
 
 
 
