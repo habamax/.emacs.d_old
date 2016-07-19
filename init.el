@@ -330,14 +330,6 @@
         magit-revert-buffers t))
 
 
-(use-package emmet-mode
-  :defer
-  :init
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'html-mode-hook 'emmet-mode)
-  (add-hook 'css-mode-hook  'emmet-mode))
-
-
 (use-package markdown-mode
   :mode ("\\.\\(markdown|md\\)$" . markdown-mode))
 
