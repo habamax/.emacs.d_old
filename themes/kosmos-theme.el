@@ -10,9 +10,8 @@
 ;;; There are many other things in Emacs that should be colored.
 
 ;; TODO: find color for git-commit-nonempty-second-line
-;; ivy?
-;; swiper
 ;; clojure (font-lock-warning-face --> cider-repl-stderr-face) is ugly
+;; snippet mode clash white {} with pair highlighting
 
 
 
@@ -37,6 +36,10 @@
      ;; (kosmos-bg-done "#557755")
      (kosmos-bg-done "#777777")
      (kosmos-h1 "#d1d2d3")
+     (kosmos-h2 "#b1b2b3")
+     (kosmos-h3 "#919293")
+     (kosmos-hl-parens "#ffff33")
+     (kosmos-bg-alt "#252520")
     )
 
 
@@ -82,8 +85,10 @@
  '(font-lock-constant-face ((t nil)))
 
 
- ;; parenthesis
+ ;; parenthesis and pairs
  '(show-paren-match ((t :background "Wheat" :foreground "black")))
+ `(sp-show-pair-match-face ((t (:foreground ,kosmos-hl-parens))))
+
 
  ;; links
  `(link ((t (:foreground ,kosmos-keyword :underline (:color ,kosmos-keyword)))))
@@ -153,17 +158,17 @@
  `(org-document-title ((t (:foreground ,kosmos-keyword :weight bold :height 1.6))))
  
  `(org-level-1 ((t (:foreground ,kosmos-h1 :weight bold :height 1.3 :overline ,kosmos-h1))))
- `(org-level-2 ((t (:foreground ,kosmos-h1 :weight bold :height 1.2 :overline ,kosmos-gray))))
- `(org-level-3 ((t (:foreground ,kosmos-h1 :weight bold :height 1.1))))
+ `(org-level-2 ((t (:foreground ,kosmos-h2 :weight bold :height 1.2 :overline ,kosmos-gray))))
+ `(org-level-3 ((t (:foreground ,kosmos-h3 :weight bold :height 1.1))))
 
- `(org-level-4 ((t (:foreground ,kosmos-h1 :slant italic :height 1.1))))
- `(org-level-5 ((t (:foreground ,kosmos-h1 :slant italic :height 1.1))))
- `(org-level-6 ((t (:foreground ,kosmos-h1 :slant italic :height 1.1))))
+ `(org-level-4 ((t (:foreground ,kosmos-h3 :slant italic :height 1.1))))
+ `(org-level-5 ((t (:foreground ,kosmos-h3 :slant italic :height 1.1))))
+ `(org-level-6 ((t (:foreground ,kosmos-h3 :slant italic :height 1.1))))
  
- `(org-level-7 ((t (:foreground ,kosmos-h1 :slant italic :height 1))))
- `(org-level-8 ((t (:foreground ,kosmos-h1 :slant italic :height 1))))
- `(org-level-9 ((t (:foreground ,kosmos-h1 :slant italic :height 1))))
- `(org-level-10 ((t (:foreground ,kosmos-h1 :slant italic :height 1))))
+ `(org-level-7 ((t (:foreground ,kosmos-h3 :slant italic :height 1))))
+ `(org-level-8 ((t (:foreground ,kosmos-h3 :slant italic :height 1))))
+ `(org-level-9 ((t (:foreground ,kosmos-h3 :slant italic :height 1))))
+ `(org-level-10 ((t (:foreground ,kosmos-h3 :slant italic :height 1))))
 
  `(org-tag ((nil (:foreground ,kosmos-comment))))
 
@@ -176,7 +181,7 @@
 
  `(org-date ((t (:foreground ,kosmos-comment :underline (:color ,kosmos-comment)))))
 
- `(org-verbatim ((t (:inherit default :foreground ,kosmos-keyword))))
+ `(org-verbatim ((nil (:background ,kosmos-bg-alt :foreground ,kosmos-fg))))
 
  `(org-special-keyword ((t (:foreground ,kosmos-gray :background ,kosmos-bg-modeline-inactive))))
 
@@ -226,7 +231,12 @@
  '(css-selector ((t (:inherit font-lock-keyword-face))))
  ;; '(css-property ((t (:inherit font-lock-keyword-face))))
 
- )
+
+ ;; XML
+ `(nxml-element-local-name ((t (:foreground ,kosmos-gray))))
+ `(nxml-tag-delimiter ((t (:foreground ,kosmos-gray))))
+ 
+)
 )
 
 (provide-theme 'kosmos)
