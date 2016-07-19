@@ -339,6 +339,8 @@
 (use-package go-mode
   :mode ("\\.\\(go\\)$" . go-mode))
 
+(use-package web-mode
+  :mode ("\\.\\(html\\|css\\)$" . web-mode))
 
 ;; flycheck
 (use-package flycheck
