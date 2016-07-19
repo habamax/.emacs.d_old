@@ -26,10 +26,14 @@
      (kosmos-bg "#000000")
      (kosmos-bg-modeline-active "#2f4f4f")
      (kosmos-bg-modeline-inactive "#202020")
+     (kosmos-box-modeline-active "#3f5f5f")
+     (kosmos-box-modeline-inactive "#303030")
      (kosmos-keyword "#ffffff")
      (kosmos-str "#77cc77")
      (kosmos-comment "#50abab")
      (kosmos-gray "#777777")
+     (kosmos-fg-dim "#777777")
+     (kosmos-fg-dim-2 "#506060")
      (kosmos-fg-todo "#bdabab")
      (kosmos-bg-todo "#775555")
      (kosmos-fg-done "#abbdab")
@@ -59,8 +63,12 @@
  '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
 
 
- `(mode-line ((t (:background ,kosmos-bg-modeline-active :foreground ,kosmos-keyword :box (:line-width 1 :color "#ffffff")))))
- `(mode-line-inactive ((t (:background ,kosmos-bg-modeline-inactive :foreground ,kosmos-gray :box (:line-width 1 :color ,kosmos-gray)))))
+ 
+ `(mode-line ((t (:background ,kosmos-bg-modeline-active :foreground ,kosmos-keyword :box (:line-width 1 :color ,kosmos-box-modeline-active)))))
+ `(mode-line-inactive ((t (:background ,kosmos-bg-modeline-inactive :foreground ,kosmos-gray :box (:line-width 1 :color ,kosmos-box-modeline-inactive)))))
+
+ `(vertical-border ((nil (:foreground ,kosmos-box-modeline-inactive))))
+ `(fringe ((nil (:background ,kosmos-bg))))
 
  
  ;; font-lock I care about
@@ -233,10 +241,11 @@
 
 
  ;; XML
- `(nxml-element-local-name ((t (:foreground ,kosmos-gray))))
- `(nxml-tag-delimiter ((t (:foreground ,kosmos-gray))))
- 
-)
+ `(nxml-element-local-name ((t (:foreground ,kosmos-fg-dim))))
+ `(nxml-tag-delimiter ((t (:foreground ,kosmos-fg-dim))))
+ `(nxml-attribute-local-name ((t (:foreground ,kosmos-fg-dim-2))))
+ `(nxml-attribute-value ((t (:foreground ,kosmos-fg-dim-2))))
+ )
 )
 
 (provide-theme 'kosmos)
