@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: org plantuml
+# key: uml
+# --
+#+BEGIN_SRC plantuml :file ${1:plantuml_filename}.png
+@startuml
+skinparam backgroundColor transparent
+skinparam dpi 300
+
+$0
+@enduml
+#+END_SRC
