@@ -331,7 +331,7 @@
 
 
 (use-package markdown-mode
-  :mode ("\\.\\(markdown|md\\)$" . markdown-mode))
+  :mode ("\\.\\(markdown\\|md\\)$" . markdown-mode))
 
 (use-package plantuml-mode
   :mode ("\\.\\(uml\\)$" . plantuml-mode))
