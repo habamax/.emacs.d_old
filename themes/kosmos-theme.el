@@ -44,6 +44,7 @@
      (kosmos-h3 "#919293")
      (kosmos-bg-hl-parens "#324035")
      (kosmos-bg-alt "#252520")
+     (kosmos-fg-modeline-hl "#ffff00")
     )
 
 
@@ -52,7 +53,7 @@
  'kosmos
  
  `(default ((t (:background ,kosmos-bg :foreground ,kosmos-fg))))
- '(cursor ((nil (:background "#f070f0"))))
+ '(cursor ((nil (:background "#f0f0f0"))))
  `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
  ;; '(highlight ((t (:background "#65a7e2" :foreground "#000000"))))
  ;; '(highlight ((t (:background "#202090" :foreground "#bdbdbd"))))
@@ -67,6 +68,9 @@
  `(mode-line ((t (:background ,kosmos-bg-modeline-active :foreground ,kosmos-keyword :box (:line-width 1 :color ,kosmos-box-modeline-active)))))
  `(mode-line-inactive ((t (:background ,kosmos-bg-modeline-inactive :foreground ,kosmos-gray :box (:line-width 1 :color ,kosmos-box-modeline-inactive)))))
 
+ `(mode-line-highlight ((nil (:foreground ,kosmos-fg-modeline-hl :box (:line-width 1 :color ,kosmos-fg)))))
+
+ 
  `(vertical-border ((nil (:foreground ,kosmos-box-modeline-inactive))))
  `(fringe ((nil (:background ,kosmos-bg))))
 
