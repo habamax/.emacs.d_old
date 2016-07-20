@@ -15,8 +15,10 @@
   #+HTML_HEAD_EXTRA: <style>span[class^="section-number-"]:after { content: '.';}</style>
   #+HTML_HEAD_EXTRA: <style>body {margin:0 3em;} h2,h3,h4 {padding-top:1em;}</style>
   #+HTML_HEAD_EXTRA: <style>.subtitle {font-size: x-large;}</style>
+  #+HTML_HEAD_EXTRA: <style>#table-of-contents {background-color: #f7f7f7; margin-top:2em;padding: 1em;}</style>
   #+HTML_HEAD_EXTRA: <style>#content img {max-width: 90%; height: auto !important;}</style>
-  #+HTML_HEAD_EXTRA: <style>#postamble {background-color: #fafafa; margin-top:2em;padding: 1em;}</style>
+  #+HTML_HEAD_EXTRA: <style>#postamble {background-color: #f7f7f7; margin-top:2em;padding: 1em;}</style>
+
   
 
 
