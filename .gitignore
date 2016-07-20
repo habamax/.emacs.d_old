@@ -27,3 +27,5 @@ ido.*
 /.emacs.desktop
 /ercpwd
 /emacs_backtrace.txt
+/calc.el
+/server/server
