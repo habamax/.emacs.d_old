@@ -481,7 +481,7 @@
         org-special-ctrl-a/e t
         org-special-ctrl-k t
         org-src-tab-acts-natively nil)
-  
+
   ;; auto-fill mode on for org
   (add-hook 'org-mode-hook 'auto-fill-mode)
 
@@ -492,7 +492,7 @@
   (setq org-default-notes-file "~/org/refile.org")
 
 
-  
+
 
   (setq org-refile-targets '((nil :maxlevel . 3)
                              (org-agenda-files :maxlevel . 2)))
@@ -561,13 +561,18 @@
 
   (setq org-ditaa-jar-path "c:/prg/bin/ditaa0_9.jar")
 
-  
+
 
   ;; default export options
   (setq org-export-with-smart-quotes t
         org-export-with-emphasize t
         org-export-with-todo-keywords nil
         org-export-time-stamp-file nil)
+
+  (setq org-html-validation-link nil)
+  (setq org-html-postamble-format
+        '(("en" "<p class=\"author\">Author: %a (%e)</p>\n<p class=\"date\">Date: %d</p>")
+         ("ru" "<p class=\"author\">Автор: %a (%e)</p>\n<p class=\"date\">Дата: %d</p>")))
 
   (setq org-html-postamble t)
 
