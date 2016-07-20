@@ -39,9 +39,11 @@
      (kosmos-fg-done "#abbdab")
      ;; (kosmos-bg-done "#557755")
      (kosmos-bg-done "#777777")
-     (kosmos-h1 "#d1d2d3")
-     (kosmos-h2 "#b1b2b3")
-     (kosmos-h3 "#919293")
+     (kosmos-h1 "#b0b0b0")
+     (kosmos-h2 "#b0b090")
+     ;; (kosmos-h1 "#d1d2d3")
+     ;; (kosmos-h2 "#b1b2b3")
+     ;; (kosmos-h3 "#919293")
      (kosmos-bg-hl-parens "#324035")
      (kosmos-bg-alt "#252520")
      (kosmos-fg-modeline-hl "#ffff00")
@@ -170,18 +172,18 @@
  ;; org
  `(org-document-title ((t (:foreground ,kosmos-keyword :weight bold :height 1.6))))
  
- `(org-level-1 ((t (:foreground ,kosmos-h1 :weight bold :height 1.3 :overline ,kosmos-h1))))
- `(org-level-2 ((t (:foreground ,kosmos-h2 :weight bold :height 1.2 :overline ,kosmos-gray))))
- `(org-level-3 ((t (:foreground ,kosmos-h3 :weight bold :height 1.1))))
+ `(org-level-1 ((t (:foreground ,kosmos-h1 :weight bold :height 1.3))))
+ `(org-level-2 ((t (:foreground ,kosmos-h2 :weight bold :height 1.2))))
+ `(org-level-3 ((t (:foreground ,kosmos-h1 :weight bold :height 1.1))))
 
- `(org-level-4 ((t (:foreground ,kosmos-h3 :slant italic :height 1.1))))
- `(org-level-5 ((t (:foreground ,kosmos-h3 :slant italic :height 1.1))))
- `(org-level-6 ((t (:foreground ,kosmos-h3 :slant italic :height 1.1))))
+ `(org-level-4 ((t (:foreground ,kosmos-h2 :slant italic :height 1.1))))
+ `(org-level-5 ((t (:foreground ,kosmos-h1 :slant italic :height 1.1))))
+ `(org-level-6 ((t (:foreground ,kosmos-h2 :slant italic :height 1.1))))
  
- `(org-level-7 ((t (:foreground ,kosmos-h3 :slant italic :height 1))))
- `(org-level-8 ((t (:foreground ,kosmos-h3 :slant italic :height 1))))
- `(org-level-9 ((t (:foreground ,kosmos-h3 :slant italic :height 1))))
- `(org-level-10 ((t (:foreground ,kosmos-h3 :slant italic :height 1))))
+ `(org-level-7 ((t (:foreground ,kosmos-h1 :slant italic :height 1))))
+ `(org-level-8 ((t (:foreground ,kosmos-h2 :slant italic :height 1))))
+ `(org-level-9 ((t (:foreground ,kosmos-h1 :slant italic :height 1))))
+ `(org-level-10 ((t (:foreground ,kosmos-h2 :slant italic :height 1))))
 
  `(org-tag ((nil (:foreground ,kosmos-comment))))
 
