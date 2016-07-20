@@ -474,6 +474,10 @@
          ("C-c o l" . org-store-link)
          ("C-c o c" . org-capture))
   :config
+  (use-package org-bullets
+    :config
+    (setq org-bullets-bullet-list '("◤" "◆" "◆" "◆" "◆" "◆" "◆" "◆"))
+    (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 
   (setq org-src-fontify-natively t
         org-fontify-whole-heading-line t
