@@ -42,7 +42,7 @@
      (kosmos-h1 "#d1d2d3")
      (kosmos-h2 "#b1b2b3")
      (kosmos-h3 "#919293")
-     (kosmos-hl-parens "#ffff33")
+     (kosmos-bg-hl-parens "#324035")
      (kosmos-bg-alt "#252520")
     )
 
@@ -94,8 +94,9 @@
 
 
  ;; parenthesis and pairs
- '(show-paren-match ((t :background "Wheat" :foreground "black")))
- `(sp-show-pair-match-face ((t (:foreground ,kosmos-hl-parens))))
+ `(show-paren-match ((t :background ,kosmos-bg-hl-parens)))
+ `(sp-show-pair-match-face ((t (:background ,kosmos-bg-hl-parens))))
+
 
 
  ;; links
