@@ -17,9 +17,14 @@
 (setq custom-theme-directory (concat user-emacs-directory "themes"))
 
 
-(defadvice load-theme (before theme-dont-propagate activate)
-  "Disable theme before loading new one."
+(defun disable-all-themes (&rest args)
   (mapcar #'disable-theme custom-enabled-themes))
+
+(advice-add 'load-theme :before #'disable-all-themes)
+
+;; (defadvice load-theme (before theme-dont-propagate activate)
+  ;; "Disable theme before loading new one."
+  ;; (mapcar #'disable-theme custom-enabled-themes))
 
 
 (defun haba/next-theme (theme)
@@ -59,8 +64,8 @@
   (tool-bar-mode -1)
   (menu-bar-mode 1)
   (scroll-bar-mode -1)
-  (let ((font-size (if (string-equal (system-name) "MKIM") 110 140)))
-    (haba/set-font '("Input" "Dejavu Sans Mono" "Menlo" "Roboto Mono" "Consolas")
+  (let ((font-size (if (string-equal (system-name) "MKIM") 100 140)))
+    (haba/set-font '("Source Code Pro" "Roboto Mono" "Menlo" "Consolas")
                    font-size))
   )
 
