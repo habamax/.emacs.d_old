@@ -428,6 +428,11 @@
   ;; :config
   ;; (nyan-mode))
 
+(use-package beacon
+  :defer 3
+  :config
+  (beacon-mode 1))
+
 
 ;; Built-in packages
 
