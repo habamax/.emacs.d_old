@@ -65,7 +65,7 @@
   (menu-bar-mode 1)
   (scroll-bar-mode -1)
   (let ((font-size (if (string-equal (system-name) "MKIM") 100 140)))
-    (haba/set-font '("Source Code Pro" "Roboto Mono" "Menlo" "Consolas")
+    (haba/set-font '("Roboto Mono" "Source Code Pro" "Menlo" "Consolas")
                    font-size))
   )
 
