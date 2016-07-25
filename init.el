@@ -89,6 +89,9 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
 
+;; default major mode is for regular text
+(setq-default major-mode 'text-mode)
+
 
 ;; Set up packaging system
 (let ((package-protocol (if (eq system-type 'windows-nt) "http://" "https://")))
@@ -119,7 +122,14 @@
          ("M-j" . haba/join-line)
          ("s-d" . haba/duplicate-line)
          ("C-c o i" . haba/open-init-file)
-         ([remap fill-paragraph] . haba/fill-or-unfill)))
+         ("C-c o s" . haba/open-scratch-buffer)
+         ([remap fill-paragraph] . haba/fill-or-unfill))
+  :config
+  (defun haba/open-scratch-buffer ()
+    "Open scratch buffer"
+    (interactive)
+    (switch-to-buffer "*Scratch*"))
+  )
 
 
 (use-package haba-appearance
@@ -150,7 +160,16 @@
 
 (use-package expand-region
   :bind (("M-m" . er/expand-region))
-  :config (setq expand-region-contract-fast-key "M"))
+  :config
+  (setq expand-region-contract-fast-key "M")
+
+  (defun er/add-text-mode-expansions ()
+    (make-variable-buffer-local 'er/try-expand-list)
+    (setq er/try-expand-list (append
+                              er/try-expand-list
+                              '(mark-paragraph))))
+
+  (add-hook 'text-mode-hook 'er/add-text-mode-expansions))
 
 (use-package undo-tree
   :diminish undo-tree-mode
@@ -162,6 +181,7 @@
          ("M-g g" . avy-goto-line)
          ("M-g w" . avy-goto-word-1))
   )
+
 
 (use-package smex
   :defer
