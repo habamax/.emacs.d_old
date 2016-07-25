@@ -305,7 +305,11 @@
          ("M-P" . mc/unmark-previous-like-this)
          :map haba/mc-map
          ("m" . mc/mark-all-like-this-dwim)
-         ("i" . mc/insert-numbers))
+         ("d" . mc/mark-all-symbols-like-this-in-defun)
+         ("i" . mc/insert-numbers)
+         ("l" . mc/edit-lines)
+         ("e" . mc/edit-ends-of-lines)
+         ("a" . mc/edit-beginnings-of-lines))
   :init
   (define-prefix-command 'haba/mc-map)
   (define-key ctl-x-map "m" 'haba/mc-map))
