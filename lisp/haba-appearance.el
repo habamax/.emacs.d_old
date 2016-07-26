@@ -22,11 +22,6 @@
 
 (advice-add 'load-theme :before #'disable-all-themes)
 
-;; (defadvice load-theme (before theme-dont-propagate activate)
-  ;; "Disable theme before loading new one."
-  ;; (mapcar #'disable-theme custom-enabled-themes))
-
-
 (defun haba/next-theme (theme)
   (if (eq theme 'default)
       (disable-theme *haba-current-theme*)
