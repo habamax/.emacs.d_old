@@ -473,6 +473,7 @@
     (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
 
   :config
+  (setq erc-hide-list '("JOIN" "PART" "QUIT"))
   (ignore-errors
     (load (concat user-emacs-directory "ercpwd"))
     (require 'erc-services)
