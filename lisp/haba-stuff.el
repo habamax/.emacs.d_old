@@ -212,3 +212,14 @@ line instead."
            (line-beginning-position 2)))))
 
 
+;;;; Do not include first empty lines in mark-paragraph.
+(defun current-line-empty-p ()
+  (save-excursion
+    (beginning-of-line)
+    (looking-at "[[:space:]]*$")))
+
+(defun skip-empty-line--mark-paragraph (&rest args)
+  (when (current-line-empty-p)
+    (forward-line 1)))
+
+(advice-add 'mark-paragraph :after #'skip-empty-line--mark-paragraph)
