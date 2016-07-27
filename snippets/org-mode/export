@@ -12,13 +12,19 @@
   #+SELECT_TAGS: export
   #+EXCLUDE_TAGS: noexport
   #+LATEX_CLASS: ${6:article}
-  #+HTML_HEAD_EXTRA: <style>span[class^="section-number-"]:after { content: '.';}</style>
-  #+HTML_HEAD_EXTRA: <style>body {margin:0 3em;} h2,h3,h4 {padding-top:1em;}</style>
-  #+HTML_HEAD_EXTRA: <style>.subtitle {font-size: x-large;}</style>
-  #+HTML_HEAD_EXTRA: <style>#table-of-contents {background-color: #f7f7f7; margin-top:2em;padding: 1em;}</style>
+
+  #+HTML_HEAD_EXTRA: <style>span[class^="section-number-"]:after { content: '.'; }</style>
+  #+HTML_HEAD_EXTRA: <style>h1.title {background-color: #242729; color: #e4e6e8; margin:0 0 0 0;padding: 1em;}</style>
+  #+HTML_HEAD_EXTRA: <style>h1.title .subtitle {display: block; margin:0; padding-top: 1em;font-weight: normal;;}</style>
+  #+HTML_HEAD_EXTRA: <style>.subtitle {color:#9fa6ad;font-size: x-large;}</style>
+  #+HTML_HEAD_EXTRA: <style>body, #content {margin:0;} h2,h3,h4 {padding-top:1.5em; margin:0;}</style>
+  #+HTML_HEAD_EXTRA: <style>div.outline-2 {margin:0 3em;}</style>
+  #+HTML_HEAD_EXTRA: <style>#table-of-contents {background-color: #f0f0f0; margin:0; padding: 0 2em 1em 2em;}</style>
+  #+HTML_HEAD_EXTRA: <style>#table-of-contents h2 {font-weight: normal;}</style>
+  #+HTML_HEAD_EXTRA: <style>#text-table-of-contents ul {list-style-type:none;}</style>
+  #+HTML_HEAD_EXTRA: <style>#text-table-of-contents a {text-decoration:none; color:#034f84}</style>
+  #+HTML_HEAD_EXTRA: <style>#text-table-of-contents a:hover {text-decoration:underline;}</style>
+  #+HTML_HEAD_EXTRA: <style>#text-table-of-contents a:visited {color:#667292;}</style>
   #+HTML_HEAD_EXTRA: <style>#content img {max-width: 90%; height: auto !important;}</style>
-  #+HTML_HEAD_EXTRA: <style>#postamble {background-color: #f7f7f7; margin-top:2em;padding: 1em;}</style>
-
-  
-
-
+  #+HTML_HEAD_EXTRA: <style>#postamble {background-color: #242729; color: #9fa6ad; margin:2em 0 0 0;padding: 1em;}</style>
+  #+HTML_HEAD_EXTRA: <style>#postamble a {color: #5e666e; text-decoration: underline;}</style>
