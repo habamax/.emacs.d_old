@@ -35,6 +35,9 @@
 ;; scroll to the top or bottom with C-v and M-v
 (setq scroll-error-top-bottom t)
 
+;; not so jumpy mouse scroll
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
+
 ;; M-a and M-e use punct and single space as sentence delimiter
 (setq sentence-end-double-space nil)
 
@@ -174,6 +177,7 @@
 (use-package undo-tree
   :diminish undo-tree-mode
   :config (global-undo-tree-mode 1))
+
 
 (use-package avy
   :diminish avy-mode
