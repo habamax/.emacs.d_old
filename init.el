@@ -461,6 +461,25 @@
 
 ;; Built-in packages
 
+;; Outline-mode
+(use-package outline
+  :bind (("M-o" . hydra-outline/body))
+  :defer
+  :ensure nil
+  :config
+  (outline-minor-mode 1)
+
+  (defhydra hydra-outline ()
+    "Outline"
+    ("o" outline-toggle-children "Toggle children")
+    ("h" hide-body "Hide bodies")
+    ("a" show-all "Show all")
+
+    ("SPC" nil "quit")
+    ("q" nil "quit"))
+  )
+
+
 (use-package erc
   :defer
   :ensure nil
