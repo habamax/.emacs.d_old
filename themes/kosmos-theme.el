@@ -42,12 +42,11 @@
      (kosmos-bg-done "#777777")
      (kosmos-h1 "#b0b0b0")
      (kosmos-h2 "#b0b090")
-     ;; (kosmos-h1 "#d1d2d3")
-     ;; (kosmos-h2 "#b1b2b3")
-     ;; (kosmos-h3 "#919293")
      (kosmos-bg-hl-parens "#324035")
      (kosmos-bg-alt "#252520")
      (kosmos-fg-modeline-hl "#ffff00")
+     (kosmos-bg-whitespace "#1a1a1f")
+     (kosmos-fg-whitespace "#303040")
     )
 
 
@@ -253,6 +252,11 @@
  `(nxml-tag-delimiter ((t (:foreground ,kosmos-fg-dim))))
  `(nxml-attribute-local-name ((t (:foreground ,kosmos-fg-dim-2))))
  `(nxml-attribute-value ((t (:foreground ,kosmos-fg-dim-2))))
+
+ ;; whitespace-mode
+ `(whitespace-space ((t (:foreground ,kosmos-fg-whitespace))))
+ `(whitespace-indentation ((t (:foreground ,kosmos-fg-whitespace :background ,kosmos-bg-whitespace))))
+ 
  )
 )
 
