@@ -609,8 +609,8 @@
 
   (setq org-html-validation-link nil)
   (setq org-html-postamble-format
-        '(("en" "<p class=\"author\">Author: %a (%e)</p>\n<p class=\"date\">Date: %d</p>")
-         ("ru" "<p class=\"author\">Автор: %a (%e)</p>\n<p class=\"date\">Дата: %d</p>")))
+        '(("en" "<p> <span class=\"author\">Author:</span> <span class=\"author_name\"> %a ( %e )</span></p>\n<p> <span class=\"date\">Date:</span> <span class=\"date_value\">%d</span></p>")
+         ("ru" "<p> <span class=\"author_caption\">Автор:</span> <span class=\"author\"> %a ( %e )</span></p>\n<p> <span class=\"date_caption\">Дата:</span> <span class=\"date\">%d</span></p>")))
 
   (setq org-html-postamble t)
 
