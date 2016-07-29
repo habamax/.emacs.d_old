@@ -137,7 +137,7 @@
    '(erc-current-nick-face ((t (:foreground "#ffffff"))))
    '(erc-nick-default-face ((t (:foreground "#779977"))))
    '(erc-my-nick-face ((t (:foreground "#cc5555"))))
-   '(erc-input-face ((t (:foreground "#6dbdbd"))))
+   '(erc-input-face ((t (:foreground "#8dbdbd"))))
    '(erc-timestamp-face ((t (:foreground "Wheat"))))
    '(erc-notice-face ((t (:foreground "#555555"))))
    '(erc-action-face ((nil (:slant italic))))
