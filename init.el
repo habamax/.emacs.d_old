@@ -92,9 +92,6 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
 
-;; default major mode is for regular text
-(setq-default major-mode 'text-mode)
-
 
 ;; Set up packaging system
 (let ((package-protocol (if (eq system-type 'windows-nt) "http://" "https://")))
