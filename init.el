@@ -186,56 +186,61 @@
 
 (use-package smex
   :defer
-  ;; :bind (("M-x" . smex))
+  :bind (("M-x" . smex))
   )
 
-;; (use-package ido
-;;   :init
-;;   ;; display any item that contains the chars you typed
-;;   (setq ido-enable-flex-matching t)
-;;   (setq ido-everywhere t)
-;;   (setq ido-use-virtual-buffers t)
-;;   (setq ido-use-filename-at-point 'guess)
-;;   (setq ido-create-new-buffer 'always)
-;;   :config
-;;   (ido-mode 1)
-;;   (use-package ido-ubiquitous :config (ido-ubiquitous-mode 1)))
-
-
-(use-package ivy
-  :diminish ivy-mode
+(use-package ido
   :init
-  ;; clear default ^ for counsel-M-x and friends
-  (setq ivy-initial-inputs-alist '())
+  ;; display any item that contains the chars you typed
+  (setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+  (setq ido-use-virtual-buffers t)
+  (setq ido-use-filename-at-point 'guess)
+  (setq ido-create-new-buffer 'always)
   :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-re-builders-alist
-        ;; '((t . ivy--regex-fuzzy)))
-        '((t . ivy--regex-ignore-order))))
+  (ido-mode 1)
+  (use-package ido-ubiquitous :config (ido-ubiquitous-mode 1))
+  (use-package ido-vertical-mode
+    :config
+    (ido-vertical-mode 1)
+    (setq ido-vertical-show-count t)
+    (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
 
-(use-package counsel
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-c s" . haba/counsel-pt-choose-dir)
-         ("C-s" . counsel-grep-or-swiper)
-         ("C-r" . counsel-grep-or-swiper)
-         ("C-x b" . ivy-switch-buffer)
-         ("s-b" . ivy-switch-buffer))
-  :config
-  (setq counsel-find-file-at-point t)
-  (setq counsel-find-file-ignore-regexp
-        (concat
-         ;; file names beginning with # or .
-         "\\(?:\\`[#.]\\)"
-         ;; file names ending with # or ~
-         "\\|\\(?:\\`.+?[#~]\\'\\)"))
 
-  (defun haba/counsel-pt-choose-dir ()
-    (interactive)
-    (setq current-prefix-arg '(4))
-    (counsel-pt))
-  )
+;; (use-package ivy
+;;   :diminish ivy-mode
+;;   :init
+;;   ;; clear default ^ for counsel-M-x and friends
+;;   (setq ivy-initial-inputs-alist '())
+;;   :config
+;;   (ivy-mode 1)
+;;   (setq ivy-use-virtual-buffers t)
+;;   (setq ivy-re-builders-alist
+;;         '((t . ivy--regex-ignore-order))))
+
+;; (use-package counsel
+;;   :bind (("M-x" . counsel-M-x)
+;;          ("C-x C-f" . counsel-find-file)
+;;          ("C-c s" . haba/counsel-pt-choose-dir)
+;;          ("C-s" . counsel-grep-or-swiper)
+;;          ("C-r" . counsel-grep-or-swiper)
+;;          ("C-x b" . ivy-switch-buffer)
+;;          ("s-b" . ivy-switch-buffer))
+;;   :config
+;;   (setq ivy-sort-matches-functions-alist nil)
+;;   (setq counsel-find-file-at-point t)
+;;   (setq counsel-find-file-ignore-regexp
+;;         (concat
+;;          ;; file names beginning with # or .
+;;          "\\(?:\\`[#.]\\)"
+;;          ;; file names ending with # or ~
+;;          "\\|\\(?:\\`.+?[#~]\\'\\)"))
+
+;;   (defun haba/counsel-pt-choose-dir ()
+;;     (interactive)
+;;     (setq current-prefix-arg '(4))
+;;     (counsel-pt))
+;;   )
 
 
 (use-package hydra
