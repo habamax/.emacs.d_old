@@ -3,13 +3,13 @@
 (defvar *haba-current-theme* *haba-theme-dark*)
 
 
-(defun haba/set-font (fonts-list font-size)
-  (catch 'loop
-    (dolist (font fonts-list)
-      (when (find-font (font-spec :name font))
-        (progn
-          (set-face-attribute 'default nil :family font :height font-size)
-          (throw 'loop font))))))
+;; (defun haba/set-font (fonts-list font-size)
+  ;; (catch 'loop
+    ;; (dolist (font fonts-list)
+      ;; (when (find-font (font-spec :name font))
+        ;; (progn
+          ;; (set-face-attribute 'default nil :family font :height font-size)
+          ;; (throw 'loop font))))))
 
 
 
@@ -59,9 +59,9 @@
   (tool-bar-mode -1)
   (menu-bar-mode 1)
   (scroll-bar-mode -1)
-  (let ((font-size (if (string-equal (system-name) "MKIM") 100 140)))
-    (haba/set-font '("Roboto Mono" "Source Code Pro" "Menlo" "Consolas")
-                   font-size))
+  ;; (let ((font-size (if (string-equal (system-name) "MKIM") 100 140)))
+    ;; (haba/set-font '("Roboto Mono" "Source Code Pro" "Menlo" "Consolas")
+                   ;; font-size))
   )
 
 
