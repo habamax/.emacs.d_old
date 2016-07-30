@@ -544,7 +544,7 @@
 
   (setq org-directory "~/org")
   (setq org-default-notes-file "~/org/refile.org")
-
+  (setq org-agenda-files '("~/org"))
 
 
 
