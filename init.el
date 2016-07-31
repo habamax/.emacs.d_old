@@ -88,6 +88,11 @@
 ;; (setq save-abbrevs t)
 (setq-default abbrev-mode t)
 
+
+;; dired user another dired buffer as destination for copy/move
+(setq dired-dwim-target t)
+
+
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
