@@ -468,6 +468,7 @@
 ;; Outline-mode
 (use-package outline
   :bind (("M-o" . hydra-outline/body))
+  :diminish outline-mode outline-minor-mode
   :defer
   :ensure nil
   :config
