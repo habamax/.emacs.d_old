@@ -255,7 +255,9 @@
 
    ;; whitespace-mode
    `(whitespace-space ((t (:foreground ,kosmos-fg-whitespace))))
+   `(whitespace-newline ((t (:foreground ,kosmos-fg-whitespace))))
    `(whitespace-indentation ((t (:foreground ,kosmos-fg-whitespace :background ,kosmos-bg-whitespace))))
+   `(whitespace-line ((nil (:background ,kosmos-bg-whitespace))))
 
    )
   )
