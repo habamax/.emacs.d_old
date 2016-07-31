@@ -249,6 +249,7 @@
 (use-package projectile
   :bind-keymap (("C-c p" . projectile-mode-map))
   :config
+  ;; (setq projectile-completion-system 'ivy)
   (projectile-global-mode))
 
 (use-package hydra
