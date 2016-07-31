@@ -457,11 +457,6 @@
 
 ;; (use-package evil)
 
-;; (use-package nyan-mode
-  ;; :defer 3
-  ;; :config
-  ;; (nyan-mode))
-
 (use-package beacon
   :defer 3
   :config
