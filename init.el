@@ -246,6 +246,11 @@
 ;;   )
 
 
+(use-package projectile
+  :bind-keymap (("C-c p" . projectile-mode-map))
+  :config
+  (projectile-global-mode))
+
 (use-package hydra
   :bind ("C-c w" . hydra-windows/body)
   :bind ("C-c t" . hydra-toggle-theme/body)
@@ -419,12 +424,12 @@
 
 ;; music FTW
 (use-package emms
-  :bind (("C-c p m" . haba/emms-play-main)
-         ("C-c p c" . emms-playlist-mode-go)
-         ("C-c p p" . emms-pause)
-         ("C-c p n" . emms-next)
-         ("C-c p r" . emms-random)
-         ("C-c p s" . emms-stop))
+  :bind (("C-c u m" . haba/emms-play-main)
+         ("C-c u c" . emms-playlist-mode-go)
+         ("C-c u p" . emms-pause)
+         ("C-c u n" . emms-next)
+         ("C-c u r" . emms-random)
+         ("C-c u s" . emms-stop))
   :init
   ;; Well on OSX I get weird tramp error...
   ;; (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
