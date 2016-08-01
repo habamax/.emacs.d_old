@@ -17,7 +17,7 @@
   #+HTML_HEAD_EXTRA: <style>h1.title {font-family: "Marmelad", Sans; background-color: #242729; color: #e4e6e8; margin:0 0 0 0;padding: 1em;}</style>
   #+HTML_HEAD_EXTRA: <style>h1.title .subtitle {font-family: "Cuprum", sans-serif; display: block; margin:0; padding-top: 1em;font-weight: normal;;}</style>
   #+HTML_HEAD_EXTRA: <style>.subtitle {color:#9fa6ad;font-size: x-large;}</style>
-  #+HTML_HEAD_EXTRA: <style>body, #content {margin:0;font-family: "Roboto", sans-serif;line-height:1.5;} h2,h3,h4 {font-family: "Scada", sans-serif; padding-top:1.5em; margin:0;}</style>
+  #+HTML_HEAD_EXTRA: <style>body, #content {margin:0;font-family: "Roboto", sans-serif; font-size: 14pt; line-height:1.5;} h2,h3,h4 {font-family: "Scada", sans-serif; padding-top:1.5em; margin:0;}</style>
   #+HTML_HEAD_EXTRA: <style>div.outline-2 {margin:0 3em;}</style>
   #+HTML_HEAD_EXTRA: <style>#table-of-contents {border-top:5px black solid; border-bottom:3px solid #e7e7e7;background-color: #f0f0f0; margin:0; padding: 0 2em 1em 2em;}</style>
   #+HTML_HEAD_EXTRA: <style>#text-table-of-contents ul {list-style-type:none;}</style>
