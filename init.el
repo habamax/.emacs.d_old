@@ -188,9 +188,6 @@
          ("M-g w" . avy-goto-word-1))
   )
 
-
-(use-package smex :bind (("M-x" . smex)))
-
 (use-package ido
   :config
   (setq ido-enable-flex-matching t)
@@ -199,11 +196,12 @@
   (setq ido-use-filename-at-point 'guess)
   (setq ido-create-new-buffer 'always)
   (ido-mode 1)
+  (use-package smex :bind (("M-x" . smex)))
   (use-package ido-ubiquitous :config (ido-ubiquitous-mode 1))
   (use-package flx-ido
     :config
     (setq ido-enable-flex-matching t)
-    ;; (setq ido-use-faces nil)
+    (setq ido-use-faces nil)
     (flx-ido-mode 1))
   (use-package ido-vertical-mode
     :config
@@ -219,14 +217,15 @@
 ;;   (setq ivy-initial-inputs-alist '())
 ;;   :config
 ;;   (ivy-mode 1)
+;;   (setq projectile-completion-system 'ivy)
 ;;   (setq ivy-use-virtual-buffers t)
 ;;   (setq ivy-re-builders-alist
-;;         '((t . ivy--regex-ignore-order))))
+;;         '((t . ivy--regex-fuzzy))))
+
 
 ;; (use-package counsel
 ;;   :bind (("M-x" . counsel-M-x)
 ;;          ("C-x C-f" . counsel-find-file)
-;;          ("C-c s" . haba/counsel-pt-choose-dir)
 ;;          ("C-s" . counsel-grep-or-swiper)
 ;;          ("C-r" . counsel-grep-or-swiper)
 ;;          ("C-x b" . ivy-switch-buffer)
@@ -239,17 +238,12 @@
 ;;          "\\(?:\\`[#.]\\)"
 ;;          ;; file names ending with # or ~
 ;;          "\\|\\(?:\\`.+?[#~]\\'\\)"))
-;;   (defun haba/counsel-pt-choose-dir ()
-;;     (interactive)
-;;     (setq current-prefix-arg '(4))
-;;     (counsel-pt))
 ;;   )
 
 
 (use-package projectile
   :bind-keymap (("C-c p" . projectile-mode-map))
   :config
-  ;; (setq projectile-completion-system 'ivy)
   (projectile-global-mode))
 
 (use-package hydra
