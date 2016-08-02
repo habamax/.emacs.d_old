@@ -618,15 +618,6 @@
              (string= lang "dot"))))
   (setq org-confirm-babel-evaluate 'haba/org-confirm-babel-evaluate)
 
-  ;; this has to be set up for different machines
-  ;; XXX: refactor this
-  ;; (setq org-plantuml-jar-path "/usr/local/Cellar/plantuml/8037/plantuml.8037.jar")
-  (setq org-plantuml-jar-path "c:/prg/bin/plantuml.jar")
-
-  (setq org-ditaa-jar-path "c:/prg/bin/ditaa0_9.jar")
-
-
-
   ;; default export options
   (setq org-export-with-smart-quotes t
         org-export-with-emphasize t
