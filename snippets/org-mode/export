@@ -28,3 +28,24 @@
   #+HTML_HEAD_EXTRA: <style>#postamble {border-top:5px black solid;background-color: #242729; color: #9fa6ad; margin:2em 0 0 0;padding: 1em;}</style>
   #+HTML_HEAD_EXTRA: <style>#postamble a {color: #5e666e; text-decoration: underline;}</style>
   #+HTML_HEAD_EXTRA: <style>#postamble .author_caption, #postamble .date_caption {color: #707777;}</style>
+
+  #+HTML_HEAD_EXTRA: <style>code {font-family: "Roboto Mono", monospace; font-size: 16px;}</style>
+  #+HTML_HEAD_EXTRA: <style>p>code, li>code {background-color: #eee; padding: 0.25em;}</style>
+  #+HTML_HEAD_EXTRA: <style>h2 code, h3 code, h4 code, h5 code, td code {font-family: inherit !important; font-size: inherit !important;}</style>
+  #+HTML_HEAD_EXTRA: <style>td code {font-weight: bold;}</style>
+  #+HTML_HEAD_EXTRA: <style>ol>li {margin-top: 1em;}</style>
+  #+HTML_HEAD_EXTRA: <style>table {margin: auto;}</style>
+  #+HTML_HEAD_EXTRA: <style>table, th, td {border: 1px solid #666;}</style>
+  #+HTML_HEAD_EXTRA: <style>thead tr th {background-color:#eee; border-bottom:4px solid; border-top:2px solid;}</style>
+  #+HTML_HEAD_EXTRA: <style>th, td {padding: 0.5em; text-align: left;}</style>
+  #+HTML_HEAD_EXTRA: <style>pre {font-family: "Roboto Mono", monospace; border: 0; box-shadow: none;}</style>
+  #+HTML_HEAD_EXTRA: <style>pre.example:before {display: block; border-bottom: 1px dotted; margin-bottom: 1em;}</style>
+  #+HTML_HEAD_EXTRA: <style>pre.example {background: #fec; color: #666; font-size: 0.85em;}</style>
+  #+HTML_HEAD_EXTRA: <style>pre {background-color: #f8f8f8; background-size: 8px 8px; background-image: linear-gradient(135deg, transparent 25%, rgba(0, 0, 0, 0.02) 25%, rgba(0, 0, 0, 0.02) 50%, transparent 50%, transparent 75%, rgba(0, 0, 0, 0.02) 75%, rgba(0, 0, 0, 0.02));}</style>
+  #+HTML_HEAD_EXTRA: <style>pre.src {padding: 0.5em;}</style>
+  #+HTML_HEAD_EXTRA: <style>pre.src:before {display: block; position: absolute; background-color: #ccccd0; top: 0; right: 0; padding: 0.25em 0.5em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 80%;}</style>
+  #+HTML_HEAD_EXTRA: <style>pre.src-plantuml:before {content: "UML";}</style>
+  #+HTML_HEAD_EXTRA: <style>pre.src-clojure:before {content: "CLJ";}</style>
+  #+HTML_HEAD_EXTRA: <style>.todo, .done {font-family: sans-serif; font-weight: normal; padding: 0 0.25em; border-radius: 0.2em;}</style>
+  #+HTML_HEAD_EXTRA: <style>.todo {background: #f04; color: white;}</style>
+  #+HTML_HEAD_EXTRA: <style>.done {background: #5f7; color: white;}</style>
