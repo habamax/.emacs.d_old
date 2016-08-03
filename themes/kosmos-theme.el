@@ -57,13 +57,15 @@
    `(default ((t (:background ,kosmos-bg :foreground ,kosmos-fg))))
    '(cursor ((nil (:background "#f0f0f0"))))
    `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
-   ;; '(highlight ((t (:background "#65a7e2" :foreground "#000000"))))
-   ;; '(highlight ((t (:background "#202090" :foreground "#bdbdbd"))))
-   '(highlight ((nil (:background "#304050"))))
+   ;; '(highlight ((nil (:background "#304050"))))
+   '(highlight ((nil (:background "#203040"))))
    '(bold ((t (:weight bold))))
 
    '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
    '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
+   ;; match
+   ;; isearch-fail
+
 
 
 
@@ -149,24 +151,21 @@
    '(git-commit-summary ((t (:inherit font-lock-string-face))))
 
    ;; ivy
-   '(ivy-current-match ((nil (:inherit highlight))))
-   '(ivy-minibuffer-match-face-1 ((nil (:inherit highlight))))
-   '(ivy-minibuffer-match-face-2 ((nil (:weight bold))))
-   '(ivy-minibuffer-match-face-3 ((nil (:weight bold))))
-   '(ivy-minibuffer-match-face-4 ((nil (:weight bold))))
-   ;; '(ivy-minibuffer-match-face-2 ((nil (:background "#202020" :weight bold))))
-   ;; '(ivy-minibuffer-match-face-3 ((nil (:background "#303030" :weight bold))))
-   ;; '(ivy-minibuffer-match-face-4 ((nil (:background "#404040" :weight bold))))
+   `(ivy-current-match ((nil (:background "#203040"))))
+
+   `(ivy-minibuffer-match-face-1 ((t (:foreground "#777777"))))
+   '(ivy-minibuffer-match-face-2 ((t (:foreground "#fff68f" :weight bold :underline (:color "#fff68f")))))
+   '(ivy-minibuffer-match-face-3 ((t (:foreground "#40e0d0" :weight bold :underline (:color "#40e0d0")))))
+   '(ivy-minibuffer-match-face-4 ((t (:foreground "#da70d6" :weight bold :underline (:color "#da70d6")))))
    '(ivy-modified-buffer ((t (:inherit font-lock-keyword-face))))
    '(ivy-remote ((t (:inherit font-lock-comment-face))))
    '(ivy-virtual ((t (:foreground "#787878"))))
 
    ;; swiper
-   '(swiper-match-face-1 ((nil (:inherit ivy-minibuffer-match-face-1))))
-   '(swiper-match-face-2 ((nil (:inherit ivy-minibuffer-match-face-2))))
-   '(swiper-match-face-3 ((nil (:inherit ivy-minibuffer-match-face-3))))
-   '(swiper-match-face-4 ((nil (:inherit ivy-minibuffer-match-face-4))))
-
+   `(swiper-match-face-1 ((t (:foreground "#777777"))))
+   `(swiper-match-face-2 ((t (:background "#606020" :foreground "#fff68f" :weight bold :underline (:color "#fff68f")))))
+   `(swiper-match-face-3 ((t (:background "#206060" :foreground "#40e0d0" :weight bold :underline (:color "#40e0d0")))))
+   `(swiper-match-face-4 ((t (:background "#603060" :foreground "#da70d6" :weight bold :underline (:color "#da70d6")))))
 
 
    ;; org
