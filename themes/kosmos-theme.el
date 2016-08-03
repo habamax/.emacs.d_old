@@ -7,11 +7,12 @@
 ;;; 2. Strings  -- did I miss a quote?
 ;;; 3. Keywords -- a bit of standout
 ;;;
-;;; There are many other things in Emacs that should be colored.
-
-;; TODO: find color for git-commit-nonempty-second-line
-;; clojure (font-lock-warning-face --> cider-repl-stderr-face) is ugly
-;; snippet mode clash white {} with pair highlighting
+;;; TODO:
+;;; - find color for git-commit-nonempty-second-line
+;;; - clojure (font-lock-warning-face --> cider-repl-stderr-face) is ugly
+;;; - snippet mode clash white {} with pair highlighting
+;;; - better isearch
+;;; - softer string color?
 
 
 
@@ -30,7 +31,6 @@
      (kosmos-box-modeline-inactive "#303030")
      (kosmos-keyword "#ffffff")
      (kosmos-str "#77cc77")
-     ;; (kosmos-comment "#50abab")
      (kosmos-comment "#5797a0")
      (kosmos-gray "#777777")
      (kosmos-fg-dim "#777777")
@@ -38,7 +38,6 @@
      (kosmos-fg-todo "#bdabab")
      (kosmos-bg-todo "#775555")
      (kosmos-fg-done "#abbdab")
-     ;; (kosmos-bg-done "#557755")
      (kosmos-bg-done "#777777")
      (kosmos-h1 "#b0b0b0")
      (kosmos-h2 "#b0b090")
@@ -54,60 +53,47 @@
   (custom-theme-set-faces
    'kosmos
 
+   ;; standard faces
    `(default ((t (:background ,kosmos-bg :foreground ,kosmos-fg))))
    '(cursor ((nil (:background "#f0f0f0"))))
    `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
-   ;; '(highlight ((nil (:background "#304050"))))
    '(highlight ((nil (:background "#203040"))))
    '(bold ((t (:weight bold))))
+   `(minibuffer-prompt ((t (:foreground "#ff8247"))))
+   '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
+
 
    '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
    '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
-   ;; match
-   ;; isearch-fail
+   ;; match?
+   ;; isearch-fail?
 
-
-
-
+   ;; frame UI
    `(mode-line ((t (:background ,kosmos-bg-modeline-active :foreground ,kosmos-keyword :box (:line-width 1 :color ,kosmos-box-modeline-active)))))
    `(mode-line-inactive ((t (:background ,kosmos-bg-modeline-inactive :foreground ,kosmos-gray :box (:line-width 1 :color ,kosmos-box-modeline-inactive)))))
-
    `(mode-line-highlight ((nil (:foreground ,kosmos-fg-modeline-hl :box (:line-width 1 :color ,kosmos-fg)))))
-
-
    `(vertical-border ((nil (:foreground ,kosmos-box-modeline-inactive))))
    `(fringe ((nil (:background ,kosmos-bg))))
-   ;; experimental
-   `(minibuffer-prompt ((t (:foreground "#ff8247"))))
 
 
-
-   ;; font-lock I care about
+   ;; syntax font-lock I DO care about
    `(font-lock-string-face ((t (:foreground ,kosmos-str))))
-   ;; review this later.
-   `(font-lock-regexp-grouping-backslash ((t (:foreground ,kosmos-str :weight bold))))
-   `(font-lock-regexp-grouping-construct ((t (:foreground ,kosmos-str :weight bold :slant italic))))
-
-   ;; can't decide if cyan of wheat is better for comments.
    `(font-lock-comment-face ((t (:foreground ,kosmos-comment))))
-   ;; '(font-lock-comment-face ((t (:foreground "wheat"))))
-
    `(font-lock-keyword-face ((t (:foreground ,kosmos-keyword))))
-
-
-
-   ;; font-lock I don't care about
+   ;; syntax font-lock I DON'T care about
    '(font-lock-builtin-face ((t nil)))
    '(font-lock-type-face ((t nil)))
    '(font-lock-function-name-face ((t nil)))
    '(font-lock-variable-name-face ((t nil)))
    '(font-lock-constant-face ((t nil)))
+   ;; review this later.
+   `(font-lock-regexp-grouping-backslash ((t (:foreground ,kosmos-str :weight bold))))
+   `(font-lock-regexp-grouping-construct ((t (:foreground ,kosmos-str :weight bold :slant italic))))
 
 
    ;; parenthesis and pairs
    `(show-paren-match ((t :background ,kosmos-bg-hl-parens)))
    `(sp-show-pair-match-face ((t (:background ,kosmos-bg-hl-parens))))
-
 
 
    ;; links
@@ -153,9 +139,9 @@
    ;; magit
    '(git-commit-summary ((t (:inherit font-lock-string-face))))
 
+
    ;; ivy
    `(ivy-current-match ((nil (:background "#203040"))))
-
    `(ivy-minibuffer-match-face-1 ((t (:foreground "#777777"))))
    '(ivy-minibuffer-match-face-2 ((t (:foreground "#fff68f" :weight bold :underline (:color "#fff68f")))))
    '(ivy-minibuffer-match-face-3 ((t (:foreground "#40e0d0" :weight bold :underline (:color "#40e0d0")))))
@@ -232,9 +218,6 @@
    ;; emms
    '(emms-playlist-track-face ((t (:inherit default))))
    '(emms-playlist-selected-face ((t (:background "#20408b" :foreground "white" :weight bold))))
-
-   ;; widget
-   '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
 
 
    ;; LaTeX
