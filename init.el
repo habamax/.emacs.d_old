@@ -366,6 +366,10 @@
         magit-popup-use-prefix-argument 'default
         magit-revert-buffers t))
 
+(use-package git-gutter
+  :defer 4
+  :config
+  (global-git-gutter-mode 1))
 
 (use-package markdown-mode
   :mode ("\\.\\(markdown\\|md\\)$" . markdown-mode))
