@@ -133,7 +133,7 @@
   (defun haba/open-scratch-buffer ()
     "Open scratch buffer"
     (interactive)
-    (switch-to-buffer "*Scratch*"))
+    (switch-to-buffer "*scratch*"))
   )
 
 
