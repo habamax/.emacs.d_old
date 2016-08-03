@@ -230,10 +230,9 @@
          ("C-s" . counsel-grep-or-swiper)
          ("C-r" . counsel-grep-or-swiper)
          ("C-c s" . swiper-all)
-         ("C-x b" . ivy-switch-buffer)
-         ("s-b" . ivy-switch-buffer))
+         ("C-x b" . ivy-switch-buffer))
   :config
-  ;; cousel uses smex for better soring
+  ;; counsel uses smex for better soring
   (use-package smex :defer)
 
   (setq counsel-find-file-at-point t)
