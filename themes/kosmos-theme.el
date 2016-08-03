@@ -77,6 +77,9 @@
 
    `(vertical-border ((nil (:foreground ,kosmos-box-modeline-inactive))))
    `(fringe ((nil (:background ,kosmos-bg))))
+   ;; experimental
+   `(minibuffer-prompt ((t (:foreground "#ff8247"))))
+
 
 
    ;; font-lock I care about
