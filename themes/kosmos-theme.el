@@ -46,6 +46,13 @@
      (kosmos-fg-modeline-hl "#ffff00")
      (kosmos-bg-whitespace "#1a1a1f")
      (kosmos-fg-whitespace "#303040")
+     (kosmos-fg-search "#fff68f")
+     (kosmos-bg-search "#606020")
+     (kosmos-fg-lazysearch "#40e0d0")
+     (kosmos-bg-lazysearch "#206060")
+     (kosmos-fg-search-fail "#da70d6")
+     (kosmos-bg-search-fail "#603060")
+     (kosmos-bg-highlight "#203040")
      )
 
 
@@ -57,16 +64,17 @@
    `(default ((t (:background ,kosmos-bg :foreground ,kosmos-fg))))
    '(cursor ((nil (:background "#f0f0f0"))))
    `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
-   '(highlight ((nil (:background "#203040"))))
+   `(highlight ((nil (:background ,kosmos-bg-highlight))))
    '(bold ((t (:weight bold))))
    `(minibuffer-prompt ((t (:foreground "#ff8247"))))
    '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
 
 
-   '(isearch ((t (:background "wheat" :foreground "#000000" :weight bold))))
-   '(lazy-highlight ((t (:background "honeydew" :foreground "#000000"))))
+   `(isearch ((t (:background ,kosmos-bg-search :foreground ,kosmos-fg-search :weight bold))))
+   `(lazy-highlight ((t (:background ,kosmos-bg-lazysearch :foreground ,kosmos-fg-lazysearch :weight bold))))
    ;; match?
-   ;; isearch-fail?
+   `(isearch-fail ((t (:background ,kosmos-bg-search-fail :foreground ,kosmos-fg-search-fail :weight bold))))
+
 
    ;; frame UI
    `(mode-line ((t (:background ,kosmos-bg-modeline-active :foreground ,kosmos-keyword :box (:line-width 1 :color ,kosmos-box-modeline-active)))))
@@ -141,20 +149,20 @@
 
 
    ;; ivy
-   `(ivy-current-match ((nil (:background "#203040"))))
-   `(ivy-minibuffer-match-face-1 ((t (:foreground "#777777"))))
-   '(ivy-minibuffer-match-face-2 ((t (:foreground "#fff68f" :weight bold :underline (:color "#fff68f")))))
-   '(ivy-minibuffer-match-face-3 ((t (:foreground "#40e0d0" :weight bold :underline (:color "#40e0d0")))))
-   '(ivy-minibuffer-match-face-4 ((t (:foreground "#da70d6" :weight bold :underline (:color "#da70d6")))))
-   '(ivy-modified-buffer ((t (:inherit font-lock-keyword-face))))
+   `(ivy-current-match ((t (:background ,kosmos-bg-highlight))))
+   `(ivy-minibuffer-match-face-1 ((t (:foreground ,kosmos-fg-dim))))
+   `(ivy-minibuffer-match-face-2 ((t (:foreground ,kosmos-fg-search :weight bold :underline (:color ,kosmos-fg-search)))))
+   `(ivy-minibuffer-match-face-3 ((t (:foreground ,kosmos-fg-lazysearch :weight bold :underline (:color ,kosmos-bg-lazysearch)))))
+   `(ivy-minibuffer-match-face-4 ((t (:foreground ,kosmos-fg-search-fail :weight bold :underline (:color ,kosmos-bg-search-fail)))))
+   `(ivy-modified-buffer ((nil (:foreground ,kosmos-keyword :slant italic))))
    '(ivy-remote ((t (:inherit font-lock-comment-face))))
-   '(ivy-virtual ((t (:foreground "#787878"))))
+   `(ivy-virtual ((t (:foreground ,kosmos-fg-dim))))
 
    ;; swiper
-   `(swiper-match-face-1 ((t (:foreground "#777777"))))
-   `(swiper-match-face-2 ((t (:background "#606020" :foreground "#fff68f" :weight bold :underline (:color "#fff68f")))))
-   `(swiper-match-face-3 ((t (:background "#206060" :foreground "#40e0d0" :weight bold :underline (:color "#40e0d0")))))
-   `(swiper-match-face-4 ((t (:background "#603060" :foreground "#da70d6" :weight bold :underline (:color "#da70d6")))))
+   `(swiper-match-face-1 ((t (:foreground ,kosmos-fg-dim))))
+   `(swiper-match-face-2 ((t (:background ,kosmos-bg-search :foreground ,kosmos-fg-search :weight bold :underline (:color ,kosmos-fg-search)))))
+   `(swiper-match-face-3 ((t (:background ,kosmos-bg-lazysearch :foreground ,kosmos-fg-lazysearch :weight bold :underline (:color ,kosmos-bg-lazysearch)))))
+   `(swiper-match-face-4 ((t (:background ,kosmos-bg-search-fail :foreground ,kosmos-fg-search-fail :weight bold :underline (:color ,kosmos-bg-search-fail)))))
 
 
    ;; org
