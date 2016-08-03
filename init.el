@@ -220,7 +220,8 @@
   (ivy-mode 1)
   (setq projectile-completion-system 'ivy)
   (setq ivy-use-virtual-buffers t)
-  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
+  (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
+                                (t . ivy--regex-fuzzy))))
 
 
 (use-package counsel
