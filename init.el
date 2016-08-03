@@ -617,7 +617,8 @@
   (setq org-export-with-smart-quotes t
         org-export-with-emphasize t
         org-export-with-todo-keywords nil
-        org-export-time-stamp-file nil)
+        org-export-time-stamp-file nil
+        org-export-headline-levels 5)
 
   (setq org-html-validation-link nil)
   (setq org-html-postamble-format
