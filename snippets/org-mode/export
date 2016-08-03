@@ -33,7 +33,6 @@
   #+HTML_HEAD_EXTRA: <style>p>code, li>code {background-color: #eee; padding: 0.25em;}</style>
   #+HTML_HEAD_EXTRA: <style>h2 code, h3 code, h4 code, h5 code, td code {font-family: inherit !important; font-size: inherit !important;}</style>
   #+HTML_HEAD_EXTRA: <style>td code {font-weight: bold;}</style>
-  #+HTML_HEAD_EXTRA: <style>ol>li {margin-top: 1em;}</style>
   #+HTML_HEAD_EXTRA: <style>table {margin: auto;}</style>
   #+HTML_HEAD_EXTRA: <style>table, th, td {border: 1px solid #666;}</style>
   #+HTML_HEAD_EXTRA: <style>thead tr th {background-color:#eee; border-bottom:4px solid; border-top:2px solid;}</style>
