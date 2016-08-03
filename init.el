@@ -141,12 +141,8 @@
   :ensure nil
   :demand
   :load-path "lisp/"
-  ;; :bind (("s-t" . haba/toggle-theme)
-         ;; ("C-c t" . haba/toggle-theme))
   :config
     (use-package leuven-theme :defer))
-
-
 
 
 ;; Melpa packages
