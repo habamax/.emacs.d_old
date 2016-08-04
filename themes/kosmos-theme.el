@@ -13,6 +13,7 @@
 ;;; - snippet mode clash white {} with pair highlighting
 ;;; - better isearch
 ;;; - softer string color?
+;;; - ido faces?
 
 
 
@@ -30,7 +31,7 @@
      (kosmos-box-modeline-active "#3f5f5f")
      (kosmos-box-modeline-inactive "#303030")
      (kosmos-keyword "#ffffff")
-     (kosmos-str "#77cc77")
+     (kosmos-str "#3cb371")
      (kosmos-comment "#5797a0")
      (kosmos-gray "#777777")
      (kosmos-fg-dim "#777777")
@@ -67,7 +68,7 @@
    `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
    `(highlight ((nil (:background ,kosmos-bg-highlight))))
    '(bold ((t (:weight bold))))
-   `(minibuffer-prompt ((t (:foreground "#ff8247"))))
+   `(minibuffer-prompt ((t (:foreground "#00bfff"))))
    '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
 
 
