@@ -72,10 +72,10 @@
    '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
 
 
-   `(isearch ((t (:background ,kosmos-bg-search :foreground ,kosmos-fg-search :weight bold))))
-   `(lazy-highlight ((t (:background ,kosmos-bg-lazysearch :foreground ,kosmos-fg-lazysearch :weight bold))))
+   `(isearch ((t (:background ,kosmos-bg-search :foreground ,kosmos-fg-search :weight bold :underline (:color ,kosmos-fg-search)))))
+   `(lazy-highlight ((t (:background ,kosmos-bg-lazysearch :foreground ,kosmos-fg-lazysearch :weight bold :underline (:color ,kosmos-fg-lazysearch)))))
    ;; match?
-   `(isearch-fail ((t (:background ,kosmos-bg-search-fail :foreground ,kosmos-fg-search-fail :weight bold))))
+   `(isearch-fail ((t (:background ,kosmos-bg-search-fail :foreground ,kosmos-fg-search-fail :weight bold :underline (:color ,kosmos-fg-search-fail)))))
 
 
    ;; frame UI
