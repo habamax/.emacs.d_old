@@ -68,7 +68,7 @@
    `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
    `(highlight ((nil (:background ,kosmos-bg-highlight))))
    '(bold ((t (:weight bold))))
-   `(minibuffer-prompt ((t (:foreground "#00bfff"))))
+   '(minibuffer-prompt ((t (:foreground "#00ff00" :weight bold))))
    '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
 
 
