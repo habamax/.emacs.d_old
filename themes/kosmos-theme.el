@@ -34,6 +34,7 @@
      (kosmos-comment "#5797a0")
      (kosmos-gray "#777777")
      (kosmos-fg-dim "#777777")
+     (kosmos-bg-dim "#101010")
      (kosmos-fg-dim-2 "#506060")
      (kosmos-fg-todo "#bdabab")
      (kosmos-bg-todo "#775555")
@@ -81,7 +82,7 @@
    `(mode-line-inactive ((t (:background ,kosmos-bg-modeline-inactive :foreground ,kosmos-gray :box (:line-width 1 :color ,kosmos-box-modeline-inactive)))))
    `(mode-line-highlight ((nil (:foreground ,kosmos-fg-modeline-hl :box (:line-width 1 :color ,kosmos-fg)))))
    `(vertical-border ((nil (:foreground ,kosmos-box-modeline-inactive))))
-   `(fringe ((nil (:background ,kosmos-bg))))
+   `(fringe ((nil (:background ,kosmos-bg-dim))))
 
 
    ;; syntax font-lock I DO care about
@@ -146,6 +147,11 @@
 
    ;; magit
    '(git-commit-summary ((t (:inherit font-lock-string-face))))
+
+   ;; git gutter fringe
+   `(git-gutter-fr:modified ((nil (:background ,kosmos-bg-dim :foreground "#ff55ff"))))
+   `(git-gutter-fr:added ((nil (:background ,kosmos-bg-dim :foreground "#55ff55"))))
+   `(git-gutter-fr:deleted ((nil (:background ,kosmos-bg-dim :foreground "#ff5555"))))
 
 
    ;; ivy
