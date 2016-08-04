@@ -250,8 +250,12 @@
    ;; XML
    `(nxml-element-local-name ((t (:foreground ,kosmos-fg-dim))))
    `(nxml-tag-delimiter ((t (:foreground ,kosmos-fg-dim))))
-   `(nxml-attribute-local-name ((t (:foreground ,kosmos-fg-dim-2))))
-   `(nxml-attribute-value ((t (:foreground ,kosmos-fg-dim-2))))
+   `(nxml-namespace-attribute-xmlns ((t (:foreground ,kosmos-fg-dim))))
+   `(nxml-attribute-local-name ((t (:foreground ,kosmos-fg-dim))))
+   `(nxml-attribute-value ((t (:foreground ,kosmos-str))))
+   `(nxml-cdata-section-CDATA ((t (:foreground ,kosmos-fg-dim))))
+   `(nxml-cdata-section-content ((t (:foreground ,kosmos-fg))))
+   `(nxml-cdata-section-delimiter ((t (:foreground ,kosmos-fg-dim-2))))
 
    ;; whitespace-mode
    `(whitespace-space ((t (:foreground ,kosmos-fg-whitespace))))
