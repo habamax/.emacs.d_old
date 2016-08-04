@@ -64,8 +64,8 @@
 
    ;; standard faces
    `(default ((t (:background ,kosmos-bg :foreground ,kosmos-fg))))
-   '(cursor ((nil (:background "#f0f0f0"))))
-   `(region ((t (:background "#668b8b" :foreground ,kosmos-bg))))
+   '(cursor ((nil (:background "#ffffff"))))
+   `(region ((t (:background "#839191" :foreground ,kosmos-bg))))
    `(highlight ((nil (:background ,kosmos-bg-highlight))))
    '(bold ((t (:weight bold))))
    '(minibuffer-prompt ((t (:foreground "#00ff00" :weight bold))))
