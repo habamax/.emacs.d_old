@@ -268,6 +268,8 @@
     ("b" balance-windows "Balance windows")
     ("m" delete-other-windows "Maximize window")
     ("c" delete-window "Close window")
+    ("p" ivy-push-view "Save layout")
+    ("P" ivy-pop-view "Remove layout")
     ("SPC" nil "quit")
     ("q" nil "quit"))
 
