@@ -369,6 +369,7 @@
 (use-package git-gutter
   :defer 4
   :config
+  (use-package git-gutter-fringe)
   (global-git-gutter-mode 1))
 
 (use-package git-timemachine
