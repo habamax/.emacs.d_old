@@ -239,7 +239,7 @@
          ;; file names ending with # or ~
          "\\|\\(?:\\`.+?[#~]\\'\\)"))
 
-  (setq ivy-ignore-buffers '("\\.*autoloads.el"))
+  (setq ivy-ignore-buffers '(".*-autoloads.el"))
   (setq ivy-switch-buffer-faces-alist '((dired-mode . ivy-subdir)))
   )
 
