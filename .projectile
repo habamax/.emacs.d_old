@@ -1,2 +1,5 @@
 -/elpa
 -/auto-save-list
+-/url
+-/emms
+-*.*autoloads.el
