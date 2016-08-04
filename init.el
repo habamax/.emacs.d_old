@@ -366,10 +366,19 @@
         magit-popup-use-prefix-argument 'default
         magit-revert-buffers t))
 
+
+;; git-gutter and git-gutter-fringe are mutually exclusive
+;; fringe version doesn't work for terminal
+(use-package git-gutter-fringe
+  :defer 4
+  :if (display-graphic-p)
+  :config
+  (global-git-gutter-mode 1))
+
 (use-package git-gutter
   :defer 4
+  :if (not (display-graphic-p))
   :config
-  (use-package git-gutter-fringe)
   (global-git-gutter-mode 1))
 
 (use-package git-timemachine
