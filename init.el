@@ -179,10 +179,8 @@
 
 (use-package avy
   :diminish avy-mode
-  :bind (("C-;" . avy-goto-char-timer)
-         ("M-g g" . avy-goto-line)
-         ("M-g w" . avy-goto-word-1))
-  )
+  :bind (("C-;" . avy-goto-word-1)
+         ("M-g g" . avy-goto-line)))
 
 ;; (use-package ido
 ;;   :config
