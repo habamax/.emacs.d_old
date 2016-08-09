@@ -93,6 +93,9 @@
 (setq dired-dwim-target t)
 
 
+;; use hippie-expand
+(global-set-key [remap dabbrev-expand] 'hippie-expand)
+
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
