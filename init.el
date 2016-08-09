@@ -294,7 +294,7 @@
 (use-package company
   :defer 1
   :diminish company-mode
-  :bind ("s-/" . company-complete)
+  ;; :bind ("s-/" . company-complete)
   :config
   (progn
     (use-package company-flx :config (company-flx-mode +1))
