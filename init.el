@@ -20,6 +20,7 @@
       inhibit-splash-screen t
       initial-scratch-message "")
 
+;; The user with tentacles
 (setq user-full-name "Maxim Kim"
       user-mail-address "habamax@gmail.com")
 
