@@ -525,6 +525,8 @@
   :config
   (setq erc-hide-list '("JOIN" "PART" "QUIT"))
   (ignore-errors
+    ;; add ercpwd file with
+    ;; (setq freenode-habamax-pass "yoursecretpassword")
     (load (concat user-emacs-directory "ercpwd"))
     (require 'erc-services)
     (erc-services-mode 1)
