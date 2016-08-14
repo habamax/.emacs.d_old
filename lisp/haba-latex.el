@@ -36,11 +36,11 @@
 (defun haba/org-latex-class-common (lang-main lang-other)
   (concat "\\usepackage{fontspec}
          \\defaultfontfeatures{Ligatures=TeX}
-         \\setmainfont{PT Serif}
-         \\setsansfont{PT Sans}
-         \\newfontfamily{\\cyrillicfonttt}{Input}
-         \\setmonofont{Input}
-         \\newcommand\\quotefont{\\fontspec[Colour=55555500]{PT Sans}}
+         \\setmainfont{Roboto}
+         \\setsansfont{Roboto Condensed}
+         \\newfontfamily{\\cyrillicfonttt}{Roboto Mono}
+         \\setmonofont{Roboto Mono}
+         \\newcommand\\quotefont{\\fontspec[Colour=55555500]{Roboto}}
          \\usepackage{polyglossia}
          \\setdefaultlanguage{" lang-main "}
          \\setotherlanguages{" lang-other "}
@@ -300,5 +300,3 @@
                ;; "\\end{frame}"
                ;; "\\begin{frame}[fragile]\\frametitle{%s}"
                ;; "\\end{frame}")))
-
-
