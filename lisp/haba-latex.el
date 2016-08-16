@@ -17,13 +17,15 @@
 
 (setq org-latex-default-packages-alist
       '(("" "indentfirst" t) ; первая строка параграфа сдвинута
+        ("" "float" nil) ; расположение таблиц и рисунков "точно здесь!" [H]
         ("" "misccorr" t) ; точка в номерах заголовков
         ("onehalfspacing" "setspace" t) ; межстрочный интервал
-        ("" "tabulary" t) ; Таблицы с возможностью "спана"
+        ;; ("" "tabulary" t) ; Таблицы с возможностью "спана"
+        ("" "array" t) ; Таблицы
         ("" "fixltx2e" nil)
         ("" "graphicx" t)
         ("" "grffile" t)
-        ("" "longtable" nil)
+        ("" "longtable" nil) ; Таблицы на несколько страниц
         ("" "wrapfig" nil)
         ("" "rotating" nil)
         ("normalem" "ulem" t)
@@ -44,7 +46,11 @@
          \\usepackage{polyglossia}
          \\setdefaultlanguage{" lang-main "}
          \\setotherlanguages{" lang-other "}
-         \\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"))
+         \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
+         \\renewcommand{\\arraystretch}{1.5}
+         \\newcommand{\\theadfst}[1]{\\multicolumn{1}{|c|}{\\textbf{#1}}}
+         \\newcommand{\\thead}[1]{\\multicolumn{1}{c|}{\\textbf{#1}}}
+         "))
          ;; \\usepackage{enumitem}
          ;; \\setlist{nosep}"))
 
@@ -154,7 +160,6 @@
              `("article-en"
                ,(concat "\\documentclass[a4paper,10pt]{article}"
                         (haba/org-latex-class-common "english" "russian")
-                        "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
                         haba/org-latex-class-hf-std
                         haba/org-latex-class-titling
                         haba/org-latex-class-dot-in-chapters
@@ -213,8 +218,6 @@
              `("report"
                ,(concat "\\documentclass[a4paper,10pt]{report}"
                         (haba/org-latex-class-common "russian" "english")
-                        "\\usepackage[top=30mm, left=30mm, right=25mm, bottom=35mm]{geometry}"
-
                         haba/org-latex-class-hf-std
                         haba/org-latex-class-titling
                         haba/org-latex-class-dot-in-chapters
