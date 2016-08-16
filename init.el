@@ -514,16 +514,20 @@
   :defer
   :ensure nil
   :init
-  (setq ;erc-fill-column (- (window-width) 2)
-        erc-nick '("habamax" "mxmkm")
-        erc-track-minor-mode t
-        erc-autojoin-channels-alist '(("freenode.net" "#emacs")))
+
   (defun erc-freenode ()
     (interactive)
     (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
 
   :config
   (setq erc-hide-list '("JOIN" "PART" "QUIT"))
+  (setq erc-join-buffer 'bury)
+
+  (setq
+        erc-nick '("habamax" "mxmkm")
+        erc-track-minor-mode t
+        erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor" "#godotengine")))
+
   (ignore-errors
     ;; add ercpwd file with
     ;; (setq freenode-habamax-pass "yoursecretpassword")
