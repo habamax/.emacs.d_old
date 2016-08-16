@@ -70,6 +70,8 @@
    '(bold ((t (:weight bold))))
    '(minibuffer-prompt ((t (:foreground "#00ff00" :weight bold))))
    '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
+   ;; `(header-line ((t (:foreground ,kosmos-keyword :background "#6b5e46" :box (:line-width 1 :color "#8d7a56" :style none)))))
+   `(header-line ((t (:foreground ,kosmos-keyword :background "#404040"))))
 
 
    `(isearch ((t (:background ,kosmos-bg-search :foreground ,kosmos-fg-search :weight bold :underline (:color ,kosmos-fg-search)))))
@@ -144,8 +146,7 @@
    '(erc-action-face ((nil (:slant italic))))
    '(erc-button ((t (:underlined on))))
 
-   '(header-line ((t (:foreground "#ffffff" :background "#333333" :box (:line-width 1 :color "#555555" :style released-button)))))
-
+   
    ;; magit
    '(git-commit-summary ((t (:inherit font-lock-string-face))))
 
