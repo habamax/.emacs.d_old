@@ -25,6 +25,8 @@
         ("onehalfspacing" "setspace" t) ; межстрочный интервал
         ;; ("" "tabulary" t) ; Таблицы с возможностью "спана"
         ("" "array" t) ; Таблицы
+        ("" "color" nil) ; Использовение цветов, например в пакете soul
+        ("" "soul" nil) ; подсветка текста hl{текст}
         ("" "fixltx2e" nil)
         ("" "graphicx" t)
         ("" "grffile" t)
