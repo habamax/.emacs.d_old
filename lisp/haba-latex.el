@@ -57,8 +57,6 @@
          \\newcommand{\\theadfst}[1]{\\multicolumn{1}{|c|}{\\textbf{#1}}}
          \\newcommand{\\thead}[1]{\\multicolumn{1}{c|}{\\textbf{#1}}}
          "))
-         ;; \\usepackage{enumitem}
-         ;; \\setlist{nosep}"))
 
 (defun haba/org-latex-class-hf-logo-2(logo-left vmove-left logo-right vmove-right)
   (interactive "P")
