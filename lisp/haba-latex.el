@@ -148,7 +148,7 @@
 
 (add-to-list 'org-latex-classes
              `("article"
-               ,(concat "\\documentclass[a4paper,10pt]{article}"
+               ,(concat "\\documentclass[a4paper,10pt,hidelinks]{article}"
                         (haba/org-latex-class-common "russian" "english")
                         haba/org-latex-class-hf-std
                         haba/org-latex-class-titling
@@ -162,7 +162,7 @@
 
 (add-to-list 'org-latex-classes
              `("article-en"
-               ,(concat "\\documentclass[a4paper,10pt]{article}"
+               ,(concat "\\documentclass[a4paper,10pt,hidelinks]{article}"
                         (haba/org-latex-class-common "english" "russian")
                         haba/org-latex-class-hf-std
                         haba/org-latex-class-titling
@@ -177,7 +177,7 @@
 
 (add-to-list 'org-latex-classes
              `("article-adastra"
-               ,(concat "\\documentclass[a4paper,10pt]{article}"
+               ,(concat "\\documentclass[a4paper,10pt,hidelinks]{article}"
                         (haba/org-latex-class-common "russian" "english")
                         (haba/org-latex-class-hf-logo-2 "logo_adastra_50_opacity.png" "" "" "")
                         haba/org-latex-class-titling
@@ -191,7 +191,7 @@
 
 (add-to-list 'org-latex-classes
              `("article-adastra-en"
-               ,(concat "\\documentclass[a4paper,10pt]{article}"
+               ,(concat "\\documentclass[a4paper,10pt,hidelinks]{article}"
                         (haba/org-latex-class-common "english" "russian")
                         (haba/org-latex-class-hf-logo-2 "logo_adastra_50_opacity.png" "" "" "")
                         haba/org-latex-class-titling
@@ -206,7 +206,7 @@
 
 (add-to-list 'org-latex-classes
              `("article-sberbank"
-               ,(concat "\\documentclass[a4paper,10pt]{article}"
+               ,(concat "\\documentclass[a4paper,10pt,hidelinks]{article}"
                         (haba/org-latex-class-common "russian" "english")
                         (haba/org-latex-class-hf-logo-2 "logo_sberbank_simple_50_opacity.png" "" "logo_adastra_50_opacity.png" "-3mm")
                         haba/org-latex-class-titling
@@ -220,7 +220,7 @@
 
 (add-to-list 'org-latex-classes
              `("report"
-               ,(concat "\\documentclass[a4paper,10pt]{report}"
+               ,(concat "\\documentclass[a4paper,10pt,hidelinks]{report}"
                         (haba/org-latex-class-common "russian" "english")
                         haba/org-latex-class-hf-std
                         haba/org-latex-class-titling
@@ -238,7 +238,7 @@
 
 (add-to-list 'org-latex-classes
              `("report-sberbank-adastra"
-               ,(concat "\\documentclass[a4paper,10pt]{report}"
+               ,(concat "\\documentclass[a4paper,10pt,hidelinks]{report}"
                         (haba/org-latex-class-common "russian" "english")
                         (haba/org-latex-class-hf-logo-2 "logo_sberbank_simple_50_opacity.png" "" "logo_adastra_50_opacity.png" "-3mm")
                         (haba/org-latex-class-titling-logo-2 "logo_sberbank_simple_50_opacity.png" "" "logo_adastra_50_opacity.png" "-3mm")
@@ -255,7 +255,7 @@
 
 (add-to-list 'org-latex-classes
              `("report-sberbank"
-               ,(concat "\\documentclass[a4paper,10pt]{report}"
+               ,(concat "\\documentclass[a4paper,10pt,hidelinks]{report}"
                         (haba/org-latex-class-common "russian" "english")
                         (haba/org-latex-class-hf-logo-2 "logo_sberbank_simple_50_opacity.png" "" "" "")
                         (haba/org-latex-class-titling-logo-2 "logo_sberbank_simple_50_opacity.png" "" "" "")
@@ -272,7 +272,7 @@
 
 (add-to-list 'org-latex-classes
              `("report-adastra-ru"
-               ,(concat "\\documentclass[a4paper,10pt]{report}"
+               ,(concat "\\documentclass[a4paper,10pt,hidelinks]{report}"
                         (haba/org-latex-class-common "russian" "english")
                         (haba/org-latex-class-hf-logo-2 "logo_adastra_50_opacity.png" "" "" "")
                         (haba/org-latex-class-titling-logo-2 "logo_adastra_50_opacity.png" "" "" "")
