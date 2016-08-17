@@ -3,7 +3,7 @@
 # key: longtable3
 # --
 \begin{center}
-\begin{longtable}{|m{2cm}|m{5cm}|m{8.7}}
+\begin{longtable}{|m{2cm}|m{5cm}|m{8.7cm}|}
 \caption{${1:Таблица}}
 \hline
 \theadfst{${2:Заголовок 1}} & \thead{${3:Заголовок 2}} & \thead{${4:Заголовок 3}}\\\ \hline
@@ -11,7 +11,9 @@
 \hline
 \theadfst{$2} & \thead{$3} & \thead{$4}\\\ \hline
 \endhead
+\multicolumn{3}{|r|}{{Продолжение на следующей странице}}\\\ \hline
 \endfoot
+\endlastfoot
 ${5:Значение 1} & ${6:Значение2} & ${7:Значение3}\\\ \hline
 \end{longtable}
 \end{center}

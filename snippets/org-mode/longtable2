@@ -11,7 +11,9 @@
 \hline
 \theadfst{$2} & \thead{$3}\\\ \hline
 \endhead
+\multicolumn{2}{|r|}{{Продолжение на следующей странице}}\\\ \hline
 \endfoot
+\endlastfoot
 ${4:Значение 1} & ${5:Значение2}\\\ \hline
 \end{longtable}
 \end{center}
