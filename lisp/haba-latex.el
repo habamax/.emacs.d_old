@@ -33,7 +33,7 @@
         ("" "textcomp" t)
         ("" "amssymb" t)
         ("" "capt-of" nil)
-        ("" "hyperref" nil)))
+        ("hidelinks" "hyperref" nil)))
 
 (defun haba/org-latex-class-common (lang-main lang-other)
   (concat "\\usepackage{fontspec}
