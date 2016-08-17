@@ -11,9 +11,12 @@
 
 ;; (setq org-latex-image-default-width nil)
 (setq org-latex-pdf-process
-      '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+      '("lualatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "lualatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "lualatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(setq org-latex-hyperref-template "\\hypersetup{\n pdfencoding=auto,\n pdfauthor={%a},\n pdftitle={%t},\n pdfkeywords={%k},\n pdfsubject={%d},\n pdfcreator={%c}, \n pdflang={%L}}\n"
+)
 
 (setq org-latex-default-packages-alist
       '(("" "indentfirst" t) ; первая строка параграфа сдвинута
