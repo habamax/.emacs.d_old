@@ -258,20 +258,30 @@
 
   :config
 
-  (defhydra hydra-windows ()
-    "Windows"
-    ("w" winner-undo "Winner undo")
-    ("W" winner-redo "Winner redo")
-    ("t" haba/toggle-window-split "Toggle split")
-    ("]" enlarge-window-horizontally "Enlarge horizontal")
-    ("[" shrink-window-horizontally "Shrink horizontal")
-    ("=" enlarge-window "Enlarge vertival")
-    ("-" shrink-window "Shrink vertical")
-    ("b" balance-windows "Balance windows")
-    ("m" delete-other-windows "Maximize window")
-    ("c" delete-window "Close window")
-    ("p" ivy-push-view "Save layout")
-    ("P" ivy-pop-view "Remove layout")
+  (defhydra hydra-windows (:hint nil)
+    "
+^Windows^                    ^Size^              ^Split^
+--------------------------------------------------------------------
+_w_: Winner undo          _]_: + width         _t_: Toggle 
+_W_: Winner redo          _[_: - width         _h_: Below
+_p_: Ivy push view        _=_: + height        _v_: Right
+_P_: Ivy pop view         _-_: - height        _m_: Maximize current
+^ ^                       _b_: balance         _c_: Close current
+"
+    ("w" winner-undo)
+    ("W" winner-redo)
+    ("t" haba/toggle-window-split)
+    ("h" split-window-below)
+    ("v" split-window-right)
+    ("m" delete-other-windows)
+    ("c" delete-window)
+    ("]" enlarge-window-horizontally)
+    ("[" shrink-window-horizontally)
+    ("=" enlarge-window)
+    ("-" shrink-window)
+    ("b" balance-windows)
+    ("p" ivy-push-view)
+    ("P" ivy-pop-view)
     ("SPC" nil "quit")
     ("q" nil "quit"))
 
@@ -287,6 +297,8 @@
     "Other window"
     ("o" (other-window 1) "Next")
     ("O" (other-window -1) "Previous")
+    ("m" delete-other-windows "Maximize window")
+    ("c" delete-window "Close window")
     ("SPC" nil "quit")
     ("q" nil "quit"))
   )
