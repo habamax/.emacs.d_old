@@ -1,3 +1,4 @@
+
 (defvar *haba-theme-dark* 'kosmos)
 (defvar *haba-theme-light* 'leuven)
 (defvar *haba-current-theme* *haba-theme-dark*)
@@ -14,7 +15,7 @@
 
 
 ;; Set custom theme path
-(setq custom-theme-directory (concat user-emacs-directory "themes"))
+(setq custom-theme-directory (concat user-emacs-directory "kosmos-theme"))
 
 
 (defun disable-all-themes (&rest args)
