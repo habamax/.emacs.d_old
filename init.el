@@ -522,6 +522,24 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   )
 
 
+(use-package rcirc
+  :defer
+  :commands (irc rcirc)
+  :ensure nil
+  :config
+  (setq rcirc-default-nick "habamax")
+  (ignore-errors
+    (load (concat user-emacs-directory "freenode-pass"))
+    (setq rcirc-authinfo
+          `(("freenode" nickserv "habamax" ,freenode-habamax-pass))))
+
+  (add-to-list 'rcirc-server-alist
+               '("irc.freenode.net"
+                 :nick "habamax"
+                 :channels ("#emacs" "#lor")))
+  (setq rcirc-time-format "[%H:%M] ")
+  )
+
 (use-package erc
   :defer
   :ensure nil
@@ -543,7 +561,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (ignore-errors
     ;; add ercpwd file with
     ;; (setq freenode-habamax-pass "yoursecretpassword")
-    (load (concat user-emacs-directory "ercpwd"))
+    (load (concat user-emacs-directory "freenode-pass"))
     (require 'erc-services)
     (erc-services-mode 1)
 
