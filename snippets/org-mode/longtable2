@@ -2,6 +2,7 @@
 # name: org latex longtable with 2 columns
 # key: longtable2
 # --
+#+BEGIN_LATEX
 \begin{center}
 \begin{longtable}{|m{4cm}|m{12cm}|}
 \caption{${1:Таблица}}
@@ -17,3 +18,4 @@
 ${4:Значение 1} & ${5:Значение2}\\\ \hline
 \end{longtable}
 \end{center}
+#+END_LATEX
