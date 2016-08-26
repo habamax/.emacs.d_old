@@ -262,7 +262,7 @@
     "
 ^Windows^                    ^Size^              ^Split^
 --------------------------------------------------------------------
-_w_: Winner undo          _]_: + width         _t_: Toggle 
+_w_: Winner undo          _]_: + width         _t_: Toggle
 _W_: Winner redo          _[_: - width         _h_: Below
 _p_: Ivy push view        _=_: + height        _v_: Right
 _P_: Ivy pop view         _-_: - height        _m_: Maximize current
@@ -527,7 +527,13 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   :commands (irc rcirc)
   :ensure nil
   :config
-  (setq rcirc-default-nick "habamax")
+  (setq rcirc-default-user-name "habamax"
+        rcirc-default-nick      "habamax"
+        rcirc-default-full-name "Maxim Kim")
+  (setq rcirc-auto-authenticate-flag t)
+  (setq rcirc-time-format "[%H:%M] ")
+  (rcirc-track-minor-mode 1)
+
   (ignore-errors
     (load (concat user-emacs-directory "freenode-pass"))
     (setq rcirc-authinfo
@@ -537,7 +543,16 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
                '("irc.freenode.net"
                  :nick "habamax"
                  :channels ("#emacs" "#lor")))
-  (setq rcirc-time-format "[%H:%M] ")
+
+
+  (defun haba/rcirc-mode-setup ()
+    "Sets things up for channel and query buffers spawned by rcirc."
+    ;; rcirc-omit-mode always *toggles*, so we first 'disable' it
+    ;; and then let the function toggle it *and* set things up.
+    (setq rcirc-omit-mode nil)
+    (rcirc-omit-mode))
+
+  (add-hook 'rcirc-mode-hook 'haba/rcirc-mode-setup)
   )
 
 (use-package erc
