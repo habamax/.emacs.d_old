@@ -158,6 +158,9 @@
   (exec-path-from-shell-initialize)
   :if (eq system-type 'darwin))
 
+(use-package evil
+  :bind (("C-c e" . evil-mode)))
+
 (use-package which-key
   :defer 3
   :diminish which-key-mode
