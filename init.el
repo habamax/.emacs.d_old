@@ -495,8 +495,6 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   )
 
 
-;; (use-package evil)
-
 (use-package beacon
   :defer 3
   :config
