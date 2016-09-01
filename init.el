@@ -503,6 +503,13 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 ;; Built-in packages
 
+;; dired-jump befor dired is used
+(use-package dired-x
+  :ensure nil
+  :bind (("C-x C-j" . dired-jump)
+         ("C-x 4 C-j" . dired-jump-other-window)))
+
+
 ;; Outline-mode
 (use-package outline
   :bind (("M-o" . hydra-outline/body))
