@@ -31,6 +31,7 @@
         ("" "graphicx" t)
         ("" "grffile" t)
         ("" "longtable" nil) ; Таблицы на несколько страниц
+        ("" "makecell" nil) ; thead and makecell -- multilined cells
         ("" "wrapfig" nil)
         ("" "rotating" nil)
         ("normalem" "ulem" t)
@@ -54,8 +55,10 @@
          \\setotherlanguages{" lang-other "}
          \\usepackage[top=25mm, left=20mm, right=20mm, bottom=25mm]{geometry}
          \\renewcommand{\\arraystretch}{1.5}
-         \\newcommand{\\theadfst}[1]{\\multicolumn{1}{|c|}{\\textbf{#1}}}
-         \\newcommand{\\thead}[1]{\\multicolumn{1}{c|}{\\textbf{#1}}}
+         \\renewcommand\\theadalign{cb}
+         \\renewcommand\\theadfont{\\bfseries}
+         \\renewcommand\\theadgape{\\Gape[4pt]}
+         \\renewcommand\\cellgape{\\Gape[4pt]}
          "))
 
 (defun haba/org-latex-class-hf-logo-2(logo-left vmove-left logo-right vmove-right)
