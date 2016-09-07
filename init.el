@@ -159,7 +159,10 @@
   :if (eq system-type 'darwin))
 
 (use-package evil
-  :bind (("C-c e" . evil-mode)))
+  :bind (("C-c e" . evil-mode))
+  :config
+  ; to be able to switch input method with C-\
+  (evil-select-search-module 'evil-search-module 'evil-search))
 
 (use-package which-key
   :defer 3
