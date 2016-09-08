@@ -161,6 +161,9 @@
 (use-package evil
   :bind (("C-c e" . evil-mode))
   :config
+  (use-package evil-commentary
+    :config
+    (evil-commentary-mode))
   ; to be able to switch input method with C-\
   (evil-select-search-module 'evil-search-module 'evil-search))
 
