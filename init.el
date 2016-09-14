@@ -13,8 +13,9 @@
   ;; No new frames for files that are opened from OSX
   (setq ns-pop-up-frames nil)
   ;; command to meta, option to control
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'control))
+  ;; (setq mac-command-modifier 'meta)
+  ;; (setq mac-option-modifier 'control)
+  )
 
 (setq inhibit-startup-message t
       inhibit-splash-screen t
@@ -160,10 +161,10 @@
 
 (use-package evil
   :bind (("C-c e" . evil-mode))
+  :init (evil-mode)
   :config
-  (use-package evil-commentary
-    :config
-    (evil-commentary-mode))
+  (use-package evil-commentary :config (evil-commentary-mode))
+  (use-package evil-surround :config (global-evil-surround-mode))
   ; to be able to switch input method with C-\
   (evil-select-search-module 'evil-search-module 'evil-search))
 
@@ -223,6 +224,7 @@
   ;; clear default ^ for counsel-M-x and friends
   (setq ivy-initial-inputs-alist '())
   :config
+  (use-package ivy-hydra :defer)
   (use-package flx :defer)
   (ivy-mode 1)
   (setq projectile-completion-system 'ivy)
@@ -502,10 +504,10 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   )
 
 
-(use-package beacon
-  :defer 3
-  :config
-  (beacon-mode 1))
+;; (use-package beacon
+;;   :defer 3
+;;   :config
+;;   (beacon-mode 1))
 
 
 ;; Built-in packages
