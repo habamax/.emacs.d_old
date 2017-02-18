@@ -60,7 +60,7 @@
 (winner-mode 1)
 
 
-;; tabs are evil but...
+;; tabs are evil...
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
 (defvaralias 'c-basic-offset 'tab-width)
@@ -158,15 +158,6 @@
   (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize)
   :if (eq system-type 'darwin))
-
-(use-package evil
-  :bind (("C-c e" . evil-mode))
-  :init (evil-mode)
-  :config
-  (use-package evil-commentary :config (evil-commentary-mode))
-  (use-package evil-surround :config (global-evil-surround-mode))
-  ; to be able to switch input method with C-\
-  (evil-select-search-module 'evil-search-module 'evil-search))
 
 (use-package which-key
   :defer 3
@@ -460,7 +451,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq-default TeX-master nil)
-  (setq-default TeX-engine 'xetex)
+  (setq-default TeX-engine 'luatex)
   (setq-default TeX-PDF-mode t)
   (setq TeX-PDF-mode t)
 )
@@ -614,116 +605,6 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
         calendar-month-name-array ["Январь" "Февраль" "Март" "Апрель"
                                    "Май" "Июнь" "Июль" "Август"
                                    "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"]))
-
-
-(use-package org
-  :mode ("\\.\\(org|txt\\)$" . org-mode)
-  :bind (("C-c o a" . org-agenda)
-         ("C-c o l" . org-store-link)
-         ("C-c o c" . org-capture))
-  :config
-  (setq org-src-fontify-natively t
-        org-fontify-whole-heading-line t
-        org-return-follows-link t
-        org-special-ctrl-a/e t
-        org-special-ctrl-k t
-        org-src-tab-acts-natively nil)
-
-  ;; auto-fill mode on for org
-  (add-hook 'org-mode-hook 'auto-fill-mode)
-
-  ;; unbind C-' as I often miss a key with C-\
-  (define-key org-mode-map (kbd "C-'") nil)
-
-  (setq org-directory "~/org")
-  (setq org-default-notes-file "~/org/refile.org")
-  (setq org-agenda-files '("~/org"))
-
-
-
-  (setq org-refile-targets '((nil :maxlevel . 3)
-                             (org-agenda-files :maxlevel . 2)))
-  ;; Refile in a single go
-  (setq org-outline-path-complete-in-steps nil)
-  ;; Show full paths for refiling
-  (setq org-refile-use-outline-path 'file)
-
-  ;; open docx files in default application (ie msword)
-  (setq org-file-apps
-        '(("\\.docx\\'" . default)
-          ("\\.odt\\'" . default)
-          ("\\.mm\\'" . default)
-          ("\\.x?html?\\'" . default)
-          ("\\.pdf\\'" . default)
-          (auto-mode . emacs)))
-
-  ;; Doesn't work
-  ;; (setq org-image-actual-width 500)
-
-  (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "|" "DONE(d)")
-                (sequence "HOLD(h@/!)" "|" "CANCELED(c@/!)"))))
-
-  (setq org-tag-alist '(("misc" . ?m) ("tax" . ?t)
-                        ("adastra" . ?a) ("sber" . ?s) ("REB" . ?r) ("pochta" . ?p)))
-  ;; C-u C-c C-c to realign all tags
-  (setq org-tags-column 65)
-  ;; Place tags close to the right-hand side of the window
-  (add-hook 'org-finalize-agenda-hook 'place-agenda-tags)
-  (defun place-agenda-tags ()
-    "Put the agenda tags by the right border of the agenda window."
-    (setq org-agenda-tags-column (- 4 (window-width)))
-    (org-agenda-align-tags))
-
-  (setq org-capture-templates
-        (quote (("t" "Todo" entry (file org-default-notes-file)
-                 "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-                ("n" "Note" entry (file org-default-notes-file)
-                 "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-                ("j" "Journal" entry (file+datetree "~/org/diary.org")
-                 "* %?\n%U\n" :clock-in t :clock-resume t)
-                ("w" "Org-protocol" entry (file org-default-notes-file)
-                 "* TODO Review %c\n%U\n" :immediate-finish t))))
-
-
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '(
-     (python . t)
-     (sh . t)
-     (plantuml . t)
-     (ditaa . t)
-     (dot . t)))
-
-  (defun haba/org-confirm-babel-evaluate (lang body)
-    (not (or (string= lang "ditaa")
-             (string= lang "plantuml")
-             (string= lang "dot"))))
-  (setq org-confirm-babel-evaluate 'haba/org-confirm-babel-evaluate)
-
-  ;; default export options
-  (setq org-export-with-smart-quotes t
-        org-export-with-emphasize t
-        org-export-with-todo-keywords nil
-        org-export-time-stamp-file nil
-        org-export-headline-levels 5)
-
-  (setq org-html-validation-link nil)
-  (setq org-html-postamble-format
-        '(("en" "<p> <span class=\"author\">Author:</span> <span class=\"author_name\"> %a ( %e )</span></p>\n<p> <span class=\"date\">Date:</span> <span class=\"date_value\">%d</span></p>")
-         ("ru" "<p> <span class=\"author_caption\">Автор:</span> <span class=\"author\"> %a ( %e )</span></p>\n<p> <span class=\"date_caption\">Дата:</span> <span class=\"date\">%d</span></p>")))
-
-  (setq org-html-postamble t)
-
-
-
-  (use-package haba-latex
-    :ensure nil
-    :load-path "lisp/")
-  )
-
-
-
 
 
 ;;; init.el ends here
