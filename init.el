@@ -13,8 +13,8 @@
   ;; No new frames for files that are opened from OSX
   (setq ns-pop-up-frames nil)
   ;; command to meta, option to control
-  ;; (setq mac-command-modifier 'meta)
-  ;; (setq mac-option-modifier 'control)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'control)
   )
 
 (setq inhibit-startup-message t
@@ -147,8 +147,18 @@
   :demand
   :load-path "lisp/"
   :config
-    (use-package leuven-theme :defer))
+  (use-package leuven-theme :defer))
 
+
+(use-package asciidoctor-mode
+  :ensure nil
+  :demand
+  :load-path "lisp/"
+  :config
+  (setq asciidoctor-pdf-stylesdir "~/docs/AsciiDocThemes")
+  (setq asciidoctor-pdf-fontsdir "~/docs/AsciiDocThemes/fonts")
+  (setq asciidoctor-pdf-extensions "asciidoctor-diagram")
+  )
 
 ;; Melpa packages
 
@@ -374,7 +384,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (sp-pair "/" "/" :actions '(wrap))
   (sp-pair "$" "$" :actions '(wrap))
   (sp-pair "-" "-" :actions '(wrap))
-)
+  )
 
 (use-package magit
   :commands (magit-status)
@@ -445,16 +455,6 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
     (setq cider-repl-display-help-banner nil)))
 
 
-(use-package auctex
-  :mode ("\\.\\(tex\\)$" . latex-mode)
-  :init
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (setq-default TeX-master nil)
-  (setq-default TeX-engine 'luatex)
-  (setq-default TeX-PDF-mode t)
-  (setq TeX-PDF-mode t)
-)
 
 
 ;; music FTW
@@ -494,11 +494,6 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
     (emms-play-directory "~/Music/smusic/main"))
   )
 
-
-;; (use-package beacon
-;;   :defer 3
-;;   :config
-;;   (beacon-mode 1))
 
 
 ;; Built-in packages
@@ -577,9 +572,9 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (setq erc-join-buffer 'bury)
 
   (setq
-        erc-nick '("habamax" "mxmkm")
-        erc-track-minor-mode t
-        erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor" "#godotengine")))
+   erc-nick '("habamax" "mxmkm")
+   erc-track-minor-mode t
+   erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor" "#godotengine")))
 
   (ignore-errors
     ;; add ercpwd file with
@@ -592,7 +587,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
     (setq erc-nickserv-passwords
           `((freenode (("habamax" . ,freenode-habamax-pass))))))
 
-    )
+  )
 
 
 (use-package calendar
