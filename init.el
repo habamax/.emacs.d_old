@@ -120,6 +120,12 @@
 
 (setq use-package-always-ensure t)
 
+(use-package haba-appearance
+  :ensure nil
+  :demand
+  :load-path "lisp/"
+  :config
+  (use-package leuven-theme :defer))
 
 ;; Local packages
 (use-package haba-stuff
@@ -133,7 +139,8 @@
          ("s-d" . haba/duplicate-line)
          ("C-c o i" . haba/open-init-file)
          ("C-c o s" . haba/open-scratch-buffer)
-         ([remap fill-paragraph] . haba/fill-or-unfill))
+         ([remap fill-paragraph] . haba/fill-or-unfill)
+         ("C-c i d" . haba/insert-current-date))
   :config
   (defun haba/open-scratch-buffer ()
     "Open scratch buffer"
@@ -141,13 +148,6 @@
     (switch-to-buffer "*scratch*"))
   )
 
-
-(use-package haba-appearance
-  :ensure nil
-  :demand
-  :load-path "lisp/"
-  :config
-  (use-package leuven-theme :defer))
 
 
 (use-package asciidoctor-mode
@@ -456,43 +456,43 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 
 
+;; ;; music FTW
+;; ;; I don't listen the music using emacs, so it should be removed at some point.
+;; (use-package emms
+;;   :bind (("C-c u m" . haba/emms-play-main)
+;;          ("C-c u c" . emms-playlist-mode-go)
+;;          ("C-c u p" . emms-pause)
+;;          ("C-c u n" . emms-next)
+;;          ("C-c u r" . emms-random)
+;;          ("C-c u s" . emms-stop))
+;;   :init
+;;   ;; Well on OSX I get weird tramp error...
+;;   ;; (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
 
-;; music FTW
-(use-package emms
-  :bind (("C-c u m" . haba/emms-play-main)
-         ("C-c u c" . emms-playlist-mode-go)
-         ("C-c u p" . emms-pause)
-         ("C-c u n" . emms-next)
-         ("C-c u r" . emms-random)
-         ("C-c u s" . emms-stop))
-  :init
-  ;; Well on OSX I get weird tramp error...
-  ;; (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
+;;   :config
+;;   (setq emms-mode-line-icon-color "yellow")
 
-  :config
-  (setq emms-mode-line-icon-color "yellow")
+;;   (emms-all)
 
-  (emms-all)
+;;   (require 'emms-history)
+;;   (emms-history-load)
 
-  (require 'emms-history)
-  (emms-history-load)
+;;   (setq emms-repeat-playlist t)
 
-  (setq emms-repeat-playlist t)
+;;   ;; OSX has simple afplay utility to play music
+;;   (when (eq system-type 'darwin)
+;;     (define-emms-simple-player afplay '(file)
+;;       (regexp-opt '(".mp3" ".m4a" ".aac")) "afplay")
+;;     (setq emms-player-list `(,emms-player-afplay))
+;;     (add-hook 'kill-emacs-hook 'emms-stop))
 
-  ;; OSX has simple afplay utility to play music
-  (when (eq system-type 'darwin)
-    (define-emms-simple-player afplay '(file)
-      (regexp-opt '(".mp3" ".m4a" ".aac")) "afplay")
-    (setq emms-player-list `(,emms-player-afplay))
-    (add-hook 'kill-emacs-hook 'emms-stop))
+;;   ;; Not sure if this is needed
+;;   (setq emms-source-file-default-directory "~/Music")
 
-  ;; Not sure if this is needed
-  (setq emms-source-file-default-directory "~/Music")
-
-  (defun haba/emms-play-main ()
-    (interactive)
-    (emms-play-directory "~/Music/smusic/main"))
-  )
+;;   (defun haba/emms-play-main ()
+;;     (interactive)
+;;     (emms-play-directory "~/Music/smusic/main"))
+;;   )
 
 
 
@@ -558,36 +558,37 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (add-hook 'rcirc-mode-hook 'haba/rcirc-mode-setup)
   )
 
-(use-package erc
-  :defer
-  :ensure nil
-  :init
+;; tried both, rcirc is "better" for me
+;; (use-package erc
+;;   :defer
+;;   :ensure nil
+;;   :init
 
-  (defun erc-freenode ()
-    (interactive)
-    (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
+;;   (defun erc-freenode ()
+;;     (interactive)
+;;     (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
 
-  :config
-  (setq erc-hide-list '("JOIN" "PART" "QUIT"))
-  (setq erc-join-buffer 'bury)
+;;   :config
+;;   (setq erc-hide-list '("JOIN" "PART" "QUIT"))
+;;   (setq erc-join-buffer 'bury)
 
-  (setq
-   erc-nick '("habamax" "mxmkm")
-   erc-track-minor-mode t
-   erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor" "#godotengine")))
+;;   (setq
+;;    erc-nick '("habamax" "mxmkm")
+;;    erc-track-minor-mode t
+;;    erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor" "#godotengine")))
 
-  (ignore-errors
-    ;; add ercpwd file with
-    ;; (setq freenode-habamax-pass "yoursecretpassword")
-    (load (concat user-emacs-directory "freenode-pass"))
-    (require 'erc-services)
-    (erc-services-mode 1)
+;;   (ignore-errors
+;;     ;; add ercpwd file with
+;;     ;; (setq freenode-habamax-pass "yoursecretpassword")
+;;     (load (concat user-emacs-directory "freenode-pass"))
+;;     (require 'erc-services)
+;;     (erc-services-mode 1)
 
-    (setq erc-prompt-for-nickserv-password nil)
-    (setq erc-nickserv-passwords
-          `((freenode (("habamax" . ,freenode-habamax-pass))))))
+;;     (setq erc-prompt-for-nickserv-password nil)
+;;     (setq erc-nickserv-passwords
+;;           `((freenode (("habamax" . ,freenode-habamax-pass))))))
 
-  )
+;;   )
 
 
 (use-package calendar

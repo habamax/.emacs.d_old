@@ -54,17 +54,7 @@
     (haba/next-theme *haba-current-theme*)))
 
 
-(when window-system
-  (setq default-frame-alist '((fullscreen . maximized)))
-  (tooltip-mode -1)
-  (tool-bar-mode -1)
-  (menu-bar-mode 1)
-  (scroll-bar-mode -1)
-  ;; (let ((font-size (if (string-equal (system-name) "MKIM") 100 140)))
-    ;; (haba/set-font '("Roboto Mono" "Source Code Pro" "Menlo" "Consolas")
-                   ;; font-size))
-  )
-
+(setq default-frame-alist '((fullscreen . maximized)))
 
 
 (add-hook 'kill-emacs-hook 'haba/save-current-theme)

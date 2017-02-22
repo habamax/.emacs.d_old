@@ -1,3 +1,4 @@
+
 (provide 'haba-stuff)
 
 ;; Comment a line.
@@ -237,3 +238,12 @@ line instead."
     See `sort-regexp-fields'."
   (interactive "*P\nr")
   (sort-regexp-fields reverse "\\w+" "\\&" beg end))
+
+;;;; dates
+
+;; TODO: check if date under cursor --> replace with current one
+(defun haba/insert-current-date ()
+  "Insert current date."
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d"))
+  )
