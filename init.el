@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-;; Non-Package setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Non-Package setup
 
 ;; General OSX setup
 (when (eq system-type 'darwin)
@@ -103,7 +103,7 @@
 (load custom-file 'noerror)
 
 
-;; Set up packaging system
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Set up packaging system
 (let ((package-protocol (if (eq system-type 'windows-nt) "http://" "https://")))
   (setq package-archives `(("elpa" .  ,(concat package-protocol "elpa.gnu.org/packages/"))
                            ("melpa" . ,(concat package-protocol "melpa.org/packages/")))))
@@ -127,7 +127,7 @@
   :config
   (use-package leuven-theme :defer))
 
-;; Local packages
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Local packages
 (use-package haba-stuff
   :ensure nil
   :demand
@@ -160,7 +160,7 @@
   (setq asciidoctor-pdf-extensions "asciidoctor-diagram")
   )
 
-;; Melpa packages
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Melpa packages
 
 ;; PATH for OSX
 (use-package exec-path-from-shell
@@ -237,8 +237,7 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-s" . counsel-grep-or-swiper)
-         ("C-r" . counsel-grep-or-swiper)
+         ("M-s s" . counsel-grep-or-swiper)
          ("C-c s" . swiper-all)
          ("C-x b" . ivy-switch-buffer)
          ("M-y" . counsel-yank-pop))
@@ -455,48 +454,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
     (setq cider-repl-display-help-banner nil)))
 
 
-
-;; ;; music FTW
-;; ;; I don't listen the music using emacs, so it should be removed at some point.
-;; (use-package emms
-;;   :bind (("C-c u m" . haba/emms-play-main)
-;;          ("C-c u c" . emms-playlist-mode-go)
-;;          ("C-c u p" . emms-pause)
-;;          ("C-c u n" . emms-next)
-;;          ("C-c u r" . emms-random)
-;;          ("C-c u s" . emms-stop))
-;;   :init
-;;   ;; Well on OSX I get weird tramp error...
-;;   ;; (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
-
-;;   :config
-;;   (setq emms-mode-line-icon-color "yellow")
-
-;;   (emms-all)
-
-;;   (require 'emms-history)
-;;   (emms-history-load)
-
-;;   (setq emms-repeat-playlist t)
-
-;;   ;; OSX has simple afplay utility to play music
-;;   (when (eq system-type 'darwin)
-;;     (define-emms-simple-player afplay '(file)
-;;       (regexp-opt '(".mp3" ".m4a" ".aac")) "afplay")
-;;     (setq emms-player-list `(,emms-player-afplay))
-;;     (add-hook 'kill-emacs-hook 'emms-stop))
-
-;;   ;; Not sure if this is needed
-;;   (setq emms-source-file-default-directory "~/Music")
-
-;;   (defun haba/emms-play-main ()
-;;     (interactive)
-;;     (emms-play-directory "~/Music/smusic/main"))
-;;   )
-
-
-
-;; Built-in packages
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
 
 ;; dired-jump befor dired is used
 (use-package dired-x
