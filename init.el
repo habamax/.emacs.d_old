@@ -96,7 +96,7 @@
 
 
 ;; use hippie-expand
-(global-set-key [remap dabbrev-expand] 'hippie-expand)
+;; (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
@@ -139,6 +139,7 @@
          ("s-d" . haba/duplicate-line)
          ("C-c o i" . haba/open-init-file)
          ("C-c o s" . haba/open-scratch-buffer)
+         ("C-c o t" . haba/open-todo-file)
          ([remap fill-paragraph] . haba/fill-or-unfill)
          ("C-c i d" . haba/insert-current-date))
   :config
@@ -146,6 +147,10 @@
     "Open scratch buffer"
     (interactive)
     (switch-to-buffer "*scratch*"))
+  (defun haba/open-todo-file ()
+    "Open todo.adoc file"
+    (interactive)
+    (find-file "~/docs/todo.adoc"))
   )
 
 
@@ -357,8 +362,6 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 
 
-
-
 (use-package rainbow-delimiters
   :defer
   :init
@@ -375,7 +378,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (smartparens-global-mode)
   (show-smartparens-global-mode)
 
-  ;; useful for org-mode and others
+  ;; wrap selection with a symbols
   (sp-pair "*" "*" :actions '(wrap))
   (sp-pair "_" "_" :actions '(wrap))
   (sp-pair "=" "=" :actions '(wrap))
