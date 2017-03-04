@@ -53,9 +53,8 @@
       (haba/next-theme (intern theme-name))
     (haba/next-theme *haba-current-theme*)))
 
-
-(setq default-frame-alist '((fullscreen . maximized)))
-
+;; default frame is fullscreen and has no scrollbars
+(setq default-frame-alist '((fullscreen . maximized) (vertical-scroll-bars . nil)))
 
 (add-hook 'kill-emacs-hook 'haba/save-current-theme)
 
