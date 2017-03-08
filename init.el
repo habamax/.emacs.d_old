@@ -268,6 +268,10 @@
   :config
   (projectile-global-mode))
 
+(use-package ag :defer)
+
+(use-package pt :defer)
+
 (use-package hydra
   :bind ("C-c w" . hydra-windows/body)
   :bind ("C-c t" . hydra-toggle-theme/body)
@@ -326,20 +330,26 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   :diminish company-mode
   ;; :bind ("s-/" . company-complete)
   :config
-  (progn
-    (use-package company-flx :config (company-flx-mode +1))
+  (use-package company-flx :config (company-flx-mode +1))
 
-    (setq company-minimum-prefix-length 2)
+  (setq company-minimum-prefix-length 2)
 
-    (define-key company-active-map [tab] 'company-complete-selection)
-    (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-    (define-key company-active-map (kbd "M-n") nil)
-    (define-key company-active-map (kbd "M-p") nil)
-    (define-key company-active-map (kbd "C-j") 'company-abort)
-    (define-key company-active-map (kbd "C-n") 'company-select-next)
-    (define-key company-active-map (kbd "C-p") 'company-select-previous)
+  (add-to-list 'company-dabbrev-code-modes 'web-mode)
+  (add-to-list 'company-dabbrev-code-modes 'nxml-mode)
 
-    (global-company-mode)))
+  (setq company-dabbrev-downcase nil)
+  (setq company-dabbrev-ignore-case nil)
+
+
+  (define-key company-active-map [tab] 'company-complete-selection)
+  (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+  (define-key company-active-map (kbd "M-n") nil)
+  (define-key company-active-map (kbd "M-p") nil)
+  (define-key company-active-map (kbd "C-j") 'company-abort)
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
+
+  (global-company-mode))
 
 
 
