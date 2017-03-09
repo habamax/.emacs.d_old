@@ -159,6 +159,7 @@
   :ensure nil
   :demand
   :load-path "lisp/"
+  :mode ("\\.\\(adoc\\|asciidoc\\)$" . asciidoctor-mode)
   :config
   (setq asciidoctor-pdf-stylesdir "~/docs/AsciiDocThemes")
   (setq asciidoctor-pdf-fontsdir "~/docs/AsciiDocThemes/fonts")
