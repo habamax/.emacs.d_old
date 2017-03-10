@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: CAUTION
+# key: cau
+# --
+[CAUTION]
+====
+$0
+====

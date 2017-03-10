@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Asciidoctor RU options
+# name: RU options
 # key: optsru
 # --
 :author: ${1:Максим Ким}
