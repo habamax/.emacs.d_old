@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Asciidoctor options
+# key: opts
+# --
+:author: ${1:Maxim Kim}
+:experimental:
+:toc: left
+:toclevels: 3
+:icons: font
+:autofit-option:
+:sectnums:
+:source-highlighter: rouge
+:revdate: `(format-time-string "%Y-%m-%d")`
+:imagesdir: images
+:pdf-style: ${2:default}
+:doctype: ${3:article}
+
+$0
