@@ -335,8 +335,6 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
   (setq company-minimum-prefix-length 2)
 
-  (add-to-list 'company-dabbrev-code-modes 'web-mode)
-  (add-to-list 'company-dabbrev-code-modes 'nxml-mode)
 
   (setq company-dabbrev-downcase nil)
   (setq company-dabbrev-ignore-case nil)
