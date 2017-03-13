@@ -161,6 +161,7 @@
   :load-path "lisp/"
   :mode ("\\.\\(adoc\\|asciidoc\\)$" . asciidoctor-mode)
   :config
+  (setq asciidoctor-pdf-executable (concat "ruby " (expand-file-name "~/projects/asciidoctor-pdf/bin/asciidoctor-pdf")))
   (setq asciidoctor-pdf-stylesdir "~/docs/AsciiDocThemes")
   (setq asciidoctor-pdf-fontsdir "~/docs/AsciiDocThemes/fonts")
   (setq asciidoctor-pdf-extensions "asciidoctor-diagram")

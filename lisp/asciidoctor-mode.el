@@ -23,23 +23,29 @@
 ;;   :prefix "asciidoctor-")
 
 
-;; (defcustom asciidoctor-pdf-stylesdir
-;;   ""
-;;   "Directory with asciidoctor-pdf themes."
-;;   :group 'asciidoctor-pdf
-;;   :type 'string)
+(defcustom asciidoctor-pdf-executable
+  "asciidoctor-pdf"
+  "asciidoctor-pdf executable."
+  :group 'asciidoctor-pdf
+  :type 'string)
 
-;; (defcustom asciidoctor-pdf-fontsdir
-;;   ""
-;;   "Directory with asciidoctor-pdf fonts."
-;;   :group 'asciidoctor-pdf
-;;   :type 'string)
+(defcustom asciidoctor-pdf-stylesdir
+  ""
+  "Directory with asciidoctor-pdf themes."
+  :group 'asciidoctor-pdf
+  :type 'string)
 
-;; (defcustom asciidoctor-pdf-extensions
-;;   ""
-;;   "Extensions such as asciidoctor-diagram."
-;;   :group 'asciidoctor-pdf
-;;   :type 'string)
+(defcustom asciidoctor-pdf-fontsdir
+  ""
+  "Directory with asciidoctor-pdf fonts."
+  :group 'asciidoctor-pdf
+  :type 'string)
+
+(defcustom asciidoctor-pdf-extensions
+  ""
+  "Extensions such as asciidoctor-diagram."
+  :group 'asciidoctor-pdf
+  :type 'string)
 
 
 
@@ -110,7 +116,7 @@
     (when buffer-file-name
       (message "AsciiDoctor PDF compilation...")
       (shell-command
-       (concat "asciidoctor-pdf"
+       (concat asciidoctor-pdf-executable
                " "
                ;; what about multiple extensions?
                (when (not (string= "" asciidoctor-pdf-extensions))
