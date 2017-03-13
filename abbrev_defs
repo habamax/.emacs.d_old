@@ -5,16 +5,16 @@
 
 (define-abbrev-table 'asciidoctor-mode-abbrev-table
   '(
-    ("note" "NOTE:" nil 2)
     ("cau" "CAUTION:" nil 1)
+    ("note" "NOTE:" nil 7)
     ("teh" "the" nil 1)
     ("tip" "TIP:" nil 1)
-    ("warn" "WARNING:" nil 1)
+    ("warn" "WARNING:" nil 3)
     ("ешз" "TIP:" nil 2)
     ("сфг" "CAUTION:" nil 2)
     ("тщеу" "NOTE:" nil 2)
     ("цфкт" "WARNING:" nil 2)
-    ))
+   ))
 
 (define-abbrev-table 'calendar-mode-abbrev-table '())
 
@@ -38,11 +38,15 @@
   '(
     ("amail" "maksim.kim@adastragrp.com" nil 4)
     ("hmail" "habamax@gmail.com" nil 3)
+    ("todo" "TODO:" nil 4)
+    ("ещвщ" "TODO:" nil 1)
    ))
 
 (define-abbrev-table 'grep-mode-abbrev-table '())
 
 (define-abbrev-table 'help-mode-abbrev-table '())
+
+(define-abbrev-table 'html-mode-abbrev-table '())
 
 (define-abbrev-table 'ibuffer-mode-abbrev-table '())
 
@@ -88,6 +92,8 @@
 
 (define-abbrev-table 'messages-buffer-mode-abbrev-table '())
 
+(define-abbrev-table 'nxml-mode-abbrev-table '())
+
 (define-abbrev-table 'occur-edit-mode-abbrev-table '())
 
 (define-abbrev-table 'occur-mode-abbrev-table '())
@@ -100,6 +106,8 @@
 
 (define-abbrev-table 'select-tags-table-mode-abbrev-table '())
 
+(define-abbrev-table 'sgml-mode-abbrev-table '())
+
 (define-abbrev-table 'shell-mode-abbrev-table '())
 
 (define-abbrev-table 'snippet-mode-abbrev-table '())
@@ -108,7 +116,11 @@
 
 (define-abbrev-table 'tabulated-list-mode-abbrev-table '())
 
+(define-abbrev-table 'tar-mode-abbrev-table '())
+
 (define-abbrev-table 'text-mode-abbrev-table '())
+
+(define-abbrev-table 'url-cookie-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
 
