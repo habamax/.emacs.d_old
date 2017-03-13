@@ -240,10 +240,11 @@ line instead."
   (sort-regexp-fields reverse "\\w+" "\\&" beg end))
 
 ;;;; dates
-
-;; TODO: check if date under cursor --> replace with current one
 (defun haba/insert-current-date ()
-  "Insert current date."
+  "Insert current date. Replaces ISO date under cursor with current date."
   (interactive)
+  (when (string-match "[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}" (concat "" (thing-at-point 'symbol t)))
+    (let ((bounds (bounds-of-thing-at-point 'symbol)))
+      (delete-region (car bounds) (cdr bounds))))
   (insert (format-time-string "%Y-%m-%d"))
   )
