@@ -14,6 +14,8 @@
     ("сфг" "CAUTION:" nil 2)
     ("тщеу" "NOTE:" nil 2)
     ("цфкт" "WARNING:" nil 2)
+    ("imp" "IMPORTANT:" nil 1)
+    ("шьз" "IMPORTANT:" nil 1)
    ))
 
 (define-abbrev-table 'calendar-mode-abbrev-table '())
