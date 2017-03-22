@@ -535,39 +535,6 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (add-hook 'rcirc-mode-hook 'haba/rcirc-mode-setup)
   )
 
-;; tried both, rcirc is "better" for me
-;; (use-package erc
-;;   :defer
-;;   :ensure nil
-;;   :init
-
-;;   (defun erc-freenode ()
-;;     (interactive)
-;;     (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
-
-;;   :config
-;;   (setq erc-hide-list '("JOIN" "PART" "QUIT"))
-;;   (setq erc-join-buffer 'bury)
-
-;;   (setq
-;;    erc-nick '("habamax" "mxmkm")
-;;    erc-track-minor-mode t
-;;    erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor" "#godotengine")))
-
-;;   (ignore-errors
-;;     ;; add ercpwd file with
-;;     ;; (setq freenode-habamax-pass "yoursecretpassword")
-;;     (load (concat user-emacs-directory "freenode-pass"))
-;;     (require 'erc-services)
-;;     (erc-services-mode 1)
-
-;;     (setq erc-prompt-for-nickserv-password nil)
-;;     (setq erc-nickserv-passwords
-;;           `((freenode (("habamax" . ,freenode-habamax-pass))))))
-
-;;   )
-
-
 (use-package calendar
   :ensure nil
   :init
