@@ -355,10 +355,8 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 (use-package multiple-cursors
   :bind-keymap (("C-x m" . haba/mc-map))
-  :bind (("M-n" . mc/mark-next-like-this)
-         ("M-p" . mc/mark-previous-like-this)
-         ("M-N" . mc/unmark-next-like-this)
-         ("M-P" . mc/unmark-previous-like-this)
+  :bind (("M-n" . haba/mark-next-word-like-this)
+         ("M-N" . mc/unmark-next-like-this-word)
          :map haba/mc-map
          ("m" . mc/mark-all-like-this-dwim)
          ("d" . mc/mark-all-symbols-like-this-in-defun)
@@ -368,7 +366,15 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
          ("a" . mc/edit-beginnings-of-lines))
   :init
   (define-prefix-command 'haba/mc-map)
-  (define-key ctl-x-map "m" 'haba/mc-map))
+  (define-key ctl-x-map "m" 'haba/mc-map)
+  :config
+  (defun haba/mark-next-word-like-this (arg)
+    (interactive "p")
+    (if (region-active-p)
+        (let ((mc/enclose-search-term 'words))
+          (mc/mark-next-like-this arg))
+      (mc--select-thing-at-point 'word)))
+)
 
 
 
