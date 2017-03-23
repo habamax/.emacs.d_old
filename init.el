@@ -274,6 +274,7 @@
 
 
 (use-package projectile
+  :bind (:map projectile-mode-map ("C-c p s r" . projectile-ripgrep))
   :bind-keymap (("C-c p" . projectile-mode-map))
   :config
   (projectile-global-mode))
