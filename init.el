@@ -135,7 +135,7 @@
   :load-path "lisp/"
   :bind (("M-;" . haba/toggle-comment)
          ("C-a" . haba/move-beginning-of-line)
-         ("M-j" . haba/join-line)
+         ("C-M-j" . haba/join-line)
          ("s-d" . haba/duplicate-line)
          ("C-c o i" . haba/open-init-file)
          ("C-c o s" . haba/open-scratch-buffer)
@@ -361,8 +361,8 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 (use-package multiple-cursors
   :bind-keymap (("C-x m" . haba/mc-map))
-  :bind (("M-n" . haba/mark-next-word-like-this)
-         ("M-N" . mc/unmark-next-like-this-word)
+  :bind (("M-j" . haba/mark-next-word-like-this)
+         ("M-J" . mc/unmark-next-like-this-word)
          :map haba/mc-map
          ("m" . mc/mark-all-like-this-dwim)
          ("d" . mc/mark-all-symbols-like-this-in-defun)
