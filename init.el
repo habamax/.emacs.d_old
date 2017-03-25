@@ -274,14 +274,11 @@
 
 
 (use-package projectile
-  :bind (:map projectile-mode-map ("C-c p s r" . projectile-ripgrep))
   :bind-keymap (("C-c p" . projectile-mode-map))
+  :bind (:map projectile-mode-map ("C-c p s r" . projectile-ripgrep))
   :config
+  (use-package projectile-ripgrep)
   (projectile-global-mode))
-
-(use-package ag :defer)
-
-(use-package pt :defer)
 
 (use-package hydra
   :bind ("C-c w" . hydra-windows/body)
