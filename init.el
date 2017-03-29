@@ -161,7 +161,7 @@
   :load-path "lisp/"
   :mode ("\\.\\(adoc\\|asciidoc\\)$" . asciidoctor-mode)
   :config
-  (setq asciidoctor-pdf-executable (concat "ruby " (expand-file-name "~/projects/asciidoctor-pdf/bin/asciidoctor-pdf")))
+  ;; (setq asciidoctor-pdf-executable (concat "ruby " (expand-file-name "~/projects/asciidoctor-pdf/bin/asciidoctor-pdf")))
   (setq asciidoctor-pdf-stylesdir "~/docs/AsciiDocThemes")
   (setq asciidoctor-pdf-fontsdir "~/docs/AsciiDocThemes/fonts")
   (setq asciidoctor-pdf-extensions "asciidoctor-diagram")
@@ -336,16 +336,22 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 (use-package company
   :defer 1
   :diminish company-mode
-  ;; :bind ("s-/" . company-complete)
   :config
   (use-package company-flx :config (company-flx-mode +1))
-
-  (setq company-minimum-prefix-length 2)
-
 
   (setq company-dabbrev-downcase nil)
   (setq company-dabbrev-ignore-case nil)
 
+  (setq company-minimum-prefix-length 2)
+
+  (setq company-backends
+        '((company-files          ; files & directory
+           company-keywords       ; keywords
+           company-capf
+           company-yasnippet
+           )
+          (company-abbrev company-dabbrev)
+          ))
 
   (define-key company-active-map [tab] 'company-complete-selection)
   (define-key company-active-map (kbd "TAB") 'company-complete-selection)
