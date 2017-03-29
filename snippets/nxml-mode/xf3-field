@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Xf3 field
+# key: field
+# --
+<field>
+  <code>${code}</code>
+  <name>${name}</name>
+  <hint-for-edit>${}</hint-for-edit>
+  <hide-in-view>${false}</hide-in-view>
+  <hide-in-edit>${false}</hide-in-edit>
+  <floating>${false}</floating>
+  <type>
+    ${0:<plain/>}
+  </type>
+</field>
+

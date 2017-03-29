@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Xf3 group
+# key: group
+# --
+<group>
+  <id>${1:id}</id>
+  <name>${2:name}</name>
+  <fields>
+    $0
+  </fields>
+</group>
+

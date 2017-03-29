@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Xf3 select
+# key: select
+# --
+<select>
+  <options>
+    <option>
+      <code>${1}</code>
+      <text>${option text 1}</text>
+    </option>
+    <option>
+      <code>${2}</code>
+      <text>${option text 2}</text>
+    </option>
+  </options>
+</select>

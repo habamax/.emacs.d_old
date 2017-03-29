@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Xf3 relation
+# key: relation
+# --
+<relations>
+  <generator-code>xf3search:\${text} type:"${1:report}"</generator-code>
+  <relation-type>${2:related-as}</relation-type>
+  <display-as>${3:table}</display-as>
+  <multiple>${4:true}</multiple>
+  <outgoing-relation>true</outgoing-relation>
+</relations>

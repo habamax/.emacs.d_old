@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Xf3 info
+# key: info
+# --
+<info>
+  <velocity>
+    <![CDATA[
+    $0
+    ]]>
+  </velocity>
+</info>
