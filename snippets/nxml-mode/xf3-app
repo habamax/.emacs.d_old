@@ -1,0 +1,53 @@
+# -*- mode: snippet -*-
+# name: Xf3 app
+# key: app
+#
+# --
+<?xml version="1.0" encoding="UTF-8"?>
+<xforms-apps xmlns="http://semanta.cz/schema/xf3">
+  <xforms-app>
+    <xid>${1:codeOfTheApp}</xid>
+    <icon></icon>
+    <entry-name>${2:Name of the App}</entry-name>
+    <structure>
+      <row>
+        <column>
+          <width>${3:8}</width>
+          <group>
+            <id>description</id>
+            <name>Description</name>
+            <fields>
+              <field>
+                <code>entryName</code>
+                <name>${4:name of the entry}</name>
+                <type>
+                  <plain/>
+                </type>
+              </field>
+              <field>
+                <code>entrySynonym</code>
+                <name>Alternative name</name>
+                <hint-for-edit>comma separated list of alternative names</hint-for-edit>
+                <type>
+                  <synonym/>
+                </type>
+              </field>
+              <!--@import fragment="description"-->$0
+            </fields>
+          </group>
+        </column>
+        <column>
+          <width>${3:$(- 12 (string-to-number yas-text))}</width>
+          <!--@import fragment="governance"-->
+        </column>
+      </row>
+      <list>
+        <fieldCode>entryName</fieldCode>
+        <fieldCode>description</fieldCode>
+      </list>
+    </structure>
+    <listeners>
+      <!--@import fragment="event-monitor"-->
+    </listeners>
+  </xforms-app>
+</xforms-apps>
