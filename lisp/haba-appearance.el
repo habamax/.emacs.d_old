@@ -1,7 +1,7 @@
 
 (defvar *haba-theme-dark* 'kosmos)
 (defvar *haba-theme-light* 'leuven)
-(defvar *haba-current-theme* *haba-theme-dark*)
+(defvar *haba-current-theme* 'default)
 
 
 ;; (defun haba/set-font (fonts-list font-size)
@@ -38,9 +38,12 @@
 
 (defun haba/read-current-theme ()
   (ignore-errors
-    (with-temp-buffer
-      (insert-file-contents (concat user-emacs-directory "current-theme"))
-      (buffer-string))))
+    (let ((theme-file (concat user-emacs-directory "current-theme")))
+      (if (file-exists-p theme-file)
+          (with-temp-buffer
+            (insert-file-contents theme-file)
+            (buffer-string))
+        nil))))
 
 (defun haba/save-current-theme ()
   (ignore-errors
@@ -49,9 +52,8 @@
 
 
 (let ((theme-name (haba/read-current-theme)))
-  (if theme-name
-      (haba/next-theme (intern theme-name))
-    (haba/next-theme *haba-current-theme*)))
+  (when theme-name
+      (haba/next-theme (intern theme-name))))
 
 ;; default frame is fullscreen and has no scrollbars
 (setq default-frame-alist '((fullscreen . maximized) (vertical-scroll-bars . nil)))
