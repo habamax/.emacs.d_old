@@ -141,7 +141,9 @@
          ("C-c o s" . haba/open-scratch-buffer)
          ("C-c o t" . haba/open-todo-file)
          ([remap fill-paragraph] . haba/fill-or-unfill)
-         ("C-c i d" . haba/insert-current-date))
+         ("C-c i d" . haba/insert-current-date)
+         ("<C-wheel-up>" . text-scale-increase)
+         ("<C-wheel-down>" . text-scale-decrease))
   :config
   (defun haba/open-scratch-buffer ()
     "Open scratch buffer"
