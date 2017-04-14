@@ -59,7 +59,6 @@
 ;; winner mode is a must
 (winner-mode 1)
 
-
 ;; tabs are evil...
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
@@ -83,7 +82,7 @@
 (setq set-mark-command-repeat-pop t)
 
 ;; Tab to indent or complete
-;; (setq tab-always-indent 'complete)
+(setq tab-always-indent 'complete)
 
 ;; abbrev
 (setq abbrev-file-name (concat user-emacs-directory "abbrev_defs"))
@@ -255,11 +254,12 @@
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("M-s s" . counsel-grep-or-swiper)
+         ("M-s r" . counsel-rg)
          ("C-c s" . swiper-all)
          ("C-x b" . ivy-switch-buffer)
          ("M-y" . counsel-yank-pop))
   :config
-  ;; counsel uses smex for better soring
+  ;; counsel uses smex for better sorting
   (use-package smex :defer)
 
   (setq counsel-find-file-at-point t)
@@ -272,6 +272,8 @@
 
   (setq ivy-ignore-buffers '(".*-autoloads.el"))
   (setq ivy-switch-buffer-faces-alist '((dired-mode . ivy-subdir)))
+
+  (setq counsel-yank-pop-separator (concat "\n" (make-string 70 ?-) "\n"))
   )
 
 
@@ -485,6 +487,13 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (use-package cider
     :config
     (setq cider-repl-display-help-banner nil)))
+
+(use-package slime
+  :commands (slime)
+  :config
+  (setq inferior-lisp-program "ros -Q run")
+  (slime-setup '(slime-fancy))
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
