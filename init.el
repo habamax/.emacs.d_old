@@ -457,7 +457,18 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   :mode ("\\.\\(go\\)$" . go-mode))
 
 (use-package web-mode
-  :mode ("\\.\\(html\\|css\\)$" . web-mode))
+  :mode ("\\.\\(html\\|css\\)$" . web-mode)
+  :config
+  (setq web-mode-enable-auto-expanding t
+        web-mode-enable-auto-pairing t))
+
+(use-package groovy-mode
+  :mode ("\\.groovy$" . groovy-mode)
+  :config
+  (defun haba/groovy-mode-hook ()
+    (setq tab-width 4)
+    (setq c-basic-offset 4))
+  (add-hook 'groovy-mode-hook 'haba/groovy-mode-hook))
 
 ;; flycheck
 (use-package flycheck
@@ -480,6 +491,12 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   :config
   (yas-global-mode t))
 
+
+(use-package python-mode
+  :mode ("\\.\\(py\\)$" . python-mode)
+  :config
+  ;; (setq python-shell-interpreter "python3")
+  )
 
 (use-package clojure-mode
   :mode ("\\.\\(clj\\)$" . clojure-mode)
