@@ -330,8 +330,6 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
     "Other window"
     ("o" (other-window 1) "Next")
     ("O" (other-window -1) "Previous")
-    ("m" delete-other-windows "Maximize window")
-    ("c" delete-window "Close window")
     ("SPC" nil "quit")
     ("q" nil "quit"))
   )
