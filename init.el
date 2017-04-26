@@ -303,6 +303,7 @@
 
 
 (use-package projectile
+  :commands (projectile-project-root)
   :bind-keymap (("C-c p" . projectile-mode-map))
   :bind (:map projectile-mode-map ("C-c p s r" . projectile-ripgrep))
   :config
