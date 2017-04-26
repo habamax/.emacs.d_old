@@ -82,7 +82,7 @@
 (setq set-mark-command-repeat-pop t)
 
 ;; Tab to indent or complete
-(setq tab-always-indent 'complete)
+;; (setq tab-always-indent 'complete)
 
 ;; abbrev
 (setq abbrev-file-name (concat user-emacs-directory "abbrev_defs"))
