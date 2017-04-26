@@ -257,6 +257,7 @@
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("M-s s" . counsel-grep-or-swiper)
+         ("M-s t" . haba/counsel-projectile-rg-todo)
          ("M-s r" . counsel-rg)
          ("C-c s" . swiper-all)
          ("C-x b" . ivy-switch-buffer)
@@ -277,6 +278,27 @@
   (setq ivy-switch-buffer-faces-alist '((dired-mode . ivy-subdir)))
 
   (setq counsel-yank-pop-separator (concat "\n" (make-string 70 ?-) "\n"))
+
+
+  (defun haba/counsel-projectile-rg-todo ()
+    (interactive)
+    (ivy-set-prompt 'haba/counsel-projectile-rg-todo counsel-prompt-function)
+    (setq counsel--git-grep-dir (projectile-project-root))
+    (ivy-read "TODO"
+               (lambda (string)
+                 (counsel-ag-function (concat "TODO: " string)
+                                      counsel-rg-base-command ""))
+               :initial-input ""
+               :dynamic-collection t
+               :keymap counsel-ag-map
+               :history 'counsel-git-grep-history
+               :action #'counsel-git-grep-action
+               :unwind (lambda ()
+                         (counsel-delete-process)
+                         (swiper--cleanup))
+               :caller 'haba/counsel-projectile-rg-todo))
+
+  (counsel-set-async-exit-code 'haba/counsel-projectile-rg-todo 1 "No matches found")
   )
 
 
