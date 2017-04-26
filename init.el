@@ -130,7 +130,10 @@
 (use-package haba-stuff
   :ensure nil
   :demand
-  :commands (haba/next-buffer haba/previous-buffer haba/toggle-window-split haba/fill-or-unfill)
+  :commands (haba/next-buffer
+             haba/previous-buffer
+             haba/toggle-window-split
+             haba/fill-or-unfill)
   :load-path "lisp/"
   :bind (("M-;" . haba/toggle-comment)
          ("C-a" . haba/move-beginning-of-line)
