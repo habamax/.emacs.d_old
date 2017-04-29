@@ -522,6 +522,12 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   ;; (setq python-shell-interpreter "python3")
   )
 
+(use-package rust-mode
+  :mode ("\\.\\(rs\\)$" . rust-mode)
+  :config
+  (setq rust-format-on-save t)
+  )
+
 (use-package clojure-mode
   :mode ("\\.\\(clj\\)$" . clojure-mode)
   :config
