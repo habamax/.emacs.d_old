@@ -1,4 +1,4 @@
-;;; asciidoctor-mode.el --- A major mode for AsciiDoc files.
+;;; asciidoctor-mode.el --- A major mode for AsciiDoc(tor) files.
 
 ;; Copyright (C) 2017 Maxim Kim
 
@@ -21,6 +21,11 @@
 ;; (defgroup asciidoctor nil
 ;;   "Major mode for editing text files in AsciiDoc format."
 ;;   :prefix "asciidoctor-")
+
+(require 'outline)
+(require 'thingatpt)
+(require 'cl-lib)
+;; (require 'url-parse)
 
 
 (defcustom asciidoctor-pdf-executable
@@ -48,45 +53,116 @@
   :type 'string)
 
 
+;;; Regexes
 
-;;; Font Lock
-
-;; (require 'font-lock)
-
-
-;; (defface asciidoctor-title-face
-;;   '((t (:inherit default :height 2.0 :weight bold)))
-;;   "Document's title"
-;;   :group 'asciidoctor-faces)
-
-;; (defface asciidoctor-header1-face
-;;   '((t (:inherit default :height 1.6 :weight bold)))
-;;   "Header level 1"
-;;   :group 'asciidoctor-faces)
-
-;; (defface asciidoctor-header2-face
-;;   '((t (:inherit default :height 1.3 :weight bold)))
-;;   "Header level 2"
-;;   :group 'asciidoctor-faces)
-
-;; (defface asciidoctor-header3-face
-;;   '((t (:inherit default :height 1.1 :weight bold)))
-;;   "Header level 3"
-;;   :group 'asciidoctor-faces)
-
-;; (defface asciidoctor-header4-face
-;;   '((t (:inherit default :height 1.0 :weight bold)))
-;;   "Header level 4"
-;;   :group 'asciidoctor-faces)
-
-;; (defvar asciidoctor-title-face 'asciidoctor-title-face)
-;; (defvar asciidoctor-header1-face 'asciidoctor-header1-face)
-;; (defvar asciidoctor-header2-face 'asciidoctor-header2-face)
-;; (defvar asciidoctor-header3-face 'asciidoctor-header3-face)
-;; (defvar asciidoctor-header4-face 'asciidoctor-header4-face)
+  ;; "^\\(:?\\(=+\\)[ \t]+\\(.*?\\)\\)$"
 
 
+(defconst asciidoctor-regex-header
+  "^\\(=+\\)[ \t]+\\(.*?\\)[ \t]*\\(=*\\)$"
+  "Regexp identifying Asciidoctor headings.
+Group 1 matches the opening equal marks of an atx heading.
+Group 2 matches the text, without surrounding whitespace, of an atx heading.")
 
+;; (defconst asciidoctor-regex-header
+;;   "^\\(?:\\([^\r\n\t -].*\\)\n\\(?:\\(=+\\)\\|\\(-+\\)\\)\\|\\(=+\\)[ \t]+\\(.*?\\)[ \t]*\\(=*\\)\\)$"
+;;   "Regexp identifying Markdown headings.
+;; Group 1 matches the text of a setext heading.
+;; Group 2 matches the underline of a level-1 setext heading.
+;; Group 3 matches the underline of a level-2 setext heading.
+;; Group 4 matches the opening equal marks of an atx heading.
+;; Group 5 matches the text, without surrounding whitespace, of an atx heading.
+;; Group 6 matches the closing equal marks of an atx heading.")
+
+
+(defun asciidoctor-text-property-at-point (prop)
+  (get-text-property (point) prop))
+
+
+;; (defun asciidoctor-get-fenced-block-from-start (prop)
+;;   "Return limits of an enclosing fenced block from its start, using PROP.
+;; Return value is a list usable as `match-data'."
+;;   (catch 'no-rest-of-block
+;;     (let* ((correct-entry
+;;             (cl-find-if
+;;              (lambda (entry) (eq (cl-cadar entry) prop))
+;;              asciidoctor-fenced-block-pairs))
+;;            (begin-of-begin (cl-first (markdown-text-property-at-point prop)))
+;;            (middle-prop (cl-third correct-entry))
+;;            (end-prop (cl-cadadr correct-entry))
+;;            (end-of-end
+;;             (save-excursion
+;;               (goto-char (match-end 0))   ; end of begin
+;;               (unless (eobp) (forward-char))
+;;               (let ((mid-prop-v (asciidoctor-text-property-at-point middle-prop)))
+;;                 (if (not mid-prop-v)    ; no middle
+;;                     (progn
+;;                       ;; try to find end by advancing one
+;;                       (let ((end-prop-v
+;;                              (asciidoctor-text-property-at-point end-prop)))
+;;                         (if end-prop-v (cl-second end-prop-v)
+;;                           (throw 'no-rest-of-block nil))))
+;;                   (set-match-data mid-prop-v)
+;;                   (goto-char (match-end 0))   ; end of middle
+;;                   (beginning-of-line)         ; into end
+;;                   (cl-second (asciidoctor-text-property-at-point end-prop)))))))
+;;       (list begin-of-begin end-of-end))))
+
+
+;; (defun asciidoctor-get-enclosing-fenced-block-construct (&optional pos)
+;;   "Get \"fake\" match data for block enclosing POS.
+;; Returns fake match data which encloses the start, middle, and end
+;; of the block construct enclosing POS, if it exists. Used in
+;; `asciidoctor-code-block-at-pos'."
+;;   (save-excursion
+;;     (when pos (goto-char pos))
+;;     (beginning-of-line)
+;;     (car
+;;      (cl-remove-if
+;;       #'null
+;;       (cl-mapcar
+;;        (lambda (fun-and-prop)
+;;          (cl-destructuring-bind (fun prop) fun-and-prop
+;;            (when prop
+;;              (save-match-data
+;;                (set-match-data (asciidoctor-text-property-at-point prop))
+;;                (funcall fun prop)))))
+;;        `((asciidoctor-get-fenced-block-from-start
+;;           ,(cl-find-if
+;;             #'asciidoctor-text-property-at-point
+;;             (asciidoctor-get-fenced-block-begin-properties)))
+;;          (asciidoctor-get-fenced-block-from-middle
+;;           ,(cl-find-if
+;;             #'asciidoctor-text-property-at-point
+;;             (asciidoctor-get-fenced-block-middle-properties)))
+;;          (asciidoctor-get-fenced-block-from-end
+;;           ,(cl-find-if
+;;             #'asciidoctor-text-property-at-point
+;;             (asciidoctor-get-fenced-block-end-properties)))))))))
+
+;; (defun asciidoctor-code-block-at-pos (pos)
+;;   "Return match data list if there is a code block at POS.
+;; This includes pre blocks, tilde-fenced code blocks, and GFM
+;; quoted code blocks.  Return nil otherwise."
+;;   (or (get-text-property pos 'asciidoctor-pre)
+;;       (asciidoctor-get-enclosing-fenced-block-construct pos)))
+
+;; (defun asciidoctor-code-block-at-point ()
+;;   "Return match data if the point is inside a code block.
+;; This includes pre blocks, tilde-fenced code blocks, and
+;; GFM quoted code blocks.  Calls `asciidoctor-code-block-at-pos'."
+;;   (asciidoctor-code-block-at-pos (point)))
+
+(defun asciidoctor-outline-level ()
+  "Return the depth to which a statement is nested in the outline."
+  (cond
+   ;; ((asciidoctor-code-block-at-point) 7)
+   ((match-end 2) 1)
+   ((match-end 3) 2)
+   ((- (match-end 4) (match-beginning 4)))))
+
+
+;;; Compile functions
 
 (defun asciidoctor-compile-html ()
   "Compile AsciiDoc file to HTML, using asciidoctor ruby implementation."
@@ -184,339 +260,270 @@
 
 
 
-;; (defun asciidoctor-make-one-line-title (sub-type level text)
-;;   "Returns a one line title of LEVEL and SUB-TYPE containing the given text."
-;;   (let ((del (make-string (+ level 1) ?=)))
-;;     (concat del " " text (when (eq sub-type 2) (concat " " del)))))
+(defgroup asciidoctor-faces nil
+  "Faces used in Asciidoctor Mode"
+  :group 'asciidoctor
+  :group 'faces)
 
 
-;; (defun asciidoctor-kwf-std (end regexp &optional must-free-groups no-block-del-groups)
-;;   "Standart function for keywords
+(defface asciidoctor-markup-face
+  '((t (:inherit shadow :slant normal :weight normal)))
+  "Face for markup elements."
+  :group 'asciidoctor-faces)
 
-;; Intendent to be called from font lock keyword functions. END is
-;; the limit of the search. REXEXP the regexp to be searched.
-;; MUST-FREE-GROUPS a list of regexp group numbers which may not
-;; match text that has an asciidoctor-reserved text-property with a non-nil
-;; value. Likewise, groups in NO-BLOCK-DEL-GROUPS may not contain
-;; text having asciidoctor-reserved set to 'block-del."
-;;   (let ((found t) (prevented t) saved-point)
-;;     (while (and found prevented (<= (point) end) (not (eobp)))
-;;       (setq saved-point (point))
-;;       (setq found (re-search-forward regexp end t))
-;;       (setq prevented 
-;; 	    (and found
-;; 		 (or
-;; 		  (some (lambda(x)
-;; 			  (and (match-beginning x)
-;; 			       (text-property-not-all (match-beginning x)
-;; 						      (match-end x)
-;; 						      'asciidoctor-reserved nil)))
-;; 			must-free-groups)
-;; 		  (some (lambda(x)
-;; 			  (and (match-beginning x))
-;; 			  (text-property-any (match-beginning x)
-;; 			         	     (match-end x)
-;; 					     'asciidoctor-reserved 'block-del))
-;; 			no-block-del-groups))))
-;;       (when (and found prevented (<= (point) end))
-;; 	(goto-char (1+ saved-point))))
-;;     (and found (not prevented))))
+(defface asciidoctor-header-delimiter-face
+  '((t (:inherit asciidoctor-markup-face)))
+  "Base face for headers hash delimiter."
+  :group 'asciidoctor-faces)
 
+(defface asciidoctor-header-rule-face
+  '((t (:inherit asciidoctor-markup-face)))
+  "Base face for headers rules."
+  :group 'asciidoctor-faces)
 
-;; (defconst asciidoctor-title-max-level 4
-;;   "Max title level, counting starts at 0.")
+(defface asciidoctor-header-face
+  '((t (:inherit font-lock-keyword-face
+                 :weight bold)))
+  "Base face for headers."
+  :group 'asciidoctor-faces)
 
-;; (defun asciidoctor-re-one-line-title (level)
-;;   "Returns a regex matching a one line title of the given LEVEL.
-;; When LEVEL is nil, a one line title of any level is matched.
+(defface asciidoctor-header-face-1
+  '((t (:inherit asciidoctor-header-face)))
+  "Header 1 face."
+  :group 'asciidoctor-faces)
 
-;; match-data has these sub groups:
-;; 1 leading delimiter inclusive whites between delimiter and title text
-;; 2 title's text exclusive leading/trailing whites
-;; 3 trailing delimiter with all whites 
-;; 4 trailing delimiter only inclusive whites between title text and delimiter
-;; 0 only chars that belong to the title block element
+(defface asciidoctor-header-face-2
+  '((t (:inherit asciidoctor-header-face)))
+  "Header 2 face."
+  :group 'asciidoctor-faces)
 
-;; ==  my title  ==  n
-;; ---12------23------
-;;             4--4"
-;;   (let* ((del (if level
-;;                  (make-string (+ level 1) ?=)
-;;                (concat "=\\{1," (+ asciidoctor-title-max-level 1) "\\}"))))
-;;     (concat
-;;      "^\\(" del "[ \t]+\\)"		      ; 1
-;;      "\\([^ \t\n].*?\\)"                          ; 2
-;;      ;; using \n instad $ is important so group 3 is guaranteed to be at least 1
-;;      ;; char long (except when at the end of the buffer()). That is important to
-;;      ;; to have a place to put the text property asciidoctor-reserved on.
-;;      "\\(\\([ \t]+" del "\\)?[ \t]*\\(?:\n\\|\\'\\)\\)" )))
+(defface asciidoctor-header-face-3
+  '((t (:inherit asciidoctor-header-face)))
+  "Header 3 face."
+  :group 'asciidoctor-faces)
 
-;; (defun asciidoctor-kw-one-line-title (level text-face)
-;;   "Creates a keyword for font-lock which highlights one line titles"
-;;   (list
-;;    `(lambda (end) (asciidoctor-kwf-std end ,(asciidoctor-re-one-line-title level) '(0)))
-;;     '(1 '(face nil asciidoctor-reserved block-del) t)
-;;     `(2 ,text-face t) 
-;;     '(3  '(face nil asciidoctor-reserved block-del) t)
-;;     '(4 '(face nil) t t)))
+(defface asciidoctor-header-face-4
+  '((t (:inherit asciidoctor-header-face)))
+  "Header 4 face."
+  :group 'asciidoctor-faces)
+
+(defface asciidoctor-header-face-5
+  '((t (:inherit asciidoctor-header-face)))
+  "Header 5 face."
+  :group 'asciidoctor-faces)
+
+(defface asciidoctor-header-face-6
+  '((t (:inherit asciidoctor-header-face)))
+  "Header 6 face."
+  :group 'asciidoctor-faces)
+
+(defface asciidoctor-comment-face
+  '((t (:inherit font-lock-comment-face)))
+  "Face for asciidoctor comments."
+  :group 'asciidoctor-faces)
 
 
-;; (defun asciidoctor-font-lock-mark-block-function ()
-;;   (mark-paragraph 2)
-;;   (forward-paragraph -1))
-
-;; (defun asciidoctor-get-font-lock-keywords ()
-;;   (list
-   
-;;    ;; Asciidoc BUG: Lex.next has a different order than the following extract
-;;    ;; from the documentation states.
-   
-;;    ;; When a block element is encountered asciidoc(1) determines the type of
-;;    ;; block by checking in the following order (first to last): (section)
-;;    ;; Titles, BlockMacros, Lists, DelimitedBlocks, Tables, AttributeEntrys,
-;;    ;; AttributeLists, BlockTitles, Paragraphs.
-
-;;    ;; sections / document structure
-;;    ;; ------------------------------
-;;    (asciidoctor-kw-one-line-title 0 asciidoctor-title-face)
-;;    (asciidoctor-kw-one-line-title 1 asciidoctor-header1-face)
-;;    (asciidoctor-kw-one-line-title 2 asciidoctor-header2-face)
-;;    (asciidoctor-kw-one-line-title 3 asciidoctor-header3-face)
-;;    (asciidoctor-kw-one-line-title 4 asciidoctor-header4-face)
-
-;;    ;; ;; block macros 
-;;    ;; ;; ------------------------------
-;;    ;; ;; todo: respect asciidoc.conf order
-
-;;    ;; ;; -- system block macros
-;;    ;; ;;     # Default system macro syntax.
-;;    ;; ;; SYS_RE = r'(?u)^(?P<name>[\\]?\w(\w|-)*?)::(?P<target>\S*?)' + \
-;;    ;; ;;          r'(\[(?P<attrlist>.*?)\])$'
-;;    ;; ;; conditional inclusion
-;;    ;; (list "^\\(\\(?:ifn?def\\|endif\\)::\\)\\([^ \t\n]*?\\)\\(\\[\\).+?\\(\\]\\)[ \t]*$"
-;;    ;;       '(1 '(face asciidoctor-preprocessor asciidoctor-reserved block-del))    ; macro name
-;;    ;;       '(2 '(face asciidoctor-delimiter asciidoctor-reserved block-del))       ; condition
-;;    ;;       '(3 '(face asciidoctor-hide-delimiter asciidoctor-reserved block-del))  ; [
-;;    ;;       ; ... attribute list content = the conditionaly included text
-;;    ;;       '(4 '(face asciidoctor-hide-delimiter asciidoctor-reserved block-del))) ; ]
-;;    ;; ;; include
-;;    ;; (list "^\\(\\(include1?::\\)\\([^ \t\n]*?\\)\\(\\[\\)\\(.*?\\)\\(\\]\\)\\)[ \t]*$"
-;;    ;;       '(1 '(face nil asciidoctor-reserved block-del)) ; the whole match
-;;    ;;       '(2 asciidoctor-preprocessor)           ; macro name
-;;    ;;       '(3 asciidoctor-delimiter)              ; file name
-;;    ;;       '(4 asciidoctor-hide-delimiter)         ; [
-;;    ;;       '(5 asciidoctor-delimiter)              ;   attribute list content
-;;    ;;       '(6 asciidoctor-hide-delimiter))        ; ]
 
 
-;;    ;; ;; -- special block macros
-;;    ;; ;; ruler line.
-;;    ;; ;; Is a block marcro in asciidoc.conf, altough manual has it in the "text formatting" section 
-;;    ;; ;; ^'{3,}$=#ruler
-;;    ;; (list "^\\('\\{3,\\}+\\)[ \t]*$"
-;;    ;;       '(1 '(face asciidoctor-complex-replacement asciidoctor-reserved block-del))) 
-;;    ;; ;; forced pagebreak
-;;    ;; ;; Is a block marcro in asciidoc.conf, altough manual has it in the "text formatting" section 
-;;    ;; ;; ^<{3,}$=#pagebreak
-;;    ;; (list "^\\(<\\{3,\\}+\\)[ \t]*$"
-;;    ;;       '(1 '(face asciidoctor-delimiter asciidoctor-reserved block-del))) 
-;;    ;; ;; comment
-;;    ;; ;; (?mu)^[\\]?//(?P<passtext>[^/].*|)$
-;;    ;; ;; I don't know what the [\\]? should mean
-;;    ;; (list "^\\(//\\(?:[^/].*\\|\\)\\(?:\n\\|\\'\\)\\)"
-;;    ;;       '(1 '(face markup-comment-face asciidoctor-reserved block-del)))    
-;;    ;; ;; image. The first positional attribute is per definition 'alt', see
-;;    ;; ;; asciidoc manual, sub chapter 'Image macro attributes'.
-;;    ;; (list `(lambda (end) (asciidoctor-kwf-std end ,(asciidoctor-re-block-macro "image") '(0)))
-;;    ;;       '(0 '(face markup-meta-face asciidoctor-reserved block-del) t) ; whole match
-;;    ;;       '(1 markup-complex-replacement-face t)	; 'image'  
-;;    ;;       '(2 markup-internal-reference-face t)  ; file name
-;;    ;;       '(3 '(face markup-meta-face asciidoctor-reserved nil asciidoctor-attribute-list ("alt")) t)) ; attribute list
-			  
-;;    ;; ;; passthrough: (?u)^(?P<name>pass)::(?P<subslist>\S*?)(\[(?P<passtext>.*?)\])$
-;;    ;; ;; todo
+(defvar asciidoctor-markup-face 'asciidoctor-markup-face
+  "Face name to use for markup elements.")
 
-;;    ;; ;; -- general block macro
-;;    ;; (list `(lambda (end) (asciidoctor-kwf-std end ,(asciidoctor-re-block-macro) '(0)))
-;;    ;;       '(0 '(face markup-meta-face asciidoctor-reserved block-del)) ; whole match
-;;    ;;       '(1 markup-command-face t)			       ; command name
-;;    ;;       '(3 '(face markup-meta-face asciidoctor-reserved nil asciidoctor-attribute-list t) t)) ; attribute list
+(defvar asciidoctor-header-delimiter-face 'asciidoctor-header-delimiter-face
+  "Face name to use as a base for header delimiters.")
 
-;;    ;; ;; Delimited blocks
-;;    ;; ;; ------------------------------
-;;    ;; (asciidoctor-kw-delimited-block 0 markup-comment-face)   ; comment
-;;    ;; (asciidoctor-kw-delimited-block 1 markup-passthrough-face) ; passthrough
-;;    ;; (asciidoctor-kw-delimited-block 2 markup-code-face) ; listing
-;;    ;; (asciidoctor-kw-delimited-block 3 markup-verbatim-face) ; literal
-;;    ;; (asciidoctor-kw-delimited-block 4 nil t) ; quote    
-;;    ;; (asciidoctor-kw-delimited-block 5 nil t) ; example  
-;;    ;; (asciidoctor-kw-delimited-block 6 asciidoctor-secondary-text t) ; sidebar
-;;    ;; (asciidoctor-kw-delimited-block 7 nil t) ; open block
-;;    ;; (asciidoctor-kw-delimiter-line-fallback)  
+(defvar asciidoctor-header-rule-face 'asciidoctor-header-rule-face
+  "Face name to use as a base for header rules.")
+
+(defvar asciidoctor-header-face 'asciidoctor-header-face
+  "Face name to use as a base for headers.")
+
+(defvar asciidoctor-header-face-1 'asciidoctor-header-face-1
+  "Face name to use for level-1 headers.")
+
+(defvar asciidoctor-header-face-2 'asciidoctor-header-face-2
+  "Face name to use for level-2 headers.")
+
+(defvar asciidoctor-header-face-3 'asciidoctor-header-face-3
+  "Face name to use for level-3 headers.")
+
+(defvar asciidoctor-header-face-4 'asciidoctor-header-face-4
+  "Face name to use for level-4 headers.")
+
+(defvar asciidoctor-header-face-5 'asciidoctor-header-face-5
+  "Face name to use for level-5 headers.")
+
+(defvar asciidoctor-header-face-6 'asciidoctor-header-face-6
+  "Face name to use for level-6 headers.")
 
 
-;;    ;; ;; tables
-;;    ;; ;; ------------------------------
-;;    ;; ;; must come BEFORE block title, else rows starting like .2+| ... | ... are taken as 
-;;    ;; (cons "^|=\\{3,\\}[ \t]*$" 'asciidoctor-table-del ) ; ^\|={3,}$
-;;    ;; (list (concat "^"                  "\\(" (asciidoctor-re-cell-specifier) "\\)" "\\(|\\)"
-;;    ;;               "\\(?:[^|\n]*?[ \t]" "\\(" (asciidoctor-re-cell-specifier) "\\)" "\\(|\\)"
-;;    ;;               "\\(?:[^|\n]*?[ \t]" "\\(" (asciidoctor-re-cell-specifier) "\\)" "\\(|\\)"
-;;    ;;               "\\(?:[^|\n]*?[ \t]" "\\(" (asciidoctor-re-cell-specifier) "\\)" "\\(|\\)" "\\)?\\)?\\)?")
-;;    ;;       '(1 '(face asciidoctor-delimiter asciidoctor-reserved block-del) nil t) '(2 '(face asciidoctor-table-del asciidoctor-reserved block-del) nil t)
-;;    ;;       '(3 '(face asciidoctor-delimiter asciidoctor-reserved block-del) nil t) '(4 '(face asciidoctor-table-del asciidoctor-reserved block-del) nil t)
-;;    ;;       '(5 '(face asciidoctor-delimiter asciidoctor-reserved block-del) nil t) '(6 '(face asciidoctor-table-del asciidoctor-reserved block-del) nil t)
-;;    ;;       '(7 '(face asciidoctor-delimiter asciidoctor-reserved block-del) nil t) '(8 '(face asciidoctor-table-del asciidoctor-reserved block-del) nil t))
-   
 
-;;    ;; ;; attribute entry
-;;    ;; ;; ------------------------------
-;;    ;; (list (asciidoctor-re-attribute-entry) '(1 asciidoctor-delimiter) '(2 asciidoctor-secondary-text nil t))
+(defun asciidoctor-syntactic-face (state)
+  "Return font-lock face for characters with given STATE.
+See `font-lock-syntactic-face-function' for details."
+  (let ((in-comment (nth 4 state)))
+    (cond
+     (in-comment 'asciidoctor-comment-face)
+     (t nil))))
 
 
-;;    ;; ;; attribute list
-;;    ;; ;; ----------------------------------
-
-;;    ;; ;; --- special attribute lists
-;;    ;; ;; quote/verse
-;;    ;; (list (concat
-;;    ;;        "^\\("
-;;    ;;          "\\(\\[\\)"
-;;    ;;          "\\(quote\\|verse\\)"
-;;    ;;          "\\(?:\\(,\\)\\(.*?\\)\\(?:\\(,\\)\\(.*?\\)\\)?\\)?"
-;;    ;;          "\\(\\]\\)"
-;;    ;;        "\\)[ \t]*$")
-;;    ;;       '(1 '(face nil asciidoctor-reserved block-del)) ; whole match
-;;    ;;       '(2 asciidoctor-hide-delimiter)         ; [
-;;    ;;       '(3 asciidoctor-delimiter)              ;   quote|verse
-;;    ;;       '(4 asciidoctor-hide-delimiter nil t)   ;   ,
-;;    ;;       '(5 asciidoctor-secondary-text nil t)   ;   attribution(author)
-;;    ;;       '(6 asciidoctor-delimiter nil t)        ;   ,
-;;    ;;       '(7 asciidoctor-secondary-text nil t)   ;   cite title
-;;    ;;       '(8 asciidoctor-hide-delimiter))        ; ]
-;;    ;; ;; admonition block
-;;    ;; (list "^\\(\\[\\(?:CAUTION\\|WARNING\\|IMPORTANT\\|TIP\\|NOTE\\)\\]\\)[ \t]*$"
-;;    ;;       '(1 '(face asciidoctor-complex-replacement asciidoctor-reserved block-del)))
-;;    ;; ;; block id
-;;    ;; (list `(lambda (end) (asciidoctor-kwf-std end ,(asciidoctor-re-anchor 'block-id) '(0)))
-;;    ;; 	 '(0 '(face markup-meta-face asciidoctor-reserved block-del))
-;;    ;; 	 '(1 markup-anchor-face t)
-;;    ;; 	 '(2 markup-secondary-text-face t t))
-
-;;    ;; ;; --- general attribute list block element
-;;    ;; ;; ^\[(?P<attrlist>.*)\]$
-;;    ;; (list '(lambda (end) (asciidoctor-kwf-std end "^\\(\\[\\(.*\\)\\]\\)[ \t]*$" '(0)))
-;;    ;;       '(1 '(face markup-meta-face asciidoctor-reserved block-del))
-;;    ;; 	 '(2 '(face markup-meta-face asciidoctor-attribute-list t)))
+(defun asciidoctor-syntax-propertize-extend-region (start end)
+  "Extend START to END region to include an entire block of text.
+This helps improve syntax analysis for block constructs.
+Returns a cons (NEW-START . NEW-END) or nil if no adjustment should be made.
+Function is called repeatedly until it returns nil. For details, see
+`syntax-propertize-extend-region-functions'."
+  (save-match-data
+    (save-excursion
+      (let* ((new-start (progn (goto-char start)
+                               (skip-chars-forward "\n")
+                               (if (re-search-backward "\n\n" nil t)
+                                   (min start (match-end 0))
+                                 (point-min))))
+             (new-end (progn (goto-char end)
+                             (skip-chars-backward "\n")
+                             (if (re-search-forward "\n\n" nil t)
+                                 (max end (match-beginning 0))
+                               (point-max))))
+             ;; (code-match (asciidoctor-code-block-at-pos new-start))
+             ;; (new-start (or (and code-match (cl-first code-match)) new-start))
+             ;; (code-match (asciidoctor-code-block-at-pos end))
+             ;; (new-end (or (and code-match (cl-second code-match)) new-end)))
+             )
+        (unless (and (eq new-start start) (eq new-end end))
+          (cons new-start (min new-end (point-max))))))))
 
 
-;;    ;; ;; block title
-;;    ;; ;; -----------------------------------
-;;    ;; (asciidoctor-kw-block-title)
+
+;; (defun asciidoctor-syntax-propertize-comments (start end)
+;;   "Match asciidoctor comments from the START to END."
+;;   (let* ((state (syntax-ppss)) (in-comment (nth 4 state)))
+;;     (goto-char start)
+;;     (cond
+;;      ;; Comment start
+;;      ((and (not in-comment)
+;;            (re-search-forward asciidoctor-regex-comment-start end t)
+;;            (save-match-data (not (asciidoctor-code-at-point-p)))
+;;            (save-match-data (not (asciidoctor-code-block-at-point))))
+;;       (let ((open-beg (match-beginning 0)))
+;;         (put-text-property open-beg (1+ open-beg)
+;;                            'syntax-table (string-to-syntax "<"))
+;;         (asciidoctor-syntax-propertize-comments
+;;          (min (1+ (match-end 0)) end (point-max)) end)))
+;;      ;; Comment end
+;;      ((and in-comment
+;;            (re-search-forward asciidoctor-regex-comment-end end t))
+;;       (put-text-property (1- (match-end 0)) (match-end 0)
+;;                          'syntax-table (string-to-syntax ">"))
+;;       (asciidoctor-syntax-propertize-comments
+;;        (min (1+ (match-end 0)) end (point-max)) end))
+;;      ;; Nothing found
+;;      (t nil))))
+
+(defun asciidoctor-syntax-propertize-headings (start end)
+  "Match headings of type SYMBOL with REGEX from START to END."
+  (goto-char start)
+  (while (re-search-forward asciidoctor-regex-header end t)
+    ;; (unless (asciidoctor-code-block-at-pos (match-beginning 0))
+      (put-text-property
+       (match-beginning 0) (match-end 0) 'asciidoctor-heading t)
+      (put-text-property
+       (match-beginning 0) (match-end 0)
+       (let ((atx-level (length (match-string-no-properties 1))))
+         (intern (format "asciidoctor-heading-%d-atx" atx-level)))
+       (match-data t)))
+;  )
+)
+
+       ;; (cond ((match-string-no-properties 2) 'asciidoctor-heading-1-setext)
+             ;; ((match-string-no-properties 3) 'asciidoctor-heading-2-setext)
+             ;; (t (let ((atx-level (length (match-string-no-properties 4))))
+                  ;; (intern (format "asciidoctor-heading-%d-atx" atx-level)))))
+
+(defvar asciidoctor--syntax-properties
+  (list 'asciidoctor-heading nil
+        'asciidoctor-heading-1-atx nil
+        'asciidoctor-heading-2-atx nil
+        'asciidoctor-heading-3-atx nil
+        'asciidoctor-heading-4-atx nil
+        'asciidoctor-heading-5-atx nil
+        'asciidoctor-heading-6-atx nil)
+  "Property list of all known asciidoctor syntactic properties.")
+
+(defun asciidoctor-syntax-propertize (start end)
+  "Function used as `syntax-propertize-function'.
+START and END delimit region to propertize."
+  (remove-text-properties start end asciidoctor--syntax-properties)
+  ;; (markdown-syntax-propertize-fenced-block-constructs start end)
+  ;; (markdown-syntax-propertize-yaml-metadata start end)
+  ;; (markdown-syntax-propertize-pre-blocks start end)
+  ;; (markdown-syntax-propertize-blockquotes start end)
+  ;; (asciidoctor-syntax-propertize-comments start end)
+  (asciidoctor-syntax-propertize-headings start end))
 
 
-;;    ;; ;; paragraphs
-;;    ;; ;; --------------------------
-;;    ;; (asciidoctor-kw-verbatim-paragraph-sequence)
-;;    ;; (asciidoctor-kw-admonition-paragraph)
-;;    ;; (list "^[ \t]+$" '(0 '(face nil asciidoctor-reserved block-del) t))
-
-;;    ;; ;; Inline substitutions
-;;    ;; ;; ==========================================
-;;    ;; ;; Inline substitutions within block elements are performed in the
-;;    ;; ;; following default order:
-;;    ;; ;; -. Passtrough stuff removal (seen in asciidoc source)
-;;    ;; ;; 1. Special characters
-;;    ;; ;; 2. Quotes
-;;    ;; ;; 3. Special words
-;;    ;; ;; 4. Replacements
-;;    ;; ;; 5. Attributes
-;;    ;; ;; 6. Inline Macros
-;;    ;; ;; 7. Replacements2
+(defun asciidoctor-match-propertized-text (property last)
+  "Match text with PROPERTY from point to LAST.
+Restore match data previously stored in PROPERTY."
+  (let ((saved (get-text-property (point) property))
+        pos)
+    (unless saved
+      (setq pos (next-single-char-property-change (point) property nil last))
+      (setq saved (get-text-property pos property)))
+    (when saved
+      (set-match-data saved)
+      ;; Step at least one character beyond point. Otherwise
+      ;; `font-lock-fontify-keywords-region' infloops.
+      (goto-char (min (1+ (max (match-end 0) (point)))
+                      (point-max)))
+      saved)))
 
 
-;;    ;; ;; (passthrough stuff removal)
-;;    ;; ;; ------------------------
-;;    ;; ;; todo. look in asciidoc source how exactly asciidoc does it
-;;    ;; ;; 1) BUG: actually only ifdef::no-inline-literal[]
-;;    ;; ;; 2) TODO: in asciidod.conf (but not yet here) also in inline macro section
+(defun asciidoctor-match-heading-1-atx (last)
+  "Match level 1 ATX headings from point to LAST."
+  (asciidoctor-match-propertized-text 'asciidoctor-heading-1-atx last))
 
-;;    ;; ;; AsciiDoc Manual: constitutes an inline literal passthrough. The enclosed
-;;    ;; ;; text is rendered in a monospaced font and is only subject to special
-;;    ;; ;; character substitution.
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-constrained "`" markup-typewriter-face nil nil t)     ;1)
-;;    ;; ;; AsciiDoc Manual: The triple-plus passthrough is functionally identical to
-;;    ;; ;; the pass macro but you don’t have to escape ] characters and you can
-;;    ;; ;; prefix with quoted attributes in the inline version
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-unconstrained "+++" markup-typewriter-face nil nil t) ;2)
-;;    ;; ;;The double-dollar passthrough is functionally identical to the triple-plus
-;;    ;; ;;passthrough with one exception: special characters are escaped.
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-unconstrained "$$" markup-typewriter-face nil nil t)  ;2)
-;;    ;; ;; todo: add pass:[...], latexmath:[...], asciimath[...]
+(defun asciidoctor-match-heading-2-atx (last)
+  "Match level 2 ATX headings from point to LAST."
+  (asciidoctor-match-propertized-text 'asciidoctor-heading-2-atx last))
 
-;;    ;; ;; special characters
-;;    ;; ;; ------------------
-;;    ;; ;; no highlighting for them, since they are a property of the backend markup,
-;;    ;; ;; not of AsciiDoc syntax
+(defun asciidoctor-match-heading-3-atx (last)
+  "Match level 3 ATX headings from point to LAST."
+  (asciidoctor-match-propertized-text 'asciidoctor-heading-3-atx last))
 
+(defun asciidoctor-match-heading-4-atx (last)
+  "Match level 4 ATX headings from point to LAST."
+  (asciidoctor-match-propertized-text 'asciidoctor-heading-4-atx last))
 
-;;    ;; ;; quotes: unconstrained and constrained
-;;    ;; ;; order given by asciidoc.conf
-;;    ;; ;; ------------------------------
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-unconstrained "**" markup-strong-face)
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-constrained "*" markup-strong-face)
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-constrained "``" nil asciidoctor-replacement "''") ; double quoted text
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-constrained "'" markup-emphasis-face)	   ; single quoted text
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-constrained "`" nil asciidoctor-replacement "'")
-;;    ;; ;; `...` , +++...+++, $$...$$ are within passthrough stuff above
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-unconstrained "++" markup-typewriter-face) ; AsciiDoc manual: really onl '..are rendered in a monospaced font.'
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-constrained "+" markup-typewriter-face) 
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-unconstrained  "__" markup-emphasis-face)
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-constrained "_" markup-emphasis-face)
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-unconstrained "##" markup-gen-face) ; unquoted text
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-constrained "#" markup-gen-face)    ; unquoted text
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-unconstrained "~" (asciidoctor-facespec-subscript)) ; subscript
-;;    ;; (asciidoctor-kw-quote 'asciidoctor-unconstrained "^" (asciidoctor-facespec-superscript)) ; superscript
-    
+(defun asciidoctor-match-heading-5-atx (last)
+  "Match level 5 ATX headings from point to LAST."
+  (asciidoctor-match-propertized-text 'asciidoctor-heading-5-atx last))
 
-;;    ;; ;; special words
-;;    ;; ;; --------------------
-;;    ;; ;; there are no default special words to highlight
+(defun asciidoctor-match-heading-6-atx (last)
+  "Match level 6 ATX headings from point to LAST."
+  (asciidoctor-match-propertized-text 'asciidoctor-heading-6-atx last))
 
 
-;;    ;; ;; attributes
-;;    ;; ;; ---------------------------------
-;;    ;; ;; attribute refrence
-;;    ;; (cons "{\\(\\w+\\(?:\\w*\\|-\\)*\\)\\([=?!#%@$][^}\n]*\\)?}" 'asciidoctor-replacement) 
 
 
-;;    ;; ;; inline macros (that includes anchors, links, footnotes,....)
-;;    ;; ;; ------------------------------
-;;    ;; ;; todo: make asciidoctor-kw-... macros to have less redundancy
-;;    ;; ;; Note: Some regexp/kewyords are within the macro section 
-;;    ;; ;; TODO:
-;;    ;; ;; - allow multiline
-;;    ;; ;; - currently escpapes are not looked at
-;;    ;; ;; - adapt to the asciidoctor-reserved scheme
-;;    ;; ;; - same order as in asciidoc.conf (is that in 'reverse'? cause 'default syntax' comes first)
-
-;;    ;; ;; Macros using default syntax, but having special highlighting in asciidoctor-mode
-;;    ;; (asciidoctor-kw-inline-macro-urls-no-attribute-list)
-;;    ;; (asciidoctor-kw-inline-macro-urls-attribute-list)
-;;    ;; (asciidoctor-kw-standalone-urls)
-
-;;    ;; ;; Macros using default syntax and having default highlighting in asciidoctor-mod
-;;    ;; (asciidoctor-kw-inline-macro)
-
-;;    ;; ;; -- misc 
-;;    ;; (asciidoctor-kw-first-whites-fixed-width)
-
-;;    ;; ;; content of attribute lists
-;;    ;; (list 'asciidoctor-kwf-attribute-list)
-
-;;    ))
-
-(defvar asciidoctor-font-lock-keywords nil
+(defvar asciidoctor-font-lock-keywords
+  '((asciidoctor-match-heading-6-atx . ((1 asciidoctor-header-delimiter-face)
+                                        (2 asciidoctor-header-face-6)
+                                        (3 asciidoctor-header-delimiter-face)))
+    (asciidoctor-match-heading-5-atx . ((1 asciidoctor-header-delimiter-face)
+                                        (2 asciidoctor-header-face-5)
+                                        (3 asciidoctor-header-delimiter-face)))
+    (asciidoctor-match-heading-4-atx . ((1 asciidoctor-header-delimiter-face)
+                                        (2 asciidoctor-header-face-4)
+                                        (3 asciidoctor-header-delimiter-face)))
+    (asciidoctor-match-heading-3-atx . ((1 asciidoctor-header-delimiter-face)
+                                        (2 asciidoctor-header-face-3)
+                                        (3 asciidoctor-header-delimiter-face)))
+    (asciidoctor-match-heading-2-atx . ((1 asciidoctor-header-delimiter-face)
+                                        (2 asciidoctor-header-face-2)
+                                        (3 asciidoctor-header-delimiter-face)))
+    (asciidoctor-match-heading-1-atx . ((1 asciidoctor-header-delimiter-face)
+                                        (2 asciidoctor-header-face-1)
+                                        (3 asciidoctor-header-delimiter-face))))
   "Keyword highlighting specification for `asciidoctor-mode'.")
 
 ;; (setq asciidoctor-font-lock-keywords (asciidoctor-get-font-lock-keywords))
@@ -542,32 +549,75 @@
   (setq-local comment-end-skip "[ \t]*\\(?:\n\\|\\'\\)")
 
   
-  ;; font lock
-  ;; (set (make-local-variable 'font-lock-defaults)
-  ;;      '(asciidoctor-font-lock-keywords
-  ;;        nil nil nil nil
-  ;;        (font-lock-multiline . t)
-  ;;        (font-lock-mark-block-function . asciidoctor-font-lock-mark-block-function)))
+  ;; Font lock.
+  (setq-local asciidoctor-mode-font-lock-keywords asciidoctor-font-lock-keywords)
+  (setq-local font-lock-defaults '(asciidoctor-mode-font-lock-keywords
+                                   nil nil nil nil
+                                   (font-lock-syntactic-face-function . asciidoctor-syntactic-face)))
   
-  ;; (setq-local font-lock-defaults
-  ;;             '(asciidoctor-font-lock-keywords
-  ;;               nil nil nil nil
-  ;;               (font-lock-multiline .t)
-  ;;               (font-lock-mark-block-function . asciidoctor-font-lock-mark-block-function)))
+  (setq-local font-lock-multiline t)
 
-  ;; (make-local-variable 'font-lock-extra-managed-props)
-  ;; (setq font-lock-extra-managed-props '(asciidoctor-reserved asciidoctor-attribute-list))
+  ;; Syntax
+  (add-hook 'syntax-propertize-extend-region-functions
+            'asciidoctor-syntax-propertize-extend-region)
+  (setq-local syntax-propertize-function 'asciidoctor-syntax-propertize)
 
-  ;; (make-local-variable 'font-lock-unfontify-region-function)
-  ;; (setq font-lock-unfontify-region-function 'font-lock-default-unfontify-region-function)
 
-  ;; (set (make-local-variable 'parse-sexp-lookup-properties) t)
+  ;; Paragraph filling
+  (set
+   ;; Should match start of lines that start or separate paragraphs
+   (make-local-variable 'paragraph-start)
+       (mapconcat #'identity
+                  '(
+                    "\f" ; starts with a literal line-feed
+                    "[ \t\f]*$" ; space-only line
+                    "[ \t]*[*+-][ \t]+" ; unordered list item
+                    "[ \t]*\\(?:[0-9]+\\|#\\)\\.[ \t]+" ; ordered list item
+                    "[ \t]*\\[\\S-*\\]:[ \t]+" ; link ref def
+                    "[ \t]*:[ \t]+" ; definition
+                    )
+                  "\\|"))
+  (set
+   ;; Should match lines that separate paragraphs without being
+   ;; part of any paragraph:
+   (make-local-variable 'paragraph-separate)
+   (mapconcat #'identity
+              '("[ \t\f]*$" ; space-only line
+                ;; The following is not ideal, but the Fill customization
+                ;; options really only handle paragraph-starting prefixes,
+                ;; not paragraph-ending suffixes:
+                ".*  $" ; line ending in two spaces
+                "^#+"
+                "[ \t]*\\[\\^\\S-*\\]:[ \t]*$") ; just the start of a footnote def
+              "\\|"))
+  (set (make-local-variable 'adaptive-fill-first-line-regexp)
+       "\\`[ \t]*>[ \t]*?\\'")
+  (set (make-local-variable 'adaptive-fill-regexp) "\\s-*")
+  ;; (set (make-local-variable 'adaptive-fill-function)
+       ;; 'markdown-adaptive-fill-function)
+  ;; (set (make-local-variable 'fill-forward-paragraph-function)
+       ;; 'markdown-fill-forward-paragraph-function)
+
+  ;; Outline mode
+  (make-local-variable 'outline-regexp)
+  (setq outline-regexp asciidoctor-regex-header)
+  (make-local-variable 'outline-level)
+  (setq outline-level 'asciidoctor-outline-level)
+  ;; Cause use of ellipses for invisible text.
+  (add-to-invisibility-spec '(outline . t))
+
+
+  ;; Indentation
+  ;; (setq indent-line-function markdown-indent-function)
 
   
   )
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.adoc\\'" . asciidoctor-mode) t)
+
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.asciidoc\\'" . asciidoctor-mode) t)
 
 (provide 'asciidoctor-mode)
 ;;; asciidoctor-mode.el ends here
