@@ -16,16 +16,19 @@
 ;; (defvar asciidoctor-mode-hook nil
   ;; "Hook run when entering asciidoctor mode.")
 
-;;; Customize
-
-;; (defgroup asciidoctor nil
-;;   "Major mode for editing text files in AsciiDoc format."
-;;   :prefix "asciidoctor-")
 
 (require 'outline)
 (require 'thingatpt)
 (require 'cl-lib)
 ;; (require 'url-parse)
+
+
+
+;;; Customize
+
+(defgroup asciidoctor nil
+  "Major mode for editing text files in AsciiDoc format."
+  :prefix "asciidoctor-")
 
 
 (defcustom asciidoctor-pdf-executable
@@ -55,24 +58,21 @@
 
 ;;; Regexes
 
-  ;; "^\\(:?\\(=+\\)[ \t]+\\(.*?\\)\\)$"
-
-
 (defconst asciidoctor-regex-header
   "^\\(=+\\)[ \t]+\\(.*?\\)[ \t]*\\(=*\\)$"
   "Regexp identifying Asciidoctor headings.
 Group 1 matches the opening equal marks of an atx heading.
 Group 2 matches the text, without surrounding whitespace, of an atx heading.")
 
-;; (defconst asciidoctor-regex-header
-;;   "^\\(?:\\([^\r\n\t -].*\\)\n\\(?:\\(=+\\)\\|\\(-+\\)\\)\\|\\(=+\\)[ \t]+\\(.*?\\)[ \t]*\\(=*\\)\\)$"
-;;   "Regexp identifying Markdown headings.
-;; Group 1 matches the text of a setext heading.
-;; Group 2 matches the underline of a level-1 setext heading.
-;; Group 3 matches the underline of a level-2 setext heading.
-;; Group 4 matches the opening equal marks of an atx heading.
-;; Group 5 matches the text, without surrounding whitespace, of an atx heading.
-;; Group 6 matches the closing equal marks of an atx heading.")
+
+(defconst asciidoctor-regex-comment-start
+  "^\\(////[ \t]*\\)\\|\\(//[ \t]+.*\\)$"
+  "Regular expression matches asciidoctor comment opening.")
+
+(defconst asciidoctor-regex-comment-end
+  "^////[ \t]*$"
+  "Regular expression matches asciidoctor comment closing.")
+
 
 
 (defun asciidoctor-text-property-at-point (prop)
@@ -236,26 +236,26 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
 
 
 ;; (defconst asciidoctor-mode-syntax-table
-;;   (let ((table (make-syntax-table)))
-;;     (modify-syntax-entry ?$ "." table)
-;;     (modify-syntax-entry ?% "." table)
-;;     (modify-syntax-entry ?& "." table)
-;;     (modify-syntax-entry ?' "." table)
-;;     (modify-syntax-entry ?` "." table)
-;;     (modify-syntax-entry ?\" "." table)
-;;     (modify-syntax-entry ?* "." table )
-;;     (modify-syntax-entry ?+ "." table )
-;;     (modify-syntax-entry ?. "." table )
-;;     (modify-syntax-entry ?/ "." table )
-;;     (modify-syntax-entry ?< "." table )
-;;     (modify-syntax-entry ?= "." table )
-;;     (modify-syntax-entry ?> "." table )
-;;     (modify-syntax-entry ?\\ "." table)
-;;     (modify-syntax-entry ?| "." table)
-;;     (modify-syntax-entry ?_ "." table)
-    
-;;     table)
-;;   "Syntax table for `asciidoctor-mode'")
+  ;; (let ((table (make-syntax-table)))
+    ;; (modify-syntax-entry ?$ "." table)
+    ;; (modify-syntax-entry ?% "." table)
+    ;; (modify-syntax-entry ?& "." table)
+    ;; (modify-syntax-entry ?' "." table)
+    ;; (modify-syntax-entry ?` "." table)
+    ;; (modify-syntax-entry ?\" "." table)
+    ;; (modify-syntax-entry ?* "." table )
+    ;; (modify-syntax-entry ?+ "." table )
+    ;; (modify-syntax-entry ?. "." table )
+    ;; (modify-syntax-entry ?/ "." table )
+    ;; (modify-syntax-entry ?< "." table )
+    ;; (modify-syntax-entry ?= "." table )
+    ;; (modify-syntax-entry ?> "." table )
+    ;; (modify-syntax-entry ?\\ "." table)
+    ;; (modify-syntax-entry ?| "." table)
+    ;; (modify-syntax-entry ?_ "." table)
+
+    ;; table)
+  ;; "Syntax table for `asciidoctor-mode'")
 
 
 
@@ -272,13 +272,8 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   :group 'asciidoctor-faces)
 
 (defface asciidoctor-header-delimiter-face
-  '((t (:inherit asciidoctor-markup-face)))
+  '((t (:inherit font-lock-preprocessor-face)))
   "Base face for headers hash delimiter."
-  :group 'asciidoctor-faces)
-
-(defface asciidoctor-header-rule-face
-  '((t (:inherit asciidoctor-markup-face)))
-  "Base face for headers rules."
   :group 'asciidoctor-faces)
 
 (defface asciidoctor-header-face
@@ -330,9 +325,6 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
 
 (defvar asciidoctor-header-delimiter-face 'asciidoctor-header-delimiter-face
   "Face name to use as a base for header delimiters.")
-
-(defvar asciidoctor-header-rule-face 'asciidoctor-header-rule-face
-  "Face name to use as a base for header rules.")
 
 (defvar asciidoctor-header-face 'asciidoctor-header-face
   "Face name to use as a base for headers.")
@@ -394,35 +386,46 @@ Function is called repeatedly until it returns nil. For details, see
 
 
 
-;; (defun asciidoctor-syntax-propertize-comments (start end)
-;;   "Match asciidoctor comments from the START to END."
-;;   (let* ((state (syntax-ppss)) (in-comment (nth 4 state)))
-;;     (goto-char start)
-;;     (cond
-;;      ;; Comment start
-;;      ((and (not in-comment)
-;;            (re-search-forward asciidoctor-regex-comment-start end t)
-;;            (save-match-data (not (asciidoctor-code-at-point-p)))
-;;            (save-match-data (not (asciidoctor-code-block-at-point))))
-;;       (let ((open-beg (match-beginning 0)))
-;;         (put-text-property open-beg (1+ open-beg)
-;;                            'syntax-table (string-to-syntax "<"))
-;;         (asciidoctor-syntax-propertize-comments
-;;          (min (1+ (match-end 0)) end (point-max)) end)))
-;;      ;; Comment end
-;;      ((and in-comment
-;;            (re-search-forward asciidoctor-regex-comment-end end t))
-;;       (put-text-property (1- (match-end 0)) (match-end 0)
-;;                          'syntax-table (string-to-syntax ">"))
-;;       (asciidoctor-syntax-propertize-comments
-;;        (min (1+ (match-end 0)) end (point-max)) end))
-;;      ;; Nothing found
-;;      (t nil))))
+(defun asciidoctor-syntax-propertize-comments (start end)
+  "Match asciidoctor comments from the START to END."
+  (let* ((state (syntax-ppss)) (in-comment (nth 4 state)))
+    (goto-char start)
+    (cond
+
+     ;; Block Comment start
+     ((and (not in-comment)
+           (re-search-forward asciidoctor-regex-comment-start end t)
+           ;; TODO: implement code and code blocks at point
+           ;; (save-match-data (not (asciidoctor-code-at-point-p)))
+           ;; (save-match-data (not (asciidoctor-code-block-at-point)))
+           )
+      (let ((open-beg (match-beginning 0))
+            (close-beg (match-end 2))) ; second group is the single line comment -- non nil if matched
+        (put-text-property open-beg (1+ open-beg)
+                           'syntax-table (string-to-syntax "<"))
+        (when close-beg ; close single line comment
+          (put-text-property (1- close-beg) close-beg
+                             'syntax-table (string-to-syntax ">")))
+        
+        (asciidoctor-syntax-propertize-comments
+         (min (1+ (match-end 0)) end (point-max)) end)))
+
+     ;; Block Comment end
+     ((and in-comment
+           (re-search-forward asciidoctor-regex-comment-end end t))
+      (put-text-property (1- (match-end 0)) (match-end 0)
+                         'syntax-table (string-to-syntax ">"))
+      (asciidoctor-syntax-propertize-comments
+       (min (1+ (match-end 0)) end (point-max)) end))
+
+      ;; Nothing found
+     (t nil))))
 
 (defun asciidoctor-syntax-propertize-headings (start end)
   "Match headings of type SYMBOL with REGEX from START to END."
   (goto-char start)
   (while (re-search-forward asciidoctor-regex-header end t)
+    ;; TODO: implement code block
     ;; (unless (asciidoctor-code-block-at-pos (match-beginning 0))
       (put-text-property
        (match-beginning 0) (match-end 0) 'asciidoctor-heading t)
@@ -433,11 +436,6 @@ Function is called repeatedly until it returns nil. For details, see
        (match-data t)))
 ;  )
 )
-
-       ;; (cond ((match-string-no-properties 2) 'asciidoctor-heading-1-setext)
-             ;; ((match-string-no-properties 3) 'asciidoctor-heading-2-setext)
-             ;; (t (let ((atx-level (length (match-string-no-properties 4))))
-                  ;; (intern (format "asciidoctor-heading-%d-atx" atx-level)))))
 
 (defvar asciidoctor--syntax-properties
   (list 'asciidoctor-heading nil
@@ -453,12 +451,13 @@ Function is called repeatedly until it returns nil. For details, see
   "Function used as `syntax-propertize-function'.
 START and END delimit region to propertize."
   (remove-text-properties start end asciidoctor--syntax-properties)
+  ;; TODO: imlemenent additional propertizing
   ;; (markdown-syntax-propertize-fenced-block-constructs start end)
   ;; (markdown-syntax-propertize-yaml-metadata start end)
   ;; (markdown-syntax-propertize-pre-blocks start end)
   ;; (markdown-syntax-propertize-blockquotes start end)
-  ;; (asciidoctor-syntax-propertize-comments start end)
-  (asciidoctor-syntax-propertize-headings start end))
+  (asciidoctor-syntax-propertize-headings start end)
+  (asciidoctor-syntax-propertize-comments start end))
 
 
 (defun asciidoctor-match-propertized-text (property last)
@@ -503,6 +502,15 @@ Restore match data previously stored in PROPERTY."
   (asciidoctor-match-propertized-text 'asciidoctor-heading-6-atx last))
 
 
+;; TODO: check with markdown what is this???
+;; (defun asciidoctor-match-comments (last)
+;;   "Match asciidoctor comments from the point to LAST."
+;;   (when (and (skip-syntax-forward "^<" last))
+;;     (let ((beg (point)))
+;;       (when (and (skip-syntax-forward "^>" last) (< (point) last))
+;;         (forward-char)
+;;         (set-match-data (list beg (point)))
+;;         t))))
 
 
 (defvar asciidoctor-font-lock-keywords
@@ -542,6 +550,8 @@ Restore match data previously stored in PROPERTY."
   (setq-local tab-width 4)
 
   ;; Comments
+  (setq-local comment-column 0)
+  (setq-local comment-auto-fill-only-comments nil)
   (setq-local comment-start "// ")
   (setq-local comment-end "") 
   (setq-local comment-use-syntax t)
