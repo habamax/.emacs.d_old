@@ -283,32 +283,32 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   :group 'asciidoctor-faces)
 
 (defface asciidoctor-header-face-1
-  '((t (:inherit asciidoctor-header-face)))
+  '((t (:inherit info-title-1)))
   "Header 1 face."
   :group 'asciidoctor-faces)
 
 (defface asciidoctor-header-face-2
-  '((t (:inherit asciidoctor-header-face)))
+  '((t (:inherit info-title-1)))
   "Header 2 face."
   :group 'asciidoctor-faces)
 
 (defface asciidoctor-header-face-3
-  '((t (:inherit asciidoctor-header-face)))
+  '((t (:inherit info-title-2)))
   "Header 3 face."
   :group 'asciidoctor-faces)
 
 (defface asciidoctor-header-face-4
-  '((t (:inherit asciidoctor-header-face)))
+  '((t (:inherit info-title-3)))
   "Header 4 face."
   :group 'asciidoctor-faces)
 
 (defface asciidoctor-header-face-5
-  '((t (:inherit asciidoctor-header-face)))
+  '((t (:inherit info-title-4)))
   "Header 5 face."
   :group 'asciidoctor-faces)
 
 (defface asciidoctor-header-face-6
-  '((t (:inherit asciidoctor-header-face)))
+  '((t (:inherit info-title-4)))
   "Header 6 face."
   :group 'asciidoctor-faces)
 
