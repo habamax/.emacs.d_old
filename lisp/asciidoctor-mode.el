@@ -73,7 +73,9 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   "^////[ \t]*$"
   "Regular expression matches asciidoctor comment closing.")
 
-
+(defconst asciidoctor-regex-option
+  "^\\(:\\)\\(.*?\\)\\(:\\)\\([ \t]\\|$\\)"
+  "Regular expression matches asciidoctor comment closing.")
 
 (defun asciidoctor-text-property-at-point (prop)
   (get-text-property (point) prop))
@@ -317,8 +319,15 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   "Face for asciidoctor comments."
   :group 'asciidoctor-faces)
 
+(defface asciidoctor-option-face
+  '((t (:inherit font-lock-doc-face)))
+  "Face for asciidoctor options."
+  :group 'asciidoctor-faces)
 
-
+(defface asciidoctor-option-markup-face
+  '((t (:inherit font-lock-doc-face)))
+  "Face for asciidoctor options."
+  :group 'asciidoctor-faces)
 
 (defvar asciidoctor-markup-face 'asciidoctor-markup-face
   "Face name to use for markup elements.")
@@ -347,7 +356,11 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
 (defvar asciidoctor-header-face-6 'asciidoctor-header-face-6
   "Face name to use for level-6 headers.")
 
+(defvar asciidoctor-option-face 'asciidoctor-option-face
+  "Face name to use for option elements.")
 
+(defvar asciidoctor-option-markup-face 'asciidoctor-option-markup-face
+  "Face name to use for option's markup elements.")
 
 (defun asciidoctor-syntactic-face (state)
   "Return font-lock face for characters with given STATE.
@@ -437,6 +450,18 @@ Function is called repeatedly until it returns nil. For details, see
 ;  )
 )
 
+(defun asciidoctor-syntax-propertize-options (start end)
+  "Match options of type SYMBOL with REGEX from START to END."
+  (goto-char start)
+  (while (re-search-forward asciidoctor-regex-option end t)
+    ;; TODO: implement code block
+    ;; (unless (asciidoctor-code-block-at-pos (match-beginning 0))
+      (put-text-property
+       (match-beginning 0) (match-end 0) 'asciidoctor-option (match-data t))
+      )
+;  )
+)
+
 (defvar asciidoctor--syntax-properties
   (list 'asciidoctor-heading nil
         'asciidoctor-heading-1-atx nil
@@ -444,7 +469,8 @@ Function is called repeatedly until it returns nil. For details, see
         'asciidoctor-heading-3-atx nil
         'asciidoctor-heading-4-atx nil
         'asciidoctor-heading-5-atx nil
-        'asciidoctor-heading-6-atx nil)
+        'asciidoctor-heading-6-atx nil
+        'asciidoctor-option nil)
   "Property list of all known asciidoctor syntactic properties.")
 
 (defun asciidoctor-syntax-propertize (start end)
@@ -456,6 +482,7 @@ START and END delimit region to propertize."
   ;; (markdown-syntax-propertize-yaml-metadata start end)
   ;; (markdown-syntax-propertize-pre-blocks start end)
   ;; (markdown-syntax-propertize-blockquotes start end)
+  (asciidoctor-syntax-propertize-options start end)
   (asciidoctor-syntax-propertize-headings start end)
   (asciidoctor-syntax-propertize-comments start end))
 
@@ -501,6 +528,9 @@ Restore match data previously stored in PROPERTY."
   "Match level 6 ATX headings from point to LAST."
   (asciidoctor-match-propertized-text 'asciidoctor-heading-6-atx last))
 
+(defun asciidoctor-match-option (last)
+  "Match option from point to LAST."
+  (asciidoctor-match-propertized-text 'asciidoctor-option last))
 
 ;; TODO: check with markdown what is this???
 ;; (defun asciidoctor-match-comments (last)
@@ -511,6 +541,51 @@ Restore match data previously stored in PROPERTY."
 ;;         (forward-char)
 ;;         (set-match-data (list beg (point)))
 ;;         t))))
+
+
+
+;; (defun asciidoctor-match-bold (last)
+;;   "Match inline bold from the point to LAST."
+;;   (when (asciidoctor-match-inline-generic asciidoctor-regex-bold last)
+;;     (let ((begin (match-beginning 2)) (end (match-end 2)))
+;;       (cond
+;;        ((asciidoctor-range-property-any
+;;          begin end 'face (list asciidoctor-inline-code-face
+;;                                asciidoctor-math-face))
+;;         (goto-char (1+ (match-end 0)))
+;;         (asciidoctor-match-bold last))
+;;        (t
+;;         (set-match-data (list (match-beginning 2) (match-end 2)
+;;                           (match-beginning 3) (match-end 3)
+;;                           (match-beginning 4) (match-end 4)
+;;                           (match-beginning 5) (match-end 5)))
+;;         (goto-char (1+ (match-end 0))))))))
+
+;; (defun asciidoctor-match-italic (last)
+;;   "Match inline italics from the point to LAST."
+;;   (let ((regex (if (eq major-mode 'gfm-mode)
+;;                    markdown-regex-gfm-italic markdown-regex-italic)))
+;;     (when (markdown-match-inline-generic regex last)
+;;       (let ((begin (match-beginning 1)) (end (match-end 1)))
+;;         (cond
+;;          ((markdown-range-property-any
+;;            begin begin 'face (list markdown-url-face))
+;;           ;; Italics shouldn't begin inside a URL due to an underscore
+;;           (goto-char (min (1+ (match-end 0)) last))
+;;           (markdown-match-italic last))
+;;          ((markdown-range-property-any
+;;            begin end 'face (list markdown-inline-code-face
+;;                                  markdown-bold-face
+;;                                  markdown-list-face
+;;                                  markdown-math-face))
+;;           (goto-char (1+ (match-end 0)))
+;;           (markdown-match-italic last))
+;;          (t
+;;           (set-match-data (list (match-beginning 1) (match-end 1)
+;;                                 (match-beginning 2) (match-end 2)
+;;                                 (match-beginning 3) (match-end 3)
+;;                                 (match-beginning 4) (match-end 4)))
+;;           (goto-char (1+ (match-end 0)))))))))
 
 
 (defvar asciidoctor-font-lock-keywords
@@ -531,7 +606,17 @@ Restore match data previously stored in PROPERTY."
                                         (3 asciidoctor-header-delimiter-face)))
     (asciidoctor-match-heading-1-atx . ((1 asciidoctor-header-delimiter-face)
                                         (2 asciidoctor-header-face-1)
-                                        (3 asciidoctor-header-delimiter-face))))
+                                        (3 asciidoctor-header-delimiter-face)))
+    (asciidoctor-match-option . ((1 asciidoctor-option-markup-face)
+                                 (2 asciidoctor-option-face)
+                                 (3 asciidoctor-option-markup-face)))
+    ;; (asciidoctor-match-bold . ((1 asciidoctor-bold-markup-face prepend)
+    ;;                            (2 asciidoctor-bold-face append)
+    ;;                            (3 asciidoctor-bold-markup-face prepend)))
+    ;; (asciidoctor-match-italic . ((1 asciidoctor-italic-markup-face prepend)
+    ;;                              (2 asciidoctor-italic-face append)
+    ;;                              (3 asciidoctor-italic-markup-face prepend)))
+    )
   "Keyword highlighting specification for `asciidoctor-mode'.")
 
 ;; (setq asciidoctor-font-lock-keywords (asciidoctor-get-font-lock-keywords))
