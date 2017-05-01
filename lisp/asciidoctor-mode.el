@@ -320,12 +320,12 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   :group 'asciidoctor-faces)
 
 (defface asciidoctor-option-face
-  '((t (:inherit font-lock-doc-face)))
+  '((t (:inherit shadow)))
   "Face for asciidoctor options."
   :group 'asciidoctor-faces)
 
 (defface asciidoctor-option-markup-face
-  '((t (:inherit font-lock-doc-face)))
+  '((t (:inherit shadow)))
   "Face for asciidoctor options."
   :group 'asciidoctor-faces)
 
