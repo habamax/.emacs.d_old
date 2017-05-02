@@ -256,7 +256,7 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("M-s s" . counsel-grep-or-swiper)
+         ("M-s s" . swiper)
          ("M-s t" . haba/counsel-projectile-rg-todo)
          ("M-s r" . counsel-rg)
          ("C-c s" . swiper-all)
