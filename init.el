@@ -544,7 +544,9 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 ;; Music that just works (if you have mplayer installed :))
 (use-package bongo
-  :commands (bongo))
+  :commands (bongo)
+  :config
+  (use-package volume))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
 
