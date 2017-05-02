@@ -542,6 +542,9 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (slime-setup '(slime-fancy))
   )
 
+;; Music that just works (if you have mplayer installed :))
+(use-package bongo
+  :commands (bongo))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
 
