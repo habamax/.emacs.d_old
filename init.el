@@ -546,7 +546,9 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 (use-package bongo
   :commands (bongo)
   :config
-  (use-package volume))
+  (use-package volume)
+  (setq bongo-display-inline-playback-progress t)
+  (setq bongo-insert-album-covers t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
 
