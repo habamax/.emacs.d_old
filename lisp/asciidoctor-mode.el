@@ -1,6 +1,6 @@
-;;; asciidoctor-mode.el --- A major mode for AsciiDoc(tor) files.
+;;; asciidoctor-mode.el --- A major mode for AsciiDoc(tor) files that is not fancy.
 
-;; Copyright (C) 2017 Maxim Kim
+;; Copyright (C) 2017-05-01 Maxim Kim
 
 ;; Author: Maxim Kim <habamax@gmail.com>
 ;; Version: 0.1
@@ -8,8 +8,20 @@
 
 ;;; Commentary:
 
-;; None
-;; Yet
+;; DONE:
+;; * Headers
+;; * Comments
+;; * Options
+
+;; TODO:
+;; * Single line notes
+;; * Source block (and other as-is blocks)
+;; * Rest of the blocks
+;; * Block names and options
+;; * List bullets
+;; * Tables? or Table separators?
+;; * Bold/Italic/Mono (not yet)
+
 
 ;;; Code:
 
