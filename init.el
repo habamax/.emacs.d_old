@@ -204,7 +204,7 @@
 
 (use-package avy
   :diminish avy-mode
-  :bind (("C-;" . avy-goto-word-1)
+  :bind (("C-l" . avy-goto-word-1)
          ("M-g g" . avy-goto-line)))
 
 
@@ -541,8 +541,8 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   )
 
 (use-package lispy
-  :commands (lispy-mode)
-  :config
+  :defer
+  :init
   (defun haba/enable-lispy-mode ()
     (lispy-mode 1))
 
