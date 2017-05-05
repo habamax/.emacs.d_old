@@ -14,8 +14,7 @@
   (setq ns-pop-up-frames nil)
   ;; command to meta, option to control
   (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'control)
-  )
+  (setq mac-option-modifier 'control))
 
 (setq inhibit-startup-message t
       inhibit-splash-screen t
@@ -104,7 +103,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Set up packaging system
 (let ((package-protocol (if (eq system-type 'windows-nt) "http://" "https://")))
-  (setq package-archives `(("elpa" .  ,(concat package-protocol "elpa.gnu.org/packages/"))
+  (setq package-archives `(("elpa" . ,(concat package-protocol "elpa.gnu.org/packages/"))
                            ("melpa" . ,(concat package-protocol "melpa.org/packages/")))))
 
 (package-initialize)
@@ -357,8 +356,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
     ("o" (other-window 1) "Next")
     ("O" (other-window -1) "Previous")
     ("SPC" nil "quit")
-    ("q" nil "quit"))
-  )
+    ("q" nil "quit")))
 
 ;; Complete Anything
 (use-package company
@@ -542,6 +540,14 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (slime-setup '(slime-fancy))
   )
 
+(use-package lispy
+  :commands (lispy-mode)
+  :config
+  (defun haba/enable-lispy-mode ()
+    (lispy-mode 1))
+
+  (add-hook 'emacs-lisp-mode-hook 'haba/enable-lispy-mode)
+  (add-hook 'clojure-mode-hook 'haba/enable-lispy-mode))
 
 ;; haskell stuff
 (use-package intero
