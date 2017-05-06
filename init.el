@@ -551,8 +551,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 ;; haskell stuff
 (use-package intero
-  :config
-  )
+  :mode ("\\.\\(hs\\)$" . inter-mode))
 
 ;; Music that just works (if you have mplayer installed :))
 (use-package bongo
