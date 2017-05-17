@@ -116,24 +116,21 @@
 (eval-when-compile
   (require 'use-package))
 
-(setq use-package-always-ensure t)
+(setq use-package-always-ensure nil)
 
 (use-package haba-appearance
-  :ensure nil
-  :demand
   :load-path "lisp/"
   :config
-  (use-package leuven-theme :defer))
+  (use-package leuven-theme :defer)
+  (haba/set-current-theme))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Local packages
 (use-package haba-stuff
-  :ensure nil
-  :demand
+  :load-path "lisp/"
   :commands (haba/next-buffer
              haba/previous-buffer
              haba/toggle-window-split
              haba/fill-or-unfill)
-  :load-path "lisp/"
   :bind (("M-;" . haba/toggle-comment)
          ("C-a" . haba/move-beginning-of-line)
          ("C-M-j" . haba/join-line)
@@ -156,11 +153,9 @@
     (find-file "~/docs/todo.adoc"))
   )
 
-
+;; STARTUP: 0.7
 
 (use-package asciidoctor-mode
-  :ensure nil
-  :demand
   :load-path "lisp/"
   :mode ("\\.\\(adoc\\|asciidoc\\)$" . asciidoctor-mode)
   :config
@@ -169,6 +164,8 @@
   (setq asciidoctor-pdf-fontsdir "~/docs/AsciiDocThemes/fonts")
   (setq asciidoctor-pdf-extensions "asciidoctor-diagram")
   )
+
+;; STARTUP: 0.8
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Melpa packages
 
@@ -238,6 +235,7 @@
 
 
 (use-package ivy
+  :defer 2
   :diminish ivy-mode
   :init
   ;; clear default ^ for counsel-M-x and friends
@@ -360,7 +358,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 ;; Complete Anything
 (use-package company
-  :defer 1
+  :defer 2
   :diminish company-mode
   :config
   (use-package company-flx :config (company-flx-mode +1))
@@ -555,6 +553,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 ;; Music that just works (if you have mplayer installed :))
 (use-package bongo
+  :defer
   :commands (bongo)
   :config
   (use-package volume)
@@ -624,7 +623,6 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   )
 
 (use-package calendar
-  :ensure nil
   :init
   ;; Calendar -- говорим и показываем по русски.
   (setq calendar-date-style 'iso

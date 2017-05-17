@@ -50,10 +50,13 @@
     (with-temp-file (concat user-emacs-directory "current-theme")
       (insert (symbol-name *haba-current-theme*)))))
 
+(defun haba/set-current-theme ()
+  "Load current theme"
+  (interactive)
+  (let ((theme-name (haba/read-current-theme)))
+    (when theme-name
+      (haba/next-theme (intern theme-name)))))
 
-(let ((theme-name (haba/read-current-theme)))
-  (when theme-name
-      (haba/next-theme (intern theme-name))))
 
 ;; default frame is fullscreen and has no scrollbars
 (setq default-frame-alist '((fullscreen . maximized) (vertical-scroll-bars . nil)))
