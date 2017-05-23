@@ -487,8 +487,8 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   :mode ("\\.groovy$" . groovy-mode)
   :config
   (defun haba/groovy-mode-hook ()
-    (setq tab-width 4)
-    (setq c-basic-offset 4))
+    (setq tab-width 2)
+    (setq c-basic-offset 2))
   (add-hook 'groovy-mode-hook 'haba/groovy-mode-hook))
 
 ;; flycheck
