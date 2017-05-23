@@ -539,14 +539,14 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (slime-setup '(slime-fancy))
   )
 
-(use-package lispy
-  :defer
-  :init
-  (defun haba/enable-lispy-mode ()
-    (lispy-mode 1))
+;; (use-package lispy
+;;   :defer
+;;   :init
+;;   (defun haba/enable-lispy-mode ()
+;;     (lispy-mode 1))
 
-  (add-hook 'emacs-lisp-mode-hook 'haba/enable-lispy-mode)
-  (add-hook 'clojure-mode-hook 'haba/enable-lispy-mode))
+;;   (add-hook 'emacs-lisp-mode-hook 'haba/enable-lispy-mode)
+;;   (add-hook 'clojure-mode-hook 'haba/enable-lispy-mode))
 
 ;; haskell stuff
 (use-package intero
