@@ -392,7 +392,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 (use-package multiple-cursors
   :bind-keymap (("C-x m" . haba/mc-map))
   :bind (("M-j" . haba/mark-next-word-like-this)
-         ("M-J" . mc/unmark-next-like-this-word)
+         ("M-J" . mc/unmark-next-like-this)
          :map haba/mc-map
          ("m" . mc/mark-all-like-this-dwim)
          ("d" . mc/mark-all-symbols-like-this-in-defun)
@@ -409,8 +409,9 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
     (if (region-active-p)
         (let ((mc/enclose-search-term 'words))
           (mc/mark-next-like-this arg))
-      (mc--select-thing-at-point 'word)))
-)
+      (mc--select-thing-at-point 'word))
+    (when (not (region-active-p))
+        (mc/mark-next-lines 1))))
 
 
 
