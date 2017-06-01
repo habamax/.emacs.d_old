@@ -505,6 +505,12 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
                 ispell-extra-args '("--sug-mode=ultra")))
 
 
+(use-package neotree
+  :defer
+  :commands (neotree-toggle)
+  :bind ("M-1" . neotree-toggle))
+
+
 ;; yasnippets
 (use-package yasnippet
   :defer 2
