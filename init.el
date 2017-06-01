@@ -48,6 +48,7 @@
 (setq suggest-key-bindings t)
 
 (electric-indent-mode t)
+(global-subword-mode t)
 (show-paren-mode t)
 (column-number-mode t)
 (recentf-mode 1)
