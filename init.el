@@ -201,8 +201,7 @@
 
 (use-package avy
   :diminish avy-mode
-  :bind (("C-l" . avy-goto-word-1)
-         ("M-g g" . avy-goto-line)))
+  :bind (("C-l" . avy-goto-word-1)))
 
 
 (use-package dumb-jump
