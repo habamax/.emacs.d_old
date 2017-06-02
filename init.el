@@ -484,12 +484,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
         web-mode-enable-auto-pairing t))
 
 (use-package groovy-mode
-  :mode ("\\.groovy$" . groovy-mode)
-  :config
-  (defun haba/groovy-mode-hook ()
-    (setq tab-width 2)
-    (setq c-basic-offset 2))
-  (add-hook 'groovy-mode-hook 'haba/groovy-mode-hook))
+  :mode ("\\.groovy$" . groovy-mode))
 
 ;; flycheck
 (use-package flycheck
