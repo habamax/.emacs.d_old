@@ -244,7 +244,6 @@
   (use-package ivy-hydra :defer)
   (use-package flx :defer)
   (ivy-mode 1)
-  (setq projectile-completion-system 'ivy)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
                                 (t . ivy--regex-fuzzy))))
@@ -305,7 +304,8 @@
   :bind (:map projectile-mode-map ("C-c p s r" . projectile-ripgrep))
   :config
   (use-package projectile-ripgrep)
-  (projectile-global-mode))
+  (projectile-global-mode)
+  (setq projectile-completion-system 'ivy))
 
 (use-package hydra
   :bind ("C-c w" . hydra-windows/body)
