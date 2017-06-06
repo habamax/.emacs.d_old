@@ -142,7 +142,9 @@
          ([remap fill-paragraph] . haba/fill-or-unfill)
          ("C-c i d" . haba/insert-current-date)
          ("<C-wheel-up>" . text-scale-increase)
-         ("<C-wheel-down>" . text-scale-decrease))
+         ("<C-wheel-down>" . text-scale-decrease)
+         ("M-0" . haba/restore-windows-layout-from-register)
+         ("C-M-0" . haba/save-windows-layout-to-register))
   :config
   (defun haba/open-scratch-buffer ()
     "Open scratch buffer"

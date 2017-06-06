@@ -180,6 +180,17 @@ point reaches the beginning or end of the buffer, stop there."
     (call-interactively #'fill-paragraph)))
 
 
+;;
+(defun haba/save-windows-layout-to-register ()
+  "Save windows layout to register ?w"
+  (interactive)
+  (window-configuration-to-register ?w))
+
+(defun haba/restore-windows-layout-from-register ()
+  "Restore windows layout to register ?w"
+  (interactive)
+  (jump-to-register ?w))
+
 ;; Return path to the project root defined by markers
 (defun haba/locate-project-root ()
   (interactive)
