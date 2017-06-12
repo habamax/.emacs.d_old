@@ -135,7 +135,6 @@
   :bind (("M-;" . haba/toggle-comment)
          ("C-a" . haba/move-beginning-of-line)
          ("C-M-j" . haba/join-line)
-         ("s-d" . haba/duplicate-line)
          ("C-c o i" . haba/open-init-file)
          ("C-c o s" . haba/open-scratch-buffer)
          ("C-c o t" . haba/open-todo-file)
