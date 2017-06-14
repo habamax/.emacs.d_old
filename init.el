@@ -178,6 +178,10 @@
   (exec-path-from-shell-initialize)
   :if (eq system-type 'darwin))
 
+(use-package reverse-im
+  :config
+  (reverse-im-activate "russian-computer"))
+
 (use-package which-key
   :defer 3
   :diminish which-key-mode
