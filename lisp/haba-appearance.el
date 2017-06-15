@@ -21,7 +21,12 @@
 (defun disable-all-themes (&rest args)
   (mapcar #'disable-theme custom-enabled-themes))
 
+(defun store-current-theme (&rest args)
+  (setq *haba-current-theme* (car args)))
+
 (advice-add 'load-theme :before #'disable-all-themes)
+(advice-add 'load-theme :after #'store-current-theme)
+
 
 (defun haba/next-theme (theme)
   (if (eq theme 'default)
