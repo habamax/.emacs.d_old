@@ -38,7 +38,8 @@
   (interactive)
   (cond ((eq *haba-current-theme* *haba-theme-dark*) (haba/next-theme *haba-theme-light*))
         ((eq *haba-current-theme* *haba-theme-light*) (haba/next-theme 'default))
-        ((eq *haba-current-theme* 'default) (haba/next-theme *haba-theme-dark*))))
+        ((eq *haba-current-theme* 'default) (haba/next-theme *haba-theme-dark*))
+        (t (haba/next-theme 'default))))
 
 
 (defun haba/read-current-theme ()
