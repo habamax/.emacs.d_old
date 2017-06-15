@@ -123,6 +123,7 @@
   :load-path "lisp/"
   :config
   (use-package leuven-theme :defer)
+  (use-package base16-theme :defer)
   (haba/set-current-theme))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Local packages
