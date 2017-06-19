@@ -489,6 +489,14 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (setq web-mode-enable-auto-expanding t
         web-mode-enable-auto-pairing t))
 
+(use-package emmet-mode
+  :defer
+  :config
+  (add-hook 'web-mode-hook 'emmet-mode)
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook 'emmet-mode)
+  (add-hook 'nxml-mode-hook 'emmet-mode))
+
 (use-package groovy-mode
   :mode ("\\.groovy$" . groovy-mode))
 
