@@ -566,14 +566,32 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 (use-package intero
   :mode ("\\.\\(hs\\)$" . inter-mode))
 
-;; Music that just works (if you have mplayer installed :))
-(use-package bongo
-  :defer
-  :commands (bongo)
+;; music FTW
+(use-package emms
+  :bind (("C-c m b" . emms-smart-browse)
+         ("C-c m c" . emms-playlist-mode-go)
+         ("C-c m p" . emms-pause)
+         ("C-c m n" . emms-next)
+         ("C-c m r" . emms-random)
+         ("C-c m s" . emms-stop))
+  :init
+  ;; Well on OSX I get weird tramp error...
+  ;; (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
+
   :config
-  (use-package volume)
-  (setq bongo-display-inline-playback-progress t)
-  (setq bongo-insert-album-covers t))
+  (require 'emms-setup)
+  (emms-standard)
+  (emms-default-players)
+
+  (setq emms-source-file-default-directory "~/Music")
+
+  (setq emms-mode-line-icon-color "yellow")
+
+  ;; (emms-all)
+
+  (setq emms-repeat-playlist t))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
 
