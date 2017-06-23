@@ -119,14 +119,19 @@
 
 (setq use-package-always-ensure t)
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Local packages
+
 (use-package haba-appearance
+  :ensure nil
   :load-path "lisp/"
   :config
   (use-package leuven-theme :defer)
   (haba/set-current-theme))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Local packages
 (use-package haba-stuff
+  :ensure nil
   :load-path "lisp/"
   :commands (haba/next-buffer
              haba/previous-buffer
@@ -158,6 +163,7 @@
 ;; STARTUP: 0.7
 
 (use-package asciidoctor-mode
+  :ensure nil
   :load-path "lisp/"
   :mode ("\\.\\(adoc\\|asciidoc\\)$" . asciidoctor-mode)
   :config
@@ -568,16 +574,12 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 ;; music FTW
 (use-package emms
-  :bind (("C-c m b" . emms-smart-browse)
+  :bind (("C-c m d" . emms-play-directory-tree)
          ("C-c m c" . emms-playlist-mode-go)
          ("C-c m p" . emms-pause)
          ("C-c m n" . emms-next)
          ("C-c m r" . emms-random)
          ("C-c m s" . emms-stop))
-  :init
-  ;; Well on OSX I get weird tramp error...
-  ;; (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find)
-
   :config
   (require 'emms-setup)
   (emms-standard)
@@ -587,10 +589,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
   (setq emms-mode-line-icon-color "yellow")
 
-  ;; (emms-all)
-
   (setq emms-repeat-playlist t))
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
