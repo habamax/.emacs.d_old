@@ -6,15 +6,15 @@
 (define-abbrev-table 'asciidoctor-mode-abbrev-table
   '(
     ("cau" "CAUTION:" nil 1)
+    ("imp" "IMPORTANT:" nil 1)
     ("note" "NOTE:" nil 7)
     ("teh" "the" nil 1)
     ("tip" "TIP:" nil 1)
     ("warn" "WARNING:" nil 3)
     ("ешз" "TIP:" nil 2)
     ("сфг" "CAUTION:" nil 2)
-    ("тщеу" "NOTE:" nil 2)
+    ("тщеу" "NOTE:" nil 3)
     ("цфкт" "WARNING:" nil 2)
-    ("imp" "IMPORTANT:" nil 1)
     ("шьз" "IMPORTANT:" nil 1)
    ))
 
@@ -25,6 +25,8 @@
 (define-abbrev-table 'comint-mode-abbrev-table '())
 
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
+
+(define-abbrev-table 'debugger-mode-abbrev-table '())
 
 (define-abbrev-table 'diff-mode-abbrev-table '())
 
@@ -99,6 +101,8 @@
 (define-abbrev-table 'occur-edit-mode-abbrev-table '())
 
 (define-abbrev-table 'occur-mode-abbrev-table '())
+
+(define-abbrev-table 'outline-mode-abbrev-table '())
 
 (define-abbrev-table 'package-menu-mode-abbrev-table '())
 

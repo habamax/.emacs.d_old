@@ -450,6 +450,11 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (sp-pair "/" "/" :actions '(wrap))
   (sp-pair "$" "$" :actions '(wrap))
   (sp-pair "-" "-" :actions '(wrap))
+  (sp-pair "«" "»" :actions '(wrap))
+  (sp-pair "“" "”" :actions '(wrap))
+  (sp-pair "´" "´" :actions '(wrap))
+  (sp-pair "`" "`" :actions '(wrap))
+  (sp-pair "'" "'" :actions '(wrap))
   )
 
 (use-package magit
