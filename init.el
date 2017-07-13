@@ -404,6 +404,9 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   :bind-keymap (("C-x m" . haba/mc-map))
   :bind (("M-j" . haba/mark-next-word-like-this)
          ("M-J" . mc/unmark-next-like-this)
+         ("C-8" . mc/mark-next-lines)
+         ("C-7" . mc/unmark-next-like-this)
+         ("M-S-<mouse-1>" . mc/add-cursor-on-click)
          :map haba/mc-map
          ("m" . mc/mark-all-like-this-dwim)
          ("d" . mc/mark-all-symbols-like-this-in-defun)
