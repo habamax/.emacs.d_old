@@ -147,6 +147,7 @@
          ("C-c i d" . haba/insert-current-date)
          ("<C-wheel-up>" . text-scale-increase)
          ("<C-wheel-down>" . text-scale-decrease)
+         ("C-x C-b" . ibuffer)
          ("M-0" . haba/restore-windows-layout-from-register)
          ("C-M-0" . haba/save-windows-layout-to-register))
   :config
