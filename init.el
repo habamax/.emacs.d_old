@@ -102,6 +102,19 @@
 (load custom-file 'noerror)
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; fix the minibuffer gc triggering
+
+(defun haba/minibuffer-setup-hook ()
+  (setq gc-cons-threshold most-positive-fixnum))
+
+(defun haba/minibuffer-exit-hook ()
+  (setq gc-cons-threshold 800000))
+
+(add-hook 'minibuffer-setup-hook #'haba/minibuffer-setup-hook)
+(add-hook 'minibuffer-exit-hook #'haba/minibuffer-exit-hook)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Set up packaging system
 (let ((package-protocol (if (eq system-type 'windows-nt) "http://" "https://")))
   (setq package-archives `(("elpa" . ,(concat package-protocol "elpa.gnu.org/packages/"))
