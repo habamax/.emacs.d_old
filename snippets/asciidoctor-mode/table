@@ -2,7 +2,7 @@
 # name: table
 # key: table
 # --
-[cols=".^${1:1},.^${2:2}", options="header",frame=topbot,grid=rows]
+[cols=".^${1:1},.^${2:2}", options="header",frame=none,grid=none]
 |===
 | ${3:header1}
 | ${4:header1}
