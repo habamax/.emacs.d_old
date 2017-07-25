@@ -619,6 +619,53 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
 
+
+(use-package eshell
+  :ensure nil
+  :bind ("M-`" . haba/toggle-eshell-here)
+  :config
+
+  (defun haba/eshell-here (eshell-name)
+    "Opens up a new shell in the directory associated with the
+current buffer's file. The eshell is renamed to match that
+directory to make multiple eshell windows easier."
+    (interactive)
+    (let ((height (/ (window-total-height) 3)))
+      (split-window-vertically (- height))
+      (other-window 1)
+
+      (if (get-buffer eshell-name)
+          (switch-to-buffer eshell-name)
+        (progn
+          (eshell "new")
+          (rename-buffer eshell-name)
+          (insert (concat "ls"))
+          (eshell-send-input)))))
+
+  (defun haba/toggle-eshell-here ()
+    "Toggle eshell-here."
+    (interactive)
+
+   (let* ((parent (if (buffer-file-name)
+                       (file-name-directory (buffer-file-name))
+                     default-directory))
+          (name   (car (last (split-string parent "/" t))))
+          (eshell-name (concat "*eshell: " name "*")))
+
+
+     (cond ((eq (get-buffer eshell-name) (window-buffer (selected-window)))
+            ;; (message "Visible and focused")
+            (insert "exit")
+            (eshell-send-input)
+            (delete-window))
+           ((get-buffer-window eshell-name)
+            ;; (message "Visible and unfocused")
+            (switch-to-buffer-other-window eshell-name))
+           (t
+            ;; (message "Not visible")
+            (haba/eshell-here eshell-name)))))
+  )
+
 ;; dired-jump befor dired is used
 (use-package dired-x
   :ensure nil
