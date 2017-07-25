@@ -516,6 +516,9 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   (setq web-mode-enable-auto-expanding t
         web-mode-enable-auto-pairing t))
 
+(use-package yaml-mode
+  :mode ("\\.\\(yml\\)$" . yaml-mode))
+
 (use-package emmet-mode
   :defer
   :config
