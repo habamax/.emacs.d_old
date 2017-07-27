@@ -657,8 +657,7 @@ directory to make multiple eshell windows easier."
           (name   (car (last (split-string parent "/" t))))
           (eshell-name (concat "*eshell: " name "*")))
 
-
-     (cond ((eq (get-buffer eshell-name) (window-buffer (selected-window)))
+     (cond ((string-prefix-p "*eshell: " (buffer-name (window-buffer)))
             ;; (message "Visible and focused")
             (insert "exit")
             (eshell-send-input)
