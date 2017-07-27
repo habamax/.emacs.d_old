@@ -625,6 +625,11 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   :bind ("M-`" . haba/toggle-eshell-here)
   :config
 
+  (defun haba/company-off ()
+     (interactive)
+     (company-mode -1))
+  (add-hook 'eshell-mode-hook 'haba/company-off)
+
   (defun haba/eshell-here (eshell-name)
     "Opens up a new shell in the directory associated with the
 current buffer's file. The eshell is renamed to match that
