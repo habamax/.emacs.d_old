@@ -668,6 +668,12 @@ directory to make multiple eshell windows easier."
            (t
             ;; (message "Not visible")
             (haba/eshell-here eshell-name)))))
+
+  (defun eshell/wintree ()
+    "Generate current dir tree using ASCII and built in Windows tree executable"
+    (interactive "P")
+    (insert "tree /A /F")
+    (eshell-send-input))
   )
 
 ;; dired-jump befor dired is used
