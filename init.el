@@ -438,8 +438,9 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
         (let ((mc/enclose-search-term 'words))
           (mc/mark-next-like-this arg))
       (mc--select-thing-at-point 'word))
-    (when (not (region-active-p))
-        (mc/mark-next-lines 1))))
+    ;; (when (not (region-active-p))
+    ;;     (mc/mark-next-lines 1))
+    ))
 
 
 
