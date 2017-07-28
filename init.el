@@ -152,7 +152,7 @@
              haba/fill-or-unfill)
   :bind (("M-;" . haba/toggle-comment)
          ("C-a" . haba/move-beginning-of-line)
-         ("C-M-j" . haba/join-line)
+         ("M-j" . haba/join-line)
          ("C-c o i" . haba/open-init-file)
          ("C-c o s" . haba/open-scratch-buffer)
          ("C-c o t" . haba/open-todo-file)
@@ -416,8 +416,8 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 (use-package multiple-cursors
   :bind-keymap (("C-x m" . haba/mc-map))
-  :bind (("M-j" . haba/mark-next-word-like-this)
-         ("M-J" . mc/unmark-next-like-this)
+  :bind (("M-n" . haba/mark-next-word-like-this)
+         ("M-N" . mc/unmark-next-like-this)
          ("C-8" . mc/mark-next-lines)
          ("C-7" . mc/unmark-next-like-this)
          ("M-S-<mouse-1>" . mc/add-cursor-on-click)
