@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: diagram-usecase
+# key: diaguse
+# --
+[plantuml, ${1:diagram-usecase-name}, svg]
+....
+
+:${2:Actor1}: -> (${3:Start})
+note right of :$2: : hello
+:$2: --> (${4:Use the Application}) : ${5:with pleasure}
+
+:${6:Super Admin}: ---> ($4) : ${7:Label\nthe usage}
+note left of ($4)
+Однажды в студеную
+Зимнюю пору
+Я из лесу вышел
+Был сильный мороз
+end note
+$0
+....

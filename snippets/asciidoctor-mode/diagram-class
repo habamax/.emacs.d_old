@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: diagram-class
+# key: diagcl
+# --
+[plantuml, ${1:diagram-classes-name}, svg]
+....
+class ${2:Parent}
+class ${3:Child1}
+class ${4:Child2}
+
+$2 <|-- $3
+$2 <|-- $4
+$0
+....

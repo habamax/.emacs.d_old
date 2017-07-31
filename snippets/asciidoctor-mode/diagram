@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: diagram
+# key: diag
+# --
+[plantuml, ${1:diagram-name}, svg]
+....
+$0
+....

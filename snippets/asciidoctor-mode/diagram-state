@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: diagram-state
+# key: diagst
+# --
+[plantuml, ${1:diagram-state-name}, svg]
+....
+
+[*] --> ${2:State1}
+$2 --> ${3:State2}
+$2 --> ${4:State3}
+$3 --> [*]
+$4 --> [*]
+$0
+....
