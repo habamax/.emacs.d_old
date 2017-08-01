@@ -8,6 +8,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Non-Package setup
 
+;; disable gc for init
+(setq gc-cons-threshold 64000000)
+(add-hook 'after-init-hook #'(lambda ()
+                               ;; restore after startup
+                               (setq gc-cons-threshold 800000)))
+
 ;; General OSX setup
 (when (eq system-type 'darwin)
   ;; No new frames for files that are opened from OSX
