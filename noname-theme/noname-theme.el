@@ -7,6 +7,7 @@
 ;;; Commentary:
 
 ;; tbd
+;; 0. background -- sliiiightly greenish
 ;; 1. keywords -- reddish
 ;; 2. strings -- greenish
 ;; 3. comments -- grayish
@@ -17,20 +18,13 @@
 
 (let
     ((noname-fg "#000000")
-     (noname-bg "#f0f0f0")
-     ;; (noname-bg-modeline-active "#2f4f4f")
-     ;; (noname-bg-modeline-inactive "#202020")
-     ;; (noname-box-modeline-active "#3f5f5f")
-     ;; (noname-box-modeline-inactive "#303030")
-     (noname-keyword "#b00000")
+     (noname-bg "#f0f5f2")
+     (noname-keyword "#b22222")
+     (noname-keyword-dim "#305090")
+     (noname-keyword-dim-bg "#e7ecea")
      (noname-str "#008000")
-     ;; (noname-comment "#979760")
-     (noname-comment "#777777")
-     ;; (noname-comment "#5797a0")
-     ;; (noname-gray "#7a7a7a")
-     ;; (noname-fg-dim "#777777")
-     ;; (noname-bg-dim "#101010")
-     ;; (noname-fg-dim-2 "#506060")
+     (noname-comment "#808080")
+     (noname-gray "#7a7a7a")
      ;; (noname-fg-todo "#bdabab")
      ;; (noname-bg-todo "#775555")
      ;; (noname-fg-done "#abbdab")
@@ -39,7 +33,6 @@
      (noname-heading "#000000")
      ;; (noname-bg-hl-parens "#703000")
      ;; (noname-bg-alt "#252520")
-     ;; (noname-fg-modeline-hl "#ffff00")
      ;; (noname-bg-whitespace "#1a1a1f")
      ;; (noname-fg-whitespace "#303040")
      ;; (noname-fg-search "#fff68f")
@@ -49,7 +42,6 @@
      ;; (noname-fg-search-fail "#da70d6")
      ;; (noname-bg-search-fail "#603060")
      ;; (noname-bg-highlight "#203040")
-     ;; (noname-fg-url "#90a0bd")
 )
 
 
@@ -60,14 +52,15 @@
    ;; standard faces
    `(default ((t (:background ,noname-bg :foreground ,noname-fg))))
    '(cursor ((nil (:background "#000000"))))
-   ;; `(region ((t (:background "#839191" :foreground ,noname-bg))))
+   ;; '(region ((t (:background "#eedc82"))))
+   '(region ((t (:background "#f0e0a0"))))
    ;; `(highlight ((nil (:background ,noname-bg-highlight))))
    ;; '(bold ((t (:weight bold))))
-   ;; '(minibuffer-prompt ((t (:foreground "#00ff00" :weight bold))))
+   `(minibuffer-prompt ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg :weight bold))))
    ;; '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
    ;; `(header-line ((t (:foreground ,noname-keyword :background "#404040"))))
    
-   
+   ;; Default isearch is OK for now.
    ;; `(isearch ((t (:background ,noname-bg-search :foreground ,noname-fg-search :weight bold :underline (:color ,noname-fg-search)))))
    ;; `(lazy-highlight ((t (:background ,noname-bg-lazysearch :foreground ,noname-fg-lazysearch :weight bold :underline (:color ,noname-fg-lazysearch)))))
    ;; match?
@@ -75,11 +68,12 @@
 
 
    ;; frame UI
-   ;; `(mode-line ((t (:background ,noname-bg-modeline-active :foreground ,noname-keyword :box (:line-width 1 :color ,noname-box-modeline-active)))))
-   ;; `(mode-line-inactive ((t (:background ,noname-bg-modeline-inactive :foreground ,noname-gray :box (:line-width 1 :color ,noname-box-modeline-inactive)))))
-   ;; `(mode-line-highlight ((nil (:foreground ,noname-fg-modeline-hl :box (:line-width 1 :color ,noname-fg)))))
-   ;; `(vertical-border ((nil (:foreground ,noname-box-modeline-inactive))))
-   ;; `(fringe ((nil (:background ,noname-bg-dim))))
+   '(mode-line ((t (:background "#b5d5f5" :foreground "#406582" :box (:line-width 1 :color "#7095b2" :style nil)))))
+   `(mode-line-highlight ((t (:foreground ,noname-keyword))))
+   '(mode-line-buffer-id ((t (:foreground "#000000" :weight bold))))
+   '(mode-line-inactive ((t (:background "#e0e5e2" :foreground "#505552" :box (:line-width 1 :color "#c0c5c2")))))
+   `(vertical-border ((nil (:foreground ,noname-gray))))
+   `(fringe ((nil (:background ,noname-bg))))
 
 
    ;; syntax font-lock I DO care about
@@ -107,7 +101,7 @@
    ;; `(link-visited ((t (:foreground ,noname-fg :underline (:color ,noname-fg)))))
 
    ;; dired
-   ;; '(dired-directory ((t (:inherit font-lock-keyword-face :weight bold))))
+   '(dired-directory ((t (:inherit font-lock-keyword-face :weight bold))))
 
    ;; flycheck
    ;; '(flycheck-warning ((t (:underline (:color "Wheat3" :style wave)))))
@@ -116,8 +110,9 @@
    ;; '(flycheck-fringe-error ((t (:foreground "Coral"))))
 
    ;; which-key
-   ;; '(which-key-key-face ((t (:foreground "#ffa500"))))
-   ;; '(which-key-separator-face ((t (:foreground "#4d4d4d"))))
+   `(which-key-key-face ((t (:foreground ,noname-keyword))))
+   `(which-key-group-description-face ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   `(which-key-separator-face ((t (:foreground ,noname-keyword-dim))))
 
    ;; company
    ;; '(company-tooltip ((t (:background "Gray20" :foreground "Gray80"))))
@@ -131,7 +126,7 @@
    ;; '(company-preview-common ((t (:inherit company-preview :slant italic))))
 
    ;; erc
-   '(erc-current-nick-face ((t (:foreground "#ffffff"))))
+   ;; '(erc-current-nick-face ((t (:foreground "#ffffff"))))
 ;;   ;; if erc-nick-default-face has foreground setup then it could not be
 ;;   ;; overriden by erc-my-nick-face
 ;;   ;; '(erc-nick-default-face ((t (:foreground "#779977"))))
@@ -144,10 +139,12 @@
 
 
    ;; rcirc
-   ;; '(rcirc-server ((t (:foreground "#555555"))))
-   ;; '(rcirc-timestamp ((t (:foreground "#555555"))))
-   ;; '(rcirc-other-nick ((t (:foreground "#779977"))))
-   ;; '(rcirc-my-nick ((t (:foreground "#cc5555"))))
+   `(rcirc-server ((t (:foreground ,noname-comment))))
+   `(rcirc-timestamp ((t (:foreground ,noname-comment))))
+   `(rcirc-other-nick ((t (:foreground ,noname-keyword-dim))))
+   `(rcirc-my-nick ((t (:foreground ,noname-keyword))))
+   `(rcirc-nick-in-message ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   
    ;; `(rcirc-url ((t (:foreground ,noname-fg-url :weight normal :underline (:color ,noname-fg-url)))))
 
 
@@ -155,10 +152,12 @@
    '(git-commit-summary ((t (:inherit font-lock-string-face))))
 
    ;; git gutter fringe
-   ;; `(git-gutter-fr:modified ((nil (:background ,noname-bg-dim :foreground "#ff55ff"))))
-   ;; `(git-gutter-fr:added ((nil (:background ,noname-bg-dim :foreground "#55ff55"))))
-   ;; `(git-gutter-fr:deleted ((nil (:background ,noname-bg-dim :foreground "#ff5555"))))
-
+   `(git-gutter-fr:modified ((nil (:foreground "#f000f0" :weight bold))))
+   `(git-gutter-fr:added ((nil (:foreground "#00c000" :weight bold))))
+   `(git-gutter-fr:deleted ((nil (:foreground "#ff0000" :weight bold))))
+   `(git-gutter:modified ((nil (:foreground "#f000f0" :weight bold))))
+   `(git-gutter:added ((nil (:foreground "#00c000" :weight bold))))
+   `(git-gutter:deleted ((nil (:foreground "#ff0000" :weight bold))))
 
    ;; ivy
    ;; `(ivy-current-match ((t (:background ,noname-bg-highlight))))
@@ -253,15 +252,20 @@
 
 
    ;; XML
-   ;; `(nxml-element-local-name ((t (:foreground ,noname-fg-dim))))
-   ;; `(nxml-tag-delimiter ((t (:foreground ,noname-fg-dim))))
+   `(nxml-element-local-name ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   `(nxml-tag-delimiter ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
    ;; `(nxml-namespace-attribute-xmlns ((t (:foreground ,noname-fg-dim))))
-   ;; `(nxml-attribute-local-name ((t (:foreground ,noname-fg-dim))))
-   ;; `(nxml-attribute-value ((t (:foreground ,noname-str))))
-   ;; `(nxml-cdata-section-CDATA ((t (:foreground ,noname-fg-dim))))
+   `(nxml-attribute-local-name ((t (:foreground ,noname-keyword-dim))))
+   `(nxml-attribute-value ((t (:foreground ,noname-str))))
+   `(nxml-cdata-section-CDATA ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   `(nxml-cdata-section-delimiter ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
    ;; `(nxml-cdata-section-content ((t (:foreground ,noname-fg))))
-   ;; `(nxml-cdata-section-delimiter ((t (:foreground ,noname-fg-dim-2))))
 
+
+   ;; web-mode
+   `(web-mode-html-tag-face ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   `(web-mode-html-tag-bracket-face ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   `(web-mode-html-attr-name-face ((t (:foreground ,noname-keyword-dim))))
 
    ;; whitespace-mode
    ;; `(whitespace-space ((t (:foreground ,noname-fg-whitespace))))
@@ -292,7 +296,7 @@
    `(asciidoctor-header-face-5 ((t (:foreground ,noname-heading :slant italic :height 1.1))))
    `(asciidoctor-header-face-6 ((t (:foreground ,noname-heading :slant italic :height 1.1))))
 
-   ;; `(asciidoctor-option-face ((t (:foreground ,noname-fg-dim))))
+   `(asciidoctor-option-face ((t (:foreground ,noname-gray))))
    ;; `(asciidoctor-option-markup-face ((t (:foreground ,noname-fg-dim))))
 
 
