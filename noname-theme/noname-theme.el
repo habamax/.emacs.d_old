@@ -80,10 +80,10 @@
    `(font-lock-string-face ((t (:foreground ,noname-str))))
    `(font-lock-comment-face ((t (:foreground ,noname-comment))))
    `(font-lock-keyword-face ((t (:foreground ,noname-keyword))))
+   `(font-lock-builtin-face ((t (:foreground ,noname-keyword-dim))))
+   `(font-lock-function-name-face ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   `(font-lock-type-face ((t (:foreground ,noname-keyword))))
    ;; syntax font-lock I DON'T care about
-   '(font-lock-builtin-face ((t nil)))
-   '(font-lock-type-face ((t nil)))
-   '(font-lock-function-name-face ((t nil)))
    '(font-lock-variable-name-face ((t nil)))
    '(font-lock-constant-face ((t nil)))
    ;; review this later.
@@ -275,15 +275,16 @@
 
 
    ;; rainbow-delimiters
-   ;; `(rainbow-delimiters-depth-1-face ((t (:foreground ,noname-fg))))
-   ;; `(rainbow-delimiters-depth-2-face ((t (:foreground "#bd7070"))))
-   ;; `(rainbow-delimiters-depth-3-face ((t (:foreground "#bdbd70"))))
-   ;; `(rainbow-delimiters-depth-4-face ((t (:foreground "#7070bd"))))
-   ;; `(rainbow-delimiters-depth-5-face ((t (:foreground "#bd70bd"))))
-   ;; `(rainbow-delimiters-depth-6-face ((t (:foreground "#70bdbd"))))
-   ;; `(rainbow-delimiters-depth-7-face ((t (:foreground "#bda090"))))
-   ;; `(rainbow-delimiters-depth-8-face ((t (:foreground "#90a0bd"))))
-   ;; `(rainbow-delimiters-depth-9-face ((t (:foreground "#a0bd90"))))
+   `(rainbow-delimiters-depth-1-face ((t (:foreground ,noname-keyword))))
+   '(rainbow-delimiters-depth-2-face ((t (:foreground "#00a0a0"))))
+   '(rainbow-delimiters-depth-3-face ((t (:foreground "#f0a000"))))
+   '(rainbow-delimiters-depth-4-face ((t (:foreground "#000000"))))
+   '(rainbow-delimiters-depth-5-face ((t (:foreground "#0000f0"))))
+   `(rainbow-delimiters-depth-6-face ((t (:foreground ,noname-keyword))))
+   '(rainbow-delimiters-depth-7-face ((t (:foreground "#00a0a0"))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "#f0a000"))))
+   '(rainbow-delimiters-depth-9-face ((t (:foreground "#000000"))))
+
 
 
    ;; asciidoctor-mode
