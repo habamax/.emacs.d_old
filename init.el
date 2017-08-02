@@ -145,6 +145,7 @@
 (use-package haba-appearance
   :ensure nil
   :load-path "lisp/"
+  :diminish abbrev-mode auto-revert-mode
   :config
   (use-package leuven-theme :defer)
   (haba/set-current-theme))
@@ -268,6 +269,9 @@
 (use-package ivy
   :defer 2
   :diminish ivy-mode
+  :bind (("M-1" . ivy-switch-view)
+         ("M-2" . ivy-push-view)
+         ("M-3" . ivy-pop-view))
   :init
   ;; clear default ^ for counsel-M-x and friends
   (setq ivy-initial-inputs-alist '())
@@ -333,6 +337,7 @@
   :commands (projectile-project-root)
   :bind-keymap (("C-c p" . projectile-mode-map))
   :bind (:map projectile-mode-map ("C-c p s r" . projectile-ripgrep))
+  :diminish projectile-mode
   :config
   (use-package projectile-ripgrep)
   (projectile-global-mode)
@@ -495,6 +500,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 ;; fringe version doesn't work for terminal
 (use-package git-gutter-fringe
   :defer 4
+  :diminish git-gutter-mode
   :if (display-graphic-p)
   :config
   (global-git-gutter-mode 1))
@@ -502,6 +508,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 (use-package git-gutter
   :defer 4
   :if (not (display-graphic-p))
+  :diminish git-gutter-mode
   :config
   (global-git-gutter-mode 1))
 
@@ -551,12 +558,6 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
                 ispell-extra-args '("--sug-mode=ultra")))
 
 
-(use-package neotree
-  :defer
-  :commands (neotree-toggle)
-  :bind ("M-1" . neotree-toggle))
-
-
 ;; yasnippets
 (use-package yasnippet
   :defer 2
@@ -599,10 +600,6 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
 
 ;;   (add-hook 'emacs-lisp-mode-hook 'haba/enable-lispy-mode)
 ;;   (add-hook 'clojure-mode-hook 'haba/enable-lispy-mode))
-
-;; haskell stuff
-(use-package intero
-  :mode ("\\.\\(hs\\)$" . inter-mode))
 
 ;; music FTW
 (use-package emms
