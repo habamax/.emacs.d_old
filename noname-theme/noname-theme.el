@@ -111,7 +111,8 @@
 
    ;; which-key
    `(which-key-key-face ((t (:foreground ,noname-keyword))))
-   `(which-key-group-description-face ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg))))
+   `(which-key-command-description-face ((t (:foreground ,noname-fg))))
+   `(which-key-group-description-face ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg :weight bold))))
    `(which-key-separator-face ((t (:foreground ,noname-keyword-dim))))
 
    ;; company
