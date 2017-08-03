@@ -13,6 +13,11 @@ Otherwise call well known `comment-dwim'"
         (forward-line))
     (comment-dwim arg)))
 
+(defun haba/open-line ()
+  "Insert newline(s) below the line containing cursor"
+  (interactive)
+  (move-end-of-line 1)
+  (newline-and-indent))
 
 (defun haba/join-line ()
   "Join the following line onto the current one (analogous to `C-e', `C-d') or
