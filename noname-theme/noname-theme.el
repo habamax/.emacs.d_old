@@ -19,9 +19,9 @@
 (let
     ((noname-fg "#000000")
      (noname-bg "#f0f5f2")
+     (noname-dim-bg "#e7ecea")
      (noname-keyword "#b22222")
      (noname-keyword-dim "#305090")
-     (noname-keyword-dim-bg "#e7ecea")
      (noname-str "#008000")
      (noname-comment "#808080")
      (noname-gray "#7a7a7a")
@@ -56,7 +56,7 @@
    '(region ((t (:background "#f0e0a0"))))
    ;; `(highlight ((nil (:background ,noname-bg-highlight))))
    ;; '(bold ((t (:weight bold))))
-   `(minibuffer-prompt ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg :weight bold))))
+   `(minibuffer-prompt ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg :weight bold))))
    ;; '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
    ;; `(header-line ((t (:foreground ,noname-keyword :background "#404040"))))
    
@@ -81,7 +81,7 @@
    `(font-lock-comment-face ((t (:foreground ,noname-comment))))
    `(font-lock-keyword-face ((t (:foreground ,noname-keyword))))
    `(font-lock-builtin-face ((t (:foreground ,noname-keyword-dim))))
-   `(font-lock-function-name-face ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   `(font-lock-function-name-face ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg))))
    `(font-lock-type-face ((t (:foreground ,noname-keyword))))
    ;; syntax font-lock I DON'T care about
    '(font-lock-variable-name-face ((t nil)))
@@ -111,7 +111,7 @@
 
    ;; which-key
    `(which-key-key-face ((t (:foreground ,noname-keyword))))
-   `(which-key-group-description-face ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   `(which-key-group-description-face ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg))))
    `(which-key-separator-face ((t (:foreground ,noname-keyword-dim))))
 
    ;; company
@@ -143,7 +143,7 @@
    `(rcirc-timestamp ((t (:foreground ,noname-comment))))
    `(rcirc-other-nick ((t (:foreground ,noname-keyword-dim))))
    `(rcirc-my-nick ((t (:foreground ,noname-keyword))))
-   `(rcirc-nick-in-message ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   `(rcirc-nick-in-message ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg))))
    
    ;; `(rcirc-url ((t (:foreground ,noname-fg-url :weight normal :underline (:color ,noname-fg-url)))))
 
@@ -252,19 +252,19 @@
 
 
    ;; XML
-   `(nxml-element-local-name ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
-   `(nxml-tag-delimiter ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   `(nxml-element-local-name ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg))))
+   `(nxml-tag-delimiter ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg))))
    ;; `(nxml-namespace-attribute-xmlns ((t (:foreground ,noname-fg-dim))))
    `(nxml-attribute-local-name ((t (:foreground ,noname-keyword-dim))))
    `(nxml-attribute-value ((t (:foreground ,noname-str))))
-   `(nxml-cdata-section-CDATA ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
-   `(nxml-cdata-section-delimiter ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
-   ;; `(nxml-cdata-section-content ((t (:foreground ,noname-fg))))
+   `(nxml-cdata-section-CDATA ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg))))
+   `(nxml-cdata-section-delimiter ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg))))
+   `(nxml-cdata-section-content ((t (:background ,noname-dim-bg))))
 
 
    ;; web-mode
-   `(web-mode-html-tag-face ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
-   `(web-mode-html-tag-bracket-face ((t (:foreground ,noname-keyword-dim :background ,noname-keyword-dim-bg))))
+   `(web-mode-html-tag-face ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg))))
+   `(web-mode-html-tag-bracket-face ((t (:foreground ,noname-keyword-dim :background ,noname-dim-bg))))
    `(web-mode-html-attr-name-face ((t (:foreground ,noname-keyword-dim))))
 
    ;; whitespace-mode
