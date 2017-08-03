@@ -167,9 +167,7 @@
          ("C-c i d" . haba/insert-current-date)
          ("<C-wheel-up>" . text-scale-increase)
          ("<C-wheel-down>" . text-scale-decrease)
-         ("C-x C-b" . ibuffer)
-         ("M-0" . haba/restore-windows-layout-from-register)
-         ("C-M-0" . haba/save-windows-layout-to-register))
+         ("C-x C-b" . ibuffer))
   :config
   (defun haba/open-scratch-buffer ()
     "Open scratch buffer"
@@ -269,9 +267,6 @@
 (use-package ivy
   :defer 2
   :diminish ivy-mode
-  :bind (("M-1" . ivy-switch-view)
-         ("M-2" . ivy-push-view)
-         ("M-3" . ivy-pop-view))
   :init
   ;; clear default ^ for counsel-M-x and friends
   (setq ivy-initial-inputs-alist '())
@@ -374,6 +369,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
     ("b" balance-windows)
     ("p" ivy-push-view)
     ("P" ivy-pop-view)
+    ("j" ivy-switch-view)
     ("SPC" nil "quit")
     ("q" nil "quit"))
 
@@ -589,8 +585,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   :commands (slime)
   :config
   (setq inferior-lisp-program "ros -Q run")
-  (slime-setup '(slime-fancy))
-  )
+  (slime-setup '(slime-fancy)))
 
 ;; (use-package lispy
 ;;   :defer
