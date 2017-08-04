@@ -1,21 +1,19 @@
-;;; noname-theme.el --- no description, but it should be whity and plainy
+;;; habamax-theme.el --- no description, but it should be whity and plainy
 
 ;; Author: Maxim Kim <habamax@gmail.com>
-;; Url: https://github.com/habamax/noname-theme
+;; Url: https://github.com/habamax/habamax-theme
 ;; Package-Requires: ((emacs "24"))
 
 ;;; Commentary:
 
-;; tbd
-;; -1. the name!
-;; 0. background -- sliiiightly greenish
+;; 0. background -- a bit dirty light greenish
 ;; 1. keywords -- reddish
 ;; 2. strings -- greenish
 ;; 3. comments -- grayish
 
 ;;; Code:
 
-(deftheme noname "and no description yet...")
+(deftheme habamax "and no description yet...")
 
 (let
     ((color-fg "#000000")
@@ -48,7 +46,7 @@
 
 
   (custom-theme-set-faces
-   'noname
+   'habamax
 
    ;; standard faces
    `(default ((t (:background ,color-bg :foreground ,color-fg))))
@@ -324,6 +322,6 @@
   (add-to-list 'custom-theme-load-path
                (file-name-as-directory (file-name-directory load-file-name))))
 
-(provide-theme 'noname)
+(provide-theme 'habamax)
 
 ;;; noname-theme.el ends here
