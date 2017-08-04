@@ -303,6 +303,15 @@
    ;; `(asciidoctor-option-markup-face ((t (:foreground ,color-fg-dim))))
 
 
+   ;; markdown-mode
+   `(markdown-header-face-1 ((t (:foreground ,color-title :weight bold :height 1.3))))
+   `(markdown-header-face-2 ((t (:foreground ,color-heading :weight bold :height 1.2))))
+   `(markdown-header-face-3 ((t (:foreground ,color-heading :weight bold :height 1.1))))
+   `(markdown-header-face-4 ((t (:foreground ,color-heading :weight bold :height 1.1))))
+   `(markdown-header-face-5 ((t (:foreground ,color-heading :slant italic :height 1.1))))
+   `(markdown-header-face-6 ((t (:foreground ,color-heading :slant italic :height 1.1))))
+   `(markdown-code-face ((t (:background ,color-dim-bg))))
+
    ;; `(bongo-comment ((t (:foreground ,color-fg-dim))))
    ;; `(bongo-elapsed-track-part ((t (:background ,color-bg-alt))))
    ;; `(bongo-currently-playing-track ((t (:slant italic))))
