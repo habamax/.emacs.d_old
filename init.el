@@ -514,7 +514,9 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
   :commands (git-timemachine))
 
 (use-package markdown-mode
-  :mode ("\\.\\(markdown\\|md\\)$" . markdown-mode))
+  :mode ("\\.\\(markdown\\|md\\)$" . markdown-mode)
+  :config
+  (setq markdown-fontify-code-blocks-natively t))
 
 (use-package plantuml-mode
   :mode ("\\.\\(uml\\)$" . plantuml-mode))
