@@ -6,10 +6,20 @@
 
 ;;; Commentary:
 
-;; 0. background -- a bit dirty light greenish
+;; 0. background -- a bit dirty very light greenish
 ;; 1. keywords -- reddish
 ;; 2. strings -- greenish
 ;; 3. comments -- grayish
+
+;;; TODO:
+
+;; highlight line
+;; magit highlight
+;; diff mode colors refinements
+;; TODO: colors
+;; minimal org mode refinements
+;; ivy and swiper
+;; isearch
 
 ;;; Code:
 
