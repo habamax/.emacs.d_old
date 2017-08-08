@@ -110,7 +110,16 @@
    ;; `(link-visited ((t (:foreground ,color-fg :underline (:color ,color-fg)))))
 
    ;; dired
-   '(dired-directory ((t (:inherit font-lock-keyword-face :weight bold))))
+   '(dired-directory ((t (:inherit default :weight bold))))
+   `(dired-mark ((t (:foreground ,color-keyword :weight bold))))
+   ;; TODO: think of the "good" marked color
+   ;; `(dired-marked ((t (:foreground ,color-keyword :background "#f0cccc"))))
+   '(dired-header ((t (:inherit default :weight bold))))
+
+   ;; eshell
+   '(eshell-ls-directory ((t (:inherit default :weight bold))))
+   `(eshell-prompt ((t (:foreground ,color-keyword))))
+
 
    ;; flycheck
    ;; '(flycheck-warning ((t (:underline (:color "Wheat3" :style wave)))))
