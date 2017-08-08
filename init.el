@@ -648,8 +648,9 @@ directory to make multiple eshell windows easier."
         (progn
           (eshell "new")
           (rename-buffer eshell-name)
-          (insert (concat "ls"))
-          (eshell-send-input)))))
+          ;; (insert (concat "ls"))
+          ;; (eshell-send-input)
+          ))))
 
   (defun haba/toggle-eshell-here ()
     "Toggle eshell-here."
