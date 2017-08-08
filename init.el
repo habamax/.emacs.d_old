@@ -162,6 +162,8 @@
          ("M-j" . haba/join-line)
          ("C-o" . haba/open-line)
          ("M-2" . haba/duplicate-line)
+         ("M-3" . haba/move-line-up)
+         ("M-4" . haba/move-line-down)
          ("C-c o i" . haba/open-init-file)
          ("C-c o s" . haba/open-scratch-buffer)
          ("C-c o t" . haba/open-todo-file)
@@ -287,7 +289,6 @@
          ("M-s s" . swiper)
          ("M-s t" . haba/counsel-projectile-rg-todo)
          ("M-s r" . counsel-rg)
-         ("C-c s" . swiper-all)
          ("C-x b" . ivy-switch-buffer)
          ("M-y" . counsel-yank-pop))
   :config
