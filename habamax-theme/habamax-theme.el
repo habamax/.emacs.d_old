@@ -168,7 +168,7 @@
 
 
    ;; magit
-   '(git-commit-summary ((t (:inherit font-lock-string-face))))
+   '(git-commit-summary ((t (:inherit default :weight bold))))
 
    ;; git gutter fringe
    `(git-gutter-fr:modified ((nil (:foreground "#f000f0" :weight bold))))
