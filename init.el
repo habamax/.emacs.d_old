@@ -152,7 +152,7 @@
 (use-package haba-appearance
   :ensure nil
   :load-path "lisp/"
-  :diminish abbrev-mode auto-revert-mode
+  :diminish abbrev-mode auto-revert-mode subword-mode
   :config
   (use-package leuven-theme :defer)
   (haba/set-current-theme))
