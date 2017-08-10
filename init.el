@@ -178,6 +178,9 @@
          ("C-c i d" . haba/insert-current-date)
          ("<C-wheel-up>" . text-scale-increase)
          ("<C-wheel-down>" . text-scale-decrease)
+         ("C-M-<f12>" . desktop-save-in-desktop-dir)
+         ("<f12>" . desktop-read)
+         ("<f10>" . menu-bar-mode)
          ("C-x C-b" . ibuffer))
   :config
   (defun haba/open-scratch-buffer ()
