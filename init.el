@@ -18,9 +18,15 @@
 (when (eq system-type 'darwin)
   ;; No new frames for files that are opened from OSX
   (setq ns-pop-up-frames nil)
+  ;; Show menu by default
+  (menu-bar-mode 1)
   ;; command to meta, option to control
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'control))
+
+(when (not (eq system-type 'darwin))
+  (menu-bar-mode -1))
+
 
 (setq inhibit-startup-message t
       inhibit-splash-screen t
@@ -58,6 +64,7 @@
 (show-paren-mode t)
 (column-number-mode t)
 (recentf-mode 1)
+
 
 ;; fill text with M-q or auto-fill-mode
 (setq-default fill-column 80)
