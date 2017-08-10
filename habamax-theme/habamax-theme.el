@@ -50,7 +50,7 @@
      ;; (color-bg-lazysearch "#206060")
      ;; (color-fg-search-fail "#da70d6")
      ;; (color-bg-search-fail "#603060")
-     ;; (color-bg-highlight "#203040")
+     (color-bg-highlight "#c4f0c4")
 )
 
 
@@ -61,13 +61,11 @@
    ;; standard faces
    `(default ((t (:background ,color-bg :foreground ,color-fg))))
    '(cursor ((nil (:background "#000000"))))
-   ;; '(region ((t (:background "#eedc82"))))
    '(region ((t (:background "#f0e0a0"))))
-   ;; `(highlight ((nil (:background ,color-bg-highlight))))
-   ;; '(bold ((t (:weight bold))))
+   `(highlight ((nil (:background ,color-bg-highlight))))
    `(minibuffer-prompt ((t (:foreground ,color-keyword-dim :background ,color-dim-bg :weight bold))))
    ;; '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
-   ;; `(header-line ((t (:foreground ,color-keyword :background "#404040"))))
+   `(header-line ((t (:foreground ,color-fg :background "#e9e590" :box (:line-width 1 :color "#a9a550")))))
    
    ;; Default isearch is OK for now.
    ;; `(isearch ((t (:background ,color-bg-search :foreground ,color-fg-search :weight bold :underline (:color ,color-fg-search)))))
