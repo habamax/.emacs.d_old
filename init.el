@@ -155,6 +155,10 @@
   :diminish abbrev-mode auto-revert-mode subword-mode
   :config
   (use-package leuven-theme :defer)
+  (use-package kosmos-theme
+    :ensure nil
+    :load-path "kosmos-theme/")
+
   (haba/set-current-theme))
 
 (use-package haba-stuff
