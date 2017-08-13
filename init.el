@@ -363,37 +363,39 @@
   (setq projectile-completion-system 'ivy))
 
 (use-package hydra
-  :bind ("C-c w" . hydra-windows/body)
-  :bind ("C-c t" . hydra-toggle-theme/body)
-  :bind ("C-x o" . hydra-other-window/body)
+  :bind (("C-c w" . hydra-windows/body)
+         ("C-c t" . hydra-toggle-theme/body))
+
 
   :config
 
   (defhydra hydra-windows (:hint nil)
     "
-^Windows^                    ^Size^              ^Split^
---------------------------------------------------------------------
-_w_: Winner undo          _]_: + width         _t_: Toggle
-_W_: Winner redo          _[_: - width         _h_: Below
-_p_: Ivy push view        _=_: + height        _v_: Right
-_P_: Ivy pop view         _-_: - height        _m_: Maximize current
-^ ^                       _b_: balance         _c_: Close current
+^Layout^                    ^Size^              ^Split^
+--------------------------------------------------------------
+_w_: Winner undo          _]_: + width         _b_: Go left
+_W_: Winner redo          _[_: - width         _p_: Go up
+_v_: Ivy push view        _=_: + height        _n_: Go down
+_V_: Ivy pop view         _-_: - height        _f_: Go right
+_s_: Ivy switch       _<tab>_: balance
+_t_: Toggle
+
 "
     ("w" winner-undo)
     ("W" winner-redo)
     ("t" haba/toggle-window-split)
-    ("h" split-window-below)
-    ("v" split-window-right)
-    ("m" delete-other-windows)
-    ("c" delete-window)
+    ("b" windmove-left)
+    ("n" windmove-down)
+    ("p" windmove-up)
+    ("f" windmove-right)
     ("]" enlarge-window-horizontally)
     ("[" shrink-window-horizontally)
     ("=" enlarge-window)
     ("-" shrink-window)
-    ("b" balance-windows)
-    ("p" ivy-push-view)
-    ("P" ivy-pop-view)
-    ("j" ivy-switch-view)
+    ("<tab>" balance-windows)
+    ("v" ivy-push-view)
+    ("V" ivy-pop-view)
+    ("s" ivy-switch-view)
     ("SPC" nil "quit")
     ("q" nil "quit"))
 
@@ -403,14 +405,7 @@ _P_: Ivy pop view         _-_: - height        _m_: Maximize current
     ("t" (haba/toggle-theme) "Toggle next theme")
     ("SPC" nil "quit")
     ("q" nil "quit"))
-
-  (defhydra hydra-other-window
-    (:body-pre (other-window 1))
-    "Other window"
-    ("o" (other-window 1) "Next")
-    ("O" (other-window -1) "Previous")
-    ("SPC" nil "quit")
-    ("q" nil "quit")))
+)
 
 ;; Complete Anything
 (use-package company
