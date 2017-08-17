@@ -258,12 +258,6 @@
          ("M-g z" . dumb-jump-go-prefer-external-other-window))
   :config (setq dumb-jump-selector 'ivy))
 
-(use-package eyebrowse
-  :bind-keymap (("C-c C-w" . eyebrowse-mode-map))
-  :bind (("M-0" . eyebrowse-next-window-config))
-  :bind (("M-9" . eyebrowse-prev-window-config))
-  :config
-  (eyebrowse-mode))
 
 ;; (use-package ido
 ;;   :config
