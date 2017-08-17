@@ -240,13 +240,24 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
 
 (defvar asciidoctor-mode-map
   (let ((map (make-sparse-keymap)))
+    ;; AsciiDoctor results
     (define-key map "\C-c\C-c\C-h" 'asciidoctor-compile-html)
     (define-key map "\C-c\C-c\C-p" 'asciidoctor-compile-pdf)
     (define-key map "\C-c\C-o\C-o" 'browse-url-of-buffer)
     (define-key map "\C-c\C-o\C-p" 'asciidoctor-open-pdf)
     (define-key map "\C-c\C-o\C-h" 'asciidoctor-open-html)
+    ;; Insert callouts
+    (define-key map (kbd "C-c i 1") '(lambda () (interactive) (insert "<1>")))
+    (define-key map (kbd "C-c i 2") '(lambda () (interactive) (insert "<2>")))
+    (define-key map (kbd "C-c i 3") '(lambda () (interactive) (insert "<3>")))
+    (define-key map (kbd "C-c i 4") '(lambda () (interactive) (insert "<4>")))
+    (define-key map (kbd "C-c i 5") '(lambda () (interactive) (insert "<5>")))
+    (define-key map (kbd "C-c i 6") '(lambda () (interactive) (insert "<6>")))
+    (define-key map (kbd "C-c i 7") '(lambda () (interactive) (insert "<7>")))
+    (define-key map (kbd "C-c i 8") '(lambda () (interactive) (insert "<8>")))
+    (define-key map (kbd "C-c i 9") '(lambda () (interactive) (insert "<9>")))
     map)
-  "Keymap used in AsciiDoc mode.")
+  "Keymap used in AsciiDoctor mode.")
 
 
 ;; (defconst asciidoctor-mode-syntax-table
