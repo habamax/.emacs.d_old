@@ -592,7 +592,8 @@ _t_: Toggle
   :config
   (use-package cider
     :config
-    (setq cider-repl-display-help-banner nil)))
+    (setq cider-repl-display-help-banner nil)
+    (setq cider-repl-use-pretty-printing t)))
 
 (use-package slime
   :commands (slime)
