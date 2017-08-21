@@ -293,7 +293,22 @@
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                                (t . ivy--regex-fuzzy))))
+                                (t . ivy--regex-fuzzy)))
+
+  (defun haba/save-ivy-views ()
+    (interactive)
+    (with-temp-file (concat user-emacs-directory "ivy-views")
+      (prin1 ivy-views (current-buffer))
+      (message "Save ivy-views")))
+
+  (defun haba/load-ivy-views ()
+    (interactive)
+    (setq ivy-views
+          (with-temp-buffer
+            (insert-file-contents (concat user-emacs-directory "ivy-views"))
+            (read (current-buffer))))
+    (message "Load ivy-views"))
+  )
 
 
 (use-package counsel
