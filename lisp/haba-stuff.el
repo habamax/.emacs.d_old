@@ -149,6 +149,7 @@ point reaches the beginning or end of the buffer, stop there."
   (find-file user-init-file))
 
 
+;; TODO: exclude dired buffers
 ;; Next Buffer
 (defun haba/next-buffer ()
   (interactive)
