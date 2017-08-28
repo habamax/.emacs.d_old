@@ -400,23 +400,17 @@
 
   (defhydra hydra-windows (:hint nil)
     "
-^Layout^                    ^Size^              ^Split^
---------------------------------------------------------------
-_w_: Winner undo          _]_: + width         _b_: Go left
-_W_: Winner redo          _[_: - width         _p_: Go up
-_v_: Ivy push view        _=_: + height        _n_: Go down
-_V_: Ivy pop view         _-_: - height        _f_: Go right
-_s_: Ivy switch       _<tab>_: balance
-_t_: Toggle
+^Layout^                    ^Size^
+---------------------------------------------
+_w_: Winner undo          _]_: + width
+_W_: Winner redo          _[_: - width
+_v_: Ivy push view        _=_: + height
+_V_: Ivy pop view         _-_: - height
+_s_: Ivy switch       _<tab>_: balance-windows
 
 "
     ("w" winner-undo)
     ("W" winner-redo)
-    ("t" haba/toggle-window-split)
-    ("b" windmove-left)
-    ("n" windmove-down)
-    ("p" windmove-up)
-    ("f" windmove-right)
     ("]" enlarge-window-horizontally)
     ("[" shrink-window-horizontally)
     ("=" enlarge-window)
