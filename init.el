@@ -164,15 +164,16 @@
   :load-path "lisp/"
   :commands (haba/next-buffer
              haba/previous-buffer
-             haba/toggle-window-split
              haba/fill-or-unfill)
   :bind (("M-;" . haba/toggle-comment)
          ("C-a" . haba/move-beginning-of-line)
          ("M-j" . haba/join-line)
          ("C-o" . haba/open-line)
          ("M-2" . haba/duplicate-line)
-         ("M-3" . haba/move-line-up)
-         ("M-4" . haba/move-line-down)
+         ("M-5" . haba/move-line-down)
+         ("M-6" . haba/move-line-up)
+         ("M-9" . haba/previous-buffer)
+         ("M-0" . haba/next-buffer)
          ("C-c o i" . haba/open-init-file)
          ("C-c o s" . haba/open-scratch-buffer)
          ("C-c o t" . haba/open-todo-file)
