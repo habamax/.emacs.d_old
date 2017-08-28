@@ -250,6 +250,14 @@
   :diminish avy-mode
   :bind (("C-l" . avy-goto-char-timer)))
 
+(use-package ace-window
+  :bind (("C-x o" . ace-window))
+  :config
+  (setq aw-scope 'frame)
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+
+(use-package treemacs
+  :bind (("M-1" . treemacs-toggle)))
 
 (use-package dumb-jump
   :bind (("M-g o" . dumb-jump-go-other-window)
