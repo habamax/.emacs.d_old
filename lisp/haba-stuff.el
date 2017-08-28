@@ -161,7 +161,7 @@ point reaches the beginning or end of the buffer, stop there."
           (string-match-p "^\*" (buffer-name))
           (not (equal b-name (buffer-name))))
          ; skip dired buffers
-         (equal major-mode 'dired-mode))
+         (derived-mode-p 'dired-mode))
       (next-buffer))))
 
 
@@ -177,7 +177,7 @@ point reaches the beginning or end of the buffer, stop there."
           (string-match-p "^\*" (buffer-name))
           (not (equal b-name (buffer-name))))
          ; skip dired buffers
-         (equal major-mode 'dired-mode))
+         (derived-mode-p 'dired-mode))
       (previous-buffer))))
 
 ;; Sequence of M-q fill or unfill paragraphs
