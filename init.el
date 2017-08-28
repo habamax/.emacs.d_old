@@ -368,13 +368,25 @@
   )
 
 
+;; sort buffers by git projects
+(use-package ibuffer-vc
+  :commands (ibuffer)
+  :init
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-vc-set-filter-groups-by-vc-root)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic)))))
+
+(use-package projectile-ripgrep :after projectile)
+
 (use-package projectile
   :commands (projectile-project-root)
   :bind-keymap (("C-c p" . projectile-mode-map))
   :bind (:map projectile-mode-map ("C-c p s r" . projectile-ripgrep))
   :diminish projectile-mode
   :config
-  (use-package projectile-ripgrep)
+
   (projectile-global-mode)
   (setq projectile-completion-system 'ivy))
 
