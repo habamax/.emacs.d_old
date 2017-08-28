@@ -149,16 +149,19 @@ point reaches the beginning or end of the buffer, stop there."
   (find-file user-init-file))
 
 
-;; TODO: exclude dired buffers
 ;; Next Buffer
 (defun haba/next-buffer ()
   (interactive)
   (let ((b-name (buffer-name)))
     (next-buffer)
     (while
-        (and
-         (string-match-p "^\*" (buffer-name))
-         (not (equal b-name (buffer-name))))
+        (or
+         ; skip "special" buffers beginning with star
+         (and
+          (string-match-p "^\*" (buffer-name))
+          (not (equal b-name (buffer-name))))
+         ; skip dired buffers
+         (equal major-mode 'dired-mode))
       (next-buffer))))
 
 
@@ -168,9 +171,13 @@ point reaches the beginning or end of the buffer, stop there."
   (let ((b-name (buffer-name)))
     (previous-buffer)
     (while
-        (and
-         (string-match-p "^\*" (buffer-name))
-         (not (equal b-name (buffer-name))))
+        (or
+         ; skip "special" buffers beginning with star
+         (and
+          (string-match-p "^\*" (buffer-name))
+          (not (equal b-name (buffer-name))))
+         ; skip dired buffers
+         (equal major-mode 'dired-mode))
       (previous-buffer))))
 
 ;; Sequence of M-q fill or unfill paragraphs
