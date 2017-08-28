@@ -319,6 +319,9 @@
   )
 
 
+;; counsel uses smex for better sorting
+(use-package smex :after counsel)
+
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
@@ -328,8 +331,6 @@
          ("C-x b" . ivy-switch-buffer)
          ("M-y" . counsel-yank-pop))
   :config
-  ;; counsel uses smex for better sorting
-  (use-package smex :defer)
 
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
