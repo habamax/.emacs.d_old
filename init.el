@@ -69,6 +69,9 @@
 ;; fill text with M-q or auto-fill-mode
 (setq-default fill-column 80)
 
+;; do not wrap lines by default
+(setq-default truncate-lines t)
+
 ;; winner mode is a must
 (winner-mode 1)
 
