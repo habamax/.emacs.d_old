@@ -453,11 +453,11 @@ _s_: Ivy switch       _<tab>_: balance-windows
                             company-echo-metadata-frontend))
   (setq company-selection-wrap-around t))
 
-
 ;; Complete Anything
 (use-package company
   :defer 2
   :diminish company-mode
+  :bind (("<tab>" . company-indent-or-complete-common))
   :config
   (use-package company-flx :config (company-flx-mode +1))
 
