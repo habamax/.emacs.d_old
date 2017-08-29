@@ -433,6 +433,27 @@ _s_: Ivy switch       _<tab>_: balance-windows
     ("q" nil "quit"))
 )
 
+;; test
+(use-package company-insert-selected
+  :load-path "lisp/"
+  :ensure nil
+  :after company
+
+  :bind (:map company-active-map
+              ("TAB" . company-select-first-then-next)
+              ("<tab>" . company-select-first-then-next)
+              ("<S-tab>" . company-select-previous-then-none)
+              ("<backtab>" . company-select-previous-then-none))
+  :config
+  (unbind-key "<return>" company-active-map)
+  (unbind-key "RET" company-active-map)
+
+  (setq company-frontends '(company-insert-selected-frontend
+                            company-pseudo-tooltip-frontend
+                            company-echo-metadata-frontend))
+  (setq company-selection-wrap-around t))
+
+
 ;; Complete Anything
 (use-package company
   :defer 2
@@ -445,22 +466,19 @@ _s_: Ivy switch       _<tab>_: balance-windows
 
   (setq company-minimum-prefix-length 2)
 
-  (setq company-backends
-        '((company-files          ; files & directory
-           company-keywords       ; keywords
-           company-capf
-           company-yasnippet
-           )
-          (company-abbrev company-dabbrev)
-          ))
+  ;; (setq company-backends
+  ;;       '((company-files          ; files & directory
+  ;;          company-keywords       ; keywords
+  ;;          company-capf
+  ;;          company-yasnippet
+  ;;          )
+  ;;         (company-abbrev company-dabbrev)
+  ;;         ))
 
-  (define-key company-active-map [tab] 'company-complete-selection)
-  (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-  (define-key company-active-map (kbd "M-n") nil)
-  (define-key company-active-map (kbd "M-p") nil)
-  (define-key company-active-map (kbd "C-j") 'company-abort)
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous)
+  ;; (define-key company-active-map (kbd "M-n") nil)
+  ;; (define-key company-active-map (kbd "M-p") nil)
+  ;; (define-key company-active-map [tab] 'company-select-next-if-tooltip-visible-or-complete-selection)
+  ;; (define-key company-active-map [backtab] 'company-select-previous)
 
   (global-company-mode))
 
