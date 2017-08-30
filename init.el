@@ -457,7 +457,7 @@ _s_: Ivy switch       _<tab>_: balance-windows
 (use-package company
   :defer 2
   :diminish company-mode
-  :bind (("<tab>" . company-indent-or-complete-common))
+  :bind (("TAB" . company-indent-or-complete-common))
   :config
   (use-package company-flx :config (company-flx-mode +1))
 
