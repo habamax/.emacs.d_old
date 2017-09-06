@@ -42,6 +42,12 @@
 (set-terminal-coding-system 'utf-8)
 (setq default-input-method 'russian-computer)
 
+;; This is windows only
+;; I have finally solved the problem of external processes to use Russian language,
+;; Now rg.exe can actually search Russian words from Emacs.
+(when (eq system-type 'windows-nt)
+  (setq default-process-coding-system '(utf-8-dos . cp1251-dos)))
+
 ;; make unix lineendings default
 (setq default-buffer-file-coding-system 'utf-8-unix)
 
