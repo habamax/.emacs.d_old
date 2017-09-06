@@ -468,7 +468,8 @@ _s_: Ivy switch       _<tab>_: balance-windows
   (use-package company-flx :config (company-flx-mode +1))
 
   (setq company-dabbrev-downcase nil)
-  (setq company-dabbrev-ignore-case nil)
+  (setq company-dabbrev-ignore-case t)
+  (setq company-idle-delay 0.2)
 
   (setq company-minimum-prefix-length 2)
 
@@ -478,7 +479,7 @@ _s_: Ivy switch       _<tab>_: balance-windows
   ;;          company-capf
   ;;          company-yasnippet
   ;;          )
-  ;;         (company-abbrev company-dabbrev)
+  ;;         (company-abbrev company-dabbrev company-dabbrev-code)
   ;;         ))
 
   ;; (define-key company-active-map (kbd "M-n") nil)
