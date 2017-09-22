@@ -14,8 +14,17 @@
                                ;; restore after startup
                                (setq gc-cons-threshold 800000)))
 
+
+(defun OSX? ()
+  "return true if OSX"
+  (eq system-type 'darwin))
+
+(defun windows? ()
+  "return true if Windows"
+  (eq system-type 'windows-nt))
+
 ;; General OSX setup
-(when (eq system-type 'darwin)
+(when (OSX?)
   ;; No new frames for files that are opened from OSX
   (setq ns-pop-up-frames nil)
   ;; Show menu by default
@@ -24,7 +33,7 @@
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'control))
 
-(when (not (eq system-type 'darwin))
+(when (not (OSX?))
   (menu-bar-mode -1))
 
 
@@ -45,7 +54,7 @@
 ;; This is windows only
 ;; I have finally solved the problem of external processes to use Russian language,
 ;; Now rg.exe can actually search Russian words from Emacs.
-(when (eq system-type 'windows-nt)
+(when (windows?)
   (setq default-process-coding-system '(utf-8-dos . cp1251-dos)))
 
 ;; make unix lineendings default
@@ -138,7 +147,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Set up packaging system
-(let ((package-protocol (if (eq system-type 'windows-nt) "http://" "https://")))
+(let ((package-protocol (if (windows?) "http://" "https://")))
   (setq package-archives `(("elpa" . ,(concat package-protocol "elpa.gnu.org/packages/"))
                            ("melpa" . ,(concat package-protocol "melpa.org/packages/")))))
 
@@ -227,7 +236,7 @@
   :config
   (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize)
-  :if (eq system-type 'darwin))
+  :if (OSX?))
 
 (use-package reverse-im
   :config
@@ -267,7 +276,7 @@
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 (use-package treemacs
-  :bind (("M-1" . treemacs-toggle)))
+  :bind (("<f8>" . treemacs-toggle)))
 
 (use-package dumb-jump
   :bind (("M-g o" . dumb-jump-go-other-window)
@@ -493,8 +502,8 @@ _s_: Ivy switch       _<tab>_: balance-windows
 
 (use-package multiple-cursors
   :bind-keymap (("C-x m" . haba/mc-map))
-  :bind (("M-n" . haba/mark-next-word-like-this)
-         ("M-N" . mc/unmark-next-like-this)
+  :bind (("C-M-m" . haba/mark-next-word-like-this)
+         ("C-M-S-m" . mc/unmark-next-like-this)
          ("C-8" . mc/mark-next-lines)
          ("C-7" . mc/unmark-next-like-this)
          ("M-S-<mouse-1>" . mc/add-cursor-on-click)
@@ -514,10 +523,7 @@ _s_: Ivy switch       _<tab>_: balance-windows
     (if (region-active-p)
         (let ((mc/enclose-search-term 'words))
           (mc/mark-next-like-this arg))
-      (mc--select-thing-at-point 'word))
-    ;; (when (not (region-active-p))
-    ;;     (mc/mark-next-lines 1))
-    ))
+      (mc--select-thing-at-point 'word))))
 
 
 
@@ -549,8 +555,7 @@ _s_: Ivy switch       _<tab>_: balance-windows
   (sp-pair "“" "”" :actions '(wrap))
   (sp-pair "´" "´" :actions '(wrap))
   (sp-pair "`" "`" :actions '(wrap))
-  (sp-pair "'" "'" :actions '(wrap))
-  )
+  (sp-pair "'" "'" :actions '(wrap)))
 
 (use-package magit
   :commands (magit-status)
@@ -597,6 +602,14 @@ _s_: Ivy switch       _<tab>_: balance-windows
   :config
   (setq web-mode-enable-auto-expanding t
         web-mode-enable-auto-pairing t))
+
+
+(use-package elixir-mode
+  :mode ("\\.\\(ex\\|exs\\)$" . elixir-mode))
+
+(use-package alchemist
+  :after elixir-mode)
+
 
 (use-package yaml-mode
   :mode ("\\.\\(yml\\)$" . yaml-mode))
@@ -687,6 +700,10 @@ _s_: Ivy switch       _<tab>_: balance-windows
   (setq emms-mode-line-icon-color "yellow")
 
   (setq emms-repeat-playlist t))
+
+
+(use-package nov
+  :mode ("\\.\\(epub\\)$" . nov-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
