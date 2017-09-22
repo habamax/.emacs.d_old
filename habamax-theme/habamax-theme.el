@@ -75,13 +75,18 @@
 
 
    ;; frame UI
-   '(mode-line ((t (:background "#b5d5f5" :foreground "#406582" :box (:line-width 1 :color "#7095b2" :style nil)))))
+   '(mode-line ((t (:background "#b5d5f5" :foreground "#406582"))))
    `(mode-line-highlight ((t (:foreground ,color-keyword))))
    '(mode-line-buffer-id ((t (:foreground "#000000" :weight bold))))
-   '(mode-line-inactive ((t (:background "#e0e5e2" :foreground "#505552" :box (:line-width 1 :color "#c0c5c2")))))
+   '(mode-line-inactive ((t (:background "#e0e5e2" :foreground "#505552"))))
    `(vertical-border ((nil (:foreground ,color-gray))))
    `(fringe ((nil (:background ,color-bg))))
 
+   ;; powerline default theme
+   `(powerline-active1 ((t (:foreground "#406582" :background "#95b5c5"))))
+   `(powerline-active2 ((t (:foreground "#b0c5e2" :background "#6585b5"))))
+   `(powerline-inactive1 ((t (:foreground "#505552" :background "#c0c5c2"))))
+   `(powerline-inactive2 ((t (:foreground "#505552" :background "#b0b5b2"))))
 
    ;; syntax font-lock I DO care about
    `(font-lock-string-face ((t (:foreground ,color-str))))
@@ -131,6 +136,7 @@
    `(which-key-group-description-face ((t (:foreground ,color-keyword-dim :background ,color-dim-bg :weight bold))))
    `(which-key-separator-face ((t (:foreground ,color-keyword-dim))))
 
+   
    ;; company
    ;; '(company-tooltip ((t (:background "Gray20" :foreground "Gray80"))))
    ;; '(company-tooltip-selection ((t (:background "LightSteelBlue4" :foreground "White"))))
