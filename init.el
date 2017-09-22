@@ -338,6 +338,10 @@
   )
 
 
+(use-package powerline
+  :config
+  (powerline-default-theme))
+
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)
 
