@@ -88,6 +88,10 @@
    `(powerline-inactive1 ((t (:foreground "#505552" :background "#c0c5c2"))))
    `(powerline-inactive2 ((t (:foreground "#505552" :background "#b0b5b2"))))
 
+   ;; telephone-line
+   `(telephone-line-accent-active ((t (:foreground "#202040" :background "#84a4c2"))))
+   `(telephone-line-accent-inactive ((t (:foreground "#505552" :background "#c0c5c2"))))
+
    ;; syntax font-lock I DO care about
    `(font-lock-string-face ((t (:foreground ,color-str))))
    `(font-lock-comment-face ((t (:foreground ,color-comment))))
