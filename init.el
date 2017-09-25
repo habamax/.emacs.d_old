@@ -452,26 +452,6 @@ _s_: Ivy switch       _<tab>_: balance-windows
     ("q" nil "quit"))
 )
 
-;; test
-(use-package company-insert-selected
-  :load-path "lisp/"
-  :ensure nil
-  :after company
-
-  :bind (:map company-active-map
-              ("TAB" . company-select-first-then-next)
-              ("<tab>" . company-select-first-then-next)
-              ("<S-tab>" . company-select-previous-then-none)
-              ("<backtab>" . company-select-previous-then-none))
-  :config
-  (unbind-key "<return>" company-active-map)
-  (unbind-key "RET" company-active-map)
-
-  (setq company-frontends '(company-insert-selected-frontend
-                            company-pseudo-tooltip-frontend
-                            company-echo-metadata-frontend))
-  (setq company-selection-wrap-around t))
-
 ;; Complete Anything
 (use-package company
   :defer 2
@@ -485,6 +465,8 @@ _s_: Ivy switch       _<tab>_: balance-windows
   (setq company-idle-delay 0.2)
 
   (setq company-minimum-prefix-length 2)
+
+  (company-tng-configure-default)
 
   ;; (setq company-backends
   ;;       '((company-files          ; files & directory
