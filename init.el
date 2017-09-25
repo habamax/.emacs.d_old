@@ -338,9 +338,23 @@
   )
 
 
-(use-package powerline
+(use-package telephone-line
   :config
-  (powerline-default-theme))
+  (setq telephone-line-primary-left-separator 'telephone-line-gradient
+        telephone-line-secondary-left-separator 'telephone-line-nil
+        telephone-line-primary-right-separator 'telephone-line-gradient
+        telephone-line-secondary-right-separator 'telephone-line-nil)
+  ;; (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
+  ;;       telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
+  ;;       telephone-line-primary-right-separator 'telephone-line-cubed-right
+  ;;       telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
+
+  (setq telephone-line-height 24)
+  (telephone-line-mode 1))
+
+;; (use-package powerline
+;;   :config
+;;   (powerline-default-theme))
 
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)
