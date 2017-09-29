@@ -105,9 +105,7 @@
 
 
 ;; autosave position in file
-(setq save-place-file (concat user-emacs-directory "saveplace"))
-(setq-default save-place t)
-(require 'saveplace)
+(save-place-mode 1)
 
 ;; C-u C-SPC C-SPC to pop mark twice...
 (setq set-mark-command-repeat-pop t)
