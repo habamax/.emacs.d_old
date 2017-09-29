@@ -182,7 +182,8 @@
   :load-path "lisp/"
   :commands (haba/next-buffer
              haba/previous-buffer
-             haba/fill-or-unfill)
+             haba/fill-or-unfill
+             haba/pretty-print-xml-region)
   :bind (("M-;" . haba/toggle-comment)
          ("C-a" . haba/move-beginning-of-line)
          ("M-j" . haba/join-line)
@@ -347,10 +348,14 @@
 
 (use-package telephone-line
   :config
-  (setq telephone-line-primary-left-separator 'telephone-line-gradient
-        telephone-line-secondary-left-separator 'telephone-line-nil
-        telephone-line-primary-right-separator 'telephone-line-gradient
-        telephone-line-secondary-right-separator 'telephone-line-nil)
+  ;; (setq telephone-line-primary-left-separator 'telephone-line-gradient
+  ;;       telephone-line-secondary-left-separator 'telephone-line-nil
+  ;;       telephone-line-primary-right-separator 'telephone-line-gradient
+  ;;       telephone-line-secondary-right-separator 'telephone-line-nil)
+  (setq telephone-line-primary-left-separator 'telephone-line-identity-left
+        telephone-line-secondary-left-separator 'telephone-line-identity-hollow-left
+        telephone-line-primary-right-separator 'telephone-line-identity-right
+        telephone-line-secondary-right-separator 'telephone-line-identity-hollow-right)
   ;; (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
   ;;       telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
   ;;       telephone-line-primary-right-separator 'telephone-line-cubed-right
@@ -358,10 +363,6 @@
 
   (setq telephone-line-height 24)
   (telephone-line-mode 1))
-
-;; (use-package powerline
-;;   :config
-;;   (powerline-default-theme))
 
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)
@@ -712,6 +713,9 @@ _s_: Ivy switch       _<tab>_: balance-windows
 (use-package nov
   :mode ("\\.\\(epub\\)$" . nov-mode))
 
+(use-package htmlize
+  :defer
+  :commands (htmlize-buffer htmlize-region))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
 
