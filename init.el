@@ -724,6 +724,23 @@ _s_: Ivy switch       _<tab>_: balance-windows
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
 
 
+(use-package autorevert
+  :mode ("\\(catalina.out\\|\\.log$\\)" . auto-revert-tail-mode)
+  :config
+  ;; (view-mode)
+  (defun haba/log-tail-handler ()
+    (end-of-buffer)
+    (setq auto-revert-interval 1)
+    (auto-revert-set-timer)
+    (make-variable-buffer-local 'auto-revert-verbose)
+    (setq auto-revert-verbose nil)
+    (read-only-mode t)
+    (font-lock-mode 0)
+    (when (fboundp 'show-smartparens-mode)
+      (show-smartparens-mode 0)))
+
+  (add-hook 'auto-revert-tail-mode-hook 'haba/log-tail-handler))
+
 (use-package eshell
   :ensure nil
   :bind ("M-`" . haba/toggle-eshell-here)
