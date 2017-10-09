@@ -9,7 +9,8 @@
 :icons: font
 :autofit-option:
 :sectnums:
-:source-highlighter: rouge
+:sectnumlevels: 4
+:source-highlighter: coderay
 :revdate: `(format-time-string "%Y-%m-%d")`
 :imagesdir: images
 :pdf-style: ${2:default}
