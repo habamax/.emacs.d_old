@@ -734,7 +734,7 @@ _s_: Ivy switch       _<tab>_: balance-windows
     (auto-revert-set-timer)
     (make-variable-buffer-local 'auto-revert-verbose)
     (setq auto-revert-verbose nil)
-    (read-only-mode t)
+    (view-mode t)
     (font-lock-mode 0)
     (when (fboundp 'show-smartparens-mode)
       (show-smartparens-mode 0)))
