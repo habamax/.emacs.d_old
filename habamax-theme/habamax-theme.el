@@ -28,11 +28,11 @@
 (let
     ((color-fg "#000000")
      ;; (color-bg "#f0f5f2")
-     ;; (color-bg "#f9fefb")
      (color-bg "#ffffff")
      ;; (color-dim-bg "#e7ecea")
      (color-dim-bg "#f5f9fe")
-     (color-keyword "#b22222")
+     ;; (color-keyword "#b22222")
+     (color-keyword "#8b2323")
      (color-keyword-dim "#305090")
      (color-str "#008000")
      (color-comment "#808080")
