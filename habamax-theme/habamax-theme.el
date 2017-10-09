@@ -100,7 +100,7 @@
    `(font-lock-comment-face ((t (:foreground ,color-comment))))
    `(font-lock-keyword-face ((t (:foreground ,color-keyword))))
    `(font-lock-builtin-face ((t (:foreground ,color-keyword-dim))))
-   `(font-lock-function-name-face ((t (:foreground ,color-keyword-dim :background ,color-dim-bg))))
+   `(font-lock-function-name-face ((t (:foreground ,color-keyword-dim))))
    `(font-lock-type-face ((t (:foreground ,color-keyword))))
    ;; syntax font-lock I DON'T care about
    '(font-lock-variable-name-face ((t nil)))
