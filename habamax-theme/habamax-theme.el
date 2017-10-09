@@ -6,7 +6,7 @@
 
 ;;; Commentary:
 
-;; 0. background -- a bit dirty very light greenish
+;; 0. background -- snowwhite
 ;; 1. keywords -- reddish
 ;; 2. strings -- greenish
 ;; 3. comments -- grayish
@@ -27,8 +27,11 @@
 
 (let
     ((color-fg "#000000")
-     (color-bg "#f0f5f2")
-     (color-dim-bg "#e7ecea")
+     ;; (color-bg "#f0f5f2")
+     ;; (color-bg "#f9fefb")
+     (color-bg "#ffffff")
+     ;; (color-dim-bg "#e7ecea")
+     (color-dim-bg "#f5f9fe")
      (color-keyword "#b22222")
      (color-keyword-dim "#305090")
      (color-str "#008000")
@@ -89,7 +92,7 @@
    `(powerline-inactive2 ((t (:foreground "#505552" :background "#b0b5b2"))))
 
    ;; telephone-line
-   `(telephone-line-accent-active ((t (:foreground "#202040" :background "#84a4c2"))))
+   `(telephone-line-accent-active ((t (:foreground "#e0e0f0" :background "#364780"))))
    `(telephone-line-accent-inactive ((t (:foreground "#505552" :background "#c0c5c2"))))
 
    ;; syntax font-lock I DO care about
