@@ -187,8 +187,8 @@
          ("M-j" . haba/join-line)
          ("C-o" . haba/open-line)
          ("M-2" . haba/duplicate-line)
-         ("M-5" . haba/move-line-down)
-         ("M-6" . haba/move-line-up)
+         ("M-3" . haba/move-line-down)
+         ("M-4" . haba/move-line-up)
          ("M-9" . haba/previous-buffer)
          ("M-0" . haba/next-buffer)
          ("C-c o i" . haba/open-init-file)
@@ -419,8 +419,8 @@
 
 ;; goto last change
 (use-package goto-chg
-  :bind (("C-c ," . goto-last-change)
-         ("C-c ." . goto-last-change-reverse)))
+  :bind (("M-5" . goto-last-change)
+         ("M-6" . goto-last-change-reverse)))
 
 ;; sort buffers by git projects
 (use-package ibuffer-vc
