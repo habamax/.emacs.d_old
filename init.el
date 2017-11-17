@@ -350,24 +350,11 @@
 
 (use-package telephone-line
   :config
-  (if (OSX?)
-      (setq telephone-line-primary-left-separator 'telephone-line-flat
-            telephone-line-secondary-left-separator 'telephone-line-nil
-            telephone-line-primary-right-separator 'telephone-line-flat
-            telephone-line-secondary-right-separator 'telephone-line-nil)
-    (setq telephone-line-primary-left-separator 'telephone-line-identity-left
-          telephone-line-secondary-left-separator 'telephone-line-identity-hollow-left
-          telephone-line-primary-right-separator 'telephone-line-identity-right
-          telephone-line-secondary-right-separator 'telephone-line-identity-hollow-right))
+  (setq telephone-line-primary-left-separator 'telephone-line-nil
+        telephone-line-secondary-left-separator 'telephone-line-nil
+        telephone-line-primary-right-separator 'telephone-line-nil
+        telephone-line-secondary-right-separator 'telephone-line-nil)
 
-  ;; (setq telephone-line-primary-left-separator 'telephone-line-gradient
-  ;;       telephone-line-secondary-left-separator 'telephone-line-nil
-  ;;       telephone-line-primary-right-separator 'telephone-line-gradient
-  ;;       telephone-line-secondary-right-separator 'telephone-line-nil)
-  ;; (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
-  ;;       telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
-  ;;       telephone-line-primary-right-separator 'telephone-line-cubed-right
-  ;;       telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
 
   (setq telephone-line-height 20)
   (telephone-line-mode 1))
