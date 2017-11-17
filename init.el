@@ -173,6 +173,10 @@
   (use-package leuven-theme :defer)
   (use-package kosmos-theme :defer)
 
+  (use-package solarized-theme :defer
+    :init
+    (setq solarized-high-contrast-mode-line t))
+
   (haba/set-current-theme))
 
 (use-package haba-stuff
