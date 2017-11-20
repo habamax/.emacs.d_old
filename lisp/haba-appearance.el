@@ -1,4 +1,4 @@
-(defvar *haba-theme-dark* 'kosmos)
+(defvar *haba-theme-dark* 'solarized-dark)
 (defvar *haba-theme-light* 'leuven)
 (defvar *haba-theme-light2* 'habamax)
 (defvar *haba-current-theme* 'default)
