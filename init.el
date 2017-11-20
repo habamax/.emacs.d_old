@@ -539,7 +539,8 @@ _s_: Ivy switch       _<tab>_: balance-windows
     (interactive "p")
     (if (region-active-p)
         (let ((mc/enclose-search-term 'words))
-          (mc/mark-next-like-this arg))
+          (mc/mark-next-like-this arg)
+          (mc/cycle-forward))
       (mc--select-thing-at-point 'word))))
 
 
