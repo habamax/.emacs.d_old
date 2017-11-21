@@ -352,13 +352,12 @@
 
 (use-package telephone-line
   :config
-  (setq telephone-line-primary-left-separator 'telephone-line-nil
+  (setq telephone-line-primary-left-separator 'telephone-line-identity-left
         telephone-line-secondary-left-separator 'telephone-line-nil
-        telephone-line-primary-right-separator 'telephone-line-nil
+        telephone-line-primary-right-separator 'telephone-line-identity-right
         telephone-line-secondary-right-separator 'telephone-line-nil)
 
-
-  (setq telephone-line-height 20)
+  (setq telephone-line-height 22)
   (telephone-line-mode 1))
 
 ;; counsel uses smex for better sorting
