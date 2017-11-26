@@ -352,9 +352,9 @@
 
 (use-package telephone-line
   :config
-  (setq telephone-line-primary-left-separator 'telephone-line-identity-left
+  (setq telephone-line-primary-left-separator 'telephone-line-flat
         telephone-line-secondary-left-separator 'telephone-line-nil
-        telephone-line-primary-right-separator 'telephone-line-identity-right
+        telephone-line-primary-right-separator 'telephone-line-flat
         telephone-line-secondary-right-separator 'telephone-line-nil)
 
   (setq telephone-line-height 22)
