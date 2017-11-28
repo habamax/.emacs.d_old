@@ -527,6 +527,7 @@ _s_: Ivy switch       _<tab>_: balance-windows
   (define-prefix-command 'haba/mc-map)
   (define-key ctl-x-map "m" 'haba/mc-map)
   :config
+  (setq mc/insert-numbers-default 1)
   (defun haba/mark-next-word-like-this (arg)
     (interactive "p")
     (if (region-active-p)
