@@ -76,6 +76,14 @@
 Group 1 matches the opening equal marks of an atx heading.
 Group 2 matches the text, without surrounding whitespace, of an atx heading.")
 
+(defconst asciidoctor-regex-blank-line
+  "^[[:blank:]]*$"
+  "Regular expression that matches a blank line.")
+
+(defconst asciidoctor-regex-list-item
+  "^\\([*-.]+\\|[0-9]\\.\\)[[:blank:]]+"
+  "Regular expression that matches a list item element.")
+
 
 (defconst asciidoctor-regex-comment-start
   "^\\(////[ \t]*\\)\\|\\(//[ \t]+.*\\)$"
@@ -645,9 +653,54 @@ Restore match data previously stored in PROPERTY."
 ;; (setq asciidoctor-font-lock-keywords (asciidoctor-get-font-lock-keywords))
 
 
+(defun asciidoctor-prev-line-indent ()
+  "Return the number of leading whitespace characters in the previous line.
+Return 0 if the current line is the first line in the buffer."
+  (save-excursion
+    (if (= (line-beginning-position) (point-min))
+        0
+      (forward-line -1)
+      (current-indentation))))
+
+(defun asciidoctor-prev-line-list-p ()
+  "Return true if previous line is the beginning of the list item"
+  (interactive)
+      (save-excursion
+        (forward-line -1)
+        (looking-at asciidoctor-regex-list-item)))
+
+;; XXX: INEFFICIENT
+(defun asciidoctor-prev-line-list-indent ()
+  "Return indent level of previous line which is a list item"
+  (interactive)
+  (save-excursion
+    (forward-line -1)
+    (looking-at asciidoctor-regex-list-item)
+    (- (match-end 0) (line-beginning-position))))
+
+
+(defun asciidoctor-indent-line ()
+  (interactive)
+  (cond ((asciidoctor-prev-line-list-p) (indent-line-to (asciidoctor-prev-line-list-indent)))
+        (t (indent-line-to (asciidoctor-prev-line-indent)))))
 
 
 
+(defun asciidoctor-adaptive-fill-function ()
+  "Return prefix for filling paragraph or nil if not determined."
+  (cond
+   ;;;; List item inside blockquote
+   ;; ((looking-at "^[ \t]*>[ \t]*\\(\\(?:[0-9]+\\|#\\)\\.\\|[*+:-]\\)[ \t]+")
+   ;;  (markdown-replace-regexp-in-string
+   ;;   "[0-9\\.*+-]" " " (match-string-no-properties 0)))
+   ;;;; Blockquote
+   ;; ((looking-at markdown-regex-blockquote)
+   ;;  (buffer-substring-no-properties (match-beginning 0) (match-end 2)))
+   ;; List items
+   ((looking-at asciidoctor-regex-list-item)
+    (match-string-no-properties 0))
+   ;; No match
+   (t nil)))
 
 ;;;###autoload
 (define-derived-mode asciidoctor-mode text-mode "AsciiDoctor"
@@ -703,15 +756,14 @@ Restore match data previously stored in PROPERTY."
    (mapconcat #'identity
               '("[ \t\f]*$" ; space-only line
                 "^=+[[:blank:]]" ; Headings
+                "^\\[.+\\][[:blank:]]*$" ; Blocks (source, quotes, etc)
+                "^[-+~=]\\{2,\\}$" ; Blocks separators (source, quotes, etc)
                 "[ \t]*\\[\\^\\S-*\\]:[ \t]*$") ; just the start of a footnote def
               "\\|"))
-  (set (make-local-variable 'adaptive-fill-first-line-regexp)
-       "\\`[ \t]*>[ \t]*?\\'")
-  (set (make-local-variable 'adaptive-fill-regexp) "\\s-*")
-  ;; (set (make-local-variable 'adaptive-fill-function)
-       ;; 'markdown-adaptive-fill-function)
-  ;; (set (make-local-variable 'fill-forward-paragraph-function)
-       ;; 'markdown-fill-forward-paragraph-function)
+  (setq-local adaptive-fill-first-line-regexp "\\`[ \t]*[A-Z]?>[ \t]*?\\'")
+  (setq-local adaptive-fill-regexp "\\s-*")
+  (setq-local adaptive-fill-function #'asciidoctor-adaptive-fill-function)
+  ;; (setq-local fill-forward-paragraph-function #'markdown-fill-forward-paragraph)
 
   ;; Outline mode
   (make-local-variable 'outline-regexp)
@@ -723,7 +775,7 @@ Restore match data previously stored in PROPERTY."
 
 
   ;; Indentation
-  ;; (setq indent-line-function markdown-indent-function)
+  (setq indent-line-function 'asciidoctor-indent-line)
 
   
   )
