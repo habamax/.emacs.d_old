@@ -678,10 +678,15 @@ Return 0 if the current line is the first line in the buffer."
     (looking-at asciidoctor-regex-list-item)
     (- (match-end 0) (line-beginning-position))))
 
+(defun asciidoctor-indent-list-item-below-p ()
+  (and (asciidoctor-prev-line-list-p)
+       (save-excursion
+         (beginning-of-line)
+         (not (looking-at asciidoctor-regex-list-item)))))
 
 (defun asciidoctor-indent-line ()
   (interactive)
-  (cond ((asciidoctor-prev-line-list-p) (indent-line-to (asciidoctor-prev-line-list-indent)))
+  (cond ((asciidoctor-indent-list-item-below-p) (indent-line-to (asciidoctor-prev-line-list-indent)))
         (t (indent-line-to (asciidoctor-prev-line-indent)))))
 
 
