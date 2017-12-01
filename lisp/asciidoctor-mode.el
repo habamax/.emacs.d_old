@@ -680,6 +680,7 @@ Restore match data previously stored in PROPERTY."
             'asciidoctor-syntax-propertize-extend-region)
   (setq-local syntax-propertize-function 'asciidoctor-syntax-propertize)
 
+                    ;; "^[ \t]*\\([0-9]+\\.|\\.\\)[ \t]+" ; ordered list item
 
   ;; Paragraph filling
   (set
@@ -688,10 +689,10 @@ Restore match data previously stored in PROPERTY."
        (mapconcat #'identity
                   '(
                     "\f" ; starts with a literal line-feed
-                    "[ \t\f]*$" ; space-only line
-                    "[ \t]*[*+-][ \t]+" ; unordered list item
-                    "[ \t]*\\(?:[0-9]+\\|#\\)\\.[ \t]+" ; ordered list item
-                    "[ \t]*\\[\\S-*\\]:[ \t]+" ; link ref def
+                    "^[ \t\f]*$" ; space-only line
+                    "^[ \t]*[*+-]+[ \t]+" ; unordered list item
+                    "^[ \t]*[0-9]*\\.[ \t]+" ; ordered list item
+                    "^\\.[^[:blank:]]" ; block description
                     "[ \t]*:[ \t]+" ; definition
                     )
                   "\\|"))
@@ -701,11 +702,7 @@ Restore match data previously stored in PROPERTY."
    (make-local-variable 'paragraph-separate)
    (mapconcat #'identity
               '("[ \t\f]*$" ; space-only line
-                ;; The following is not ideal, but the Fill customization
-                ;; options really only handle paragraph-starting prefixes,
-                ;; not paragraph-ending suffixes:
-                ".*  $" ; line ending in two spaces
-                "^#+"
+                "^=+[[:blank:]]" ; Headings
                 "[ \t]*\\[\\^\\S-*\\]:[ \t]*$") ; just the start of a footnote def
               "\\|"))
   (set (make-local-variable 'adaptive-fill-first-line-regexp)
