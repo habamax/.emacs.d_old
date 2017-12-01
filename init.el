@@ -194,6 +194,7 @@
          ("M-j" . haba/join-line)
          ("C-o" . haba/open-line)
          ("M-2" . haba/duplicate-line)
+         ("C-M-2" . haba/duplicate-line-inc-numbers)
          ("M-3" . haba/move-line-down)
          ("M-4" . haba/move-line-up)
          ("M-9" . haba/previous-buffer)

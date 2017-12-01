@@ -72,6 +72,26 @@ remove the comment characters from that line."
   ;; put the point in the lowest line and return
   (next-line arg))
 
+(defun haba/duplicate-line-inc-numbers (num-lines)
+  "Duplicate line, preserving cursor column, and increments any numbers found.
+  Duplicate a block of optional NUM-LINES lines.  If no optional argument is given,
+  then only one line is copied."
+  (interactive "p")
+  (if (not num-lines) (setq num-lines 0) (setq num-lines (1- num-lines)))
+  (let* ((col (current-column))
+         (bol (save-excursion (forward-line (- num-lines)) (beginning-of-line) (point)))
+         (eol (progn (end-of-line) (point)))
+         (line (buffer-substring bol eol)))
+    (goto-char bol)
+    (while (re-search-forward "[0-9]+" eol 1)
+      (let ((num (string-to-int (buffer-substring
+                                 (match-beginning 0) (match-end 0)))))
+        (replace-match (int-to-string (1+ num))))
+      (setq eol (save-excursion (goto-char eol) (end-of-line) (point))))
+    (goto-char bol)
+    (insert line "\n")
+    (move-to-column col)))
+
 
 (defun haba/move-line-up ()
   "Move up the current line."
