@@ -684,10 +684,26 @@ Return 0 if the current line is the first line in the buffer."
          (beginning-of-line)
          (not (looking-at asciidoctor-regex-list-item)))))
 
+(defun asciidoctor-calc-indent ()
+  (interactive)
+  (cond
+   ;; hanging list item like
+   ;; * List item
+   ;;   hanging part (cursor is on that line)
+   ;; XXX: REFACTOR IT!!! Double time looking at list item
+   ((asciidoctor-indent-list-item-below-p) (asciidoctor-prev-line-list-indent))
+   ;; use previous indent as a fallback
+   (t (asciidoctor-prev-line-indent))))
+
 (defun asciidoctor-indent-line ()
   (interactive)
-  (cond ((asciidoctor-indent-list-item-below-p) (indent-line-to (asciidoctor-prev-line-list-indent)))
-        (t (indent-line-to (asciidoctor-prev-line-indent)))))
+  (let ((cur-col (current-column))
+        (_ (back-to-indentation))
+        (cur-indented-col (current-column))
+        (new-indent (asciidoctor-calc-indent)))
+    (indent-line-to new-indent)
+    (move-to-column (+ cur-col (- new-indent cur-indented-col)))))
+
 
 
 
