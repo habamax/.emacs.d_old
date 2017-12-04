@@ -146,6 +146,10 @@
 (add-hook 'minibuffer-exit-hook #'haba/minibuffer-exit-hook)
 
 
+;; default frame is fullscreen and has no scrollbars
+(setq default-frame-alist '((fullscreen . maximized) (vertical-scroll-bars . nil)))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Set up packaging system
 (let ((package-protocol (if (windows?) "http://" "https://")))
   (setq package-archives `(("elpa" . ,(concat package-protocol "elpa.gnu.org/packages/"))
@@ -160,7 +164,6 @@
 
 (eval-when-compile
   (require 'use-package))
-(require 'diminish)
 (require 'bind-key)
 
 (setq use-package-always-ensure t)
@@ -168,27 +171,14 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Local packages
 
-(use-package haba-appearance
-  :ensure nil
-  :load-path "lisp/"
-  :diminish abbrev-mode auto-revert-mode subword-mode
-  :config
-  (use-package leuven-theme :defer)
-  (use-package kosmos-theme :defer)
-
-  (use-package solarized-theme :defer
-    :init
-    (setq solarized-high-contrast-mode-line t))
-
-  (haba/set-current-theme))
-
 (use-package haba-stuff
   :ensure nil
   :load-path "lisp/"
   :commands (haba/next-buffer
              haba/previous-buffer
              haba/fill-or-unfill
-             haba/pretty-print-xml-region)
+             haba/pretty-print-xml-region
+             load-theme)
   :bind (("M-;" . haba/toggle-comment)
          ("C-a" . haba/move-beginning-of-line)
          ("M-j" . haba/join-line)
@@ -211,6 +201,9 @@
          ("<f10>" . menu-bar-mode)
          ("C-x C-b" . ibuffer))
   :config
+  (defun disable-all-themes (&rest args)
+    (mapcar #'disable-theme custom-enabled-themes))
+  (advice-add 'load-theme :before #'disable-all-themes)
   (defun haba/open-scratch-buffer ()
     "Open scratch buffer"
     (interactive)
@@ -222,6 +215,21 @@
   )
 
 ;; STARTUP: 0.7
+
+(use-package diminish
+  :diminish abbrev-mode auto-revert-mode subword-mode)
+
+(use-package habamax-theme
+  :load-path "habamax-theme/"
+  :config
+  (load-theme 'habamax t))
+
+(use-package leuven-theme :defer)
+(use-package kosmos-theme :defer)
+(use-package solarized-theme :defer
+  :init
+  (setq solarized-high-contrast-mode-line t))
+
 
 (use-package asciidoctor-mode
   :ensure nil
