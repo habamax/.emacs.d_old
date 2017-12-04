@@ -235,6 +235,12 @@
   :ensure nil
   :load-path "lisp/"
   :mode ("\\.\\(adoc\\|asciidoc\\)$" . asciidoctor-mode)
+  :bind (:map asciidoctor-mode-map
+              ("C-c C-o C-o" . browse-url-of-buffer)
+              ("C-c C-c C-h" . asciidoctor-compile-html)
+              ("C-c C-c C-p" . asciidoctor-compile-pdf)
+              ("C-c C-o C-h" . asciidoctor-open-html)
+              ("C-c C-o C-p" . asciidoctor-open-pdf))
   :config
   ;; (setq asciidoctor-pdf-executable (concat "ruby " (expand-file-name "~/projects/asciidoctor-pdf/bin/asciidoctor-pdf")))
   (setq asciidoctor-pdf-stylesdir "~/docs/AsciiDocThemes")
