@@ -81,7 +81,7 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   "Regular expression that matches a blank line.")
 
 (defconst asciidoctor-regex-list-item
-  "^\\([*-.]+\\|[0-9]\\.\\)[[:blank:]]+"
+  "^[[:blank:]]*\\([*-.]+\\|[0-9]\\.\\)[[:blank:]]+"
   "Regular expression that matches a list item element.")
 
 
@@ -669,6 +669,13 @@ Return 0 if the current line is the first line in the buffer."
         (forward-line -1)
         (looking-at asciidoctor-regex-list-item)))
 
+(defun asciidoctor-cur-line-list-p ()
+  "Return true if current line is the list item"
+  (interactive)
+      (save-excursion
+        (beginning-of-line)
+        (looking-at asciidoctor-regex-list-item)))
+
 ;; XXX: INEFFICIENT
 (defun asciidoctor-prev-line-list-indent ()
   "Return indent level of previous line which is a list item"
@@ -691,6 +698,7 @@ Return 0 if the current line is the first line in the buffer."
    ;; * List item
    ;;   hanging part (cursor is on that line)
    ;; XXX: REFACTOR IT!!! Double time looking at list item
+   ((asciidoctor-cur-line-list-p) 0)
    ((asciidoctor-indent-list-item-below-p) (asciidoctor-prev-line-list-indent))
    ;; use previous indent as a fallback
    (t (asciidoctor-prev-line-indent))))
@@ -722,6 +730,30 @@ Return 0 if the current line is the first line in the buffer."
     (match-string-no-properties 0))
    ;; No match
    (t nil)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Electric
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun asciidoctor-electric-list-should-indent-p ()
+  (interactive)
+    (and
+     ;; nothing till the end
+     (looking-at "[[:blank:]]*$")
+     ;; list item in the beginning
+     (save-excursion
+       (beginning-of-line)
+       (looking-at asciidoctor-regex-list-item))))
+
+(defun asciidoctor-electric-indent (char)
+  (cond 
+   ((eq char ?\n) t)
+   ((eq char ?\s) (asciidoctor-electric-list-should-indent-p))
+   (t nil)))
+
+
 
 ;;;###autoload
 (define-derived-mode asciidoctor-mode text-mode "AsciiDoctor"
@@ -786,6 +818,7 @@ Return 0 if the current line is the first line in the buffer."
   (setq-local adaptive-fill-function #'asciidoctor-adaptive-fill-function)
   ;; (setq-local fill-forward-paragraph-function #'markdown-fill-forward-paragraph)
 
+
   ;; Outline mode
   (make-local-variable 'outline-regexp)
   (setq outline-regexp asciidoctor-regex-header)
@@ -797,7 +830,8 @@ Return 0 if the current line is the first line in the buffer."
 
   ;; Indentation
   (setq indent-line-function 'asciidoctor-indent-line)
-
+  ;; XXX: How to make it local?
+  (add-hook 'electric-indent-functions 'asciidoctor-electric-indent)
   
   )
 
