@@ -9,7 +9,7 @@
 ;; 0. background -- snowwhite
 ;; 1. keywords -- blueish
 ;; 2. strings -- reddish
-;; 3. comments -- grayish
+;; 3. comments -- dirty dark yellowish
 
 ;;; TODO:
 
@@ -34,7 +34,8 @@
      (color-keyword-dim "#204060")
      ;; (color-str "#a01515")
      (color-str "#901515")
-     (color-comment "#808080")
+     ;; (color-comment "#808080")
+     (color-comment "#707000")
      (color-gray "#7a7a7a")
      ;; (color-fg-todo "#bdabab")
      ;; (color-bg-todo "#775555")
