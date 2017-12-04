@@ -703,6 +703,10 @@ _s_: Ivy switch       _<tab>_: balance-windows
 ;;   (add-hook 'emacs-lisp-mode-hook 'haba/enable-lispy-mode)
 ;;   (add-hook 'clojure-mode-hook 'haba/enable-lispy-mode))
 
+
+(use-package restclient
+  :commands (restclient-mode))
+
 ;; music FTW
 (use-package emms
   :bind (("C-c m d" . emms-play-directory-tree)
