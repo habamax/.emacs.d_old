@@ -9,7 +9,7 @@
 ;; 0. background -- snowwhite
 ;; 1. keywords -- blueish
 ;; 2. strings -- reddish
-;; 3. comments -- dirty dark yellowish
+;; 3. comments -- gray gray gray
 
 ;;; TODO:
 
@@ -32,10 +32,8 @@
      ;; (color-keyword "#8b2323")
      (color-keyword "#0000ff")
      (color-keyword-dim "#204060")
-     ;; (color-str "#a01515")
      (color-str "#901515")
-     ;; (color-comment "#808080")
-     (color-comment "#707000")
+     (color-comment "#808080")
      (color-gray "#7a7a7a")
      ;; (color-fg-todo "#bdabab")
      ;; (color-bg-todo "#775555")
@@ -305,15 +303,15 @@
 
 
    ;; rainbow-delimiters
-   `(rainbow-delimiters-depth-1-face ((t (:foreground ,color-fg))))
-   '(rainbow-delimiters-depth-2-face ((t (:foreground "#009000"))))
-   `(rainbow-delimiters-depth-3-face ((t (:foreground ,color-fg))))
-   '(rainbow-delimiters-depth-4-face ((t (:foreground "#009000"))))
-   `(rainbow-delimiters-depth-5-face ((t (:foreground ,color-fg))))
-   '(rainbow-delimiters-depth-6-face ((t (:foreground "#009000"))))
-   `(rainbow-delimiters-depth-7-face ((t (:foreground ,color-fg))))
-   '(rainbow-delimiters-depth-8-face ((t (:foreground "#009000"))))
-   `(rainbow-delimiters-depth-9-face ((t (:foreground ,color-fg))))
+   `(rainbow-delimiters-depth-1-face ((t (:foreground ,color-keyword))))
+   '(rainbow-delimiters-depth-2-face ((t (:foreground "#000000"))))
+   `(rainbow-delimiters-depth-3-face ((t (:foreground ,color-keyword))))
+   '(rainbow-delimiters-depth-4-face ((t (:foreground "#000000"))))
+   `(rainbow-delimiters-depth-5-face ((t (:foreground ,color-keyword))))
+   '(rainbow-delimiters-depth-6-face ((t (:foreground "#000000"))))
+   `(rainbow-delimiters-depth-7-face ((t (:foreground ,color-keyword))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "#000000"))))
+   `(rainbow-delimiters-depth-9-face ((t (:foreground ,color-keyword))))
 
 
 
