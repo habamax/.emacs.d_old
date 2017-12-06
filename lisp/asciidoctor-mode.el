@@ -648,6 +648,13 @@ Return 0 if the current line is the first line in the buffer."
       (forward-line -1)
       (current-indentation))))
 
+(defun asciidoctor-cur-line-blank-p ()
+  "Return true if current line is blank"
+  (interactive)
+      (save-excursion
+        (beginning-of-line)
+        (looking-at asciidoctor-regex-blank-line)))
+
 (defun asciidoctor-prev-line-list-p ()
   "Return true if previous line is the beginning of the list item"
   (interactive)
@@ -686,6 +693,8 @@ Return 0 if the current line is the first line in the buffer."
    ;; XXX: REFACTOR IT!!! Double time looking at list item
    ((asciidoctor-cur-line-list-p) 0)
    ((asciidoctor-indent-list-item-below-p) (asciidoctor-prev-line-list-indent))
+   ;; blank line -- no indent
+   ;; ((asciidoctor-cur-line-blank-p) 0)
    ;; use previous indent as a fallback
    (t (asciidoctor-prev-line-indent))))
 
@@ -784,7 +793,6 @@ Return 0 if the current line is the first line in the buffer."
                     "^[ \t\f]*$" ; space-only line
                     "^[ \t]*[*+-]+[ \t]+" ; unordered list item
                     "^[ \t]*[0-9]*\\.[ \t]+" ; ordered list item
-                    "^\\.[^[:blank:]]" ; block description
                     "[ \t]*:[ \t]+" ; definition
                     )
                   "\\|"))
@@ -796,7 +804,12 @@ Return 0 if the current line is the first line in the buffer."
               '("[ \t\f]*$" ; space-only line
                 "^=+[[:blank:]]" ; Headings
                 "^\\[.+\\][[:blank:]]*$" ; Blocks (source, quotes, etc)
-                "^[-+~=]\\{2,\\}$" ; Blocks separators (source, quotes, etc)
+                "^====[[:blank:]]*$" ; block separator 
+                "^____[[:blank:]]*$" ; block separator
+                "^\\*\\{4\\}[[:blank:]]*$" ; block separator
+                "^\\+\\{4\\}[[:blank:]]*$" ; block separator
+                "^\\.\\{4\\}[[:blank:]]*$" ; block separator
+                "^-\\{2,4\\}[[:blank:]]*$" ; block separator
                 "[ \t]*\\[\\^\\S-*\\]:[ \t]*$") ; just the start of a footnote def
               "\\|"))
   (setq-local adaptive-fill-first-line-regexp "\\`[ \t]*[A-Z]?>[ \t]*?\\'")
