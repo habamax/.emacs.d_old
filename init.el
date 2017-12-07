@@ -746,6 +746,34 @@ _s_: Ivy switch       _<tab>_: balance-windows
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
 
 
+(use-package remember
+  :bind (("C-c r r" . remember)
+         ("C-c r n" . remember-notes))
+  :config
+  (setq remember-data-file (substitute-env-in-file-name "$HOME/docs/notes.adoc"))
+  (setq remember-notes-initial-major-mode 'asciidoctor-mode)
+  (setq remember-leader-text "== ")
+  (setq remember-handler-functions 'haba/remember-add-to-file)
+
+  (defun haba/remember-add-to-file ()
+  "Remember, with description DESC, the given TEXT. Add text to the beginning."
+  (let* ((text (buffer-string))
+         (desc (remember-buffer-desc))
+         (remember-text (concat "\n" remember-leader-text (format-time-string "%F %H:%M:%S")
+                                " " desc "\n\n" text
+                                (save-excursion (goto-char (point-max))
+                                                (if (bolp) nil "\n"))))
+         (buf (find-buffer-visiting remember-data-file)))
+    (if buf
+        (with-current-buffer buf
+          (save-excursion
+            (goto-char (point-min))
+            (forward-line) ;; dumb skip asciidoctor title
+            (insert remember-text))
+          (if remember-save-after-remembering (save-buffer)))
+      (append-to-file remember-text nil remember-data-file))))
+  )
+
 (use-package autorevert
   :mode ("\\(catalina.out\\|\\.log$\\)" . auto-revert-tail-mode)
   :config
