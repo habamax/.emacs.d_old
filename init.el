@@ -768,7 +768,7 @@ _s_: Ivy switch       _<tab>_: balance-windows
         (with-current-buffer buf
           (save-excursion
             (goto-char (point-min))
-            (forward-line) ;; dumb skip asciidoctor title
+            (search-forward-regexp "^[[:blank:]]*$") ;; dumb skip asciidoctor title
             (insert remember-text))
           (if remember-save-after-remembering (save-buffer)))
       (append-to-file remember-text nil remember-data-file))))
