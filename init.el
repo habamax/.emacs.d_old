@@ -667,6 +667,8 @@ _s_: Ivy switch       _<tab>_: balance-windows
                 ispell-extra-args '("--sug-mode=ultra")))
 
 
+(use-package ztree :defer)
+
 ;; yasnippets
 (use-package yasnippet
   :defer 2
