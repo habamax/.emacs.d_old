@@ -749,6 +749,71 @@ Return 0 if the current line is the first line in the buffer."
    (t nil)))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Clipboard image -- save image and paste link
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun asciidoctor-imagesdir ()
+  "Return name of the image directory. It is either current buffer directory or 
+combined current buffer directory / :imagesdir: (stated at the top of the buffer)."
+  (save-excursion
+    (goto-char (point-min))
+    (search-forward-regexp "^[[:blank:]]*$")
+    (let ((end-pos (point)))
+      (goto-char (point-min))
+      (search-forward-regexp "^:imagesdir:[[:blank:]]+\\([[:alnum:]]+\\)" end-pos t)
+      (match-string-no-properties 1))))
+
+
+(defun asciidoctor-extract-index-from-file-name (filename)
+  "Return index of the generated image file name.
+`img_document_23.png` --> 23"
+  (string-to-number
+   (replace-regexp-in-string "^img_.*_\\([[:digit:]]+\\).*" "\\1" filename)))
+
+
+(defun asciidoctor-image-full-path ()
+  "Return full path of the image directory."
+  (concat (file-name-directory (buffer-file-name))
+          (asciidoctor-imagesdir)
+          "/"))
+
+(defun asciidoctor-list-generated-images (path)
+  "Return list of all generated images for current buffer."
+  (directory-files path nil
+                   (concat "^img_" (file-name-base) "_[[:digit:]]+\\.png")))
+
+(defun asciidoctor-generate-new-image-index (list-of-images)
+  "Return the next non-existent index of the current buffer image.
+(\"img_document_1.png\" \"img_document_2.png\") --> 3"
+  (let ((indices (mapcar 'asciidoctor-extract-index-from-file-name
+                         list-of-images)))
+    (1+ (seq-max indices))))
+
+(defun asciidoctor-image-generate-name (path)
+  "Return new name for the generated image in the given path."
+  (let ((base-name (concat "img_"(ignore-errors (file-name-base))))
+        (new-index (asciidoctor-generate-new-image-index (asciidoctor-list-generated-images path))))
+    (concat base-name "_" (number-to-string new-index) ".png")))
+
+(defun asciidoctor-save-image ()
+  "Save image from the clipboard to the document image path using generated image filename.
+Use GraphicsMagick for that."
+  (let* ((path (asciidoctor-image-full-path))
+         (filename (asciidoctor-image-generate-name path)))
+    (shell-command
+     (concat "gm convert clipboard: " path filename))
+    filename))
+
+(defun asciidoctor-save-image-insert-link ()
+  "Save image to the document image path and insert link to the document."
+  (interactive)
+  (let ((filename (asciidoctor-save-image)))
+    (insert "image::" filename "[]")))
+
+
 
 ;;;###autoload
 (define-derived-mode asciidoctor-mode text-mode "AsciiDoctor"

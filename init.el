@@ -240,13 +240,13 @@
               ("C-c C-h C-h" . asciidoctor-compile-html)
               ("C-c C-p C-p" . asciidoctor-compile-pdf)
               ("C-c C-h C-o" . asciidoctor-open-html)
-              ("C-c C-p C-o" . asciidoctor-open-pdf))
+              ("C-c C-p C-o" . asciidoctor-open-pdf)
+              ("C-c C-y" . asciidoctor-save-image-insert-link))
   :config
   ;; (setq asciidoctor-pdf-executable (concat "ruby " (expand-file-name "~/projects/asciidoctor-pdf/bin/asciidoctor-pdf")))
   (setq asciidoctor-pdf-stylesdir "~/docs/AsciiDocThemes")
   (setq asciidoctor-pdf-fontsdir "~/docs/AsciiDocThemes/fonts")
-  (setq asciidoctor-pdf-extensions "asciidoctor-diagram")
-  )
+  (setq asciidoctor-pdf-extensions "asciidoctor-diagram"))
 
 ;; STARTUP: 0.8
 
