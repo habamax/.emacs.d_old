@@ -97,70 +97,13 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   "^\\(:\\)\\(.*?\\)\\(:\\)\\([ \t]\\|$\\)"
   "Regular expression matches asciidoctor comment closing.")
 
+(defconst asciidoctor-regex-def-list
+  "^\\(.*?::\\)\\([[:blank:]]*$\\|[[:blank:]].*\\)"
+  "Regular expression matches asciidoctor definition list.")
+
 (defun asciidoctor-text-property-at-point (prop)
   (get-text-property (point) prop))
 
-
-;; (defun asciidoctor-get-fenced-block-from-start (prop)
-;;   "Return limits of an enclosing fenced block from its start, using PROP.
-;; Return value is a list usable as `match-data'."
-;;   (catch 'no-rest-of-block
-;;     (let* ((correct-entry
-;;             (cl-find-if
-;;              (lambda (entry) (eq (cl-cadar entry) prop))
-;;              asciidoctor-fenced-block-pairs))
-;;            (begin-of-begin (cl-first (markdown-text-property-at-point prop)))
-;;            (middle-prop (cl-third correct-entry))
-;;            (end-prop (cl-cadadr correct-entry))
-;;            (end-of-end
-;;             (save-excursion
-;;               (goto-char (match-end 0))   ; end of begin
-;;               (unless (eobp) (forward-char))
-;;               (let ((mid-prop-v (asciidoctor-text-property-at-point middle-prop)))
-;;                 (if (not mid-prop-v)    ; no middle
-;;                     (progn
-;;                       ;; try to find end by advancing one
-;;                       (let ((end-prop-v
-;;                              (asciidoctor-text-property-at-point end-prop)))
-;;                         (if end-prop-v (cl-second end-prop-v)
-;;                           (throw 'no-rest-of-block nil))))
-;;                   (set-match-data mid-prop-v)
-;;                   (goto-char (match-end 0))   ; end of middle
-;;                   (beginning-of-line)         ; into end
-;;                   (cl-second (asciidoctor-text-property-at-point end-prop)))))))
-;;       (list begin-of-begin end-of-end))))
-
-
-;; (defun asciidoctor-get-enclosing-fenced-block-construct (&optional pos)
-;;   "Get \"fake\" match data for block enclosing POS.
-;; Returns fake match data which encloses the start, middle, and end
-;; of the block construct enclosing POS, if it exists. Used in
-;; `asciidoctor-code-block-at-pos'."
-;;   (save-excursion
-;;     (when pos (goto-char pos))
-;;     (beginning-of-line)
-;;     (car
-;;      (cl-remove-if
-;;       #'null
-;;       (cl-mapcar
-;;        (lambda (fun-and-prop)
-;;          (cl-destructuring-bind (fun prop) fun-and-prop
-;;            (when prop
-;;              (save-match-data
-;;                (set-match-data (asciidoctor-text-property-at-point prop))
-;;                (funcall fun prop)))))
-;;        `((asciidoctor-get-fenced-block-from-start
-;;           ,(cl-find-if
-;;             #'asciidoctor-text-property-at-point
-;;             (asciidoctor-get-fenced-block-begin-properties)))
-;;          (asciidoctor-get-fenced-block-from-middle
-;;           ,(cl-find-if
-;;             #'asciidoctor-text-property-at-point
-;;             (asciidoctor-get-fenced-block-middle-properties)))
-;;          (asciidoctor-get-fenced-block-from-end
-;;           ,(cl-find-if
-;;             #'asciidoctor-text-property-at-point
-;;             (asciidoctor-get-fenced-block-end-properties)))))))))
 
 ;; (defun asciidoctor-code-block-at-pos (pos)
 ;;   "Return match data list if there is a code block at POS.
@@ -184,7 +127,11 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
    ((- (match-end 4) (match-beginning 4)))))
 
 
-;;; Compile functions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Compilation and visiting
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun asciidoctor-compile-html ()
   "Compile AsciiDoc file to HTML, using asciidoctor ruby implementation."
@@ -277,7 +224,11 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   ;; "Syntax table for `asciidoctor-mode'")
 
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Faces
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defgroup asciidoctor-faces nil
   "Faces used in Asciidoctor Mode"
@@ -346,6 +297,11 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   "Face for asciidoctor options."
   :group 'asciidoctor-faces)
 
+(defface asciidoctor-def-list-face
+  '((t (:inherit bold)))
+  "Face for asciidoctor definition lists."
+  :group 'asciidoctor-faces)
+
 (defvar asciidoctor-markup-face 'asciidoctor-markup-face
   "Face name to use for markup elements.")
 
@@ -378,6 +334,9 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
 
 (defvar asciidoctor-option-markup-face 'asciidoctor-option-markup-face
   "Face name to use for option's markup elements.")
+
+(defvar asciidoctor-def-list-face 'asciidoctor-def-list-face
+  "Face name to use for definition lists.")
 
 (defun asciidoctor-syntactic-face (state)
   "Return font-lock face for characters with given STATE.
@@ -463,9 +422,7 @@ Function is called repeatedly until it returns nil. For details, see
        (match-beginning 0) (match-end 0)
        (let ((atx-level (length (match-string-no-properties 1))))
          (intern (format "asciidoctor-heading-%d-atx" atx-level)))
-       (match-data t)))
-;  )
-)
+       (match-data t))))
 
 (defun asciidoctor-syntax-propertize-options (start end)
   "Match options of type SYMBOL with REGEX from START to END."
@@ -475,9 +432,18 @@ Function is called repeatedly until it returns nil. For details, see
     ;; (unless (asciidoctor-code-block-at-pos (match-beginning 0))
       (put-text-property
        (match-beginning 0) (match-end 0) 'asciidoctor-option (match-data t))
-      )
-;  )
-)
+      ))
+
+(defun asciidoctor-syntax-propertize-def-lists (start end)
+  "Match options of type SYMBOL with REGEX from START to END."
+  (goto-char start)
+  (while (re-search-forward asciidoctor-regex-def-list end t)
+    ;; TODO: implement code block
+    ;; (unless (asciidoctor-code-block-at-pos (match-beginning 0))
+      (put-text-property
+       (match-beginning 0) (match-end 0) 'asciidoctor-def-list (match-data t))
+      ))
+
 
 (defvar asciidoctor--syntax-properties
   (list 'asciidoctor-heading nil
@@ -487,7 +453,8 @@ Function is called repeatedly until it returns nil. For details, see
         'asciidoctor-heading-4-atx nil
         'asciidoctor-heading-5-atx nil
         'asciidoctor-heading-6-atx nil
-        'asciidoctor-option nil)
+        'asciidoctor-option nil
+        'asciidoctor-def-list nil)
   "Property list of all known asciidoctor syntactic properties.")
 
 (defun asciidoctor-syntax-propertize (start end)
@@ -499,6 +466,7 @@ START and END delimit region to propertize."
   ;; (markdown-syntax-propertize-yaml-metadata start end)
   ;; (markdown-syntax-propertize-pre-blocks start end)
   ;; (markdown-syntax-propertize-blockquotes start end)
+  (asciidoctor-syntax-propertize-def-lists start end)
   (asciidoctor-syntax-propertize-options start end)
   (asciidoctor-syntax-propertize-headings start end)
   (asciidoctor-syntax-propertize-comments start end))
@@ -548,6 +516,10 @@ Restore match data previously stored in PROPERTY."
 (defun asciidoctor-match-option (last)
   "Match option from point to LAST."
   (asciidoctor-match-propertized-text 'asciidoctor-option last))
+
+(defun asciidoctor-match-def-list (last)
+  "Match option from point to LAST."
+  (asciidoctor-match-propertized-text 'asciidoctor-def-list last))
 
 ;; TODO: check with markdown what is this???
 ;; (defun asciidoctor-match-comments (last)
@@ -627,6 +599,7 @@ Restore match data previously stored in PROPERTY."
     (asciidoctor-match-option . ((1 asciidoctor-option-markup-face)
                                  (2 asciidoctor-option-face)
                                  (3 asciidoctor-option-markup-face)))
+    (asciidoctor-match-def-list . ((1 asciidoctor-def-list-face)))
     ;; (asciidoctor-match-bold . ((1 asciidoctor-bold-markup-face prepend)
     ;;                            (2 asciidoctor-bold-face append)
     ;;                            (3 asciidoctor-bold-markup-face prepend)))
