@@ -12,6 +12,8 @@
 ;; * Headers
 ;; * Comments
 ;; * Options
+;; * Definition list
+;; * Bold and italic (partly)
 
 ;; TODO:
 ;; * Single line notes
@@ -67,8 +69,11 @@
   :group 'asciidoctor-pdf
   :type 'string)
 
-
-;;; Regexes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Regexes
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defconst asciidoctor-regex-header
   "^\\(=+\\)[ \t]+\\(.*?\\)[ \t]*\\(=*\\)$"
@@ -100,6 +105,17 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
 (defconst asciidoctor-regex-def-list
   "^\\(.*?::\\)\\([[:blank:]]*$\\|[[:blank:]].*\\)"
   "Regular expression matches asciidoctor definition list.")
+
+;; XXX: should be redone for multi row strings
+(defconst asciidoctor-regex-double-bold
+  ".\\(\\*\\*.*?\\*\\*\\)"
+  "Regular expression matches bold text in double stars.")
+
+;; XXX: should be redone for multi row strings
+(defconst asciidoctor-regex-double-italic
+  "__.*?__"
+  "Regular expression matches bold text in double underscores.")
+
 
 (defun asciidoctor-text-property-at-point (prop)
   (get-text-property (point) prop))
@@ -302,6 +318,16 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   "Face for asciidoctor definition lists."
   :group 'asciidoctor-faces)
 
+(defface asciidoctor-bold-face
+  '((t (:inherit bold)))
+  "Face for asciidoctor bold text."
+  :group 'asciidoctor-faces)
+
+(defface asciidoctor-italic-face
+  '((t (:inherit italic)))
+  "Face for asciidoctor italic text."
+  :group 'asciidoctor-faces)
+
 (defvar asciidoctor-markup-face 'asciidoctor-markup-face
   "Face name to use for markup elements.")
 
@@ -337,6 +363,12 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
 
 (defvar asciidoctor-def-list-face 'asciidoctor-def-list-face
   "Face name to use for definition lists.")
+
+(defvar asciidoctor-bold-face 'asciidoctor-bold-face
+  "Face name to use for bold text.")
+
+(defvar asciidoctor-italic-face 'asciidoctor-italic-face
+  "Face name to use for italic text.")
 
 (defun asciidoctor-syntactic-face (state)
   "Return font-lock face for characters with given STATE.
@@ -444,6 +476,25 @@ Function is called repeatedly until it returns nil. For details, see
        (match-beginning 0) (match-end 0) 'asciidoctor-def-list (match-data t))
       ))
 
+(defun asciidoctor-syntax-propertize-double-bold (start end)
+  "Match options of type SYMBOL with REGEX from START to END."
+  (goto-char start)
+  (while (re-search-forward asciidoctor-regex-double-bold end t)
+    ;; TODO: implement code block
+    ;; (unless (asciidoctor-code-block-at-pos (match-beginning 0))
+      (put-text-property
+       (match-beginning 0) (match-end 0) 'asciidoctor-double-bold (match-data t))
+      ))
+
+(defun asciidoctor-syntax-propertize-double-italic (start end)
+  "Match options of type SYMBOL with REGEX from START to END."
+  (goto-char start)
+  (while (re-search-forward asciidoctor-regex-double-italic end t)
+    ;; TODO: implement code block
+    ;; (unless (asciidoctor-code-block-at-pos (match-beginning 0))
+      (put-text-property
+       (match-beginning 0) (match-end 0) 'asciidoctor-double-italic (match-data t))
+      ))
 
 (defvar asciidoctor--syntax-properties
   (list 'asciidoctor-heading nil
@@ -454,7 +505,9 @@ Function is called repeatedly until it returns nil. For details, see
         'asciidoctor-heading-5-atx nil
         'asciidoctor-heading-6-atx nil
         'asciidoctor-option nil
-        'asciidoctor-def-list nil)
+        'asciidoctor-def-list nil
+        'asciidoctor-double-bold nil
+        'asciidoctor-double-italic nil)
   "Property list of all known asciidoctor syntactic properties.")
 
 (defun asciidoctor-syntax-propertize (start end)
@@ -467,6 +520,8 @@ START and END delimit region to propertize."
   ;; (markdown-syntax-propertize-pre-blocks start end)
   ;; (markdown-syntax-propertize-blockquotes start end)
   (asciidoctor-syntax-propertize-def-lists start end)
+  (asciidoctor-syntax-propertize-double-bold start end)
+  (asciidoctor-syntax-propertize-double-italic start end)
   (asciidoctor-syntax-propertize-options start end)
   (asciidoctor-syntax-propertize-headings start end)
   (asciidoctor-syntax-propertize-comments start end))
@@ -520,6 +575,14 @@ Restore match data previously stored in PROPERTY."
 (defun asciidoctor-match-def-list (last)
   "Match option from point to LAST."
   (asciidoctor-match-propertized-text 'asciidoctor-def-list last))
+
+(defun asciidoctor-match-double-bold (last)
+  "Match option from point to LAST."
+  (asciidoctor-match-propertized-text 'asciidoctor-double-bold last))
+
+(defun asciidoctor-match-double-italic (last)
+  "Match option from point to LAST."
+  (asciidoctor-match-propertized-text 'asciidoctor-double-italic last))
 
 ;; TODO: check with markdown what is this???
 ;; (defun asciidoctor-match-comments (last)
@@ -600,6 +663,9 @@ Restore match data previously stored in PROPERTY."
                                  (2 asciidoctor-option-face)
                                  (3 asciidoctor-option-markup-face)))
     (asciidoctor-match-def-list . ((1 asciidoctor-def-list-face)))
+    (asciidoctor-match-double-bold . ((1 asciidoctor-bold-face)))
+    (asciidoctor-match-double-italic . ((0 asciidoctor-italic-face)))
+
     ;; (asciidoctor-match-bold . ((1 asciidoctor-bold-markup-face prepend)
     ;;                            (2 asciidoctor-bold-face append)
     ;;                            (3 asciidoctor-bold-markup-face prepend)))
