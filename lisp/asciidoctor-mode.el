@@ -760,10 +760,12 @@ combined current buffer directory / :imagesdir: (stated at the top of the buffer
 
 (defun asciidoctor-generate-new-image-index (list-of-images)
   "Return the next non-existent index of the current buffer image.
-(\"img_document_1.png\" \"img_document_2.png\") --> 3"
+'(\"img_document_1.png\" \"img_document_2.png\") --> 3"
   (let ((indices (mapcar 'asciidoctor-extract-index-from-file-name
                          list-of-images)))
-    (1+ (seq-max indices))))
+    (if indices
+        (1+ (seq-max indices)))
+    1))
 
 (defun asciidoctor-image-generate-name (path)
   "Return new name for the generated image in the given path."
@@ -773,12 +775,15 @@ combined current buffer directory / :imagesdir: (stated at the top of the buffer
 
 (defun asciidoctor-save-image ()
   "Save image from the clipboard to the document image path using generated image filename.
-Use GraphicsMagick for that."
-  (let* ((path (asciidoctor-image-full-path))
-         (filename (asciidoctor-image-generate-name path)))
-    (shell-command
-     (concat "gm convert clipboard: " path filename))
-    filename))
+Use GraphicsMagick for that.
+Create directory if needed."
+  (let ((path (asciidoctor-image-full-path)))
+    (unless (file-exists-p path)
+      (make-directory path t))
+    (let ((filename (asciidoctor-image-generate-name path)))
+      (shell-command
+       (concat "gm convert clipboard: " path filename))
+      filename)))
 
 (defun asciidoctor-save-image-insert-link ()
   "Save image to the document image path and insert link to the document."
