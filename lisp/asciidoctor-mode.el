@@ -257,11 +257,6 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   "Face for markup elements."
   :group 'asciidoctor-faces)
 
-(defface asciidoctor-header-delimiter-face
-  '((t (:inherit font-lock-preprocessor-face)))
-  "Base face for headers hash delimiter."
-  :group 'asciidoctor-faces)
-
 (defface asciidoctor-header-face
   '((t (:inherit default
                  :weight bold)))
@@ -298,6 +293,37 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   "Header 6 face."
   :group 'asciidoctor-faces)
 
+(defface asciidoctor-header-delimiter-face-1
+  '((t (:inherit asciidoctor-header-face-1)))
+  "Header 1 delimiter face."
+  :group 'asciidoctor-faces)
+
+(defface asciidoctor-header-delimiter-face-2
+  '((t (:inherit asciidoctor-header-face-2)))
+  "Header 2 delimiter face."
+  :group 'asciidoctor-faces)
+
+(defface asciidoctor-header-delimiter-face-3
+  '((t (:inherit asciidoctor-header-face-3)))
+  "Header 3 delimiter face."
+  :group 'asciidoctor-faces)
+
+(defface asciidoctor-header-delimiter-face-4
+  '((t (:inherit asciidoctor-header-face-4)))
+  "Header 4 delimiter face."
+  :group 'asciidoctor-faces)
+
+(defface asciidoctor-header-delimiter-face-5
+  '((t (:inherit asciidoctor-header-face-5)))
+  "Header 5 delimiter face."
+  :group 'asciidoctor-faces)
+
+(defface asciidoctor-header-delimiter-face-6
+  '((t (:inherit asciidoctor-header-face-6)))
+  "Header 6 delimiter face."
+  :group 'asciidoctor-faces)
+
+
 (defface asciidoctor-comment-face
   '((t (:inherit font-lock-comment-face)))
   "Face for asciidoctor comments."
@@ -331,8 +357,24 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
 (defvar asciidoctor-markup-face 'asciidoctor-markup-face
   "Face name to use for markup elements.")
 
-(defvar asciidoctor-header-delimiter-face 'asciidoctor-header-delimiter-face
-  "Face name to use as a base for header delimiters.")
+(defvar asciidoctor-header-delimiter-face-1 'asciidoctor-header-delimiter-face-1
+  "Face name to use for level-1 header delimiters.")
+
+(defvar asciidoctor-header-delimiter-face-2 'asciidoctor-header-delimiter-face-2
+  "Face name to use for level-2 header delimiters.")
+
+(defvar asciidoctor-header-delimiter-face-3 'asciidoctor-header-delimiter-face-3
+  "Face name to use for level-3 header delimiters.")
+
+(defvar asciidoctor-header-delimiter-face-4 'asciidoctor-header-delimiter-face-4
+  "Face name to use for level-4 header delimiters.")
+
+(defvar asciidoctor-header-delimiter-face-5 'asciidoctor-header-delimiter-face-5
+  "Face name to use for level-5 header delimiters.")
+
+(defvar asciidoctor-header-delimiter-face-6 'asciidoctor-header-delimiter-face-6
+  "Face name to use for level-6 header delimiters.")
+
 
 (defvar asciidoctor-header-face 'asciidoctor-header-face
   "Face name to use as a base for headers.")
@@ -641,24 +683,24 @@ Restore match data previously stored in PROPERTY."
 
 
 (defvar asciidoctor-font-lock-keywords
-  '((asciidoctor-match-heading-6-atx . ((1 asciidoctor-header-delimiter-face)
+  '((asciidoctor-match-heading-6-atx . ((1 asciidoctor-header-delimiter-face-6)
                                         (2 asciidoctor-header-face-6)
-                                        (3 asciidoctor-header-delimiter-face)))
-    (asciidoctor-match-heading-5-atx . ((1 asciidoctor-header-delimiter-face)
+                                        (3 asciidoctor-header-delimiter-face-6)))
+    (asciidoctor-match-heading-5-atx . ((1 asciidoctor-header-delimiter-face-5)
                                         (2 asciidoctor-header-face-5)
-                                        (3 asciidoctor-header-delimiter-face)))
-    (asciidoctor-match-heading-4-atx . ((1 asciidoctor-header-delimiter-face)
+                                        (3 asciidoctor-header-delimiter-face-5)))
+    (asciidoctor-match-heading-4-atx . ((1 asciidoctor-header-delimiter-face-4)
                                         (2 asciidoctor-header-face-4)
-                                        (3 asciidoctor-header-delimiter-face)))
-    (asciidoctor-match-heading-3-atx . ((1 asciidoctor-header-delimiter-face)
+                                        (3 asciidoctor-header-delimiter-face-4)))
+    (asciidoctor-match-heading-3-atx . ((1 asciidoctor-header-delimiter-face-3)
                                         (2 asciidoctor-header-face-3)
-                                        (3 asciidoctor-header-delimiter-face)))
-    (asciidoctor-match-heading-2-atx . ((1 asciidoctor-header-delimiter-face)
+                                        (3 asciidoctor-header-delimiter-face-3)))
+    (asciidoctor-match-heading-2-atx . ((1 asciidoctor-header-delimiter-face-2)
                                         (2 asciidoctor-header-face-2)
-                                        (3 asciidoctor-header-delimiter-face)))
-    (asciidoctor-match-heading-1-atx . ((1 asciidoctor-header-delimiter-face)
+                                        (3 asciidoctor-header-delimiter-face-2)))
+    (asciidoctor-match-heading-1-atx . ((1 asciidoctor-header-delimiter-face-1)
                                         (2 asciidoctor-header-face-1)
-                                        (3 asciidoctor-header-delimiter-face)))
+                                        (3 asciidoctor-header-delimiter-face-1)))
     (asciidoctor-match-option . ((1 asciidoctor-option-markup-face)
                                  (2 asciidoctor-option-face)
                                  (3 asciidoctor-option-markup-face)))
