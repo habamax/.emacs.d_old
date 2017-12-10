@@ -802,7 +802,7 @@ combined current buffer directory / :imagesdir: (stated at the top of the buffer
     (search-forward-regexp "^[[:blank:]]*$")
     (let ((end-pos (point)))
       (goto-char (point-min))
-      (search-forward-regexp "^:imagesdir:[[:blank:]]+\\([[:alnum:]]+\\)" end-pos t)
+      (search-forward-regexp "^:imagesdir:[[:blank:]]+\\([[:alnum:]-._]+\\)" end-pos t)
       (match-string-no-properties 1))))
 
 
