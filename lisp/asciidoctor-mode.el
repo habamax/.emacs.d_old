@@ -953,6 +953,7 @@ Create directory if needed."
    (make-local-variable 'paragraph-separate)
    (mapconcat #'identity
               '("[ \t\f]*$" ; space-only line
+                "^[+][[:blank:]]*$" ; List item line continuation
                 "^=+[[:blank:]]" ; Headings
                 "^\\[.+\\][[:blank:]]*$" ; Blocks (source, quotes, etc)
                 "^====[[:blank:]]*$" ; block separator 
