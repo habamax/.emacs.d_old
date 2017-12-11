@@ -179,7 +179,9 @@
              haba/fill-or-unfill
              haba/pretty-print-xml-region
              load-theme)
-  :bind (("M-;" . haba/toggle-comment)
+  :bind (("C-w" . haba/kill-region)
+         ("M-w" . haba/kill-ring-save)
+         ("M-;" . haba/toggle-comment)
          ("C-a" . haba/move-beginning-of-line)
          ("M-j" . haba/join-line)
          ("C-o" . haba/open-line)
