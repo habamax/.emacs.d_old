@@ -720,6 +720,13 @@ Restore match data previously stored in PROPERTY."
 ;; (setq asciidoctor-font-lock-keywords (asciidoctor-get-font-lock-keywords))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Indentation
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 (defun asciidoctor-prev-line-indent ()
   "Return the number of leading whitespace characters in the previous line.
 Return 0 if the current line is the first line in the buffer."
@@ -971,10 +978,10 @@ Create directory if needed."
 
 
   ;; Outline mode
-  (make-local-variable 'outline-regexp)
-  (setq outline-regexp asciidoctor-regex-header)
-  (make-local-variable 'outline-level)
-  (setq outline-level 'asciidoctor-outline-level)
+  ;; (make-local-variable 'outline-regexp)
+  (setq-local outline-regexp asciidoctor-regex-header)
+  ;; (make-local-variable 'outline-level)
+  (setq-local outline-level 'asciidoctor-outline-level)
   ;; Cause use of ellipses for invisible text.
   (add-to-invisibility-spec '(outline . t))
 
