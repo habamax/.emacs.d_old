@@ -168,6 +168,14 @@ point reaches the beginning or end of the buffer, stop there."
   (interactive)
   (find-file user-init-file))
 
+(defun haba/next-window ()
+  (interactive)
+  (other-window 1))
+
+(defun haba/previous-window ()
+  (interactive)
+  (other-window -1))
+
 
 ;; Next Buffer
 (defun haba/next-buffer ()
