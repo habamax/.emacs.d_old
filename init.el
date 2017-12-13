@@ -531,7 +531,8 @@ _s_: Ivy switch       _<tab>_: balance-windows
 (use-package multiple-cursors
   :bind-keymap (("C-x m" . haba/mc-map))
   :bind (("C-M-m" . haba/mark-next-word-like-this)
-         ("C-M-S-m" . mc/unmark-next-like-this)
+         ;; ("C-M-u" . mc/unmark-next-like-this)
+         ("C-M-S-m" . haba/skip-to-next-like-this)
          ("C-8" . mc/mark-next-lines)
          ("C-7" . mc/unmark-next-like-this)
          ("M-S-<mouse-1>" . mc/add-cursor-on-click)
@@ -553,7 +554,14 @@ _s_: Ivy switch       _<tab>_: balance-windows
         (let ((mc/enclose-search-term 'words))
           (mc/mark-next-like-this arg)
           (mc/cycle-forward))
-      (mc--select-thing-at-point 'word))))
+      (mc--select-thing-at-point 'word)))
+  (defun haba/skip-to-next-like-this ()
+    (interactive)
+    (when (and (region-active-p) (mc/furthest-cursor-before-point))
+      (mc/cycle-backward)
+      (mc/mark-more-like-this t 'forwards)
+      (mc/cycle-forward))
+    (mc/maybe-multiple-cursors-mode)))
 
 
 
