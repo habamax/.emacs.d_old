@@ -69,6 +69,16 @@
   :group 'asciidoctor-pdf
   :type 'string)
 
+(defcustom asciidoctor-clipboard-backend
+  "gm convert clipboard: %s%s"
+  "External program to write clipboard image to a png file.
+First %s is a path, second is a filename"
+  :group 'asciidoctor
+  :type '(choice
+          (const :tag "GraphicsMagick" "gm convert clipboard: %s%s")
+          (const :tag "pngpaste" "pngpaste %s%s")
+          (string :tag "Other" "")))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Regexes
@@ -878,9 +888,7 @@ combined current buffer directory / :imagesdir: (stated at the top of the buffer
 '(\"img_document_1.png\" \"img_document_2.png\") --> 3"
   (let ((indices (mapcar 'asciidoctor-extract-index-from-file-name
                          list-of-images)))
-    (if indices
-        (1+ (seq-max indices)))
-    1))
+    (1+ (seq-max (or indices '(0))))))
 
 (defun asciidoctor-image-generate-name (path)
   "Return new name for the generated image in the given path."
@@ -897,7 +905,7 @@ Create directory if needed."
       (make-directory path t))
     (let ((filename (asciidoctor-image-generate-name path)))
       (shell-command
-       (concat "gm convert clipboard: " path filename))
+       (format asciidoctor-clipboard-backend path filename))
       filename)))
 
 (defun asciidoctor-save-image-insert-link ()
