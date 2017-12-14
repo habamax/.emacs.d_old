@@ -397,8 +397,10 @@
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
         (concat
+         ;; pdf-files
+         "\\(?:\\`.+?\\.pdf\\'\\)"
          ;; file names beginning with # or .
-         "\\(?:\\`[#.]\\)"
+         "\\|\\(?:\\`[#.]\\)"
          ;; file names ending with # or ~
          "\\|\\(?:\\`.+?[#~]\\'\\)"))
 
