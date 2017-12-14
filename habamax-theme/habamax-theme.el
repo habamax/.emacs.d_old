@@ -41,6 +41,8 @@
      ;; (color-bg-done "#777777")
      (color-title "#000000")
      (color-heading "#000000")
+     (color-url "#0000ff")
+     (color-url-visited "#7070ff")
      ;; (color-bg-hl-parens "#703000")
      ;; (color-bg-alt "#252520")
      ;; (color-bg-whitespace "#1a1a1f")
@@ -114,8 +116,10 @@
 
 
    ;; links
-   ;; `(link ((t (:foreground ,color-fg-url :underline (:color ,color-fg-url)))))
-   ;; `(link-visited ((t (:foreground ,color-fg :underline (:color ,color-fg)))))
+   `(link ((t (:foreground ,color-url :underline (:color ,color-url)))))
+   `(link-visited ((t (:foreground ,color-url-visited :underline (:color ,color-url-visited)))))
+   `(mouse-face ((t (:foreground ,color-url-visited :underline (:color ,color-url-visited)))))
+
 
    ;; dired
    '(dired-directory ((t (:inherit default :weight bold))))
@@ -169,9 +173,10 @@
    ;; rcirc
    `(rcirc-server ((t (:foreground ,color-comment))))
    `(rcirc-timestamp ((t (:foreground ,color-comment))))
-   `(rcirc-other-nick ((t (:foreground ,color-keyword-dim))))
-   `(rcirc-my-nick ((t (:foreground ,color-keyword))))
-   `(rcirc-nick-in-message ((t (:foreground ,color-keyword-dim :background ,color-dim-bg))))
+   `(rcirc-other-nick ((t (:foreground ,color-str))))
+   `(rcirc-my-nick ((t (:foreground ,color-str :weight bold))))
+   `(rcirc-nick-in-message ((t (:foreground ,color-str :weight bold))))
+   `(rcirc-url ((t (:foreground ,color-url :underline t))))
    
    ;; `(rcirc-url ((t (:foreground ,color-fg-url :weight normal :underline (:color ,color-fg-url)))))
 
@@ -302,17 +307,27 @@
    ;; `(whitespace-line ((nil (:background ,color-bg-whitespace))))
 
 
-   ;; rainbow-delimiters
-   `(rainbow-delimiters-depth-1-face ((t (:foreground ,color-keyword))))
-   '(rainbow-delimiters-depth-2-face ((t (:foreground "#000000"))))
-   `(rainbow-delimiters-depth-3-face ((t (:foreground ,color-keyword))))
-   '(rainbow-delimiters-depth-4-face ((t (:foreground "#000000"))))
-   `(rainbow-delimiters-depth-5-face ((t (:foreground ,color-keyword))))
-   '(rainbow-delimiters-depth-6-face ((t (:foreground "#000000"))))
-   `(rainbow-delimiters-depth-7-face ((t (:foreground ,color-keyword))))
-   '(rainbow-delimiters-depth-8-face ((t (:foreground "#000000"))))
-   `(rainbow-delimiters-depth-9-face ((t (:foreground ,color-keyword))))
+   ;; ;; rainbow-delimiters
+   ;; `(rainbow-delimiters-depth-1-face ((t (:foreground ,color-keyword))))
+   ;; '(rainbow-delimiters-depth-2-face ((t (:foreground "#000000"))))
+   ;; `(rainbow-delimiters-depth-3-face ((t (:foreground ,color-keyword))))
+   ;; '(rainbow-delimiters-depth-4-face ((t (:foreground "#000000"))))
+   ;; `(rainbow-delimiters-depth-5-face ((t (:foreground ,color-keyword))))
+   ;; '(rainbow-delimiters-depth-6-face ((t (:foreground "#000000"))))
+   ;; `(rainbow-delimiters-depth-7-face ((t (:foreground ,color-keyword))))
+   ;; '(rainbow-delimiters-depth-8-face ((t (:foreground "#000000"))))
+   ;; `(rainbow-delimiters-depth-9-face ((t (:foreground ,color-keyword))))
 
+   ;; rainbow-delimiters
+   '(rainbow-delimiters-depth-1-face ((t (:foreground "#000000"))))
+   '(rainbow-delimiters-depth-2-face ((t (:foreground "#8a2be2"))))
+   '(rainbow-delimiters-depth-3-face ((t (:foreground "#008b8b"))))
+   '(rainbow-delimiters-depth-4-face ((t (:foreground "#ff7f50"))))
+   '(rainbow-delimiters-depth-5-face ((t (:foreground "#000000"))))
+   '(rainbow-delimiters-depth-6-face ((t (:foreground "#8a2be2"))))
+   '(rainbow-delimiters-depth-7-face ((t (:foreground "#008b8b"))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "#ff7f50"))))
+   '(rainbow-delimiters-depth-9-face ((t (:foreground "#000000"))))
 
 
    ;; asciidoctor-mode
