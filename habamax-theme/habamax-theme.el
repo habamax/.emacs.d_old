@@ -111,7 +111,7 @@
 
 
    ;; parenthesis and pairs
-   ;; `(show-paren-match ((t :background ,color-bg-hl-parens)))
+   `(show-paren-match ((t :background "#b0f0f0")))
    ;; `(sp-show-pair-match-face ((t (:background ,color-bg-hl-parens))))
 
 
