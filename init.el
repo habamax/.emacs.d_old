@@ -248,7 +248,8 @@
   ;; (setq asciidoctor-pdf-executable (concat "ruby " (expand-file-name "~/projects/asciidoctor-pdf/bin/asciidoctor-pdf")))
   (setq asciidoctor-pdf-stylesdir "~/docs/AsciiDocThemes")
   (setq asciidoctor-pdf-fontsdir "~/docs/AsciiDocThemes/fonts")
-  (setq asciidoctor-pdf-extensions "asciidoctor-diagram")
+  (setq asciidoctor-pdf-extensions '("asciidoctor-diagram"))
+  (setq asciidoctor-extensions '("asciidoctor-diagram" "asciidoctor-rouge"))
   (when (OSX?)
       (setq asciidoctor-clipboard-backend "pngpaste %s%s")))
 

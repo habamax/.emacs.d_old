@@ -63,11 +63,17 @@
   :group 'asciidoctor-pdf
   :type 'string)
 
+(defcustom asciidoctor-extensions
+  ""
+  "Extensions for HTML backend such as asciidoctor-diagram or asciidoctor-rouge."
+  :group 'asciidoctor-pdf
+  :type 'sexp)
+
 (defcustom asciidoctor-pdf-extensions
   ""
-  "Extensions such as asciidoctor-diagram."
+  "Extensions for PDF backend such as asciidoctor-diagram."
   :group 'asciidoctor-pdf
-  :type 'string)
+  :type 'sexp)
 
 (defcustom asciidoctor-clipboard-backend
   "gm convert clipboard: %s%s"
@@ -167,9 +173,7 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
     (shell-command
      (concat "asciidoctor"
              " "
-             ;; what about multiple extensions?
-             (when (not (string= "" asciidoctor-pdf-extensions))
-               (concat "-r " asciidoctor-pdf-extensions))
+             (seq-reduce '(lambda (s1 s2) (format "%s -r %s" s1 s2)) asciidoctor-extensions "")
              " "
              "-a docdate=" (format-time-string "%Y-%m-%d")
              " "
@@ -189,9 +193,7 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
       (shell-command
        (concat asciidoctor-pdf-executable
                " "
-               ;; what about multiple extensions?
-               (when (not (string= "" asciidoctor-pdf-extensions))
-                 (concat "-r " asciidoctor-pdf-extensions))
+               (seq-reduce '(lambda (s1 s2) (format "%s -r %s" s1 s2)) asciidoctor-pdf-extensions "")
                " "
                (when (not (string= "" pdf-stylesdir))
                  (concat "-a pdf-stylesdir=" pdf-stylesdir)
