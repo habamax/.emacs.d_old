@@ -10,7 +10,8 @@
 :autofit-option:
 :sectnums:
 :sectnumlevels: 4
-:source-highlighter: coderay
+:source-highlighter: rouge
+:rouge-style: github
 :chapter-label: Раздел
 :caution-caption: Предостережение
 :important-caption: Важно
