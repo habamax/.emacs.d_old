@@ -1,0 +1,21 @@
+= .emacs.d
+:author: Maxim Kim
+:experimental:
+:toc: left
+:toclevels: 3
+:icons: font
+:autofit-option:
+:sectnums:
+:sectnumlevels: 4
+:source-highlighter: rouge
+:rouge-style: github
+:revdate: 2017-12-16
+:imagesdir: images
+:pdf-style: default
+:doctype: article
+
+
+== Emacs is useful.
+
+.habamax theme
+image::img_README_1.png[]
