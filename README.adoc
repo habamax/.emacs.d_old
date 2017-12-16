@@ -15,7 +15,32 @@
 :doctype: article
 
 
-== Emacs is useful.
+Carefully crafted settings for alien's editor I become used to.
 
-.habamax theme
+== Themes
+
+.habamax-theme, work in progress
 image::img_README_1.png[]
+
+.kosmos-theme, in melpa
+image::img_README_2.png[]
+
+
+== Gotchas
+
+* Windows cmd shell encoding problems -- can't search russian text using
+  `ripgrep/grep/pt/ack` or (shell-command "program.exe русский_файл.txt")
++
+[source,lisp]
+----
+(defun windows? ()
+  "return true if Windows"
+  (eq system-type 'windows-nt))
+
+;; This is windows only
+;; I have finally solved the problem of external processes to use Russian language,
+;; Now rg.exe can actually search Russian words from Emacs.
+(when (windows?)
+  (setq default-process-coding-system '(utf-8-dos . cp1251-dos)))
+
+----
