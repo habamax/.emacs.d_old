@@ -1,11 +1,11 @@
 = .emacs.d
 :author: Maxim Kim
 :experimental:
-:toc: left
+:!toc: left
 :toclevels: 3
 :icons: font
 :autofit-option:
-:sectnums:
+:!sectnums:
 :sectnumlevels: 4
 :source-highlighter: rouge
 :rouge-style: github
@@ -17,12 +17,15 @@
 
 Carefully crafted settings for alien's editor I become used to.
 
-== Themes
+== My themes
 
-.habamax-theme, work in progress
+=== Light theme
+.habamax-theme -- work in progress
 image::img_README_1.png[]
 
-.kosmos-theme, in melpa
+
+=== Dark theme
+.kosmos-theme -- in melpa
 image::img_README_2.png[]
 
 
