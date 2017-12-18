@@ -941,6 +941,6 @@ directory to make multiple eshell windows easier."
 (defun display-startup-echo-area-message ()
   (let ((elapsed (float-time (time-subtract (current-time)
                                             emacs-start-time))))
-    (message "Loading Emacs configuration... DONE (%.3fs)" elapsed)))
+    (message "Loading Emacs configuration... DONE (%.3fs),  overral emacs-init-time: %s" elapsed (emacs-init-time))))
 
 ;;; init.el ends here
