@@ -166,7 +166,7 @@
   (require 'use-package))
 (require 'bind-key)
 
-(setq use-package-always-ensure t)
+(setq use-package-always-ensure nil)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Local packages
@@ -198,8 +198,6 @@
          ("C-c i d" . haba/insert-current-date)
          ("<C-wheel-up>" . text-scale-increase)
          ("<C-wheel-down>" . text-scale-decrease)
-         ("C-M-<f12>" . desktop-save-in-desktop-dir)
-         ("<f12>" . desktop-read)
          ("<f10>" . menu-bar-mode)
          ("C-x C-b" . ibuffer))
   :config
@@ -407,6 +405,7 @@
 
   (setq ivy-ignore-buffers '(".*-autoloads.el"))
   (setq ivy-switch-buffer-faces-alist '((dired-mode . ivy-subdir)))
+  (setq ivy-use-selectable-prompt t)
 
   (setq counsel-yank-pop-separator (concat "\n" (make-string 70 ?-) "\n"))
 
@@ -502,6 +501,8 @@ _s_: Ivy switch       _<tab>_: balance-windows
 ;; Complete Anything
 (use-package company
   :defer 2
+  ;; :demand
+  :ensure t
   :diminish company-mode
   :bind (("TAB" . company-indent-or-complete-common))
   :config
@@ -514,21 +515,6 @@ _s_: Ivy switch       _<tab>_: balance-windows
   (setq company-minimum-prefix-length 2)
 
   (company-tng-configure-default)
-
-  ;; (setq company-backends
-  ;;       '((company-files          ; files & directory
-  ;;          company-keywords       ; keywords
-  ;;          company-capf
-  ;;          company-yasnippet
-  ;;          )
-  ;;         (company-abbrev company-dabbrev company-dabbrev-code)
-  ;;         ))
-
-  ;; (define-key company-active-map (kbd "M-n") nil)
-  ;; (define-key company-active-map (kbd "M-p") nil)
-  ;; (define-key company-active-map [tab] 'company-select-next-if-tooltip-visible-or-complete-selection)
-  ;; (define-key company-active-map [backtab] 'company-select-previous)
-
   (global-company-mode))
 
 
@@ -718,15 +704,24 @@ _s_: Ivy switch       _<tab>_: balance-windows
   (setq inferior-lisp-program "ros -Q run")
   (slime-setup '(slime-fancy)))
 
-;; (use-package lispy
-;;   :defer
-;;   :init
-;;   (defun haba/enable-lispy-mode ()
-;;     (lispy-mode 1))
 
-;;   (add-hook 'emacs-lisp-mode-hook 'haba/enable-lispy-mode)
-;;   (add-hook 'clojure-mode-hook 'haba/enable-lispy-mode))
-
+(use-package hledger-mode
+  :mode ("\\.journal$" . hledger-mode)
+  :bind (("C-c o l" . hledger-jentry)
+         ("C-c j" . hledger-run-command))
+  :init
+  ;; make it aware of non english accounts
+  (setq hledger-account-regex "\\(\\([[:alnum:]-]+\\)\\(:[[:alnum:]-]+\\)+\\)")
+  :config
+  (setq hledger-currency-string "RUR")
+  (setq hledger-jfile "~/fin/2018.journal")
+  (setq hledger-life-expectancy 80)
+  (setq hledger-year-of-birth 1978)
+  ;; XXX company is deffered thus -- this gives errors
+  (add-hook 'hledger-mode-hook
+            (lambda ()
+              (make-local-variable 'company-backends)
+              (add-to-list 'company-backends 'hledger-company))))
 
 (use-package restclient
   :commands (restclient-mode))
