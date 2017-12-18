@@ -6,6 +6,10 @@
 
 ;;; Code:
 
+;; Measure loading time
+(defconst emacs-start-time (current-time))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Non-Package setup
 
 ;; disable gc for init
@@ -37,7 +41,6 @@
   (menu-bar-mode -1))
 
 (tool-bar-mode -1)
-
 
 (setq inhibit-startup-message t
       inhibit-splash-screen t
@@ -669,7 +672,7 @@
 
 ;; yasnippets
 (use-package yasnippet
-  :defer 2
+  :defer 5
   :diminish yas-minor-mode
   :config
   (yas-global-mode t))
@@ -932,5 +935,12 @@ directory to make multiple eshell windows easier."
                                    "Май" "Июнь" "Июль" "Август"
                                    "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"]))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; show emacs startup time
+(defun display-startup-echo-area-message ()
+  (let ((elapsed (float-time (time-subtract (current-time)
+                                            emacs-start-time))))
+    (message "Loading Emacs configuration... DONE (%.3fs)" elapsed)))
 
 ;;; init.el ends here
