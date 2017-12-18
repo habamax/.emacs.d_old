@@ -476,50 +476,12 @@
   (projectile-global-mode)
   (setq projectile-completion-system 'ivy))
 
-(use-package hydra
-  :bind (("C-c w" . hydra-windows/body)
-         ("C-c t" . hydra-toggle-theme/body))
-
-
-  :config
-
-  (defhydra hydra-windows (:hint nil)
-    "
-^Layout^                    ^Size^
----------------------------------------------
-_w_: Winner undo          _]_: + width
-_W_: Winner redo          _[_: - width
-_v_: Ivy push view        _=_: + height
-_V_: Ivy pop view         _-_: - height
-_s_: Ivy switch       _<tab>_: balance-windows
-
-"
-    ("w" winner-undo)
-    ("W" winner-redo)
-    ("]" enlarge-window-horizontally)
-    ("[" shrink-window-horizontally)
-    ("=" enlarge-window)
-    ("-" shrink-window)
-    ("<tab>" balance-windows)
-    ("v" ivy-push-view)
-    ("V" ivy-pop-view)
-    ("s" ivy-switch-view)
-    ("SPC" nil "quit")
-    ("q" nil "quit"))
-
-  (defhydra hydra-toggle-theme
-    (:body-pre (haba/toggle-theme))
-    "Themes"
-    ("t" (haba/toggle-theme) "Toggle next theme")
-    ("SPC" nil "quit")
-    ("q" nil "quit"))
-)
+(use-package hydra :defer)
 
 ;; Complete Anything
 (use-package company
-  :defer 2
+  :defer 3
   ;; :demand
-  :ensure t
   :diminish company-mode
   :bind (("TAB" . company-indent-or-complete-common))
   :config
@@ -537,6 +499,7 @@ _s_: Ivy switch       _<tab>_: balance-windows
 
 
 (use-package multiple-cursors
+  :defer 3
   :bind-keymap (("C-x m" . haba/mc-map))
   :bind (("C-M-m" . haba/mark-next-like-this)
          ;; ("C-M-u" . mc/unmark-next-like-this)
@@ -581,7 +544,7 @@ _s_: Ivy switch       _<tab>_: balance-windows
 
 (use-package smartparens
   :diminish smartparens-mode
-  :defer 1
+  :defer 3
   :config
   (require 'smartparens-config)
   (setq sp-base-key-bindings 'sp)
