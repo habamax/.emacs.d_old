@@ -240,8 +240,8 @@
   :config
   (global-whitespace-cleanup-mode))
 
-(use-package winner-mode
-  :defer 5
+(use-package winner
+  :defer 3
   :bind (("M-N" . winner-redo)
          ("M-P" . winner-undo))
   :config
@@ -538,7 +538,7 @@
 
 (use-package rainbow-delimiters :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package page-break-lines :hook (prog-mode . turn-on-page-break-lines-mode))
+(use-package page-break-lines :diminish :hook (prog-mode . turn-on-page-break-lines-mode))
 
 
 
