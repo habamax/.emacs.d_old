@@ -89,9 +89,6 @@
 ;; do not wrap lines by default
 (setq-default truncate-lines t)
 
-;; winner mode is a must
-(winner-mode 1)
-
 ;; tabs are evil...
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
@@ -152,6 +149,7 @@
 (setq default-frame-alist '((fullscreen . nil)
                             (vertical-scroll-bars . nil)))
 
+(setq frame-title-format "%b")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Set up packaging system
 (let ((package-protocol (if (windows?) "http://" "https://")))
@@ -159,6 +157,7 @@
                            ("melpa" . ,(concat package-protocol "melpa.org/packages/")))))
 
 (package-initialize)
+(setq package-enable-at-startup nil)
 
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
@@ -233,6 +232,20 @@
   :init
   (setq solarized-high-contrast-mode-line t))
 
+
+(use-package whitespace-cleanup-mode
+  :defer 5
+  :diminish
+  :commands whitespace-cleanup-mode
+  :config
+  (global-whitespace-cleanup-mode))
+
+(use-package winner-mode
+  :defer 5
+  :bind (("M-N" . winner-redo)
+         ("M-P" . winner-undo))
+  :config
+  (winner-mode 1))
 
 (use-package asciidoctor-mode
   :ensure nil
@@ -393,9 +406,11 @@
          ("M-s t" . haba/counsel-projectile-rg-todo)
          ("M-s r" . counsel-rg)
          ("C-x b" . ivy-switch-buffer)
-         ("M-y" . counsel-yank-pop))
+         ("M-y" . counsel-yank-pop)
+         :map ivy-minibuffer-map
+         ("M-y" . ivy-next-line))
   :config
-
+  (setq counsel-yank-pop-preselect-last t)
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
         (concat
@@ -411,7 +426,6 @@
   (setq ivy-use-selectable-prompt t)
 
   (setq counsel-yank-pop-separator (concat "\n" (make-string 70 ?-) "\n"))
-
 
   (defun haba/counsel-projectile-rg-todo ()
     (interactive)
@@ -559,10 +573,10 @@ _s_: Ivy switch       _<tab>_: balance-windows
 
 
 
-(use-package rainbow-delimiters
-  :defer
-  :init
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+(use-package rainbow-delimiters :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package page-break-lines :hook (prog-mode . turn-on-page-break-lines-mode))
+
 
 
 (use-package smartparens
@@ -673,6 +687,23 @@ _s_: Ivy switch       _<tab>_: balance-windows
 
 (use-package ztree :defer)
 
+(use-package beacon
+  :defer 6
+  :config
+  (setq beacon-color 0.3)
+  (setq beacon-size 20)
+  (setq beacon-blink-duration 0.2)
+  (setq beacon-blink-when-window-scrolls nil
+        beacon-blink-when-point-moves-horizontally nil
+        beacon-blink-when-buffer-changes nil)
+  (beacon-mode 1))
+
+;; (use-package minimap :defer :commands minimap-mode)
+
+(use-package string-edit :commands string-edit)
+
+(use-package string-inflection :bind (("C-c C-u" . string-inflection-java-style-cycle)))
+
 ;; yasnippets
 (use-package yasnippet
   :defer 2
@@ -707,6 +738,18 @@ _s_: Ivy switch       _<tab>_: balance-windows
   (setq inferior-lisp-program "ros -Q run")
   (slime-setup '(slime-fancy)))
 
+;; new golden-ratio
+(use-package zoom
+  :defer 5
+  ;; :bind ("C-x +" . zoom)
+  ;; :preface
+  ;; (defun size-callback ()
+  ;;   (cond ((> (frame-pixel-width) 1280) '(0.618 . 0.618))
+  ;;         (t '(0.5 . 0.5))))
+  :config
+  (setq zoom-size '(90 . 30))
+  ;; (setq zoom-ignored-buffer-names '("*MINIMAP*"))
+  (zoom-mode))
 
 (use-package hledger-mode
   :mode ("\\.journal$" . hledger-mode)
