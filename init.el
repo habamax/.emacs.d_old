@@ -716,7 +716,7 @@
   ;;         (t '(0.5 . 0.5))))
   :config
   (setq zoom-size '(90 . 30))
-  ;; (setq zoom-ignored-buffer-names '("*MINIMAP*"))
+  ;; (setq zoom-ignored-buffer-names '("Treemacs"))
   (zoom-mode))
 
 (use-package hledger-mode
