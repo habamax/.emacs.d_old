@@ -168,7 +168,7 @@
   (require 'use-package))
 (require 'bind-key)
 
-(setq use-package-always-ensure nil)
+(setq use-package-always-ensure t)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Local packages
