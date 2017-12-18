@@ -149,9 +149,11 @@
 ;; default frame is fullscreen and has no scrollbars
 ;; (setq default-frame-alist '((fullscreen . maximized) (vertical-scroll-bars . nil)))
 ;; use -geometry 120x40 for example to set initial size
-(setq default-frame-alist '((fullscreen . nil)
-                            (vertical-scroll-bars . nil)))
-
+(if (OSX?)
+    (setq default-frame-alist '((fullscreen . maximized)
+                                (vertical-scroll-bars . nil)))
+  (setq default-frame-alist '((fullscreen . nil)
+                              (vertical-scroll-bars . nil))))
 (setq frame-title-format "%b")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Set up packaging system
