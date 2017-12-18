@@ -236,7 +236,7 @@
 (use-package whitespace-cleanup-mode
   :defer 5
   :diminish
-  :commands whitespace-cleanup-mode
+  :commands (whitespace-cleanup-mode)
   :config
   (global-whitespace-cleanup-mode))
 
