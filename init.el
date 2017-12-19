@@ -92,6 +92,10 @@
 ;; do not wrap lines by default
 (setq-default truncate-lines t)
 
+;; scroll screen when there is 1 line left
+;; it is also good for follow-mode -- it prevents cursor to go to followed window
+(setq scroll-margin 1)
+
 ;; tabs are evil...
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
