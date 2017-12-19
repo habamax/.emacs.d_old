@@ -290,12 +290,17 @@
 ;; sometimes text mangling is just too cumbersome with emacs bindings...
 ;; be EVIL then and SHOW THEM ALL!!!
 (use-package evil
-  :bind (("C-c e" . haba/become-evil-or-not))
+  :bind (("C-c e" . haba/become-evil-or-not)
+         :map evil-emacs-state-map
+         ([escape] . evil-normal-state)
+         ("ESC" . evil-normal-state))
   :commands (evil-mode)
   :config
+  (defalias 'evil-insert-state 'evil-emacs-state)
+
   (defun haba/become-evil-or-not ()
     (interactive)
-    (if (bound-and-true-p evil-mode)
+    (if (bound-and-true-p evil-state)
         (progn
         (turn-off-evil-mode)
         (message "Calm down. Don't be evil, be nice..."))
