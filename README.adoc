@@ -66,7 +66,7 @@ Define a function with the text you need:
 ;; show emacs startup time
 (defun display-startup-echo-area-message ()
   (let ((elapsed (float-time (time-subtract (current-time)
-                                            emacs-start-time)))) <1>
+                                            emacs-start-time)))) ; <1>
     (message "Loading Emacs configuration... DONE (%.3fs),  overral emacs-init-time: %s" elapsed (emacs-init-time))))
 
 ----
