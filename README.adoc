@@ -1,4 +1,4 @@
-= .emacs.d: Carefully crafted settings for alien's editor I become used to
+= .emacs.d
 :author: Maxim Kim
 :experimental:
 :!toc: left
@@ -15,7 +15,7 @@
 :doctype: article
 
 
-// Carefully crafted settings for alien's editor I become used to.
+Carefully crafted settings for alien's editor I become used to.
 
 == My themes
 
