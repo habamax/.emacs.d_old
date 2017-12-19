@@ -287,6 +287,23 @@
   (exec-path-from-shell-initialize)
   :if (OSX?))
 
+;; sometimes text mangling is just too cumbersome with emacs bindings...
+;; be EVIL then and SHOW THEM ALL!!!
+(use-package evil
+  :bind (("C-c e" . haba/become-evil-or-not))
+  :commands (evil-mode)
+  :config
+  (defun haba/become-evil-or-not ()
+    (interactive)
+    (if (bound-and-true-p evil-mode)
+        (progn
+        (turn-off-evil-mode)
+        (message "Calm down. Don't be evil, be nice..."))
+      (progn
+        (turn-on-evil-mode)
+        (message "I!     AM!     EVIL!!!!")))))
+
+
 (use-package reverse-im
   :config
   (reverse-im-activate "russian-computer"))
