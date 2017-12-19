@@ -29,11 +29,13 @@ image::img_README_1.png[]
 image::img_README_2.png[]
 
 
-== Gotchas
+== Gotchas and Goodies
 
-* Windows cmd shell encoding problems -- can't search russian text using
-  `ripgrep/grep/pt/ack` or (shell-command "program.exe русский_файл.txt")
-+
+=== Windows cmd.exe shell encoding
+
+Windows cmd shell encoding problems -- can't search russian text using
+`ripgrep/grep/pt/ack` or (shell-command "program.exe русский_файл.txt")
+
 [source,lisp]
 ----
 (defun windows? ()
@@ -47,3 +49,26 @@ image::img_README_2.png[]
   (setq default-process-coding-system '(utf-8-dos . cp1251-dos)))
 
 ----
+
+=== Follow mode
+
+It is awesome for writing long documents -- just vertically split a window and
+turn on `follow-mode` to have continuation of the buffer in the second splitted
+window.
+
+
+=== Change or Remove minibuffer text on startup
+
+Define a function with the text you need:
+
+[source,elisp]
+----
+;; show emacs startup time
+(defun display-startup-echo-area-message ()
+  (let ((elapsed (float-time (time-subtract (current-time)
+                                            emacs-start-time)))) <1>
+    (message "Loading Emacs configuration... DONE (%.3fs),  overral emacs-init-time: %s" elapsed (emacs-init-time))))
+
+----
+
+<1> is defined earlier as `(defconst emacs-start-time (current-time))`
