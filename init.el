@@ -293,6 +293,9 @@
   :bind (("C-c e" . haba/become-evil-or-not)
          :map evil-emacs-state-map
          ([escape] . evil-normal-state)
+         ("ESC" . evil-normal-state)
+         :map evil-visual-state-map
+         ([escape] . evil-normal-state)
          ("ESC" . evil-normal-state))
   :commands (evil-mode)
   :config
@@ -308,6 +311,10 @@
         (turn-on-evil-mode)
         (message "I!     AM!     EVIL!!!!")))))
 
+(use-package evil-commentary
+  :after evil
+  :config
+  (evil-commentary-mode))
 
 (use-package reverse-im
   :config
