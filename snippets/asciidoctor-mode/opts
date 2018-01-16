@@ -12,7 +12,6 @@
 :sectnumlevels: 4
 :source-highlighter: rouge
 :rouge-style: github
-:rouge-theme: github
 :revdate: `(format-time-string "%Y-%m-%d")`
 :imagesdir: images
 :pdf-style: ${2:default}

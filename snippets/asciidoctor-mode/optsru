@@ -12,7 +12,6 @@
 :sectnumlevels: 4
 :source-highlighter: rouge
 :rouge-style: github
-:rouge-theme: github
 :chapter-label: Раздел
 :caution-caption: Предостережение
 :important-caption: Важно
