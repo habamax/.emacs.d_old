@@ -305,10 +305,10 @@
     (interactive)
     (if (bound-and-true-p evil-state)
         (progn
-        (turn-off-evil-mode)
+        (evil-mode -1)
         (message "Calm down. Don't be evil, be nice..."))
       (progn
-        (turn-on-evil-mode)
+        (evil-mode)
         (message "I!     AM!     EVIL!!!!")))))
 
 (use-package evil-commentary
