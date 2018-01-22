@@ -686,7 +686,12 @@
                 ispell-extra-args '("--sug-mode=ultra")))
 
 
-(use-package ztree :defer)
+(use-package ztree :defer
+  ;; :bind (:map ztree-mode-map
+              ;; ("n" . next-line)
+              ;; ("p" . previous-line)
+              ;; ("v" . scroll-up-command))
+  )
 
 (use-package beacon
   :defer 6
