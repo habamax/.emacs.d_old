@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Question and Answer
+# key: *qa
+# expand-env: ((yas-indent-line 'fixed))
+# --
+* $1
++
+[quote$2]
+____
+$0
+____
