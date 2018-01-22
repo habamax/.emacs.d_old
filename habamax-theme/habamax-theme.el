@@ -64,7 +64,8 @@
    ;; standard faces
    `(default ((t (:background ,color-bg :foreground ,color-fg))))
    '(cursor ((nil (:background "#000000"))))
-   '(region ((t (:background "#f0e0a0"))))
+   ;; '(region ((t (:background "#f0e0a0"))))
+   '(region ((t (:background "#f4e7b4"))))
    `(highlight ((nil (:background ,color-bg-highlight))))
    `(minibuffer-prompt ((t (:foreground ,color-keyword-dim :background ,color-dim-bg :weight bold))))
    ;; '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
