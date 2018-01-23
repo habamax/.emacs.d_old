@@ -708,7 +708,7 @@
 
 (use-package string-edit :commands string-edit)
 
-(use-package string-inflection :bind (("C-c C-u" . string-inflection-java-style-cycle)))
+(use-package string-inflection :bind (("C-c C-u" . string-inflection-toggle)))
 
 ;; yasnippets
 (use-package yasnippet
