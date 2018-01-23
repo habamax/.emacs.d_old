@@ -135,8 +135,13 @@
    '(diredp-file-name ((t (:inherit default))))
    '(diredp-file-suffix ((t (:inherit font-lock-comment-face))))
    '(diredp-ignored-file-name ((t (:inherit font-lock-comment-face))))
-   '(diredp-date-time ((t (:inherit font-lock-string-face))))
-   '(diredp-number ((t (:inherit font-lock-string-face))))
+   '(diredp-date-time ((t (:inherit default))))
+   '(diredp-number ((t (:inherit default))))
+   '(diredp-dir-priv ((t (:inherit default :weight bold))))
+   '(diredp-read-priv ((t (:foreground "#007000"))))
+   '(diredp-write-priv ((t (:foreground "#0000AA"))))
+   '(diredp-exec-priv ((t (:foreground "#AA00AA"))))
+   '(diredp-no-priv ((t (:inherit default))))
 
    ;; eshell
    '(eshell-ls-directory ((t (:inherit default :weight bold))))
