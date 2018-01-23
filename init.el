@@ -757,6 +757,13 @@
   ;; (setq zoom-ignored-buffer-names '("Treemacs"))
   (zoom-mode))
 
+(use-package dired+
+  :commands (dired dired-jump)
+  :config
+  (require 'dired+)
+  (setq ls-lisp-use-insert-directory-program nil)
+  (setq ls-lisp-dirs-first t))
+
 (use-package hledger-mode
   :mode ("\\.journal$" . hledger-mode)
   :bind (("C-c o l" . hledger-jentry)
