@@ -353,15 +353,15 @@
   (setq aw-scope 'frame)
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
-(use-package treemacs
-  :bind (("<f8>" . treemacs-toggle))
-  :config
-  (treemacs-follow-mode t)
-  (treemacs-filewatch-mode t))
+;; (use-package treemacs
+;;   :bind (("<f8>" . treemacs-toggle))
+;;   :config
+;;   (treemacs-follow-mode t)
+;;   (treemacs-filewatch-mode t))
 
-(use-package treemacs-projectile
-  :after treemacs
-  :bind (("S-<f8>" . treemacs-projectile-toggle)))
+;; (use-package treemacs-projectile
+;;   :after treemacs
+;;   :bind (("S-<f8>" . treemacs-projectile-toggle)))
 
 (use-package dumb-jump
   :bind (("M-g o" . dumb-jump-go-other-window)
