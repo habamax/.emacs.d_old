@@ -129,6 +129,15 @@
    ;; `(dired-marked ((t (:foreground ,color-keyword :background "#f0cccc"))))
    '(dired-header ((t (:inherit default :weight bold))))
 
+   ;; dired+
+   '(diredp-dir-name ((t (:inherit dired-directory))))
+   '(diredp-dir-heading ((t (:inherit dired-header))))
+   '(diredp-file-name ((t (:inherit default))))
+   '(diredp-file-suffix ((t (:inherit font-lock-comment-face))))
+   '(diredp-ignored-file-name ((t (:inherit font-lock-comment-face))))
+   '(diredp-date-time ((t (:inherit font-lock-string-face))))
+   '(diredp-number ((t (:inherit font-lock-string-face))))
+
    ;; eshell
    '(eshell-ls-directory ((t (:inherit default :weight bold))))
    `(eshell-prompt ((t (:foreground ,color-keyword))))
