@@ -759,6 +759,8 @@
 
 (use-package dired+
   :commands (dired dired-jump)
+  :init
+  (setq diredp-hide-details-initially-flag nil)
   :config
   (require 'dired+)
   (setq ls-lisp-use-insert-directory-program nil)
