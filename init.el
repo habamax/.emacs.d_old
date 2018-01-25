@@ -790,6 +790,13 @@
 (use-package restclient
   :commands (restclient-mode))
 
+(use-package twittering-mode
+  :commands (twit)
+  :config
+  (setq twittering-icon-mode t)
+  (setq twittering-use-master-password t))
+
+
 ;; music FTW
 (use-package emms
   :bind (("C-c m d" . emms-play-directory-tree)
