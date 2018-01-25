@@ -85,6 +85,8 @@
 (column-number-mode t)
 (recentf-mode 1)
 
+;; can help with very long lines processing (speedwise)
+(setq-default bidi-display-reordering nil)
 
 ;; fill text with M-q or auto-fill-mode
 (setq-default fill-column 80)
