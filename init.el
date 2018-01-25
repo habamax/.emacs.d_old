@@ -262,6 +262,7 @@
   :ensure nil
   :load-path "lisp/"
   :mode ("\\.\\(adoc\\|asciidoc\\)$" . asciidoctor-mode)
+  :hook ((asciidoctor-mode . goto-address-mode))
   :bind (:map asciidoctor-mode-map
               ("C-c C-o C-o" . browse-url-of-buffer)
               ("C-c C-h C-h" . asciidoctor-compile-html)
