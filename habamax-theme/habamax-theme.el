@@ -140,6 +140,10 @@
    '(dired-subtree-depth-8-face ((t (:background "#ffffff"))))
    '(dired-subtree-depth-9-face ((t (:background "#f0f0f0"))))
 
+   ;; sunrise-commander
+   '(sr-active-path-face ((t (:background "#000000" :foreground "#ffffff" :weight bold))))
+   '(sr-passive-path-face ((t (:background "#f0f0f0" :foreground "#000000" :weight bold))))
+   '(sr-highlight-path-face ((t (:background "#000000" :foreground "#ff7070" :weight bold))))
 
    ;; dired+
    '(diredp-dir-name ((t (:inherit dired-directory))))
