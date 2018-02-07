@@ -165,7 +165,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Set up packaging system
 (let ((package-protocol (if (windows?) "http://" "https://")))
   (setq package-archives `(("elpa" . ,(concat package-protocol "elpa.gnu.org/packages/"))
-                           ("melpa" . ,(concat package-protocol "melpa.org/packages/")))))
+                           ("melpa" . ,(concat package-protocol "melpa.org/packages/"))
+                           ("SC"   . "http://joseito.republika.pl/sunrise-commander/"))))
 
 (package-initialize)
 (setq package-enable-at-startup nil)
@@ -212,7 +213,7 @@
          ("C-c i d" . haba/insert-current-date)
          ("<C-wheel-up>" . text-scale-increase)
          ("<C-wheel-down>" . text-scale-decrease)
-         ("<f10>" . menu-bar-mode)
+         ("S-<f10>" . menu-bar-mode)
          ("C-x C-b" . ibuffer))
   :config
   (defun disable-all-themes (&rest args)
@@ -935,6 +936,17 @@ directory to make multiple eshell windows easier."
   :ensure nil
   :bind (("C-x C-j" . dired-jump)
          ("C-x 4 C-j" . dired-jump-other-window)))
+
+(use-package sunrise-commander
+  :commands sunrise
+  :bind (("<f10>" . sunrise)))
+
+(use-package sunrise-x-w32-addons
+  :if (windows?)
+  :after sunrise-commander)
+
+(use-package sunrise-x-loop
+  :after sunrise-commander)
 
 
 ;; Outline-mode
