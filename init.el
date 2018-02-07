@@ -772,14 +772,14 @@
   ;; (setq zoom-ignored-buffer-names '("Treemacs"))
   (zoom-mode))
 
-(use-package dired+
-  :commands (dired dired-jump)
-  :init
-  (setq diredp-hide-details-initially-flag nil)
-  :config
-  (require 'dired+)
-  (setq ls-lisp-use-insert-directory-program nil)
-  (setq ls-lisp-dirs-first t))
+;; (use-package dired+
+;;   :commands (dired dired-jump)
+;;   :init
+;;   (setq diredp-hide-details-initially-flag nil)
+;;   :config
+;;   (require 'dired+)
+;;   (setq ls-lisp-use-insert-directory-program nil)
+;;   (setq ls-lisp-dirs-first t))
 
 (use-package ledger-mode
   :mode ("\\.ledger$" . ledger-mode)
