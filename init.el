@@ -129,7 +129,8 @@
 
 ;; dired user another dired buffer as destination for copy/move
 (setq dired-dwim-target t)
-
+;; directories first?
+(setq ls-lisp-dirs-first t)
 
 ;; use hippie-expand
 ;; (global-set-key [remap dabbrev-expand] 'hippie-expand)
