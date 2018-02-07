@@ -532,7 +532,7 @@
 
 (use-package dired-subtree
   :commands (dired-jump)
- :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
+  :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
 
 
 ;; Complete Anything
