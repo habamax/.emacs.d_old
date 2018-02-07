@@ -796,6 +796,11 @@
   (setq twittering-icon-mode t)
   (setq twittering-use-master-password t))
 
+(use-package edit-server
+  :defer 10
+  :config
+  (edit-server-start))
+
 
 ;; music FTW
 (use-package emms
