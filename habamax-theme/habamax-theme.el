@@ -129,6 +129,18 @@
    ;; `(dired-marked ((t (:foreground ,color-keyword :background "#f0cccc"))))
    '(dired-header ((t (:inherit default :weight bold))))
 
+   ;; dired-subtree
+   '(dired-subtree-depth-1-face ((t (:background "#f0f0f0"))))
+   '(dired-subtree-depth-2-face ((t (:background "#ffffff"))))
+   '(dired-subtree-depth-3-face ((t (:background "#f0f0f0"))))
+   '(dired-subtree-depth-4-face ((t (:background "#ffffff"))))
+   '(dired-subtree-depth-5-face ((t (:background "#f0f0f0"))))
+   '(dired-subtree-depth-6-face ((t (:background "#ffffff"))))
+   '(dired-subtree-depth-7-face ((t (:background "#f0f0f0"))))
+   '(dired-subtree-depth-8-face ((t (:background "#ffffff"))))
+   '(dired-subtree-depth-9-face ((t (:background "#f0f0f0"))))
+
+
    ;; dired+
    '(diredp-dir-name ((t (:inherit dired-directory))))
    '(diredp-dir-heading ((t (:inherit dired-header))))
