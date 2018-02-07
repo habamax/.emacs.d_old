@@ -260,6 +260,8 @@
   :config
   (global-whitespace-cleanup-mode))
 
+
+;; restore layout
 (use-package winner
   :defer 3
   :bind (("M-N" . winner-redo)
