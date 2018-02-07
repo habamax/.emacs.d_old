@@ -531,8 +531,8 @@
 (use-package hydra :defer)
 
 (use-package dired-subtree
-  :defer
-  :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
+  :commands (dired-jump)
+ :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
 
 
 ;; Complete Anything
