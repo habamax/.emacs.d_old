@@ -205,6 +205,7 @@
          ("M-9" . haba/previous-window)
          ("M-0" . haba/next-window)
          ("C-c o i" . haba/open-init-file)
+         ("C-c o l" . haba/open-ledger-file)
          ("C-c o s" . haba/open-scratch-buffer)
          ("C-c o t" . haba/open-todo-file)
          ([remap fill-paragraph] . haba/fill-or-unfill)
@@ -225,6 +226,12 @@
     "Open todo.adoc file"
     (interactive)
     (find-file "~/docs/todo.adoc"))
+  (defun haba/open-ledger-file ()
+    "Open latest .ledger file"
+    (interactive)
+    ;; For now do not bother with finding the latest.
+    ;; There is only 1 file.
+    (find-file "~/fin/2018.ledger"))
   )
 
 ;; STARTUP: 0.7
@@ -774,23 +781,12 @@
   (setq ls-lisp-use-insert-directory-program nil)
   (setq ls-lisp-dirs-first t))
 
-(use-package hledger-mode
-  :mode ("\\.journal$" . hledger-mode)
-  :bind (("C-c o l" . hledger-jentry)
-         ("C-c j" . hledger-run-command))
-  :init
-  ;; make it aware of non english accounts
-  (setq hledger-account-regex "\\(\\([[:alnum:]-]+\\)\\(:[[:alnum:]-]+\\)+\\)")
+(use-package ledger-mode
+  :mode ("\\.ledger$" . ledger-mode)
   :config
-  (setq hledger-currency-string "RUR")
-  (setq hledger-jfile "~/fin/2018.journal")
-  (setq hledger-life-expectancy 80)
-  (setq hledger-year-of-birth 1978)
-  ;; XXX company is deffered thus -- this gives errors
-  (add-hook 'hledger-mode-hook
-            (lambda ()
-              (make-local-variable 'company-backends)
-              (add-to-list 'company-backends 'hledger-company))))
+  (setq ledger-report-links-in-register nil)
+  (setq ledger-report-use-native-highlighting nil)
+  (setq ledger-default-date-format ledger-iso-date-format))
 
 (use-package restclient
   :commands (restclient-mode))
