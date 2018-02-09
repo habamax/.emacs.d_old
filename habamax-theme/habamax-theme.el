@@ -53,7 +53,9 @@
      ;; (color-bg-lazysearch "#206060")
      ;; (color-fg-search-fail "#da70d6")
      ;; (color-bg-search-fail "#603060")
-     (color-bg-highlight "#c4f0c4")
+     ;; (color-bg-highlight "#c4f0c4")
+     ;; (color-bg-highlight "#e7e7e7")
+     (color-bg-highlight "#c7e7e7")
 )
 
 
@@ -145,6 +147,8 @@
    '(sr-passive-path-face ((t (:background "#e0e0e0" :foreground "#000000" :weight bold))))
    '(sr-highlight-path-face ((t (:background "#000000" :foreground "#ff7070" :weight bold))))
    '(sr-editing-path-face ((t (:background "#ff0000" :foreground "#ffff00" :weight bold))))
+   '(sr-marked-file-face ((t (:background "#fff0ff" :foreground "#ff00ff"))))
+   '(sr-marked-dir-face ((t (:background "#fff0ff" :foreground "#ff00ff" :weight bold))))
 
    ;; dired+
    '(diredp-dir-name ((t (:inherit dired-directory))))
