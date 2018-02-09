@@ -142,8 +142,9 @@
 
    ;; sunrise-commander
    '(sr-active-path-face ((t (:background "#000000" :foreground "#ffffff" :weight bold))))
-   '(sr-passive-path-face ((t (:background "#f0f0f0" :foreground "#000000" :weight bold))))
+   '(sr-passive-path-face ((t (:background "#e0e0e0" :foreground "#000000" :weight bold))))
    '(sr-highlight-path-face ((t (:background "#000000" :foreground "#ff7070" :weight bold))))
+   '(sr-editing-path-face ((t (:background "#ff0000" :foreground "#ffff00" :weight bold))))
 
    ;; dired+
    '(diredp-dir-name ((t (:inherit dired-directory))))
