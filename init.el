@@ -115,6 +115,9 @@
 ;; autosave position in file
 (save-place-mode 1)
 
+;; autosave minibuffer history
+(savehist-mode 1)
+
 ;; C-u C-SPC C-SPC to pop mark twice...
 (setq set-mark-command-repeat-pop t)
 
