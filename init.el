@@ -941,7 +941,9 @@ directory to make multiple eshell windows easier."
   (setq sr-cursor-follows-mouse nil)
   (define-key sr-mode-map [mouse-1] nil)
   (define-key sr-mode-map [mouse-movement] nil)
-  (add-to-list 'savehist-additional-variables 'sr-history-registry))
+  (add-to-list 'savehist-additional-variables 'sr-history-registry)
+  (setq sr-attributes-display-mask '(nil nil nil nil t t t))
+  (setq sr-show-file-attributes nil))
 
 (use-package sunrise-x-checkpoints
   :after sunrise-commander)
