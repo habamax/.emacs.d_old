@@ -440,15 +440,15 @@
   )
 
 
-(use-package telephone-line
-  :config
-  (setq telephone-line-primary-left-separator 'telephone-line-flat
-        telephone-line-secondary-left-separator 'telephone-line-nil
-        telephone-line-primary-right-separator 'telephone-line-flat
-        telephone-line-secondary-right-separator 'telephone-line-nil)
+;; (use-package telephone-line
+;;   :config
+;;   (setq telephone-line-primary-left-separator 'telephone-line-flat
+;;         telephone-line-secondary-left-separator 'telephone-line-nil
+;;         telephone-line-primary-right-separator 'telephone-line-flat
+;;         telephone-line-secondary-right-separator 'telephone-line-nil)
 
-  (setq telephone-line-height 22)
-  (telephone-line-mode 1))
+;;   (setq telephone-line-height 22)
+;;   (telephone-line-mode 1))
 
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)
