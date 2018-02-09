@@ -763,7 +763,7 @@
 (use-package slime
   :commands (slime)
   :config
-  (setq inferior-lisp-program "ros -Q run")
+  (setq inferior-lisp-program "sbcl")
   (slime-setup '(slime-fancy)))
 
 ;; new golden-ratio
