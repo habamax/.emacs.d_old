@@ -798,11 +798,6 @@
 (use-package restclient
   :commands (restclient-mode))
 
-(use-package twittering-mode
-  :commands (twit)
-  :config
-  (setq twittering-icon-mode t)
-  (setq twittering-use-master-password t))
 
 (use-package edit-server
   :defer 10
