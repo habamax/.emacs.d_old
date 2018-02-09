@@ -933,7 +933,18 @@ directory to make multiple eshell windows easier."
 
 (use-package sunrise-commander
   :commands sunrise
-  :bind (("<f10>" . sunrise)))
+  :bind (("<f10>" . sunrise))
+  :config
+  ;; dirty hack -- otherwise opening smth from sunrise-commander with OS handling doesn't workd
+  ;; ERROR feature browse-url not available!
+  (ignore-errors (browse-url))
+  (setq sr-cursor-follows-mouse nil)
+  (define-key sr-mode-map [mouse-1] nil)
+  (define-key sr-mode-map [mouse-movement] nil)
+  (add-to-list 'savehist-additional-variables 'sr-history-registry))
+
+(use-package sunrise-x-checkpoints
+  :after sunrise-commander)
 
 (use-package sunrise-x-w32-addons
   :if (windows?)
