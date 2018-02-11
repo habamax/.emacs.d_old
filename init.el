@@ -218,7 +218,8 @@
          ("<C-wheel-up>" . text-scale-increase)
          ("<C-wheel-down>" . text-scale-decrease)
          ("S-<f10>" . menu-bar-mode)
-         ("C-x C-b" . ibuffer))
+         ("C-x C-b" . ibuffer)
+         ("C-<tab>" . other-frame))
   :config
   (defun disable-all-themes (&rest args)
     (mapcar #'disable-theme custom-enabled-themes))
