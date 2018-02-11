@@ -149,6 +149,7 @@
    '(sr-editing-path-face ((t (:background "#ff0000" :foreground "#ffff00" :weight bold))))
    '(sr-marked-file-face ((t (:background "#fff0ff" :foreground "#ff00ff"))))
    '(sr-marked-dir-face ((t (:background "#fff0ff" :foreground "#ff00ff" :weight bold))))
+   '(sr-compressed-face ((t (:foreground "#1e90ff"))))
 
    ;; dired+
    '(diredp-dir-name ((t (:inherit dired-directory))))
