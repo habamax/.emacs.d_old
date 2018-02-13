@@ -722,16 +722,16 @@
               ;; ("v" . scroll-up-command))
   )
 
-(use-package beacon
-  :defer 6
-  :config
-  (setq beacon-color 0.3)
-  (setq beacon-size 20)
-  (setq beacon-blink-duration 0.2)
-  (setq beacon-blink-when-window-scrolls nil
-        beacon-blink-when-point-moves-horizontally nil
-        beacon-blink-when-buffer-changes nil)
-  (beacon-mode 1))
+;; (use-package beacon
+;;   :defer 6
+;;   :config
+;;   (setq beacon-color 0.3)
+;;   (setq beacon-size 20)
+;;   (setq beacon-blink-duration 0.2)
+;;   (setq beacon-blink-when-window-scrolls nil
+;;         beacon-blink-when-point-moves-horizontally nil
+;;         beacon-blink-when-buffer-changes nil)
+;;   (beacon-mode 1))
 
 ;; (use-package minimap :defer :commands minimap-mode)
 
