@@ -963,24 +963,24 @@ directory to make multiple eshell windows easier."
   :after sunrise-commander)
 
 
-;; Outline-mode
+;; origami-mode (folding)
+;; (use-package origami
+;;   :bind (("M-o o" . origami-toggle-node))
+;;   :init
+;;   (global-set-key (kbd "M-o") nil)
+;;   :config
+;;   (global-origami-mode))
+
 (use-package outline
-  :bind (("M-o" . hydra-outline/body))
+  :bind (("M-o o" . outline-toggle-children)
+         ("M-o h" . outline-hide-body)
+         ("M-o a" . outline-show-all))
   :diminish outline-mode outline-minor-mode
-  :defer
-  :ensure nil
+  :init
+  (global-set-key (kbd "M-o") nil)
   :config
-  (outline-minor-mode 1)
+  (outline-minor-mode 1))
 
-  (defhydra hydra-outline ()
-    "Outline"
-    ("o" outline-toggle-children "Toggle children")
-    ("h" hide-body "Hide bodies")
-    ("a" show-all "Show all")
-
-    ("SPC" nil "quit")
-    ("q" nil "quit"))
-  )
 
 
 (use-package rcirc
