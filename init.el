@@ -220,7 +220,7 @@
          ("<C-wheel-down>" . text-scale-decrease)
          ("S-<f10>" . menu-bar-mode)
          ("C-x C-b" . ibuffer)
-         ("C-<tab>" . other-frame))
+         ("C-<tab>" . haba/other-frame))
   :config
   (defun disable-all-themes (&rest args)
     (mapcar #'disable-theme custom-enabled-themes))
@@ -229,6 +229,11 @@
     "Open scratch buffer"
     (interactive)
     (switch-to-buffer "*scratch*"))
+  (defun haba/other-frame ()
+    (interactive)
+    (if (eql (length (frame-list)) 1)
+        (make-frame `((width . ,(frame-width)) (height . ,(frame-height))))
+      (other-frame 1)))
   (defun haba/open-todo-file ()
     "Open todo.adoc file"
     (interactive)
