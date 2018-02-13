@@ -338,10 +338,11 @@
    `(web-mode-html-attr-name-face ((t (:foreground ,color-keyword-dim))))
 
    ;; whitespace-mode
-   ;; `(whitespace-space ((t (:foreground ,color-fg-whitespace))))
-   ;; `(whitespace-newline ((t (:foreground ,color-fg-whitespace))))
-   ;; `(whitespace-indentation ((t (:foreground ,color-fg-whitespace :background ,color-bg-whitespace))))
-   ;; `(whitespace-line ((nil (:background ,color-bg-whitespace))))
+   '(whitespace-space ((t (:foreground "#aaaaaa"))))
+   '(whitespace-trailing ((t (:background "#f07070" :foreground "#f0f000"))))
+   '(whitespace-space-after-tab ((t (:background "#f07070" :foreground "#f0f000"))))
+   '(whitespace-indentation ((t (:background "#f0f0f0" :foreground "#aaaaaa"))))
+   '(whitespace-line ((nil (:background "#f7f7f0"))))
 
 
    ;; ;; rainbow-delimiters
