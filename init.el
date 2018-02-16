@@ -460,7 +460,15 @@
   :config
   (use-package swiper
     :bind (:map swiper-map
-                ("M-c" . swiper-mc)))
+                ("M-c" . haba/swiper-mc-fixed))
+    :init
+    (bind-key "C-." #'swiper-from-isearch isearch-mode-map)
+    :config
+    (defun haba/swiper-mc-fixed()
+      (interactive)
+      (setq swiper--current-window-start nil)
+      (swiper-mc))))
+
   (setq counsel-yank-pop-preselect-last t)
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
