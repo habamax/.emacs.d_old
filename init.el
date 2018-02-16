@@ -469,8 +469,7 @@
     (defun haba/swiper-mc-fixed()
       (interactive)
       (setq swiper--current-window-start nil)
-      (swiper-mc))))
-
+      (swiper-mc)))
   (setq counsel-yank-pop-preselect-last t)
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
