@@ -424,49 +424,33 @@
   :diminish ivy-mode
   :init
   ;; clear default ^ for counsel-M-x and friends
-  (setq ivy-initial-inputs-alist '())
+  (setq ivy-initial-inputs-alist nil)
   :config
   (use-package ivy-hydra :defer)
   (use-package flx :defer)
-  (ivy-mode 1)
+  (setq ivy-ignore-buffers '(".*-autoloads.el"))
+  (setq ivy-switch-buffer-faces-alist '((dired-mode . ivy-subdir)))
+  (setq ivy-use-selectable-prompt t)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
                                 (t . ivy--regex-fuzzy)))
+  (ivy-mode 1))
 
-  (defun haba/save-ivy-views ()
-    (interactive)
-    (with-temp-file (concat user-emacs-directory "ivy-views")
-      (prin1 ivy-views (current-buffer))
-      (message "Save ivy-views")))
-
-  (defun haba/load-ivy-views ()
-    (interactive)
-    (setq ivy-views
-          (with-temp-buffer
-            (insert-file-contents (concat user-emacs-directory "ivy-views"))
-            (read (current-buffer))))
-    (message "Load ivy-views"))
-  )
-
-
-;; (use-package telephone-line
-;;   :config
-;;   (setq telephone-line-primary-left-separator 'telephone-line-flat
-;;         telephone-line-secondary-left-separator 'telephone-line-nil
-;;         telephone-line-primary-right-separator 'telephone-line-flat
-;;         telephone-line-secondary-right-separator 'telephone-line-nil)
-
-;;   (setq telephone-line-height 22)
-;;   (telephone-line-mode 1))
-
-;; counsel uses smex for better sorting
-(use-package smex :after counsel)
+(use-package ivy-rich
+  :after ivy
+  :config
+  (ivy-set-display-transformer 'ivy-switch-buffer
+                               'ivy-rich-switch-buffer-transformer)
+  (setq ivy-virtual-abbreviate 'full)
+  (setq ivy-rich-switch-buffer-align-virtual-buffer t)
+  (setq ivy-rich-switch-buffer-name-max-length 40)
+  (setq ivy-rich-path-style 'abbrev))
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-h a" . counsel-apropos)
          ("C-x C-f" . counsel-find-file)
-         ("M-s s" . swiper)
+         ("M-s s" . counsel-grep-or-swiper)
          ("M-s t" . haba/counsel-projectile-rg-todo)
          ("M-s r" . counsel-rg)
          ("C-x b" . ivy-switch-buffer)
