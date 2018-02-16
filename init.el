@@ -420,7 +420,7 @@
 
 
 (use-package ivy
-  :defer 2
+  ;; :defer 2
   :diminish ivy-mode
   :init
   ;; clear default ^ for counsel-M-x and friends
@@ -432,8 +432,9 @@
   (setq ivy-switch-buffer-faces-alist '((dired-mode . ivy-subdir)))
   (setq ivy-use-selectable-prompt t)
   (setq ivy-use-virtual-buffers t)
-  (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                                (t . ivy--regex-fuzzy)))
+  ;; (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
+  ;;                               (t . ivy--regex-fuzzy)))
+  (setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
   (ivy-mode 1))
 
 (use-package ivy-rich
@@ -448,13 +449,14 @@
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
-         ("C-h a" . counsel-apropos)
          ("C-x C-f" . counsel-find-file)
          ("M-s s" . counsel-grep-or-swiper)
          ("M-s t" . haba/counsel-projectile-rg-todo)
          ("M-s r" . counsel-rg)
          ("C-x b" . ivy-switch-buffer)
          ("M-y" . counsel-yank-pop)
+         ("C-h a" . counsel-apropos)
+         ("C-x 8 RET" . counsel-unicode-char)
          :map ivy-minibuffer-map
          ("M-y" . ivy-next-line))
   :config
@@ -504,7 +506,8 @@
                         (swiper--cleanup))
               :caller 'haba/counsel-projectile-rg-todo))
 
-  (counsel-set-async-exit-code 'haba/counsel-projectile-rg-todo 1 "No matches found"))
+  (counsel-set-async-exit-code 'haba/counsel-projectile-rg-todo 1 "No matches found")
+  (counsel-mode 1))
 
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)
