@@ -29,7 +29,6 @@
     ((color-fg "#000000")
      (color-bg "#ffffff")
      (color-dim-bg "#f5f9fe")
-     ;; (color-keyword "#8b2323")
      (color-keyword "#0000ff")
      (color-keyword-dim "#204060")
      (color-str "#901515")
@@ -43,22 +42,7 @@
      (color-heading "#000000")
      (color-url "#0000ff")
      (color-url-visited "#7070ff")
-     ;; (color-bg-hl-parens "#703000")
-     ;; (color-bg-alt "#252520")
-     ;; (color-bg-whitespace "#1a1a1f")
-     ;; (color-fg-whitespace "#303040")
-     ;; (color-fg-search "#fff68f")
-     ;; (color-bg-search "#606020")
-     ;; (color-fg-lazysearch "#40e0d0")
-     ;; (color-bg-lazysearch "#206060")
-     ;; (color-fg-search-fail "#da70d6")
-     ;; (color-bg-search-fail "#603060")
-     ;; (color-bg-highlight "#c4f0c4")
-     ;; (color-bg-highlight "#e7e7e7")
-     (color-bg-highlight "#c7e7e7")
-)
-
-
+     (color-bg-highlight "#c7e7e7"))
 
   (custom-theme-set-faces
    'habamax
@@ -196,9 +180,9 @@
 
    ;; erc
    ;; '(erc-current-nick-face ((t (:foreground "#ffffff"))))
-;;   ;; if erc-nick-default-face has foreground setup then it could not be
-;;   ;; overriden by erc-my-nick-face
-;;   ;; '(erc-nick-default-face ((t (:foreground "#779977"))))
+   ;;   ;; if erc-nick-default-face has foreground setup then it could not be
+   ;;   ;; overriden by erc-my-nick-face
+   ;;   ;; '(erc-nick-default-face ((t (:foreground "#779977"))))
    ;; '(erc-my-nick-face ((t (:foreground "#cc5555"))))
    ;; '(erc-input-face ((t (:foreground "#8dbdbd"))))
    ;; '(erc-timestamp-face ((t (:foreground "Wheat"))))
@@ -298,10 +282,10 @@
 
 
    ;; calendar
-   ;; `(calendar-month-header ((t (:foreground ,color-keyword :weight bold))))
-   ;; `(calendar-weekday-header ((t (:foreground ,color-comment))))
-   ;; `(calendar-weekend-header ((t (:foreground ,color-str :weight bold))))
-   ;; `(calendar-today ((t (:foreground ,color-keyword :weight bold))))
+   `(calendar-month-header ((t (:foreground ,color-fg :weight bold))))
+   `(calendar-weekday-header ((t (:foreground ,color-keyword-dim))))
+   `(calendar-weekend-header ((t (:foreground ,color-str :weight bold))))
+   '(calendar-today ((t (:background "#f0c0f0" :foreground "#000000" :weight bold))))
 
 
    ;; emms
@@ -318,7 +302,7 @@
 
    ;; CSS
    ;; '(css-selector ((t (:inherit font-lock-keyword-face))))
-;;   ;; '(css-property ((t (:inherit font-lock-keyword-face))))
+   ;;   ;; '(css-property ((t (:inherit font-lock-keyword-face))))
 
 
    ;; XML
