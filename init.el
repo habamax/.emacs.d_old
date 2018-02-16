@@ -472,9 +472,9 @@
          ;; file names ending with # or ~
          "\\|\\(?:\\`.+?[#~]\\'\\)"))
 
-  (setq ivy-ignore-buffers '(".*-autoloads.el"))
-  (setq ivy-switch-buffer-faces-alist '((dired-mode . ivy-subdir)))
-  (setq ivy-use-selectable-prompt t)
+  ;; use rg instead of grep
+  ;; XXX: doesn't work with ivy-occur (C-c o)!
+  (setq counsel-grep-base-command "rg -n -i -e %s %s")
 
   (setq counsel-yank-pop-separator (concat "\n" (make-string 70 ?-) "\n"))
 
@@ -483,21 +483,36 @@
     (ivy-set-prompt 'haba/counsel-projectile-rg-todo counsel-prompt-function)
     (setq counsel--git-grep-dir (projectile-project-root))
     (ivy-read "TODO"
-               (lambda (string)
-                 (counsel-ag-function (concat "TODO: " string)
-                                      counsel-rg-base-command ""))
-               :initial-input ""
-               :dynamic-collection t
-               :keymap counsel-ag-map
-               :history 'counsel-git-grep-history
-               :action #'counsel-git-grep-action
-               :unwind (lambda ()
-                         (counsel-delete-process)
-                         (swiper--cleanup))
-               :caller 'haba/counsel-projectile-rg-todo))
+              (lambda (string)
+                (counsel-ag-function (concat "TODO: " string)
+                                     counsel-rg-base-command ""))
+              :initial-input ""
+              :dynamic-collection t
+              :keymap counsel-ag-map
+              :history 'counsel-git-grep-history
+              :action #'counsel-git-grep-action
+              :unwind (lambda ()
+                        (counsel-delete-process)
+                        (swiper--cleanup))
+              :caller 'haba/counsel-projectile-rg-todo))
 
-  (counsel-set-async-exit-code 'haba/counsel-projectile-rg-todo 1 "No matches found")
-  )
+  (counsel-set-async-exit-code 'haba/counsel-projectile-rg-todo 1 "No matches found"))
+
+;; counsel uses smex for better sorting
+(use-package smex :after counsel)
+
+;; (use-package telephone-line
+;;   :config
+;;   (setq telephone-line-primary-left-separator 'telephone-line-flat
+;;         telephone-line-secondary-left-separator 'telephone-line-nil
+;;         telephone-line-primary-right-separator 'telephone-line-flat
+;;         telephone-line-secondary-right-separator 'telephone-line-nil)
+
+;;   (setq telephone-line-height 22)
+;;   (telephone-line-mode 1))
+
+
+
 
 
 ;; goto last change
@@ -594,12 +609,35 @@
 
 (use-package rainbow-delimiters :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package page-break-lines :diminish :hook (prog-mode . turn-on-page-break-lines-mode))
+;; (use-package page-break-lines :diminish :hook (prog-mode . turn-on-page-break-lines-mode))
 
+(use-package aggressive-indent
+  :hook ((emacs-lisp-mode lisp-mode) . aggressive-indent-mode))
 
+;; (use-package lispy
+;;   :hook ((emacs-lisp-mode lisp-mode) . lispy-mode))
 
 (use-package smartparens
   :diminish smartparens-mode
+  :hook (prog-mode . smartparens-mode)
+  :bind (:map smartparens-mode-map
+              ("C-M-;" . sp-comment)
+              ("C-M-j" . sp-join-sexp)
+              ("M-9" . sp-rewrap-sexp)
+              ("M-0" . sp-rewrap-sexp)
+              :map emacs-lisp-mode-map
+              ("M-2" . sp-clone-sexp)
+              ("M-t" . sp-transpose-sexp)
+              :map lisp-mode-map
+              ("M-2" . sp-clone-sexp)
+              ("M-t" . sp-transpose-sexp))
+  ;; sp-emit-sexp
+  ;; sp-split-sexp
+  ;; sp-absorb-sexp
+  ;; sp-splice-sexp (remove brackets M-Backspace)
+  ;; sp-cheat-sheet (very good)
+  ;; sp-next-sexp (C-M-n)
+  ;; sp-convolute-sexp
   :defer 3
   :config
   (require 'smartparens-config)
