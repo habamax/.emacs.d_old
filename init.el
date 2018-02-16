@@ -405,17 +405,18 @@
 ;;   (setq ido-create-new-buffer 'always)
 ;;   (ido-mode 1)
 ;;   (use-package smex :bind (("M-x" . smex)))
-;;   (use-package ido-ubiquitous :config (ido-ubiquitous-mode 1))
+;;   (use-package ido-completing-read+ :config (ido-ubiquitous-mode 1))
 ;;   (use-package flx-ido
 ;;     :config
 ;;     (setq ido-enable-flex-matching t)
 ;;     (setq ido-use-faces nil)
 ;;     (flx-ido-mode 1))
-;;   (use-package ido-vertical-mode
-;;     :config
-;;     (ido-vertical-mode 1)
-;;     (setq ido-vertical-show-count t)
-;;     (setq ido-vertical-define-keys 'C-n-and-C-p-only)))
+;;   ;; (use-package ido-vertical-mode
+;;   ;;   :config
+;;   ;;   (ido-vertical-mode 1)
+;;   ;;   (setq ido-vertical-show-count t)
+;;   ;;   (setq ido-vertical-define-keys 'C-n-and-C-p-only))
+;;   )
 
 
 (use-package ivy
