@@ -139,6 +139,9 @@
 ;; use hippie-expand
 ;; (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
+;; S-left, S-right, S-down, S-up to switch windows
+(windmove-default-keybindings)
+
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
@@ -208,8 +211,6 @@
          ("C-M-2" . haba/duplicate-line-inc-numbers)
          ("M-3" . haba/move-line-down)
          ("M-4" . haba/move-line-up)
-         ("M-9" . haba/previous-window)
-         ("M-0" . haba/next-window)
          ("C-c o i" . haba/open-init-file)
          ("C-c o l" . haba/open-ledger-file)
          ("C-c o s" . haba/open-scratch-buffer)
