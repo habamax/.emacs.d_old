@@ -458,6 +458,9 @@
          :map ivy-minibuffer-map
          ("M-y" . ivy-next-line))
   :config
+  (use-package swiper
+    :bind (:map swiper-map
+                ("M-c" . swiper-mc)))
   (setq counsel-yank-pop-preselect-last t)
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
