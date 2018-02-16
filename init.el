@@ -1053,11 +1053,13 @@ directory to make multiple eshell windows easier."
 
 (use-package calendar
   :init
+  (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
+  ;; (setq calendar-today-marker "T")
   ;; Calendar -- говорим и показываем по русски.
-  (setq calendar-date-style 'iso
-        calendar-week-start-day 1
-        calendar-day-name-array ["Вс" "Пн" "Вт" "Ср" "Чт" "Пт" "Сб"]
-        calendar-month-name-array ["Январь" "Февраль" "Март" "Апрель"
+  (setq calendar-date-style 'iso)
+  (setq calendar-week-start-day 1)
+  (setq calendar-day-name-array ["Вс" "Пн" "Вт" "Ср" "Чт" "Пт" "Сб"])
+  (setq calendar-month-name-array ["Январь" "Февраль" "Март" "Апрель"
                                    "Май" "Июнь" "Июль" "Август"
                                    "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"]))
 
