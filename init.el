@@ -450,7 +450,7 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("M-s s" . counsel-grep-or-swiper)
+         ("C-s" . counsel-grep-or-swiper)
          ("M-s t" . haba/counsel-projectile-rg-todo)
          ("M-s r" . counsel-rg)
          ("C-x b" . ivy-switch-buffer)
@@ -707,15 +707,14 @@
 (use-package plantuml-mode
   :mode ("\\.\\(uml\\)$" . plantuml-mode))
 
-(use-package go-mode
-  :mode ("\\.\\(go\\)$" . go-mode))
+;; (use-package go-mode
+;;   :mode ("\\.\\(go\\)$" . go-mode))
 
 (use-package web-mode
   :mode ("\\.\\(html\\|css\\)$" . web-mode)
   :config
   (setq web-mode-enable-auto-expanding t
         web-mode-enable-auto-pairing t))
-
 
 (use-package elixir-mode
   :mode ("\\.\\(ex\\|exs\\)$" . elixir-mode))
@@ -752,12 +751,7 @@
                 ispell-extra-args '("--sug-mode=ultra")))
 
 
-(use-package ztree :defer
-  ;; :bind (:map ztree-mode-map
-              ;; ("n" . next-line)
-              ;; ("p" . previous-line)
-              ;; ("v" . scroll-up-command))
-  )
+(use-package ztree :defer)
 
 ;; (use-package beacon
 ;;   :defer 6
@@ -790,11 +784,11 @@
   ;; (setq python-shell-interpreter "python3")
   )
 
-(use-package rust-mode
-  :mode ("\\.\\(rs\\)$" . rust-mode)
-  :config
-  (setq rust-format-on-save t)
-  )
+(use-package haskell-mode
+  :mode ("\\.\\(hs\\)$" . haskell-mode))
+
+(use-package intero
+  :hook (haskell-mode . intero-mode))
 
 (use-package clojure-mode
   :mode ("\\.\\(clj\\)$" . clojure-mode)
@@ -823,21 +817,12 @@
   ;; (setq zoom-ignored-buffer-names '("Treemacs"))
   (zoom-mode))
 
-;; (use-package dired+
-;;   :commands (dired dired-jump)
-;;   :init
-;;   (setq diredp-hide-details-initially-flag nil)
+;; (use-package ledger-mode
+;;   :mode ("\\.ledger$" . ledger-mode)
 ;;   :config
-;;   (require 'dired+)
-;;   (setq ls-lisp-use-insert-directory-program nil)
-;;   (setq ls-lisp-dirs-first t))
-
-(use-package ledger-mode
-  :mode ("\\.ledger$" . ledger-mode)
-  :config
-  (setq ledger-report-links-in-register nil)
-  (setq ledger-report-use-native-highlighting nil)
-  (setq ledger-default-date-format ledger-iso-date-format))
+;;   (setq ledger-report-links-in-register nil)
+;;   (setq ledger-report-use-native-highlighting nil)
+;;   (setq ledger-default-date-format ledger-iso-date-format))
 
 (use-package restclient
   :commands (restclient-mode))
