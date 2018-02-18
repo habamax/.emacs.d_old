@@ -211,6 +211,8 @@
          ("C-M-2" . haba/duplicate-line-inc-numbers)
          ("M-3" . haba/move-line-down)
          ("M-4" . haba/move-line-up)
+         ("M-9" . haba/previous-buffer)
+         ("M-0" . haba/next-buffer)
          ("C-c o i" . haba/open-init-file)
          ("C-c o l" . haba/open-ledger-file)
          ("C-c o s" . haba/open-scratch-buffer)
@@ -370,7 +372,7 @@
 
 (use-package avy
   :diminish avy-mode
-  :bind (("C-l" . avy-goto-char-timer)))
+  :bind (("C-l" . avy-goto-word-or-subword-1)))
 
 (use-package ace-window
   :bind (("C-x o" . ace-window))
@@ -633,8 +635,6 @@
   :bind (:map smartparens-mode-map
               ("C-M-;" . sp-comment)
               ("C-M-j" . sp-join-sexp)
-              ("M-9" . sp-rewrap-sexp)
-              ("M-0" . sp-rewrap-sexp)
               :map emacs-lisp-mode-map
               ("M-2" . sp-clone-sexp)
               ("M-t" . sp-transpose-sexp)
@@ -707,8 +707,8 @@
 (use-package plantuml-mode
   :mode ("\\.\\(uml\\)$" . plantuml-mode))
 
-;; (use-package go-mode
-;;   :mode ("\\.\\(go\\)$" . go-mode))
+(use-package go-mode
+  :mode ("\\.\\(go\\)$" . go-mode))
 
 (use-package web-mode
   :mode ("\\.\\(html\\|css\\)$" . web-mode)
