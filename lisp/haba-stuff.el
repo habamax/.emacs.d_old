@@ -175,14 +175,13 @@ point reaches the beginning or end of the buffer, stop there."
     (next-buffer)
     (while
         (or
-         ; skip "special" buffers beginning with star
+         ;; skip "special" buffers beginning with star
          (and
           (string-match-p "^\*" (buffer-name))
           (not (equal b-name (buffer-name))))
-         ; skip dired buffers
+         ;; skip dired buffers
          (derived-mode-p 'dired-mode))
       (next-buffer))))
-
 
 ;; Previous Buffer
 (defun haba/previous-buffer ()
@@ -191,13 +190,40 @@ point reaches the beginning or end of the buffer, stop there."
     (previous-buffer)
     (while
         (or
-         ; skip "special" buffers beginning with star
+         ;; skip "special" buffers beginning with star
          (and
           (string-match-p "^\*" (buffer-name))
           (not (equal b-name (buffer-name))))
-         ; skip dired buffers
+         ;; skip dired buffers
          (derived-mode-p 'dired-mode))
       (previous-buffer))))
+
+
+;; Next buffer with the same mode
+(defun haba/next-buffer-like-this ()
+  (interactive)
+  (let ((b-name (buffer-name))
+        (b-mode mode-name))
+    (next-buffer)
+    (while
+        (and
+         (not (equal mode-name b-mode))
+         (not (equal b-name (buffer-name))))
+      (next-buffer))))
+
+;; Previous buffer with the same mode
+(defun haba/previous-buffer-like-this ()
+  (interactive)
+  (let ((b-name (buffer-name))
+        (b-mode mode-name))
+    (previous-buffer)
+    (while
+        (and
+         (not (equal mode-name b-mode))
+         (not (equal b-name (buffer-name))))
+      (previous-buffer))))
+
+
 
 ;; Sequence of M-q fill or unfill paragraphs
 ;; Doesn't work for all modes

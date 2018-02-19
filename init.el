@@ -211,8 +211,10 @@
          ("C-M-2" . haba/duplicate-line-inc-numbers)
          ("M-3" . haba/move-line-down)
          ("M-4" . haba/move-line-up)
-         ("M-9" . haba/previous-buffer)
-         ("M-0" . haba/next-buffer)
+         ("M-9" . haba/previous-buffer-like-this)
+         ("M-0" . haba/next-buffer-like-this)
+         ("C-M-9" . haba/previous-buffer)
+         ("C-M-0" . haba/next-buffer)
          ("C-c o i" . haba/open-init-file)
          ("C-c o l" . haba/open-ledger-file)
          ("C-c o s" . haba/open-scratch-buffer)
@@ -223,7 +225,8 @@
          ("<C-wheel-down>" . text-scale-decrease)
          ("S-<f10>" . menu-bar-mode)
          ("C-x C-b" . ibuffer)
-         ("C-<tab>" . haba/other-frame))
+         ("C-<tab>" . haba/other-frame)
+         ("C-S-<tab>" . haba/make-new-frame))
   :config
   (defun disable-all-themes (&rest args)
     (mapcar #'disable-theme custom-enabled-themes))
@@ -232,10 +235,15 @@
     "Open scratch buffer"
     (interactive)
     (switch-to-buffer "*scratch*"))
+
+  (defun haba/make-new-frame ()
+    (interactive)
+    (make-frame `((width . ,(frame-width)) (height . ,(frame-height)))))
+
   (defun haba/other-frame ()
     (interactive)
     (if (eql (length (frame-list)) 1)
-        (make-frame `((width . ,(frame-width)) (height . ,(frame-height))))
+        (haba/make-new-frame)
       (other-frame 1)))
   (defun haba/open-todo-file ()
     "Open todo.adoc file"
@@ -261,9 +269,9 @@
 
 (use-package leuven-theme :defer)
 (use-package kosmos-theme :defer)
-(use-package solarized-theme :defer
-  :init
-  (setq solarized-high-contrast-mode-line t))
+;; (use-package solarized-theme :defer
+;;   :init
+;;   (setq solarized-high-contrast-mode-line t))
 
 
 (use-package whitespace-cleanup-mode
