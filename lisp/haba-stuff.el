@@ -1,4 +1,3 @@
-
 (provide 'haba-stuff)
 
 ;; Comment a line.
@@ -14,14 +13,14 @@ Otherwise call well known `comment-dwim'"
     (comment-dwim arg)))
 
 (defun haba/open-line ()
-  "Insert newline(s) below the line containing cursor"
+  "Insert newline(s) below the line containing cursor."
   (interactive)
   (move-end-of-line 1)
   (newline-and-indent))
 
 (defun haba/join-line ()
-  "Join the following line onto the current one (analogous to `C-e', `C-d') or
-`C-u M-^' or `C-u M-x join-line'.
+  "Join the following line onto the current one.
+ (analogous to `C-e', `C-d') or `C-u M-^' or `C-u M-x join-line'.
 If the current line is a comment and the pulled-up line is also a comment,
 remove the comment characters from that line."
   (interactive)
@@ -164,43 +163,13 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; Quick dotemacs/initel opening
 (defun haba/open-init-file ()
-  "Edit the `user-init-file', in another window"
+  "Edit the `user-init-file', in another window."
   (interactive)
   (find-file user-init-file))
 
-;; Next Buffer
-(defun haba/next-buffer ()
-  (interactive)
-  (let ((b-name (buffer-name)))
-    (next-buffer)
-    (while
-        (or
-         ;; skip "special" buffers beginning with star
-         (and
-          (string-match-p "^\*" (buffer-name))
-          (not (equal b-name (buffer-name))))
-         ;; skip dired buffers
-         (derived-mode-p 'dired-mode))
-      (next-buffer))))
-
-;; Previous Buffer
-(defun haba/previous-buffer ()
-  (interactive)
-  (let ((b-name (buffer-name)))
-    (previous-buffer)
-    (while
-        (or
-         ;; skip "special" buffers beginning with star
-         (and
-          (string-match-p "^\*" (buffer-name))
-          (not (equal b-name (buffer-name))))
-         ;; skip dired buffers
-         (derived-mode-p 'dired-mode))
-      (previous-buffer))))
-
-
 ;; Next buffer with the same mode
 (defun haba/next-buffer-like-this ()
+  "Open next buffer with the same major mode as current."
   (interactive)
   (let ((b-name (buffer-name))
         (b-mode mode-name))
@@ -213,6 +182,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;; Previous buffer with the same mode
 (defun haba/previous-buffer-like-this ()
+  "Open previous buffer with the same major mode as current."
   (interactive)
   (let ((b-name (buffer-name))
         (b-mode mode-name))
@@ -225,7 +195,6 @@ point reaches the beginning or end of the buffer, stop there."
 
 
 
-;; Sequence of M-q fill or unfill paragraphs
 ;; Doesn't work for all modes
 (defun haba/fill-or-unfill ()
   "Like `fill-paragraph', but unfill if used twice."
@@ -238,8 +207,8 @@ point reaches the beginning or end of the buffer, stop there."
     (call-interactively #'fill-paragraph)))
 
 
-;; Return path to the project root defined by markers
 (defun haba/locate-project-root ()
+  "Return path to the project root defined by markers."
   (interactive)
   (setq project-marker-regex
         (mapconcat 'identity
@@ -254,42 +223,31 @@ point reaches the beginning or end of the buffer, stop there."
 
 
 (defun haba/kill-region ()
+  "Kill region if mark is active, kill whole line otherwise."
   (interactive)
   (if mark-active
       (kill-region (region-beginning) (region-end))
     (kill-region (line-beginning-position) (line-beginning-position 2))))
 
 (defun haba/kill-ring-save ()
+  "Save region in kill ring if mark is active, save whole line otherwise."
   (interactive)
   (if mark-active
       (kill-ring-save (region-beginning) (region-end))
     (kill-ring-save (line-beginning-position) (line-beginning-position 2))))
 
-;; (defadvice kill-ring-save (before slick-copy activate compile)
-;;   "When called interactively with no active region, copy a single
-;; line instead."
-;;   (interactive
-;;    (if mark-active (list (region-beginning) (region-end))
-;;      (message "Copied line")
-;;      (list (line-beginning-position)
-;;            (line-beginning-position 2)))))
-
-;; (defadvice kill-region (before slick-cut activate compile)
-;;   "When called interactively with no active region, kill a single
-;;   line instead."
-;;   (interactive
-;;    (if mark-active (list (region-beginning) (region-end))
-;;      (list (line-beginning-position)
-;;            (line-beginning-position 2)))))
-
 
 ;;;; Do not include first empty lines in mark-paragraph.
 (defun current-line-empty-p ()
+  "Return true if current line is empty.
+
+Helper function for advicing `mark-paragraph'."
   (save-excursion
     (beginning-of-line)
     (looking-at "[[:space:]]*$")))
 
 (defun skip-empty-line--mark-paragraph (&rest args)
+  "Set cursor on first non-empty line."
   (when (current-line-empty-p)
     (forward-line 1)))
 
@@ -300,18 +258,19 @@ point reaches the beginning or end of the buffer, stop there."
 ;;;; sort words
 (defun haba/sort-words (reverse beg end)
   "Sort words in region alphabetically, in REVERSE if negative.
-    Prefixed with negative \\[universal-argument], sorts in reverse.
 
-    The variable `sort-fold-case' determines whether alphabetic case
-    affects the sort order.
+Prefixed with negative \\[universal-argument], sorts in reverse.
 
-    See `sort-regexp-fields'."
+The variable `sort-fold-case' determines whether alphabetic case
+affects the sort order.
+
+See `sort-regexp-fields'."
   (interactive "*P\nr")
   (sort-regexp-fields reverse "\\w+" "\\&" beg end))
 
 ;;;; dates
 (defun haba/insert-current-date ()
-  "Insert current date. Replaces ISO date under cursor with current date."
+  "Insert current date. Replace ISO date under cursor with current date."
   (interactive)
   (when (string-match "[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}" (concat "" (thing-at-point 'symbol t)))
     (let ((bounds (bounds-of-thing-at-point 'symbol)))
@@ -321,7 +280,9 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;;;; Pretty print XML
 (defun haba/pretty-print-xml-region (begin end)
-  "Pretty format XML markup in region. You need to have nxml-mode
+  "Pretty format XML markup in region. 
+
+You need to have `nxml-mode'
 http://www.emacswiki.org/cgi-bin/wiki/NxmlMode installed to do
 this.  The function inserts linebreaks to separate tags that have
 nothing but whitespace between them.  It then indents the markup
