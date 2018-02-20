@@ -442,10 +442,10 @@
   (setq ivy-switch-buffer-faces-alist '((dired-mode . ivy-subdir)))
   (setq ivy-use-selectable-prompt t)
   (setq ivy-use-virtual-buffers t)
-  ;; (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
-  ;;                               (t . ivy--regex-fuzzy)))
+  (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
+                                (t . ivy--regex-fuzzy)))
   ;; (setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
-  (setq ivy-re-builders-alist '((t . ivy--regex-plus)))
+  ;; (setq ivy-re-builders-alist '((t . ivy--regex-plus)))
   (ivy-mode 1))
 
 (use-package ivy-rich
@@ -462,9 +462,7 @@
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("M-s s" . counsel-grep-or-swiper)
-         ("M-s t" . haba/counsel-projectile-rg-todo)
          ("M-s r" . counsel-rg)
-         ("C-x b" . ivy-switch-buffer)
          ("M-y" . counsel-yank-pop)
          ("C-h a" . counsel-apropos)
          ("C-x 8 RET" . counsel-unicode-char)
@@ -504,7 +502,8 @@
 
 (use-package counsel-projectile
   :bind (("C-c p SPC" . counsel-projectile)
-         ("C-c p p" . counsel-projectile-switch-project))
+         ("C-c p p" . counsel-projectile-switch-project)
+         ("C-c p f" . counsel-projectile-find-file))
   :config
   (counsel-projectile-mode))
 
