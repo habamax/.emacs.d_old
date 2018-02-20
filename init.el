@@ -213,8 +213,8 @@
          ("M-4" . haba/move-line-up)
          ("M-9" . haba/previous-buffer-like-this)
          ("M-0" . haba/next-buffer-like-this)
-         ("C-M-9" . haba/previous-buffer)
-         ("C-M-0" . haba/next-buffer)
+         ("C-M-9" . previous-buffer)
+         ("C-M-0" . next-buffer)
          ("C-c o i" . haba/open-init-file)
          ("C-c o l" . haba/open-ledger-file)
          ("C-c o s" . haba/open-scratch-buffer)
@@ -444,7 +444,8 @@
   (setq ivy-use-virtual-buffers t)
   ;; (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
   ;;                               (t . ivy--regex-fuzzy)))
-  (setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+  ;; (setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+  (setq ivy-re-builders-alist '((t . ivy--regex-plus)))
   (ivy-mode 1))
 
 (use-package ivy-rich
@@ -460,7 +461,7 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-s" . counsel-grep-or-swiper)
+         ("M-s s" . counsel-grep-or-swiper)
          ("M-s t" . haba/counsel-projectile-rg-todo)
          ("M-s r" . counsel-rg)
          ("C-x b" . ivy-switch-buffer)
@@ -469,6 +470,7 @@
          ("C-x 8 RET" . counsel-unicode-char)
          :map ivy-minibuffer-map
          ("M-y" . ivy-next-line))
+  :diminish counsel-mode
   :config
   (use-package swiper
     :bind (:map swiper-map
@@ -497,26 +499,16 @@
 
   (setq counsel-yank-pop-separator (concat "\n" (make-string 70 ?-) "\n"))
 
-  (defun haba/counsel-projectile-rg-todo ()
-    (interactive)
-    (ivy-set-prompt 'haba/counsel-projectile-rg-todo counsel-prompt-function)
-    (setq counsel--git-grep-dir (projectile-project-root))
-    (ivy-read "TODO"
-              (lambda (string)
-                (counsel-ag-function (concat "TODO: " string)
-                                     counsel-rg-base-command ""))
-              :initial-input ""
-              :dynamic-collection t
-              :keymap counsel-ag-map
-              :history 'counsel-git-grep-history
-              :action #'counsel-git-grep-action
-              :unwind (lambda ()
-                        (counsel-delete-process)
-                        (swiper--cleanup))
-              :caller 'haba/counsel-projectile-rg-todo))
-
   (counsel-set-async-exit-code 'haba/counsel-projectile-rg-todo 1 "No matches found")
   (counsel-mode 1))
+
+(use-package counsel-projectile
+  :bind (("C-c p SPC" . counsel-projectile)
+         ("C-c p p" . counsel-projectile-switch-project))
+  :config
+  (counsel-projectile-mode))
+
+(use-package projectile :defer)
 
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)
@@ -549,18 +541,6 @@
               (ibuffer-vc-set-filter-groups-by-vc-root)
               (unless (eq ibuffer-sorting-mode 'alphabetic)
                 (ibuffer-do-sort-by-alphabetic)))))
-
-(use-package projectile-ripgrep :after projectile)
-
-(use-package projectile
-  :commands (projectile-project-root)
-  :bind-keymap (("C-c p" . projectile-mode-map))
-  :bind (:map projectile-mode-map ("C-c p s r" . projectile-ripgrep))
-  :diminish projectile-mode
-  :config
-
-  (projectile-global-mode)
-  (setq projectile-completion-system 'ivy))
 
 (use-package hydra :defer)
 
@@ -643,6 +623,7 @@
   :bind (:map smartparens-mode-map
               ("C-M-;" . sp-comment)
               ("C-M-j" . sp-join-sexp)
+              ("C-M-<up>" . sp-raise-sexp)
               :map emacs-lisp-mode-map
               ("M-2" . sp-clone-sexp)
               ("M-t" . sp-transpose-sexp)
