@@ -216,7 +216,6 @@
          ("C-M-9" . previous-buffer)
          ("C-M-0" . next-buffer)
          ("C-c o i" . haba/open-init-file)
-         ("C-c o l" . haba/open-ledger-file)
          ("C-c o s" . haba/open-scratch-buffer)
          ("C-c o t" . haba/open-todo-file)
          ([remap fill-paragraph] . haba/fill-or-unfill)
@@ -248,16 +247,8 @@
   (defun haba/open-todo-file ()
     "Open todo.adoc file"
     (interactive)
-    (find-file "~/docs/todo.adoc"))
-  (defun haba/open-ledger-file ()
-    "Open latest .ledger file"
-    (interactive)
-    ;; For now do not bother with finding the latest.
-    ;; There is only 1 file.
-    (find-file "~/fin/2018.ledger"))
-  )
+    (find-file "~/docs/todo.adoc")))
 
-;; STARTUP: 0.7
 
 (use-package diminish
   :diminish abbrev-mode auto-revert-mode subword-mode)
@@ -309,9 +300,8 @@
   (setq asciidoctor-pdf-extensions '("asciidoctor-diagram"))
   (setq asciidoctor-extensions '("asciidoctor-diagram" "asciidoctor-rouge"))
   (when (OSX?)
-      (setq asciidoctor-clipboard-backend "pngpaste %s%s")))
+    (setq asciidoctor-clipboard-backend "pngpaste %s%s")))
 
-;; STARTUP: 0.8
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Melpa packages
 
@@ -380,7 +370,7 @@
 
 (use-package avy
   :diminish avy-mode
-  :bind (("C-l" . avy-goto-word-or-subword-1)))
+  :bind (("C-l" . avy-goto-char)))
 
 (use-package ace-window
   :bind (("C-x o" . ace-window))
@@ -507,7 +497,7 @@
   :config
   (counsel-projectile-mode))
 
-(use-package projectile :defer)
+(use-package projectile :defer :diminish projectile-mode)
 
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)
@@ -794,15 +784,10 @@
 
 ;; new golden-ratio
 (use-package zoom
-  :defer 5
-  ;; :bind ("C-x +" . zoom)
-  ;; :preface
-  ;; (defun size-callback ()
-  ;;   (cond ((> (frame-pixel-width) 1280) '(0.618 . 0.618))
-  ;;         (t '(0.5 . 0.5))))
+  :diminish zoom-mode
+  :defer 3
   :config
   (setq zoom-size '(90 . 30))
-  ;; (setq zoom-ignored-buffer-names '("Treemacs"))
   (zoom-mode))
 
 ;; (use-package ledger-mode
@@ -823,23 +808,23 @@
 
 
 ;; music FTW
-(use-package emms
-  :bind (("C-c m d" . emms-play-directory-tree)
-         ("C-c m c" . emms-playlist-mode-go)
-         ("C-c m p" . emms-pause)
-         ("C-c m n" . emms-next)
-         ("C-c m r" . emms-random)
-         ("C-c m s" . emms-stop))
-  :config
-  (require 'emms-setup)
-  (emms-standard)
-  (emms-default-players)
+;; (use-package emms
+;;   :bind (("C-c m d" . emms-play-directory-tree)
+;;          ("C-c m c" . emms-playlist-mode-go)
+;;          ("C-c m p" . emms-pause)
+;;          ("C-c m n" . emms-next)
+;;          ("C-c m r" . emms-random)
+;;          ("C-c m s" . emms-stop))
+;;   :config
+;;   (require 'emms-setup)
+;;   (emms-standard)
+;;   (emms-default-players)
 
-  (setq emms-source-file-default-directory "~/Music")
+;;   (setq emms-source-file-default-directory "~/Music")
 
-  (setq emms-mode-line-icon-color "yellow")
+;;   (setq emms-mode-line-icon-color "yellow")
 
-  (setq emms-repeat-playlist t))
+;;   (setq emms-repeat-playlist t))
 
 
 (use-package nov
