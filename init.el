@@ -222,7 +222,7 @@
          ("C-c i d" . haba/insert-current-date)
          ("<C-wheel-up>" . text-scale-increase)
          ("<C-wheel-down>" . text-scale-decrease)
-         ("S-<f10>" . menu-bar-mode)
+         ("<f10>" . menu-bar-mode)
          ("C-x C-b" . ibuffer)
          ("C-<tab>" . haba/other-frame)
          ("C-S-<tab>" . haba/make-new-frame))
@@ -455,6 +455,7 @@
          ("C-x C-f" . counsel-find-file)
          ("M-s s" . counsel-grep-or-swiper)
          ("M-s r" . counsel-rg)
+         ("M-s g" . counsel-git-grep)
          ("M-y" . counsel-yank-pop)
          ("C-h a" . counsel-apropos)
          ("C-x 8 RET" . counsel-unicode-char)
@@ -492,14 +493,14 @@
   (counsel-set-async-exit-code 'haba/counsel-projectile-rg-todo 1 "No matches found")
   (counsel-mode 1))
 
-(use-package counsel-projectile
-  :bind (("C-c p SPC" . counsel-projectile)
-         ("C-c p p" . counsel-projectile-switch-project)
-         ("C-c p f" . counsel-projectile-find-file))
-  :config
-  (counsel-projectile-mode))
+;; (use-package counsel-projectile
+;;   :bind (("C-c p SPC" . counsel-projectile)
+;;          ("C-c p p" . counsel-projectile-switch-project)
+;;          ("C-c p f" . counsel-projectile-find-file))
+;;   :config
+;;   (counsel-projectile-mode))
 
-(use-package projectile :defer :diminish projectile-mode)
+;; (use-package projectile :defer :diminish projectile-mode)
 
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)
@@ -513,8 +514,6 @@
 
 ;;   (setq telephone-line-height 22)
 ;;   (telephone-line-mode 1))
-
-
 
 
 
@@ -535,19 +534,26 @@
 
 (use-package hydra :defer)
 
+
+;; dired extra stuff
+(use-package dired-x
+  :ensure nil
+  :bind (("C-x C-j" . dired-jump)
+         ("C-x 4 C-j" . dired-jump-other-window)))
+
 (use-package dired-subtree
-  :commands (dired-jump)
+  :commands (dired dired-jump)
   :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
 
 
 (use-package dired-ranger
   :commands (dired-ranger-copy dired-ranger-paste dired-ranger-move)
-  :init
-  (add-hook 'dired-mode-hook
-            '(lambda ()
-               (define-key dired-mode-map (kbd "M-w") 'dired-ranger-copy)
-               (define-key dired-mode-map (kbd "C-y") 'dired-ranger-paste)
-               (define-key dired-mode-map (kbd "C-c C-y") 'dired-ranger-move))))
+  :after dired-subtree
+  :bind (:map dired-mode-map
+              ("M-w" . dired-ranger-copy)
+              ("C-y" . dired-ranger-paste)
+              ("C-c C-y" . dired-ranger-move)))
+
 
 ;; Complete Anything
 (use-package company
@@ -614,8 +620,6 @@
 (use-package aggressive-indent
   :hook ((emacs-lisp-mode lisp-mode) . aggressive-indent-mode))
 
-;; (use-package lispy
-;;   :hook ((emacs-lisp-mode lisp-mode) . lispy-mode))
 
 (use-package smartparens
   :diminish smartparens-mode
@@ -744,19 +748,6 @@
 
 
 (use-package ztree :defer)
-
-;; (use-package beacon
-;;   :defer 6
-;;   :config
-;;   (setq beacon-color 0.3)
-;;   (setq beacon-size 20)
-;;   (setq beacon-blink-duration 0.2)
-;;   (setq beacon-blink-when-window-scrolls nil
-;;         beacon-blink-when-point-moves-horizontally nil
-;;         beacon-blink-when-buffer-changes nil)
-;;   (beacon-mode 1))
-
-;; (use-package minimap :defer :commands minimap-mode)
 
 (use-package string-edit :commands string-edit)
 
@@ -897,8 +888,8 @@
   :config
 
   (defun haba/company-off ()
-     (interactive)
-     (company-mode -1))
+    (interactive)
+    (company-mode -1))
   (add-hook 'eshell-mode-hook 'haba/company-off)
 
   (defun haba/eshell-here (eshell-name)
@@ -923,62 +914,48 @@ directory to make multiple eshell windows easier."
     "Toggle eshell-here."
     (interactive)
 
-   (let* ((parent (if (buffer-file-name)
+    (let* ((parent (if (buffer-file-name)
                        (file-name-directory (buffer-file-name))
                      default-directory))
-          (name   (car (last (split-string parent "/" t))))
-          (eshell-name (concat "*eshell: " name "*")))
+           (name   (car (last (split-string parent "/" t))))
+           (eshell-name (concat "*eshell: " name "*")))
 
-     (cond ((string-prefix-p "*eshell: " (buffer-name (window-buffer)))
-            ;; (message "Visible and focused")
-            (insert "exit")
-            (eshell-send-input)
-            (delete-window))
-           ((get-buffer-window eshell-name)
-            ;; (message "Visible and unfocused")
-            (switch-to-buffer-other-window eshell-name))
-           (t
-            ;; (message "Not visible")
-            (haba/eshell-here eshell-name))))))
+      (cond ((string-prefix-p "*eshell: " (buffer-name (window-buffer)))
+             ;; (message "Visible and focused")
+             (insert "exit")
+             (eshell-send-input)
+             (delete-window))
+            ((get-buffer-window eshell-name)
+             ;; (message "Visible and unfocused")
+             (switch-to-buffer-other-window eshell-name))
+            (t
+             ;; (message "Not visible")
+             (haba/eshell-here eshell-name))))))
 
-;; dired-jump befor dired is used
-(use-package dired-x
-  :ensure nil
-  :bind (("C-x C-j" . dired-jump)
-         ("C-x 4 C-j" . dired-jump-other-window)))
-
-(use-package sunrise-commander
-  :commands sunrise
-  :bind (("<f10>" . sunrise))
-  :config
-  ;; dirty hack -- otherwise opening smth from sunrise-commander with OS handling doesn't workd
-  ;; ERROR feature browse-url not available!
-  (ignore-errors (browse-url))
-  (setq sr-cursor-follows-mouse nil)
-  (define-key sr-mode-map [mouse-1] nil)
-  (define-key sr-mode-map [mouse-movement] nil)
-  (add-to-list 'savehist-additional-variables 'sr-history-registry)
-  (setq sr-attributes-display-mask '(nil nil nil nil t t t))
-  (setq sr-show-file-attributes nil))
-
-(use-package sunrise-x-checkpoints
-  :after sunrise-commander)
-
-(use-package sunrise-x-w32-addons
-  :if (windows?)
-  :after sunrise-commander)
-
-(use-package sunrise-x-loop
-  :after sunrise-commander)
-
-
-;; origami-mode (folding)
-;; (use-package origami
-;;   :bind (("M-o o" . origami-toggle-node))
-;;   :init
-;;   (global-set-key (kbd "M-o") nil)
+;; (use-package sunrise-commander
+;;   :commands sunrise
+;;   :bind (("<f10>" . sunrise))
 ;;   :config
-;;   (global-origami-mode))
+;;   ;; dirty hack -- otherwise opening smth from sunrise-commander with OS handling doesn't workd
+;;   ;; ERROR feature browse-url not available!
+;;   (ignore-errors (browse-url))
+;;   (setq sr-cursor-follows-mouse nil)
+;;   (define-key sr-mode-map [mouse-1] nil)
+;;   (define-key sr-mode-map [mouse-movement] nil)
+;;   (add-to-list 'savehist-additional-variables 'sr-history-registry)
+;;   (setq sr-attributes-display-mask '(nil nil nil nil t t t))
+;;   (setq sr-show-file-attributes nil))
+
+;; (use-package sunrise-x-checkpoints
+;;   :after sunrise-commander)
+
+;; (use-package sunrise-x-w32-addons
+;;   :if (windows?)
+;;   :after sunrise-commander)
+
+;; (use-package sunrise-x-loop
+;;   :after sunrise-commander)
+
 
 (use-package outline
   :bind (("M-o o" . outline-toggle-children)
