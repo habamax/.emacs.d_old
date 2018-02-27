@@ -540,6 +540,15 @@
   :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
 
 
+(use-package dired-ranger
+  :commands (dired-ranger-copy dired-ranger-paste dired-ranger-move)
+  :init
+  (add-hook 'dired-mode-hook
+            '(lambda ()
+               (define-key dired-mode-map (kbd "M-w") 'dired-ranger-copy)
+               (define-key dired-mode-map (kbd "C-y") 'dired-ranger-paste)
+               (define-key dired-mode-map (kbd "C-c C-y") 'dired-ranger-move))))
+
 ;; Complete Anything
 (use-package company
   :defer 3
