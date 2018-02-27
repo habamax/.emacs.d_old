@@ -20,11 +20,11 @@
 
 
 (defun OSX? ()
-  "return true if OSX"
+  "Return true if OSX."
   (eq system-type 'darwin))
 
 (defun windows? ()
-  "return true if Windows"
+  "Return true if Windows."
   (eq system-type 'windows-nt))
 
 ;; General OSX setup
@@ -137,7 +137,7 @@
 (setq ls-lisp-dirs-first t)
 
 ;; use hippie-expand
-;; (global-set-key [remap dabbrev-expand] 'hippie-expand)
+(global-set-key [remap dabbrev-expand] 'hippie-expand)
 
 ;; S-left, S-right, S-down, S-up to switch windows
 (windmove-default-keybindings)
@@ -209,8 +209,8 @@
          ("C-o" . haba/open-line)
          ("M-2" . haba/duplicate-line)
          ("C-M-2" . haba/duplicate-line-inc-numbers)
-         ("M-3" . haba/move-line-down)
-         ("M-4" . haba/move-line-up)
+         ("M-<up>" . haba/move-line-up)
+         ("M-<down>" . haba/move-line-down)
          ("M-9" . haba/previous-buffer-like-this)
          ("M-0" . haba/next-buffer-like-this)
          ("C-M-9" . previous-buffer)
@@ -229,7 +229,9 @@
   :config
   (defun disable-all-themes (&rest args)
     (mapcar #'disable-theme custom-enabled-themes))
+
   (advice-add 'load-theme :before #'disable-all-themes)
+
   (defun haba/open-scratch-buffer ()
     "Open scratch buffer"
     (interactive)
@@ -244,6 +246,7 @@
     (if (eql (length (frame-list)) 1)
         (haba/make-new-frame)
       (other-frame 1)))
+
   (defun haba/open-todo-file ()
     "Open todo.adoc file"
     (interactive)
@@ -258,12 +261,11 @@
   :config
   (load-theme 'habamax t))
 
-(use-package leuven-theme :defer)
-(use-package kosmos-theme :defer)
-;; (use-package solarized-theme :defer
-;;   :init
-;;   (setq solarized-high-contrast-mode-line t))
+(use-package kosmos-theme :defer
+  :load-path "habamax-theme/")
 
+(use-package leuven-theme :defer)
+(use-package cyberpunk-theme :defer)
 
 (use-package whitespace-cleanup-mode
   :defer 5
@@ -370,7 +372,7 @@
 
 (use-package avy
   :diminish avy-mode
-  :bind (("C-l" . avy-goto-char)))
+  :bind (("C-l" . avy-goto-word-or-subword-1)))
 
 (use-package ace-window
   :bind (("C-x o" . ace-window))
@@ -613,6 +615,9 @@
               ("C-M-;" . sp-comment)
               ("C-M-j" . sp-join-sexp)
               ("C-M-<up>" . sp-raise-sexp)
+              :map lisp-interaction-mode-map
+              ("M-2" . sp-clone-sexp)
+              ("M-t" . sp-transpose-sexp)
               :map emacs-lisp-mode-map
               ("M-2" . sp-clone-sexp)
               ("M-t" . sp-transpose-sexp)
