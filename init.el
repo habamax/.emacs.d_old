@@ -205,6 +205,7 @@
          ("C-a" . haba/move-beginning-of-line)
          ("M-j" . haba/join-line)
          ("C-o" . haba/open-line)
+         ("M-SPC" . haba/just-one-space)
          ("M-2" . haba/duplicate-line)
          ("C-M-2" . haba/duplicate-line-inc-numbers)
          ("M-<up>" . haba/move-line-up)
@@ -445,6 +446,7 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
+         ("C-c p" . counsel-git)
          ("M-s s" . counsel-grep-or-swiper)
          ("M-s r" . counsel-rg)
          ("M-s g" . counsel-git-grep)
@@ -829,6 +831,9 @@
   :config
   (winner-mode 1))
 
+(use-package bookmark
+  :ensure nil
+  :bind (("<f5>" . bookmark-jump)))
 
 ;; dired extra stuff
 (use-package dired

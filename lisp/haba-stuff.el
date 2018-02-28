@@ -36,6 +36,17 @@ remove the comment characters from that line."
         (delete-forward-char 1))
       (insert-char ? ))))
 
+
+(defun haba/just-one-space ()
+  "Replace all whitespace in region with single spaces."
+  (interactive)
+  (save-excursion
+    (save-restriction
+      (narrow-to-region (line-beginning-position) (line-end-position))
+      (back-to-indentation)
+      (while (re-search-forward "\\s-+" nil t)
+        (replace-match " ")))))
+
 (defun haba/duplicate-line (arg)
   "Duplicate current line, leaving point in lower line."
   (interactive "*p")
