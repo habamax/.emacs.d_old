@@ -9,8 +9,9 @@
 ;; Measure loading time
 (defconst emacs-start-time (current-time))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Non-Package setup
+;; ================================================================================
+;; Non-Package setup
+;; ================================================================================
 
 ;; disable gc for init
 (setq gc-cons-threshold 64000000)
@@ -131,11 +132,6 @@
 (setq-default abbrev-mode t)
 
 
-;; dired user another dired buffer as destination for copy/move
-(setq dired-dwim-target t)
-;; directories first?
-(setq ls-lisp-dirs-first t)
-
 ;; use hippie-expand
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
@@ -147,8 +143,9 @@
 (load custom-file 'noerror)
 
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; fix the minibuffer gc triggering
+;; --------------------------------------------------------------------------------
+;; Fix the minibuffer gc triggering
+;; --------------------------------------------------------------------------------
 
 (defun haba/minibuffer-setup-hook ()
   (setq gc-cons-threshold most-positive-fixnum))
@@ -160,9 +157,8 @@
 (add-hook 'minibuffer-exit-hook #'haba/minibuffer-exit-hook)
 
 
-;; default frame is fullscreen and has no scrollbars
-;; (setq default-frame-alist '((fullscreen . maximized) (vertical-scroll-bars . nil)))
-;; use -geometry 120x40 for example to set initial size
+;; For OSX emacs fullscreen is OK, Windows on the other hand flicks and flocks on startup.
+;; For Windows and Linux use "-geometry 120x40" (example) to set initial size.
 (if (OSX?)
     (setq default-frame-alist '((fullscreen . maximized)
                                 (vertical-scroll-bars . nil)))
@@ -170,7 +166,9 @@
                               (vertical-scroll-bars . nil))))
 (setq frame-title-format "%b")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Set up packaging system
+;; ================================================================================
+;; Set up packaging system
+;; ================================================================================
 (let ((package-protocol (if (windows?) "http://" "https://")))
   (setq package-archives `(("elpa" . ,(concat package-protocol "elpa.gnu.org/packages/"))
                            ("melpa" . ,(concat package-protocol "melpa.org/packages/"))
@@ -190,9 +188,9 @@
 
 (setq use-package-always-ensure t)
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Local packages
-
+;; ================================================================================
+;; My local packages
+;; ================================================================================
 (use-package haba-stuff
   :ensure nil
   :load-path "lisp/"
@@ -252,10 +250,6 @@
     (interactive)
     (find-file "~/docs/todo.adoc")))
 
-
-(use-package diminish
-  :diminish abbrev-mode auto-revert-mode subword-mode)
-
 (use-package habamax-theme
   :load-path "habamax-theme/"
   :config
@@ -263,25 +257,6 @@
 
 (use-package kosmos-theme :defer
   :load-path "habamax-theme/")
-
-(use-package leuven-theme :defer)
-(use-package cyberpunk-theme :defer)
-
-(use-package whitespace-cleanup-mode
-  :defer 5
-  :diminish
-  :commands (whitespace-cleanup-mode)
-  :config
-  (global-whitespace-cleanup-mode))
-
-
-;; restore layout
-(use-package winner
-  :defer 3
-  :bind (("M-N" . winner-redo)
-         ("M-P" . winner-undo))
-  :config
-  (winner-mode 1))
 
 (use-package asciidoctor-mode
   :ensure nil
@@ -305,7 +280,17 @@
     (setq asciidoctor-clipboard-backend "pngpaste %s%s")))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Melpa packages
+;; ================================================================================
+;; Melpa packages
+;; ================================================================================
+
+(use-package leuven-theme :defer)
+(use-package cyberpunk-theme :defer)
+
+
+(use-package diminish
+  :defer
+  :diminish abbrev-mode auto-revert-mode subword-mode)
 
 ;; PATH for OSX
 (use-package exec-path-from-shell
@@ -421,6 +406,13 @@
 ;;   )
 
 
+(use-package whitespace-cleanup-mode
+  :defer 3
+  :diminish
+  :commands (whitespace-cleanup-mode)
+  :config
+  (global-whitespace-cleanup-mode))
+
 (use-package ivy
   ;; :defer 2
   :diminish ivy-mode
@@ -534,25 +526,6 @@
 
 (use-package hydra :defer)
 
-
-;; dired extra stuff
-(use-package dired-x
-  :ensure nil
-  :bind (("C-x C-j" . dired-jump)
-         ("C-x 4 C-j" . dired-jump-other-window)))
-
-(use-package dired-subtree
-  :commands (dired dired-jump)
-  :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
-
-
-(use-package dired-ranger
-  :commands (dired-ranger-copy dired-ranger-paste dired-ranger-move)
-  :after dired-subtree
-  :bind (:map dired-mode-map
-              ("M-w" . dired-ranger-copy)
-              ("C-y" . dired-ranger-paste)
-              ("C-c C-y" . dired-ranger-move)))
 
 
 ;; Complete Anything
@@ -839,7 +812,50 @@
   :defer
   :commands (htmlize-buffer htmlize-region))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Built-in packages
+
+
+
+
+;; ================================================================================
+;; Built-in packages
+;; ================================================================================
+
+;; restore layout
+(use-package winner
+  :ensure nil
+  :defer 3
+  :bind (("M-N" . winner-redo)
+         ("M-P" . winner-undo))
+  :config
+  (winner-mode 1))
+
+
+;; dired extra stuff
+(use-package dired
+  :ensure nil
+  :config
+  ;; dired user another dired buffer as destination for copy/move
+  (setq dired-dwim-target t)
+  ;; directories first?
+  (setq ls-lisp-dirs-first t))
+
+(use-package dired-x
+  :ensure nil
+  :after dired
+  :bind (("C-x C-j" . dired-jump)
+         ("C-x 4 C-j" . dired-jump-other-window)))
+
+(use-package dired-subtree
+  :after dired
+  :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
+
+
+(use-package dired-ranger
+  :after dired
+  :bind (:map dired-mode-map
+              ("M-w" . dired-ranger-copy)
+              ("C-y" . dired-ranger-paste)
+              ("C-c C-y" . dired-ranger-move)))
 
 
 (use-package remember
@@ -850,18 +866,18 @@
   (setq remember-notes-initial-major-mode 'asciidoctor-mode)
   (setq remember-leader-text "== ")
   (defun haba/remember-add-to-file ()
-  "Remember, with description DESC, the given TEXT. Add text to the beginning."
-  (let* ((text (buffer-string))
-         (desc (remember-buffer-desc))
-         (remember-text (concat "\n" remember-leader-text (format-time-string "%F %H:%M:%S")
-                                " " desc "\n\n" text
-                                (save-excursion (goto-char (point-max))
-                                                (if (bolp) nil "\n")))))
-    (with-current-buffer (find-file-noselect remember-data-file)
-      (goto-char (point-min))
-      (search-forward-regexp "^[[:blank:]]*$") ;; dumb skip asciidoctor title
-      (insert remember-text)
-      (if remember-save-after-remembering (save-buffer)))))
+    "Remember, with description DESC, the given TEXT. Add text to the beginning."
+    (let* ((text (buffer-string))
+           (desc (remember-buffer-desc))
+           (remember-text (concat "\n" remember-leader-text (format-time-string "%F %H:%M:%S")
+                                  " " desc "\n\n" text
+                                  (save-excursion (goto-char (point-max))
+                                                  (if (bolp) nil "\n")))))
+      (with-current-buffer (find-file-noselect remember-data-file)
+        (goto-char (point-min))
+        (search-forward-regexp "^[[:blank:]]*$") ;; dumb skip asciidoctor title
+        (insert remember-text)
+        (if remember-save-after-remembering (save-buffer)))))
 
   (setq remember-handler-functions 'haba/remember-add-to-file))
 
