@@ -856,8 +856,7 @@
 
 (use-package dired-x
   :ensure nil
-  :after dired
-  )
+  :after dired)
 
 (use-package dired-subtree
   :after dired
