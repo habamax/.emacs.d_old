@@ -448,7 +448,7 @@
          ("M-s s" . counsel-grep-or-swiper)
          ("M-s r" . counsel-rg)
          ("M-s g" . counsel-git-grep)
-         ("M-y" . counsel-yank-pop)
+         ("C-M-y" . counsel-yank-pop)
          ("C-h a" . counsel-apropos)
          ("C-x 8 RET" . counsel-unicode-char)
          :map ivy-minibuffer-map
@@ -459,7 +459,7 @@
     :bind (:map swiper-map
                 ("M-c" . haba/swiper-mc-fixed))
     :init
-    (bind-key "C-." #'swiper-from-isearch isearch-mode-map)
+    (bind-key "M-s" #'swiper-from-isearch isearch-mode-map)
     :config
     (defun haba/swiper-mc-fixed()
       (interactive)
@@ -833,6 +833,16 @@
 ;; dired extra stuff
 (use-package dired
   :ensure nil
+  :commands (dired dired-jump dired-jump-other-window)
+  :bind (("C-x C-j" . dired-jump)
+         ("C-x 4 C-j" . dired-jump-other-window)
+         :map dired-mode-map
+         ("b" . bookmark-jump)
+         ("J" . dired-up-directory))
+  :init
+  ;; by default hide all details
+  ;; you can toggle details using `('
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode)
   :config
   ;; dired user another dired buffer as destination for copy/move
   (setq dired-dwim-target t)
@@ -842,8 +852,7 @@
 (use-package dired-x
   :ensure nil
   :after dired
-  :bind (("C-x C-j" . dired-jump)
-         ("C-x 4 C-j" . dired-jump-other-window)))
+  )
 
 (use-package dired-subtree
   :after dired
