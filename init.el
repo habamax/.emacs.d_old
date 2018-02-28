@@ -6,7 +6,7 @@
 
 ;;; Code:
 
-;; Measure loading time
+;; Start measuring loading time
 (defconst emacs-start-time (current-time))
 
 ;; ================================================================================
@@ -1040,8 +1040,10 @@ directory to make multiple eshell windows easier."
                                    "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"]))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; ================================================================================
 ;; show emacs startup time
+;; ================================================================================
 (defun display-startup-echo-area-message ()
   (let ((elapsed (float-time (time-subtract (current-time)
                                             emacs-start-time))))
