@@ -757,6 +757,7 @@
 
 
 (use-package restclient
+  :mode ("\\.\\(rest\\)$" . restclient-mode)
   :commands (restclient-mode))
 
 (use-package csv-mode
