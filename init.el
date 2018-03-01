@@ -863,13 +863,16 @@
   :after dired
   :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
 
-
 (use-package dired-ranger
   :after dired
   :bind (:map dired-mode-map
               ("M-w" . dired-ranger-copy)
               ("C-y" . dired-ranger-paste)
               ("C-c C-y" . dired-ranger-move)))
+
+(use-package dired-narrow
+  :after dired
+  :bind (:map dired-mode-map ("/" . dired-narrow)))
 
 
 (use-package remember
