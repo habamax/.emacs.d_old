@@ -775,11 +775,11 @@
 (use-package restclient
   :commands (restclient-mode))
 
-
-(use-package edit-server
-  :defer 10
-  :config
-  (edit-server-start))
+(use-package csv-mode
+  :mode ("\\.\\(csv\\)$" . csv-mode)
+  :init
+  (setq csv-separators '("," ";" "|"))
+  (setq csv-header-lines 1))
 
 
 ;; music FTW
@@ -833,6 +833,7 @@
 ;; dired extra stuff
 (use-package dired
   :ensure nil
+  :defer t
   :commands (dired dired-jump dired-jump-other-window)
   :bind (("C-x C-j" . dired-jump)
          ("C-x 4 C-j" . dired-jump-other-window)
@@ -873,6 +874,28 @@
   :after dired
   :config
   (diredfl-global-mode))
+
+
+;; doesnt work...for windows
+;; (use-package dired-open
+;; :after dired
+;; :config
+;; (defun haba/dired-open-win ()
+;;   "Try to run `start' to open the file under point."
+;;   (interactive)
+;;   (let ((file (ignore-errors (dired-get-file-for-visit))))
+;;     (start-process "dired-open" nil
+;;                    "explorer" (file-truename file))))
+;; (setq dired-open-functions '(haba/dired-open-win))
+;; (setq dired-open-use-nohup nil)
+
+;; (setq dired-open-extensions
+;;       '(("pdf" . "start")
+;;         ("mkv" . "vlc")
+;;         ("mp4" . "vlc")
+;;         ("avi" . "vlc")
+;;         ("html" . "firefox")
+;;         ("mp3" . "vlc"))))
 
 ;; dired-open
 ;; dired-filter
