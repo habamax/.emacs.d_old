@@ -101,20 +101,32 @@
    `(show-paren-match ((t :background "#b0f0f0")))
    ;; `(sp-show-pair-match-face ((t (:background ,color-bg-hl-parens))))
 
-
    ;; links
    `(link ((t (:foreground ,color-url :underline (:color ,color-url)))))
    `(link-visited ((t (:foreground ,color-url-visited :underline (:color ,color-url-visited)))))
    `(mouse-face ((t (:foreground ,color-url-visited :underline (:color ,color-url-visited)))))
-
 
    ;; dired
    '(dired-directory ((t (:inherit default :weight bold))))
    `(dired-mark ((t (:foreground ,color-keyword :weight bold))))
    ;; TODO: think of the "good" marked color
    ;; `(dired-marked ((t (:foreground ,color-keyword :background "#f0cccc"))))
-   '(dired-header ((t (:inherit default :weight bold))))
+   '(dired-header ((t (:inherit default :weight bold :box (:line-width 1 :color "#AAAAAA")))))
 
+   ;; diredfl
+   '(diredfl-dir-name ((t (:inherit dired-directory))))
+   '(diredfl-dir-heading ((t (:inherit dired-header))))
+   '(diredfl-file-name ((t (:inherit default))))
+   `(diredfl-file-suffix ((t (:foreground ,color-url-visited))))
+   `(diredfl-date-time ((t (:foreground ,color-keyword-dim))))
+   `(diredfl-number ((t (:foreground ,color-keyword-dim))))
+   '(diredfl-dir-priv ((t (:inherit default :weight bold))))
+   '(diredfl-read-priv ((t (:background "#DDFFDD" :foreground "#005000"))))
+   '(diredfl-write-priv ((t (:background "#EDEDFF" :foreground "#0000AA"))))
+   '(diredfl-exec-priv ((t (:background "#FFEDFFp" :foreground "#AA00AA"))))
+   '(diredfl-no-priv ((t (:inherit default))))
+   '(diredfl-flag-mark-line ((t (:background "#FFE0E0"))))
+   
    ;; dired-subtree
    '(dired-subtree-depth-1-face ((t (:background "#f0f0f0"))))
    '(dired-subtree-depth-2-face ((t (:background "#ffffff"))))
@@ -125,7 +137,7 @@
    '(dired-subtree-depth-7-face ((t (:background "#f0f0f0"))))
    '(dired-subtree-depth-8-face ((t (:background "#ffffff"))))
    '(dired-subtree-depth-9-face ((t (:background "#f0f0f0"))))
-
+   
    ;; sunrise-commander
    '(sr-active-path-face ((t (:background "#000000" :foreground "#ffffff" :weight bold))))
    '(sr-passive-path-face ((t (:background "#e0e0e0" :foreground "#000000" :weight bold))))
@@ -134,20 +146,6 @@
    '(sr-marked-file-face ((t (:background "#fff0ff" :foreground "#ff00ff"))))
    '(sr-marked-dir-face ((t (:background "#fff0ff" :foreground "#ff00ff" :weight bold))))
    '(sr-compressed-face ((t (:foreground "#1e90ff"))))
-
-   ;; dired+
-   '(diredp-dir-name ((t (:inherit dired-directory))))
-   '(diredp-dir-heading ((t (:inherit dired-header))))
-   '(diredp-file-name ((t (:inherit default))))
-   '(diredp-file-suffix ((t (:inherit font-lock-comment-face))))
-   '(diredp-ignored-file-name ((t (:inherit font-lock-comment-face))))
-   '(diredp-date-time ((t (:inherit default))))
-   '(diredp-number ((t (:inherit default))))
-   '(diredp-dir-priv ((t (:inherit default :weight bold))))
-   '(diredp-read-priv ((t (:foreground "#007000"))))
-   '(diredp-write-priv ((t (:foreground "#0000AA"))))
-   '(diredp-exec-priv ((t (:foreground "#AA00AA"))))
-   '(diredp-no-priv ((t (:inherit default))))
 
    ;; eshell
    '(eshell-ls-directory ((t (:inherit default :weight bold))))
