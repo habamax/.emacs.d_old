@@ -874,6 +874,19 @@
   :after dired
   :bind (:map dired-mode-map ("/" . dired-narrow)))
 
+(use-package diredfl
+  :after dired
+  :config
+  (diredfl-global-mode))
+
+;; dired-open
+;; dired-filter
+
+
+;; (use-package dired-collapse
+;;   :after dired
+;;   :init
+;;   (add-hook 'dired-mode-hook 'dired-collapse-mode))
 
 (use-package remember
   :bind (("C-c r r" . remember)
