@@ -361,16 +361,6 @@
   (setq aw-scope 'frame)
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
-;; (use-package treemacs
-;;   :bind (("<f8>" . treemacs-toggle))
-;;   :config
-;;   (treemacs-follow-mode t)
-;;   (treemacs-filewatch-mode t))
-
-;; (use-package treemacs-projectile
-;;   :after treemacs
-;;   :bind (("S-<f8>" . treemacs-projectile-toggle)))
-
 (use-package dumb-jump
   :bind (("M-g o" . dumb-jump-go-other-window)
          ("M-g j" . dumb-jump-go)
@@ -765,12 +755,6 @@
   (setq zoom-size '(90 . 30))
   (zoom-mode))
 
-;; (use-package ledger-mode
-;;   :mode ("\\.ledger$" . ledger-mode)
-;;   :config
-;;   (setq ledger-report-links-in-register nil)
-;;   (setq ledger-report-use-native-highlighting nil)
-;;   (setq ledger-default-date-format ledger-iso-date-format))
 
 (use-package restclient
   :commands (restclient-mode))
@@ -780,26 +764,6 @@
   :init
   (setq csv-separators '("," ";" "|"))
   (setq csv-header-lines 1))
-
-
-;; music FTW
-;; (use-package emms
-;;   :bind (("C-c m d" . emms-play-directory-tree)
-;;          ("C-c m c" . emms-playlist-mode-go)
-;;          ("C-c m p" . emms-pause)
-;;          ("C-c m n" . emms-next)
-;;          ("C-c m r" . emms-random)
-;;          ("C-c m s" . emms-stop))
-;;   :config
-;;   (require 'emms-setup)
-;;   (emms-standard)
-;;   (emms-default-players)
-
-;;   (setq emms-source-file-default-directory "~/Music")
-
-;;   (setq emms-mode-line-icon-color "yellow")
-
-;;   (setq emms-repeat-playlist t))
 
 
 (use-package nov
