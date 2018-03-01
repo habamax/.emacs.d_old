@@ -848,6 +848,7 @@
   ;; by default hide all details
   ;; you can toggle details using `('
   (add-hook 'dired-mode-hook 'dired-hide-details-mode)
+  (add-hook 'dired-mode-hook 'dired-omit-mode)
   :config
   ;; dired user another dired buffer as destination for copy/move
   (setq dired-dwim-target t)
