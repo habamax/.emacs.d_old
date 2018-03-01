@@ -815,8 +815,8 @@
   :commands (htmlize-buffer htmlize-region))
 
 
-
-
+(use-package webpaste
+  :commands (webpaste-paste-buffer webpaste-paste-region))
 
 ;; ================================================================================
 ;; Built-in packages
