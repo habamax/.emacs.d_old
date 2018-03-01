@@ -9,6 +9,9 @@
 ;; Start measuring loading time
 (defconst emacs-start-time (current-time))
 
+(defconst *is-osx* (eq system-type 'darwin))
+(defconst *is-windows* (eq system-type 'windows-nt))
+
 ;; ================================================================================
 ;; Non-Package setup
 ;; ================================================================================
@@ -20,16 +23,8 @@
                                (setq gc-cons-threshold 800000)))
 
 
-(defun OSX? ()
-  "Return true if OSX."
-  (eq system-type 'darwin))
-
-(defun windows? ()
-  "Return true if Windows."
-  (eq system-type 'windows-nt))
-
 ;; General OSX setup
-(when (OSX?)
+(when *is-osx*
   ;; No new frames for files that are opened from OSX
   (setq ns-pop-up-frames nil)
   ;; Show menu by default
@@ -38,7 +33,7 @@
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'control))
 
-(when (not (OSX?))
+(when (not *is-osx*)
   (menu-bar-mode -1))
 
 (when window-system
@@ -61,7 +56,7 @@
 ;; This is windows only
 ;; I have finally solved the problem of external processes to use Russian language,
 ;; Now rg.exe can actually search Russian words from Emacs.
-(when (windows?)
+(when *is-windows*
   (setq default-process-coding-system '(utf-8-dos . cp1251-dos)))
 
 ;; make unix lineendings default
@@ -159,7 +154,7 @@
 
 ;; For OSX emacs fullscreen is OK, Windows on the other hand flicks and flocks on startup.
 ;; For Windows and Linux use "-geometry 120x40" (example) to set initial size.
-(if (OSX?)
+(if *is-osx*
     (setq default-frame-alist '((fullscreen . maximized)
                                 (vertical-scroll-bars . nil)))
   (setq default-frame-alist '((fullscreen . nil)
@@ -169,7 +164,7 @@
 ;; ================================================================================
 ;; Set up packaging system
 ;; ================================================================================
-(let ((package-protocol (if (windows?) "http://" "https://")))
+(let ((package-protocol (if *is-windows* "http://" "https://")))
   (setq package-archives `(("elpa" . ,(concat package-protocol "elpa.gnu.org/packages/"))
                            ("melpa" . ,(concat package-protocol "melpa.org/packages/"))
                            ("SC"   . "http://joseito.republika.pl/sunrise-commander/"))))
@@ -277,7 +272,7 @@
   (setq asciidoctor-pdf-fontsdir "~/docs/AsciiDocThemes/fonts")
   (setq asciidoctor-pdf-extensions '("asciidoctor-diagram"))
   (setq asciidoctor-extensions '("asciidoctor-diagram" "asciidoctor-rouge"))
-  (when (OSX?)
+  (when *is-osx*
     (setq asciidoctor-clipboard-backend "pngpaste %s%s")))
 
 
@@ -298,7 +293,7 @@
   :config
   (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize)
-  :if (OSX?))
+  :if *is-osx*)
 
 ;; sometimes text mangling is just too cumbersome with emacs bindings...
 ;; be EVIL then and SHOW THEM ALL!!!
