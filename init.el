@@ -137,6 +137,9 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
 
+;; Just in case, C-n speedup
+;; See https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag
+(setq auto-window-vscroll nil)
 
 ;; --------------------------------------------------------------------------------
 ;; Fix the minibuffer gc triggering
@@ -804,7 +807,8 @@
          ("C-x 4 C-j" . dired-jump-other-window)
          :map dired-mode-map
          ("b" . bookmark-jump)
-         ("J" . dired-up-directory))
+         ("j" . dired-up-directory)
+         ("J" . dired-goto-file))
   :init
   ;; by default hide all details
   ;; you can toggle details using `('
@@ -813,7 +817,15 @@
   :config
   ;; dired user another dired buffer as destination for copy/move
   (setq dired-dwim-target t)
+
   ;; directories first?
+  ;; OSX has ls but it is not gnu compatible and can't group directories first
+  ;; Load ls-lisp to use built in ls implemented in lisp.
+  ;; For windows it is preloaded automatically.
+  ;; PS: it is possible to install coreutils with GNU ls...
+  (when *is-osx*
+    (require 'ls-lisp)
+    (setq ls-lisp-use-insert-directory-program nil))
   (setq ls-lisp-dirs-first t))
 
 (use-package dired-x
