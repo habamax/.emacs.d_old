@@ -213,6 +213,13 @@
    `(git-gutter:added ((nil (:foreground "#00c000" :weight bold))))
    `(git-gutter:deleted ((nil (:foreground "#ff0000" :weight bold))))
 
+   ;; Info
+   '(info-title-1 ((t (:inherit default :weight bold :height 1.6))))
+   '(info-title-2 ((t (:inherit default :weight bold :height 1.4))))
+   '(info-title-3 ((t (:inherit default :weight bold :height 1.2))))
+   '(info-title-4 ((t (:inherit default :weight bold :height 1.1))))
+
+
    ;; ivy
    ;; `(ivy-current-match ((t (:background ,color-bg-highlight))))
    ;; `(ivy-minibuffer-match-face-1 ((t (:foreground ,color-fg-dim))))
