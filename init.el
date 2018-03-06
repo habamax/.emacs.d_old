@@ -747,7 +747,9 @@
 (use-package slime
   :commands (slime)
   :config
-  (setq inferior-lisp-program "sbcl")
+  ;; (setq inferior-lisp-program "sbcl")
+  (load (expand-file-name "~/.roswell/helper.el"))
+  (setq inferior-lisp-program "ros -Q run")
   (slime-setup '(slime-fancy)))
 
 ;; new golden-ratio
