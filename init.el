@@ -434,10 +434,9 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-c p" . counsel-git)
+         ("M-s f" . counsel-git)
          ("M-s s" . counsel-grep-or-swiper)
          ("M-s r" . counsel-rg)
-         ("M-s g" . counsel-git-grep)
          ("C-M-y" . counsel-yank-pop)
          ("C-h a" . counsel-apropos)
          ("C-x 8 RET" . counsel-unicode-char)
@@ -455,6 +454,7 @@
       (interactive)
       (setq swiper--current-window-start nil)
       (swiper-mc)))
+
   (setq counsel-yank-pop-preselect-last t)
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
@@ -466,9 +466,9 @@
          ;; file names ending with # or ~
          "\\|\\(?:\\`.+?[#~]\\'\\)"))
 
-  ;; use rg instead of grep
-  ;; XXX: doesn't work with ivy-occur (C-c o)!
-  (setq counsel-grep-base-command "rg -n -i -e %s %s")
+  (setq counsel-git-cmd "rg --files")
+  (setq counsel-rg-base-command
+        "rg -i -M 120 --no-heading --line-number --color never %s .")
 
   (setq counsel-yank-pop-separator (concat "\n" (make-string 70 ?-) "\n"))
 
