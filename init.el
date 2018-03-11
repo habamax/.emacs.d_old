@@ -316,8 +316,8 @@
     (interactive)
     (if (bound-and-true-p evil-state)
         (progn
-        (evil-mode -1)
-        (message "Calm down. Don't be evil, be nice..."))
+          (evil-mode -1)
+          (message "Calm down. Don't be evil, be nice..."))
       (progn
         (evil-mode)
         (message "I!     AM!     EVIL!!!!")))))
@@ -529,9 +529,9 @@
 
   (setq company-dabbrev-downcase nil)
   (setq company-dabbrev-ignore-case t)
-  (setq company-idle-delay 0.2)
+  (setq company-idle-delay 0)
 
-  (setq company-minimum-prefix-length 2)
+  (setq company-minimum-prefix-length 3)
 
   (company-tng-configure-default)
   (global-company-mode))
@@ -718,8 +718,11 @@
 
 ;; yasnippets
 (use-package yasnippet
-  :defer 5
+  :defer 3
   :diminish yas-minor-mode
+  :bind (("C-c i s" . yas-insert-snippet)
+         :map yas-minor-mode-map
+         ("C-c y" . yas-expand))
   :config
   (yas-global-mode t))
 
