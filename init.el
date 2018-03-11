@@ -434,7 +434,7 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("M-s f" . counsel-git)
+         ("M-s g" . counsel-git)
          ("M-s s" . counsel-grep-or-swiper)
          ("M-s r" . counsel-rg)
          ("C-M-y" . counsel-yank-pop)
