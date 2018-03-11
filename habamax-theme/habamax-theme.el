@@ -8,8 +8,8 @@
 
 ;; 0. background -- snowwhite
 ;; 1. keywords -- blueish
-;; 2. strings -- reddish
-;; 3. comments -- gray gray gray
+;; 2. strings -- greenish
+;; 3. comments -- just gray
 
 ;;; TODO:
 
@@ -32,6 +32,7 @@
      (color-keyword "#0000ff")
      (color-keyword-dim "#204060")
      (color-str "#901515")
+     ;; (color-str "#008000")
      (color-comment "#808080")
      (color-gray "#7a7a7a")
      ;; (color-fg-todo "#bdabab")
@@ -218,6 +219,9 @@
    '(info-title-2 ((t (:inherit default :weight bold :height 1.4))))
    '(info-title-3 ((t (:inherit default :weight bold :height 1.2))))
    '(info-title-4 ((t (:inherit default :weight bold :height 1.1))))
+
+   ;; ace-window
+   '(aw-leading-char-face ((nil (:foreground "#ff0000" :weight bold))))
 
 
    ;; ivy
