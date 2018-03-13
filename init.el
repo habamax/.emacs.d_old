@@ -538,6 +538,14 @@
   (global-company-mode))
 
 
+;; (use-package auto-complete
+;;   :defer 2
+;;   :bind (("C-M-i" . auto-complete))
+;;   :config
+;;   (use-package fuzzy :defer)
+;;   (setq ac-use-fuzzy t)
+;;   (ac-config-default))
+
 
 (use-package multiple-cursors
   :defer 3
