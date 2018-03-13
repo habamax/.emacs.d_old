@@ -744,6 +744,8 @@
          :map yas-minor-mode-map
          ("C-c y" . yas-expand))
   :config
+
+  (use-package yasnippet-snippets :defer)
   (yas-global-mode t))
 
 
