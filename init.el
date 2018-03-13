@@ -532,7 +532,7 @@
   (setq company-dabbrev-ignore-case t)
   (setq company-idle-delay 0)
 
-  (setq company-minimum-prefix-length 3)
+  (setq company-minimum-prefix-length 5)
 
   (company-tng-configure-default)
   (global-company-mode))
