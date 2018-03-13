@@ -766,7 +766,7 @@
   :config
   (use-package cider
     :config
-    (setq cider-repl-display-help-banner nil)
+    (setq cider-repl-display-help-banner t)
     (setq cider-repl-use-pretty-printing t)))
 
 (use-package slime
