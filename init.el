@@ -586,6 +586,17 @@
 
 
 (use-package rainbow-delimiters :hook (prog-mode . rainbow-delimiters-mode))
+(use-package rainbow-mode :hook ((css-mode html-mode) . rainbow-mode))
+(use-package kurecolor
+  :bind (("<f7>" . kurecolor-increase-hue-by-step)
+         ("M-<f7>" . kurecolor-decrease-hue-by-step)
+         ("<f8>" . kurecolor-increase-saturation-by-step)
+         ("M-<f8>" . kurecolor-decrease-saturation-by-step)
+         ("<f9>" . kurecolor-increase-brightness-by-step)
+         ("M-<f9>" . kurecolor-decrease-brightness-by-step))
+  :config
+  ;; doesn't work withou cl
+  (require 'cl))
 
 ;; (use-package page-break-lines :diminish :hook (prog-mode . turn-on-page-break-lines-mode))
 
