@@ -593,10 +593,7 @@
          ("<f8>" . kurecolor-increase-saturation-by-step)
          ("M-<f8>" . kurecolor-decrease-saturation-by-step)
          ("<f9>" . kurecolor-increase-brightness-by-step)
-         ("M-<f9>" . kurecolor-decrease-brightness-by-step))
-  :config
-  ;; doesn't work withou cl
-  (require 'cl))
+         ("M-<f9>" . kurecolor-decrease-brightness-by-step)))
 
 ;; (use-package page-break-lines :diminish :hook (prog-mode . turn-on-page-break-lines-mode))
 
