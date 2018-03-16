@@ -833,7 +833,8 @@
          :map dired-mode-map
          ("b" . bookmark-jump)
          ("j" . dired-up-directory)
-         ("J" . dired-goto-file))
+         ("J" . dired-goto-file)
+         ("<C-return>" . haba/dired-open-in-os))
   :init
   ;; by default hide all details
   ;; you can toggle details using `('
@@ -851,7 +852,13 @@
   (when *is-osx*
     (require 'ls-lisp)
     (setq ls-lisp-use-insert-directory-program nil))
-  (setq ls-lisp-dirs-first t))
+  (setq ls-lisp-dirs-first t)
+
+  (defun haba/dired-open-in-os ()
+    "Open file/folder under cursor in OS."
+    (interactive)
+    (let ((file (ignore-errors (dired-get-file-for-visit))))
+      (browse-url (file-truename file)))))
 
 (use-package dired-x
   :ensure nil
@@ -879,17 +886,17 @@
 
 
 ;; <CR> to open file under cursor in OS
-(use-package dired-open
-  :after dired
-  :config
-  (defun haba/dired-open-in-os ()
-    "Open file/folder under cursor in OS."
-    (interactive)
-    (let ((file (ignore-errors (dired-get-file-for-visit))))
-      (browse-url (file-truename file))))
-  (setq dired-open-functions '(haba/dired-open-in-os))
-  ;; (setq dired-open-use-nohup nil))
-  )
+;; (use-package dired-open
+;;   :after dired
+;;   :config
+;;   (defun haba/dired-open-in-os ()
+;;     "Open file/folder under cursor in OS."
+;;     (interactive)
+;;     (let ((file (ignore-errors (dired-get-file-for-visit))))
+;;       (browse-url (file-truename file))))
+;;   (setq dired-open-functions '(haba/dired-open-in-os))
+;;   ;; (setq dired-open-use-nohup nil))
+;;   )
 ;; dired-open
 ;; dired-filter
 
