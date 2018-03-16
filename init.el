@@ -605,6 +605,7 @@
   :diminish smartparens-mode
   :hook (prog-mode . smartparens-mode)
   :bind (:map smartparens-mode-map
+              ("C-M-k" . sp-kill-hybrid-sexp)
               ("C-M-;" . sp-comment)
               ("C-M-j" . sp-join-sexp)
               ("C-M-<up>" . sp-raise-sexp)
