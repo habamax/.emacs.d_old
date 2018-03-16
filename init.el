@@ -208,10 +208,10 @@
          ("C-M-2" . haba/duplicate-line-inc-numbers)
          ("M-<up>" . haba/move-line-up)
          ("M-<down>" . haba/move-line-down)
-         ("M-9" . haba/previous-buffer-like-this)
-         ("M-0" . haba/next-buffer-like-this)
-         ("C-M-9" . previous-buffer)
-         ("C-M-0" . next-buffer)
+         ("<f1>" . haba/previous-buffer-like-this)
+         ("<f2>" . haba/next-buffer-like-this)
+         ("M-<f1>" . previous-buffer)
+         ("M-<f2>" . next-buffer)
          ("C-c o i" . haba/open-init-file)
          ("C-c o s" . haba/open-scratch-buffer)
          ("C-c o t" . haba/open-todo-file)
@@ -293,10 +293,10 @@
 
 ;; PATH for OSX
 (use-package exec-path-from-shell
+  :if *is-osx*
   :config
   (setq exec-path-from-shell-check-startup-files nil)
-  (exec-path-from-shell-initialize)
-  :if *is-osx*)
+  (exec-path-from-shell-initialize))
 
 ;; sometimes text mangling is just too cumbersome with emacs bindings...
 ;; be EVIL then and SHOW THEM ALL!!!
@@ -606,6 +606,21 @@
   :hook (prog-mode . smartparens-mode)
   :bind (:map smartparens-mode-map
               ("C-M-k" . sp-kill-hybrid-sexp)
+              ("C-9" . sp-backward-slurp-sexp)
+              ("C-0" . sp-forward-slurp-sexp)
+              ("M-9" . sp-backward-barf-sexp)
+              ("M-0" . sp-forward-barf-sexp)
+              ("C-M-SPC" . sp-mark-sexp)
+              ("M-a" . sp-beginning-of-sexp)
+              ("M-A" . sp-beginning-of-previous-sexp)
+              ("M-e" . sp-end-of-sexp)
+              ("M-E" . sp-end-of-next-sexp)
+              ("C-M-f" . sp-forward-sexp)
+              ("C-M-b" . sp-backward-sexp)
+              ("C-M-n" . sp-next-sexp)
+              ("C-M-p" . sp-previous-sexp)
+              ("C-M-u" . sp-up-sexp)
+              ("C-M-d" . sp-down-sexp)
               ("C-M-;" . sp-comment)
               ("C-M-j" . sp-join-sexp)
               ("C-M-<up>" . sp-raise-sexp)
@@ -618,6 +633,8 @@
               :map lisp-mode-map
               ("M-2" . sp-clone-sexp)
               ("M-t" . sp-transpose-sexp))
+  ;; add more "standard bindings"
+  ;; and maybe the following
   ;; sp-emit-sexp
   ;; sp-split-sexp
   ;; sp-absorb-sexp
@@ -628,8 +645,8 @@
   :defer 3
   :config
   (require 'smartparens-config)
-  (setq sp-base-key-bindings 'sp)
-  (sp-use-smartparens-bindings)
+  ;;(setq sp-base-key-bindings 'sp)
+  ;;(sp-use-smartparens-bindings)
   (smartparens-global-mode)
   (show-smartparens-global-mode)
 
