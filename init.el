@@ -878,27 +878,18 @@
   (diredfl-global-mode))
 
 
-;; doesnt work...for windows
-;; (use-package dired-open
-;; :after dired
-;; :config
-;; (defun haba/dired-open-win ()
-;;   "Try to run `start' to open the file under point."
-;;   (interactive)
-;;   (let ((file (ignore-errors (dired-get-file-for-visit))))
-;;     (start-process "dired-open" nil
-;;                    "explorer" (file-truename file))))
-;; (setq dired-open-functions '(haba/dired-open-win))
-;; (setq dired-open-use-nohup nil)
-
-;; (setq dired-open-extensions
-;;       '(("pdf" . "start")
-;;         ("mkv" . "vlc")
-;;         ("mp4" . "vlc")
-;;         ("avi" . "vlc")
-;;         ("html" . "firefox")
-;;         ("mp3" . "vlc"))))
-
+;; <CR> to open file under cursor in OS
+(use-package dired-open
+  :after dired
+  :config
+  (defun haba/dired-open-in-os ()
+    "Open file/folder under cursor in OS."
+    (interactive)
+    (let ((file (ignore-errors (dired-get-file-for-visit))))
+      (browse-url (file-truename file))))
+  (setq dired-open-functions '(haba/dired-open-in-os))
+  ;; (setq dired-open-use-nohup nil))
+  )
 ;; dired-open
 ;; dired-filter
 
