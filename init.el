@@ -843,7 +843,7 @@
 
 (use-package bookmark
   :ensure nil
-  :bind (("<f5>" . bookmark-jump)))
+  :bind (("M-g b" . bookmark-jump)))
 
 ;; dired extra stuff
 (use-package dired
