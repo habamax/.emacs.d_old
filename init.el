@@ -208,10 +208,10 @@
          ("C-M-2" . haba/duplicate-line-inc-numbers)
          ("M-<up>" . haba/move-line-up)
          ("M-<down>" . haba/move-line-down)
-         ;; ("<f1>" . haba/previous-buffer-like-this)
-         ;; ("<f2>" . haba/next-buffer-like-this)
-         ;; ("M-<f1>" . previous-buffer)
-         ;; ("M-<f2>" . next-buffer)
+         ("<f1>" . haba/previous-buffer-like-this)
+         ("<f2>" . haba/next-buffer-like-this)
+         ("M-<f1>" . previous-buffer)
+         ("M-<f2>" . next-buffer)
          ("C-c o i" . haba/open-init-file)
          ("C-c o s" . haba/open-scratch-buffer)
          ("C-c o t" . haba/open-todo-file)
@@ -502,8 +502,8 @@
 
 ;; goto last change
 (use-package goto-chg
-  :bind (("<f2>" . goto-last-change)
-         ("<f1>" . goto-last-change-reverse)))
+  :bind (("M-g l" . goto-last-change)
+         ("M-g L" . goto-last-change-reverse)))
 
 ;; sort buffers by git projects
 (use-package ibuffer-vc
