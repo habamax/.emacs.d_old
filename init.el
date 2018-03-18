@@ -537,6 +537,11 @@
   (company-tng-configure-default)
   (global-company-mode))
 
+(use-package company-quickhelp
+  :after company
+  :config
+  (company-quickhelp-mode))
+
 
 ;; (use-package auto-complete
 ;;   :defer 2
