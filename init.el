@@ -502,8 +502,8 @@
 
 ;; goto last change
 (use-package goto-chg
-  :bind (("M-5" . goto-last-change)
-         ("M-6" . goto-last-change-reverse)))
+  :bind (("<f2>" . goto-last-change)
+         ("<f1>" . goto-last-change-reverse)))
 
 ;; sort buffers by git projects
 (use-package ibuffer-vc
