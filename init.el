@@ -485,8 +485,8 @@
 ;; (use-package projectile :defer :diminish projectile-mode)
 
 ;; counsel uses smex for better sorting
-;; (use-package smex :after counsel)
-(use-package amx :after counsel)
+(use-package smex :after counsel)
+;; (use-package amx :after counsel)
 
 ;; (use-package telephone-line
 ;;   :config
