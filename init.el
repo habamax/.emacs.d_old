@@ -907,26 +907,8 @@
   (diredfl-global-mode))
 
 
-;; <CR> to open file under cursor in OS
-;; (use-package dired-open
-;;   :after dired
-;;   :config
-;;   (defun haba/dired-open-in-os ()
-;;     "Open file/folder under cursor in OS."
-;;     (interactive)
-;;     (let ((file (ignore-errors (dired-get-file-for-visit))))
-;;       (browse-url (file-truename file))))
-;;   (setq dired-open-functions '(haba/dired-open-in-os))
-;;   ;; (setq dired-open-use-nohup nil))
-;;   )
-;; dired-open
 ;; dired-filter
 
-
-;; (use-package dired-collapse
-;;   :after dired
-;;   :init
-;;   (add-hook 'dired-mode-hook 'dired-collapse-mode))
 
 (use-package remember
   :bind (("C-c r r" . remember)
