@@ -860,8 +860,9 @@
          ("b" . bookmark-jump)
          ("j" . dired-up-directory)
          ("J" . dired-goto-file)
-         ("<C-return>" . haba/dired-open-in-os)
-         ("TAB" . haba/dired-tab))
+         ("RET" . haba/dired-open-in-os)
+         ("TAB" . haba/dired-tab)
+         ("<mouse-2>" . haba/dired-mouse-find-file))
   :init
   ;; by default hide all details
   ;; you can toggle details using `('
