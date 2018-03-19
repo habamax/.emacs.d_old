@@ -789,13 +789,21 @@
     (setq cider-repl-display-help-banner t)
     (setq cider-repl-use-pretty-printing t)))
 
+
+
 (use-package slime
   :commands (slime)
   :config
+
+  (use-package slime-company
+    :defer
+    :config
+    (setq slime-company-completion 'fuzzy))
+
   ;; (setq inferior-lisp-program "sbcl")
   (load (expand-file-name "~/.roswell/helper.el"))
   (setq inferior-lisp-program "ros -Q run")
-  (slime-setup '(slime-fancy)))
+  (slime-setup '(slime-fancy slime-indentation slime-banner slime-company)))
 
 ;; new golden-ratio
 (use-package zoom
