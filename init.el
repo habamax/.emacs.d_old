@@ -887,6 +887,8 @@
     (let ((file (ignore-errors (dired-get-file-for-visit))))
       (browse-url (file-truename file))))
 
+  ;; need for -select function
+  (require 'dash)
 
   (defun haba/dired-buffer-p (w)
     "Check if window has dired buffer."
