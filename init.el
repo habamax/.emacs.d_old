@@ -860,7 +860,8 @@
          ("b" . bookmark-jump)
          ("j" . dired-up-directory)
          ("J" . dired-goto-file)
-         ("<C-return>" . haba/dired-open-in-os))
+         ("<C-return>" . haba/dired-open-in-os)
+         ("TAB" . haba/dired-tab))
   :init
   ;; by default hide all details
   ;; you can toggle details using `('
@@ -884,15 +885,30 @@
     "Open file/folder under cursor in OS."
     (interactive)
     (let ((file (ignore-errors (dired-get-file-for-visit))))
-      (browse-url (file-truename file)))))
+      (browse-url (file-truename file))))
+
+
+  (defun haba/dired-buffer-p (w)
+    "Check if window has dired buffer."
+    (with-current-buffer (window-buffer w)
+      (when (eql major-mode 'dired-mode)
+        (window-buffer w))))
+
+  (defun haba/dired-tab ()
+    "Create a new dired window if there is only one visible or switch to the next visible dired window.
+
+ New dired window visits directory under cursor of previous dired(?)."
+    (interactive)
+    (let* ((dired-windows (-select #'haba/dired-buffer-p (window-list)))
+           (dired-selected-file (dired-get-filename))
+           (new-path (if (file-directory-p dired-selected-file) dired-selected-file (dired-current-directory))))
+      (if (> (length dired-windows) 1)
+          (select-window (cadr dired-windows))
+        (dired-other-window new-path)))))
 
 (use-package dired-x
   :ensure nil
   :after dired)
-
-(use-package dired-subtree
-  :after dired
-  :bind (:map dired-mode-map ("TAB" . dired-subtree-toggle)))
 
 (use-package dired-ranger
   :after dired
