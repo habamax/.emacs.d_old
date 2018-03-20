@@ -1057,31 +1057,6 @@ dired buffer to be opened."
   (add-hook 'auto-revert-tail-mode-hook 'haba/log-tail-handler))
 
 
-;; (use-package sunrise-commander
-;;   :commands sunrise
-;;   :bind (("<f10>" . sunrise))
-;;   :config
-;;   ;; dirty hack -- otherwise opening smth from sunrise-commander with OS handling doesn't workd
-;;   ;; ERROR feature browse-url not available!
-;;   (ignore-errors (browse-url))
-;;   (setq sr-cursor-follows-mouse nil)
-;;   (define-key sr-mode-map [mouse-1] nil)
-;;   (define-key sr-mode-map [mouse-movement] nil)
-;;   (add-to-list 'savehist-additional-variables 'sr-history-registry)
-;;   (setq sr-attributes-display-mask '(nil nil nil nil t t t))
-;;   (setq sr-show-file-attributes nil))
-
-;; (use-package sunrise-x-checkpoints
-;;   :after sunrise-commander)
-
-;; (use-package sunrise-x-w32-addons
-;;   :if (windows?)
-;;   :after sunrise-commander)
-
-;; (use-package sunrise-x-loop
-;;   :after sunrise-commander)
-
-
 (use-package outline
   :bind (("M-o o" . outline-toggle-children)
          ("M-o h" . outline-hide-body)
