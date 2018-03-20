@@ -796,9 +796,8 @@
 (use-package slime
   :commands (slime)
   :config
-  ;; (setq inferior-lisp-program "sbcl")
-  (load (expand-file-name "~/.roswell/helper.el"))
-  (setq inferior-lisp-program "ros -Q run")
+  (setq inferior-lisp-program "sbcl --noinform")
+  ;; (setq inferior-lisp-program "ros -Q run")
   (slime-setup '(slime-fancy slime-indentation slime-banner slime-company)))
 
 (use-package slime-company
