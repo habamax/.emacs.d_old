@@ -363,6 +363,11 @@
   (setq aw-scope 'frame)
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
+(use-package rotate
+  :bind (("<f5>" . rotate-layout)
+         ("M-<f5>" . rotate-window)))
+
+
 (use-package dumb-jump
   :bind (("M-g o" . dumb-jump-go-other-window)
          ("M-g j" . dumb-jump-go)
