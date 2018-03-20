@@ -927,8 +927,8 @@
  New dired window visits directory under cursor of previous dired(?)."
     (interactive)
     (let* ((dired-windows (-select #'haba/dired-buffer-p (window-list)))
-           (dired-selected-file (dired-get-filename))
-           (new-path (if (file-directory-p dired-selected-file) dired-selected-file (dired-current-directory))))
+           (dired-selected-file (ignore-errors (dired-get-filename)))
+           (new-path (if (and dired-selected-file (file-directory-p dired-selected-file)) dired-selected-file (dired-current-directory))))
       (if (> (length dired-windows) 1)
           (select-window (cadr dired-windows))
         (dired-other-window new-path))))
