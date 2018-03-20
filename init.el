@@ -863,7 +863,7 @@
          ("b" . bookmark-jump)
          ("j" . dired-up-directory)
          ("J" . dired-goto-file)
-         ("RET" . haba/dired-open-in-os)
+         ("<C-return>" . haba/dired-open-in-os)
          ("TAB" . haba/dired-tab)
          ("<mouse-2>" . haba/dired-mouse-find-file))
   :init
