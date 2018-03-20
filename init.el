@@ -169,8 +169,7 @@
 ;; ================================================================================
 (let ((package-protocol (if *is-windows* "http://" "https://")))
   (setq package-archives `(("elpa" . ,(concat package-protocol "elpa.gnu.org/packages/"))
-                           ("melpa" . ,(concat package-protocol "melpa.org/packages/"))
-                           ("SC"   . "http://joseito.republika.pl/sunrise-commander/"))))
+                           ("melpa" . ,(concat package-protocol "melpa.org/packages/")))))
 
 (package-initialize)
 (setq package-enable-at-startup nil)
