@@ -51,6 +51,12 @@
   :group 'asciidoctor-pdf
   :type 'string)
 
+(defcustom asciidoctor-pandoc-executable
+  "pandoc"
+  "pandoc executable."
+  :group 'asciidoctor-pdf
+  :type 'string)
+
 (defcustom asciidoctor-pdf-stylesdir
   ""
   "Directory with asciidoctor-pdf themes."
@@ -211,35 +217,36 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   (interactive)
 
   ;; check if pandoc available
-  
-  (when buffer-file-name
-    (message "AsciiDoctor DOCX compilation...")
-    (let ((tempfname (make-temp-file "asciidoctor")))
-      ;; convert asciidoctor to docbook
-      (shell-command
-       (concat "asciidoctor"
-               " "
-               (seq-reduce '(lambda (s1 s2) (format "%s -r %s" s1 s2)) asciidoctor-extensions "")
-               " "
-               "-a docdate=" (format-time-string "%Y-%m-%d")
-               " "
-               "-a doctime=" (format-time-string "%T")
-               " "
-               "-o " tempfname
-               " "
-               "-b docbook"
-               " "
-               buffer-file-name))
-      ;; TODO: check if succeeded
-      
-      ;; convert docbook to docx
-      (shell-command
-       (concat "pandoc -f docbook -t docx"
-               " "
-               "-o " (concat (file-name-sans-extension buffer-file-name)
-                             ".docx")
-               " "
-               tempfname)))))
+  (if (executable-find asciidoctor-pandoc-executable)
+      (when buffer-file-name
+        (message "AsciiDoctor DOCX compilation...")
+        (let ((tempfname (make-temp-file "asciidoctor")))
+          ;; convert asciidoctor to docbook
+          (shell-command
+           (concat "asciidoctor"
+                   " "
+                   (seq-reduce '(lambda (s1 s2) (format "%s -r %s" s1 s2)) asciidoctor-extensions "")
+                   " "
+                   "-a docdate=" (format-time-string "%Y-%m-%d")
+                   " "
+                   "-a doctime=" (format-time-string "%T")
+                   " "
+                   "-o " tempfname
+                   " "
+                   "-b docbook"
+                   " "
+                   buffer-file-name))
+          ;; convert docbook to docx
+          (shell-command
+           (concat asciidoctor-pandoc-executable
+                   " "
+                   "-f docbook -t docx"
+                   " "
+                   "-o " (concat (file-name-sans-extension buffer-file-name)
+                                 ".docx")
+                   " "
+                   tempfname))))
+    (message "Can't find pandoc tool!")))
 
 (defun asciidoctor-open-pdf ()
   "Open compiled PDF file."
