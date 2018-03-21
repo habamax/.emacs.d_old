@@ -205,6 +205,42 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
                " "
                buffer-file-name)))))
 
+
+(defun asciidoctor-compile-docx ()
+  "Compile AsciiDoc file to DOCX, using asciidoctor and pandoc."
+  (interactive)
+
+  ;; check if pandoc available
+  
+  (when buffer-file-name
+    (message "AsciiDoctor DOCX compilation...")
+    (let ((tempfname (make-temp-file "asciidoctor")))
+      ;; convert asciidoctor to docbook
+      (shell-command
+       (concat "asciidoctor"
+               " "
+               (seq-reduce '(lambda (s1 s2) (format "%s -r %s" s1 s2)) asciidoctor-extensions "")
+               " "
+               "-a docdate=" (format-time-string "%Y-%m-%d")
+               " "
+               "-a doctime=" (format-time-string "%T")
+               " "
+               "-o " tempfname
+               " "
+               "-b docbook"
+               " "
+               buffer-file-name))
+      ;; TODO: check if succeeded
+      
+      ;; convert docbook to docx
+      (shell-command
+       (concat "pandoc -f docbook -t docx"
+               " "
+               "-o " (concat (file-name-sans-extension buffer-file-name)
+                             ".docx")
+               " "
+               tempfname)))))
+
 (defun asciidoctor-open-pdf ()
   "Open compiled PDF file."
   (interactive)
@@ -219,7 +255,12 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
                (file-name-sans-extension buffer-file-name)
                ".html")))
 
-
+(defun asciidoctor-open-docx ()
+  "Open compiled DOCX file."
+  (interactive)
+  (browse-url (concat
+               (file-name-sans-extension buffer-file-name)
+               ".docx")))
 
 (defvar asciidoctor-mode-map
   (let ((map (make-sparse-keymap)))
