@@ -272,6 +272,7 @@
               ("C-c C-y" . asciidoctor-save-image-insert-link))
   :config
   ;; (setq asciidoctor-pdf-executable (concat "ruby " (expand-file-name "~/projects/asciidoctor-pdf/bin/asciidoctor-pdf")))
+  (setq asciidoctor-pandoc-data-dir "~/docs/templates/")
   (setq asciidoctor-pdf-stylesdir "~/docs/AsciiDocThemes")
   (setq asciidoctor-pdf-fontsdir "~/docs/AsciiDocThemes/fonts")
   (setq asciidoctor-pdf-extensions '("asciidoctor-diagram"))

@@ -57,6 +57,12 @@
   :group 'asciidoctor-pdf
   :type 'string)
 
+(defcustom asciidoctor-pandoc-data-dir
+  ""
+  "Directory with pandoc data files."
+  :group 'asciidoctor-pdf
+  :type 'string)
+
 (defcustom asciidoctor-pdf-stylesdir
   ""
   "Directory with asciidoctor-pdf themes."
@@ -202,12 +208,10 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
                (seq-reduce '(lambda (s1 s2) (format "%s -r %s" s1 s2)) asciidoctor-pdf-extensions "")
                " "
                (when (not (string= "" pdf-stylesdir))
-                 (concat "-a pdf-stylesdir=" pdf-stylesdir)
-                 )
+                 (concat "-a pdf-stylesdir=" pdf-stylesdir))
                " "
                (when (not (string= "" pdf-fontsdir))
-                 (concat "-a pdf-fontsdir=" pdf-fontsdir)
-                 )
+                 (concat "-a pdf-fontsdir=" pdf-fontsdir))
                " "
                buffer-file-name)))))
 
@@ -237,15 +241,19 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
                    " "
                    buffer-file-name))
           ;; convert docbook to docx
-          (shell-command
-           (concat asciidoctor-pandoc-executable
-                   " "
-                   "-f docbook -t docx"
-                   " "
-                   "-o " (concat (file-name-sans-extension buffer-file-name)
-                                 ".docx")
-                   " "
-                   tempfname))))
+          (let ((data-dir (expand-file-name asciidoctor-pandoc-data-dir)))
+            (shell-command
+             (concat asciidoctor-pandoc-executable
+                     " "
+                     "-f docbook -t docx"
+                     " "
+                     (when (not (string= "" data-dir))
+                       (concat "--data-dir " data-dir))
+                     " "
+                     "-o " (concat (file-name-sans-extension buffer-file-name)
+                                   ".docx")
+                     " "
+                     tempfname)))))
     (message "Can't find pandoc tool!")))
 
 (defun asciidoctor-open-pdf ()
