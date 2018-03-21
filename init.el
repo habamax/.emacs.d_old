@@ -609,6 +609,10 @@
 (use-package aggressive-indent
   :hook ((emacs-lisp-mode lisp-mode) . aggressive-indent-mode))
 
+(use-package hl-lisp-globals-mode
+  :ensure nil
+  :load-path "lisp"
+  :hook ((emacs-lisp-mode lisp-mode) . hl-lisp-globals-mode))
 
 (use-package smartparens
   :diminish smartparens-mode

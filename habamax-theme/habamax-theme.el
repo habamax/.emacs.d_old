@@ -23,7 +23,7 @@
 
 ;;; Code:
 
-(deftheme habamax "and no description yet...")
+(deftheme habamax "White theme")
 
 (let
     ((color-fg "#000000")
@@ -66,10 +66,10 @@
 
 
    ;; frame UI
-   '(mode-line ((t (:background "#b5d5f5" :foreground "#406582"))))
+   '(mode-line ((t (:background "#b5d5f5" :foreground "#406582" :box (:line-width 1 :color "#77B3E5")))))
    `(mode-line-highlight ((t (:foreground ,color-keyword))))
    '(mode-line-buffer-id ((t (:foreground "#000000" :weight bold))))
-   '(mode-line-inactive ((t (:background "#e0e5e2" :foreground "#505552"))))
+   '(mode-line-inactive ((t (:background "#e0e5e2" :foreground "#505552" :box (:line-width 1 :color "#CECECE")))))
    `(vertical-border ((nil (:foreground ,color-gray))))
    `(fringe ((nil (:background ,color-bg))))
 
@@ -85,17 +85,20 @@
 
    ;; syntax font-lock I DO care about
    `(font-lock-string-face ((t (:foreground ,color-str))))
-   `(font-lock-comment-face ((t (:foreground ,color-comment))))
+   `(font-lock-comment-face ((t (:foreground ,color-comment :slant italic))))
    `(font-lock-keyword-face ((t (:foreground ,color-keyword))))
    `(font-lock-builtin-face ((t (:foreground ,color-keyword-dim))))
    `(font-lock-function-name-face ((t (:foreground ,color-fg))))
-   `(font-lock-type-face ((t (:foreground ,color-keyword))))
    ;; syntax font-lock I DON'T care about
    '(font-lock-variable-name-face ((t nil)))
    '(font-lock-constant-face ((t nil)))
+   '(font-lock-type-face ((t (nil))))
    ;; review this later.
    ;; `(font-lock-regexp-grouping-backslash ((t (:foreground ,color-str :weight bold))))
    ;; `(font-lock-regexp-grouping-construct ((t (:foreground ,color-str :weight bold :slant italic))))
+
+   '(lisp-global-var-face ((t (:inherit default :weight bold))))
+   '(lisp-constant-var-face ((t (:inherit lisp-global-var-face))))
 
 
    ;; parenthesis and pairs
