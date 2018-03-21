@@ -7,10 +7,10 @@
 ;;; Code:
 
 ;; Start measuring loading time
-(defconst emacs-start-time (current-time))
+(defconst +emacs-start-time+ (current-time))
 
-(defconst *is-osx* (eq system-type 'darwin))
-(defconst *is-windows* (eq system-type 'windows-nt))
+(defconst +is-osx+ (eq system-type 'darwin))
+(defconst +is-windows+ (eq system-type 'windows-nt))
 
 ;; ================================================================================
 ;; Non-Package setup
@@ -24,7 +24,7 @@
 
 
 ;; General OSX setup
-(when *is-osx*
+(when +is-osx+
   ;; No new frames for files that are opened from OSX
   (setq ns-pop-up-frames nil)
   ;; Show menu by default
@@ -33,7 +33,7 @@
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'control))
 
-(when (not *is-osx*)
+(when (not +is-osx+)
   (menu-bar-mode -1))
 
 (when window-system
@@ -56,7 +56,7 @@
 ;; This is windows only
 ;; I have finally solved the problem of external processes to use Russian language,
 ;; Now rg.exe can actually search Russian words from Emacs.
-(when *is-windows*
+(when +is-windows+
   (setq default-process-coding-system '(utf-8-dos . cp1251-dos)))
 
 ;; make unix lineendings default
@@ -157,7 +157,7 @@
 
 ;; For OSX emacs fullscreen is OK, Windows on the other hand flicks and flocks on startup.
 ;; For Windows and Linux use "-geometry 120x40" (example) to set initial size.
-(if *is-osx*
+(if +is-osx+
     (setq default-frame-alist '((fullscreen . maximized)
                                 (vertical-scroll-bars . nil)))
   (setq default-frame-alist '((fullscreen . nil)
@@ -167,7 +167,7 @@
 ;; ================================================================================
 ;; Set up packaging system
 ;; ================================================================================
-(let ((package-protocol (if *is-windows* "http://" "https://")))
+(let ((package-protocol (if +is-windows+ "http://" "https://")))
   (setq package-archives `(("elpa" . ,(concat package-protocol "elpa.gnu.org/packages/"))
                            ("melpa" . ,(concat package-protocol "melpa.org/packages/")))))
 
@@ -274,7 +274,7 @@
   (setq asciidoctor-pdf-fontsdir "~/docs/AsciiDocThemes/fonts")
   (setq asciidoctor-pdf-extensions '("asciidoctor-diagram"))
   (setq asciidoctor-extensions '("asciidoctor-diagram" "asciidoctor-rouge"))
-  (when *is-osx*
+  (when +is-osx+
     (setq asciidoctor-clipboard-backend "pngpaste %s%s")))
 
 
@@ -292,7 +292,7 @@
 
 ;; PATH for OSX
 (use-package exec-path-from-shell
-  :if *is-osx*
+  :if +is-osx+
   :config
   (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
@@ -885,7 +885,7 @@
   ;; Load ls-lisp to use built in ls implemented in lisp.
   ;; For windows it is preloaded automatically.
   ;; PS: it is possible to install coreutils with GNU ls...
-  (when *is-osx*
+  (when +is-osx+
     (require 'ls-lisp)
     (setq ls-lisp-use-insert-directory-program nil))
   (setq ls-lisp-dirs-first t)
@@ -1126,7 +1126,7 @@ dired buffer to be opened."
 ;; ================================================================================
 (defun display-startup-echo-area-message ()
   (let ((elapsed (float-time (time-subtract (current-time)
-                                            emacs-start-time))))
+                                            +emacs-start-time+))))
     (message "Loading Emacs configuration... DONE (%.3fs),  overral emacs-init-time: %s" elapsed (emacs-init-time))))
 
 ;;; init.el ends here
