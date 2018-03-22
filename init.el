@@ -1108,8 +1108,7 @@ dired buffer to be opened."
     (setq rcirc-omit-mode nil)
     (rcirc-omit-mode))
 
-  (add-hook 'rcirc-mode-hook 'haba/rcirc-mode-setup)
-  )
+  (add-hook 'rcirc-mode-hook 'haba/rcirc-mode-setup))
 
 (use-package calendar
   :init
