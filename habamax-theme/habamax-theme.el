@@ -1,37 +1,29 @@
-;;; habamax-theme.el --- no description, but it should be whity and plainy
+;;; habamax-theme.el --- Boring white background color that gets the job done.
 
 ;; Author: Maxim Kim <habamax@gmail.com>
 ;; Url: https://github.com/habamax/habamax-theme
 ;; Package-Requires: ((emacs "24"))
 
 ;;; Commentary:
-
-;; 0. background -- snowwhite
-;; 1. keywords -- blueish
-;; 2. strings -- greenish
-;; 3. comments -- just gray
-
 ;;; TODO:
-
 ;; highlight line
 ;; magit highlight
 ;; diff mode colors refinements
-;; TODO: colors
 ;; minimal org mode refinements
 ;; ivy and swiper
 ;; isearch
 
 ;;; Code:
 
-(deftheme habamax "White theme")
+(deftheme habamax "Boring white. Gets the job done.")
 
 (let
     ((color-fg "#000000")
      (color-bg "#ffffff")
      (color-dim-bg "#f5f9fe")
      (color-keyword "#0000ff")
-     (color-keyword-dim "#204060")
-     (color-str "#901515")
+     (color-keyword-dim "#006363")
+     (color-str "#811111")
      ;; (color-str "#008000")
      (color-comment "#808080")
      (color-gray "#7a7a7a")
@@ -41,17 +33,16 @@
      ;; (color-bg-done "#777777")
      (color-title "#000000")
      (color-heading "#000000")
-     (color-url "#0000ff")
-     (color-url-visited "#7070ff")
+     (color-url "#3737D6")
+     (color-url-visited "#806088")
      (color-bg-highlight "#c7e7e7"))
 
   (custom-theme-set-faces
    'habamax
 
-   ;; standard faces
+;;; standard faces
    `(default ((t (:background ,color-bg :foreground ,color-fg))))
    '(cursor ((nil (:background "#000000"))))
-   ;; '(region ((t (:background "#f0e0a0"))))
    '(region ((t (:background "#f4e7b4"))))
    `(highlight ((nil (:background ,color-bg-highlight))))
    `(minibuffer-prompt ((t (:foreground ,color-keyword-dim :background ,color-dim-bg :weight bold))))
@@ -132,17 +123,6 @@
    '(diredfl-exec-priv ((t (:background "#FFEDFFp" :foreground "#AA00AA"))))
    '(diredfl-no-priv ((t (:inherit default))))
    '(diredfl-flag-mark-line ((t (:background "#FFE0E0"))))
-   
-   ;; dired-subtree
-   '(dired-subtree-depth-1-face ((t (:background "#f0f0f0"))))
-   '(dired-subtree-depth-2-face ((t (:background "#ffffff"))))
-   '(dired-subtree-depth-3-face ((t (:background "#f0f0f0"))))
-   '(dired-subtree-depth-4-face ((t (:background "#ffffff"))))
-   '(dired-subtree-depth-5-face ((t (:background "#f0f0f0"))))
-   '(dired-subtree-depth-6-face ((t (:background "#ffffff"))))
-   '(dired-subtree-depth-7-face ((t (:background "#f0f0f0"))))
-   '(dired-subtree-depth-8-face ((t (:background "#ffffff"))))
-   '(dired-subtree-depth-9-face ((t (:background "#f0f0f0"))))
    
    ;; sunrise-commander
    '(sr-active-path-face ((t (:background "#000000" :foreground "#ffffff" :weight bold))))
@@ -359,12 +339,11 @@
    '(rainbow-delimiters-depth-2-face ((t (:foreground "#8a2be2"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "#008b8b"))))
    '(rainbow-delimiters-depth-4-face ((t (:foreground "#ff7f50"))))
-   '(rainbow-delimiters-depth-5-face ((t (:foreground "#000000"))))
-   '(rainbow-delimiters-depth-6-face ((t (:foreground "#8a2be2"))))
-   '(rainbow-delimiters-depth-7-face ((t (:foreground "#008b8b"))))
-   '(rainbow-delimiters-depth-8-face ((t (:foreground "#ff7f50"))))
+   '(rainbow-delimiters-depth-5-face ((t (:foreground "#3450F2"))))
+   '(rainbow-delimiters-depth-6-face ((t (:foreground "#6F1E54"))))
+   '(rainbow-delimiters-depth-7-face ((t (:foreground "#0DB100"))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "#47D2E5"))))
    '(rainbow-delimiters-depth-9-face ((t (:foreground "#000000"))))
-
 
    ;; asciidoctor-mode
    ;; `(asciidoctor-header-delimiter-face ((t (:foreground ,color-fg-dim))))
