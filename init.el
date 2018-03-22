@@ -551,6 +551,7 @@
   (company-quickhelp-mode))
 
 
+;;; just in case
 ;; (use-package auto-complete
 ;;   :defer 2
 ;;   :bind (("C-M-i" . auto-complete))
@@ -817,7 +818,7 @@
   :diminish zoom-mode
   :defer 3
   :config
-  (setq zoom-size '(90 . 30))
+  (setq zoom-size '(100 . 33))
   (zoom-mode))
 
 
