@@ -818,7 +818,7 @@
   :diminish zoom-mode
   :defer 3
   :config
-  (setq zoom-size '(100 . 33))
+  (setq zoom-size '(90 . 33))
   (zoom-mode))
 
 
