@@ -443,10 +443,8 @@
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("M-s g" . counsel-git)
-         ;; ("M-s s" . counsel-grep-or-swiper)
          ("C-s" . counsel-grep-or-swiper)
          ("M-s r" . counsel-rg)
-         ("C-M-y" . counsel-yank-pop)
          ("C-h a" . counsel-apropos)
          ("C-x 8 RET" . counsel-unicode-char)
          :map ivy-minibuffer-map
@@ -481,17 +479,20 @@
 
   (setq counsel-yank-pop-separator (concat "\n" (make-string 70 ?-) "\n"))
 
-  (counsel-set-async-exit-code 'haba/counsel-projectile-rg-todo 1 "No matches found")
   (counsel-mode 1))
 
-;; (use-package counsel-projectile
-;;   :bind (("C-c p SPC" . counsel-projectile)
-;;          ("C-c p p" . counsel-projectile-switch-project)
-;;          ("C-c p f" . counsel-projectile-find-file))
-;;   :config
-;;   (counsel-projectile-mode))
+(use-package counsel-projectile
+  :bind (("C-c p SPC" . counsel-projectile)
+         ("C-c p p" . counsel-projectile-switch-project)
+         ("C-c p f" . counsel-projectile-find-file))
+  :config
+  (counsel-projectile-mode))
 
-;; (use-package projectile :defer :diminish projectile-mode)
+(use-package projectile
+  :defer
+  :diminish projectile-mode
+  :config
+  (setq projectile-completion-system 'ivy))
 
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)
