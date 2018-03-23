@@ -27,14 +27,15 @@
 (when +is-osx+
   ;; No new frames for files that are opened from OSX
   (setq ns-pop-up-frames nil)
-  ;; Show menu by default
-  (menu-bar-mode 1)
   ;; command to meta, option to control
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'control))
 
-(when (not +is-osx+)
-  (menu-bar-mode -1))
+;; (when (not +IS-OSX+)
+;;   (menu-bar-mode -1))
+
+;; Show menu by default
+(menu-bar-mode 1)
 
 (when window-system
   (tool-bar-mode -1))
