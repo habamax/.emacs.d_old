@@ -7,10 +7,10 @@
 ;;; Code:
 
 ;; Start measuring loading time
-(defconst +emacs-start-time+ (current-time))
+(defconst +EMACS-START-TIME+ (current-time))
 
-(defconst +is-osx+ (eq system-type 'darwin))
-(defconst +is-windows+ (eq system-type 'windows-nt))
+(defconst +IS-OSX+ (eq system-type 'darwin))
+(defconst +IS-WINDOWS+ (eq system-type 'windows-nt))
 
 ;; ================================================================================
 ;; Non-Package setup
@@ -24,7 +24,7 @@
 
 
 ;; General OSX setup
-(when +is-osx+
+(when +IS-OSX+
   ;; No new frames for files that are opened from OSX
   (setq ns-pop-up-frames nil)
   ;; command to meta, option to control
@@ -57,7 +57,7 @@
 ;; This is windows only
 ;; I have finally solved the problem of external processes to use Russian language,
 ;; Now rg.exe can actually search Russian words from Emacs.
-(when +is-windows+
+(when +IS-WINDOWS+
   (setq default-process-coding-system '(utf-8-dos . cp1251-dos)))
 
 ;; make unix lineendings default
@@ -158,7 +158,7 @@
 
 ;; For OSX emacs fullscreen is OK, Windows on the other hand flicks and flocks on startup.
 ;; For Windows and Linux use "-geometry 120x40" (example) to set initial size.
-(if +is-osx+
+(if +IS-OSX+
     (setq default-frame-alist '((fullscreen . maximized)
                                 (vertical-scroll-bars . nil)))
   (setq default-frame-alist '((fullscreen . nil)
@@ -168,7 +168,7 @@
 ;; ================================================================================
 ;; Set up packaging system
 ;; ================================================================================
-(let ((package-protocol (if +is-windows+ "http://" "https://")))
+(let ((package-protocol (if +IS-WINDOWS+ "http://" "https://")))
   (setq package-archives `(("elpa" . ,(concat package-protocol "elpa.gnu.org/packages/"))
                            ("melpa" . ,(concat package-protocol "melpa.org/packages/")))))
 
@@ -278,7 +278,7 @@
   (setq asciidoctor-pdf-fontsdir "~/docs/AsciiDocThemes/fonts")
   (setq asciidoctor-pdf-extensions '("asciidoctor-diagram"))
   (setq asciidoctor-extensions '("asciidoctor-diagram" "asciidoctor-rouge"))
-  (when +is-osx+
+  (when +IS-OSX+
     (setq asciidoctor-clipboard-backend "pngpaste %s%s")))
 
 
@@ -296,7 +296,7 @@
 
 ;; PATH for OSX
 (use-package exec-path-from-shell
-  :if +is-osx+
+  :if +IS-OSX+
   :config
   (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
@@ -634,6 +634,9 @@
               ;; ("M-A" . sp-beginning-of-previous-sexp)
               ;; ("M-e" . sp-end-of-sexp)
               ;; ("M-E" . sp-end-of-next-sexp)
+              :map lisp-interaction-mode-map
+              ("M-2" . sp-clone-sexp)
+              ("C-M-t" . sp-transpose-sexp)
               ("M-e" . sp-forward-sexp)
               ("M-a" . sp-backward-sexp)
               ("C-M-n" . sp-next-sexp)
@@ -642,16 +645,31 @@
               ("C-M-d" . sp-down-sexp)
               ("C-M-;" . sp-comment)
               ("C-M-j" . sp-join-sexp)
-              ("C-M-<up>" . sp-raise-sexp)
-              :map lisp-interaction-mode-map
-              ("M-2" . sp-clone-sexp)
-              ("M-t" . sp-transpose-sexp)
+              ("M-r" . sp-raise-sexp)
               :map emacs-lisp-mode-map
               ("M-2" . sp-clone-sexp)
               ("M-t" . sp-transpose-sexp)
+              ("M-e" . sp-forward-sexp)
+              ("M-a" . sp-backward-sexp)
+              ("C-M-n" . sp-next-sexp)
+              ("C-M-p" . sp-previous-sexp)
+              ("C-M-u" . sp-up-sexp)
+              ("C-M-d" . sp-down-sexp)
+              ("C-M-;" . sp-comment)
+              ("C-M-j" . sp-join-sexp)
+              ("M-r" . sp-raise-sexp)
               :map lisp-mode-map
               ("M-2" . sp-clone-sexp)
-              ("M-t" . sp-transpose-sexp))
+              ("C-M-t" . sp-transpose-sexp)
+              ("M-e" . sp-forward-sexp)
+              ("M-a" . sp-backward-sexp)
+              ("C-M-n" . sp-next-sexp)
+              ("C-M-p" . sp-previous-sexp)
+              ("C-M-u" . sp-up-sexp)
+              ("C-M-d" . sp-down-sexp)
+              ("C-M-;" . sp-comment)
+              ("C-M-j" . sp-join-sexp)
+              ("M-r" . sp-raise-sexp))
   ;; add more "standard bindings"
   ;; and maybe the following
   ;; sp-emit-sexp
@@ -890,7 +908,7 @@
   ;; Load ls-lisp to use built in ls implemented in lisp.
   ;; For windows it is preloaded automatically.
   ;; PS: it is possible to install coreutils with GNU ls...
-  (when +is-osx+
+  (when +IS-OSX+
     (require 'ls-lisp)
     (setq ls-lisp-use-insert-directory-program nil))
   (setq ls-lisp-dirs-first t)
@@ -1130,7 +1148,7 @@ dired buffer to be opened."
 ;; ================================================================================
 (defun display-startup-echo-area-message ()
   (let ((elapsed (float-time (time-subtract (current-time)
-                                            +emacs-start-time+))))
+                                            +EMACS-START-TIME+))))
     (message "Loading Emacs configuration... DONE (%.3fs),  overral emacs-init-time: %s" elapsed (emacs-init-time))))
 
 ;;; init.el ends here
