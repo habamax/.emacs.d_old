@@ -255,7 +255,7 @@
   (load-theme 'habamax t))
 
 (use-package kosmos-theme :defer
-  :load-path "habamax-theme/")
+  :load-path "kosmos-theme/")
 
 (use-package asciidoctor-mode
   :ensure nil
