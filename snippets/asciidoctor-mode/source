@@ -2,7 +2,7 @@
 # name: source code
 # key: src
 # --
-[source$1]
+[source,${1:text}]
 ----
 $0
 ----

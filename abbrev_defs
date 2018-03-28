@@ -3,20 +3,11 @@
 
 (define-abbrev-table 'Info-edit-mode-abbrev-table '())
 
-(define-abbrev-table 'asciidoctor-mode-abbrev-table
-  '(
-    ("cau" "CAUTION:" nil 1)
-    ("imp" "IMPORTANT:" nil 1)
-    ("note" "NOTE:" nil 7)
-    ("teh" "the" nil 1)
-    ("tip" "TIP:" nil 1)
-    ("warn" "WARNING:" nil 3)
-    ("ешз" "TIP:" nil 2)
-    ("сфг" "CAUTION:" nil 2)
-    ("тщеу" "NOTE:" nil 3)
-    ("цфкт" "WARNING:" nil 2)
-    ("шьз" "IMPORTANT:" nil 1)
-   ))
+(define-abbrev-table 'asciidoctor-mode-abbrev-table '())
+
+(define-abbrev-table 'bookmark-bmenu-mode-abbrev-table '())
+
+(define-abbrev-table 'bookmark-edit-annotation-mode-abbrev-table '())
 
 (define-abbrev-table 'calendar-mode-abbrev-table '())
 
@@ -26,9 +17,25 @@
 
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
 
+(define-abbrev-table 'conf-colon-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-javaprop-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-ppd-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-space-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-unix-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-windows-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-xdefaults-mode-abbrev-table '())
+
 (define-abbrev-table 'debugger-mode-abbrev-table '())
 
 (define-abbrev-table 'diff-mode-abbrev-table '())
+
+(define-abbrev-table 'display-time-world-mode-abbrev-table '())
 
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
 
@@ -41,9 +48,20 @@
 (define-abbrev-table 'global-abbrev-table
   '(
     ("amail" "maksim.kim@adastragrp.com" nil 4)
-    ("hmail" "habamax@gmail.com" nil 3)
-    ("todo" "TODO:" nil 4)
+    ("cau" "CAUTION:" nil 1)
+    ("hmail" "habamax@gmail.com" nil 4)
+    ("impo" "IMPORTANT:" nil 1)
+    ("noteme" "NOTE:" nil 8)
+    ("teh" "the" nil 1)
+    ("tipme" "TIP:" nil 1)
+    ("todo" "TODO:" nil 5)
+    ("warn" "WARNING:" nil 3)
+    ("ешзьу" "TIP:" nil 2)
     ("ещвщ" "TODO:" nil 1)
+    ("сфг" "CAUTION:" nil 2)
+    ("тщеуьу" "NOTE:" nil 3)
+    ("цфкт" "WARNING:" nil 2)
+    ("шьзщ" "IMPORTANT:" nil 1)
    ))
 
 (define-abbrev-table 'grep-mode-abbrev-table '())
@@ -128,6 +146,8 @@
 
 (define-abbrev-table 'url-cookie-mode-abbrev-table '())
 
+(define-abbrev-table 'use-package-statistics-mode-abbrev-table '())
+
 (define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
@@ -135,4 +155,6 @@
 (define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
 
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'yaml-mode-abbrev-table '())
 
