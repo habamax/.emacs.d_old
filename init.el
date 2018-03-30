@@ -476,6 +476,8 @@
   (setq counsel-git-cmd "rg --files")
   (setq counsel-rg-base-command
         "rg -i -M 120 --no-heading --line-number --color never %s .")
+  (setq counsel-grep-base-command
+        "rg -i -M 120 --no-heading --line-number --color never %s %s")
 
   (setq counsel-yank-pop-separator (concat "\n" (make-string 70 ?-) "\n"))
 
