@@ -621,86 +621,6 @@
   :load-path "lisp"
   :hook ((emacs-lisp-mode lisp-mode) . hl-lisp-globals-mode))
 
-(use-package smartparens
-  :diminish smartparens-mode
-  :hook (prog-mode . smartparens-mode)
-  :bind (:map smartparens-mode-map
-              ("C-M-k" . sp-kill-hybrid-sexp)
-              ("C-9" . sp-backward-slurp-sexp)
-              ("C-0" . sp-forward-slurp-sexp)
-              ("M-9" . sp-backward-barf-sexp)
-              ("M-0" . sp-forward-barf-sexp)
-              ("C-M-SPC" . sp-mark-sexp)
-              ;; ("M-a" . sp-beginning-of-sexp)
-              ;; ("M-A" . sp-beginning-of-previous-sexp)
-              ;; ("M-e" . sp-end-of-sexp)
-              ;; ("M-E" . sp-end-of-next-sexp)
-              :map lisp-interaction-mode-map
-              ("M-2" . sp-clone-sexp)
-              ("C-M-t" . sp-transpose-sexp)
-              ("M-e" . sp-forward-sexp)
-              ("M-a" . sp-backward-sexp)
-              ("C-M-n" . sp-next-sexp)
-              ("C-M-p" . sp-previous-sexp)
-              ("C-M-u" . sp-up-sexp)
-              ("C-M-d" . sp-down-sexp)
-              ("C-M-;" . sp-comment)
-              ("C-M-j" . sp-join-sexp)
-              ("M-r" . sp-raise-sexp)
-              :map emacs-lisp-mode-map
-              ("M-2" . sp-clone-sexp)
-              ("M-t" . sp-transpose-sexp)
-              ("M-e" . sp-forward-sexp)
-              ("M-a" . sp-backward-sexp)
-              ("C-M-n" . sp-next-sexp)
-              ("C-M-p" . sp-previous-sexp)
-              ("C-M-u" . sp-up-sexp)
-              ("C-M-d" . sp-down-sexp)
-              ("C-M-;" . sp-comment)
-              ("C-M-j" . sp-join-sexp)
-              ("M-r" . sp-raise-sexp)
-              :map lisp-mode-map
-              ("M-2" . sp-clone-sexp)
-              ("C-M-t" . sp-transpose-sexp)
-              ("M-e" . sp-forward-sexp)
-              ("M-a" . sp-backward-sexp)
-              ("C-M-n" . sp-next-sexp)
-              ("C-M-p" . sp-previous-sexp)
-              ("C-M-u" . sp-up-sexp)
-              ("C-M-d" . sp-down-sexp)
-              ("C-M-;" . sp-comment)
-              ("C-M-j" . sp-join-sexp)
-              ("M-r" . sp-raise-sexp))
-  ;; add more "standard bindings"
-  ;; and maybe the following
-  ;; sp-emit-sexp
-  ;; sp-split-sexp
-  ;; sp-absorb-sexp
-  ;; sp-splice-sexp (remove brackets M-Backspace)
-  ;; sp-cheat-sheet (very good)
-  ;; sp-next-sexp (C-M-n)
-  ;; sp-convolute-sexp
-  :defer 3
-  :config
-  (require 'smartparens-config)
-  ;;(setq sp-base-key-bindings 'sp)
-  ;;(sp-use-smartparens-bindings)
-  (smartparens-global-mode)
-  (show-smartparens-global-mode)
-
-  ;; wrap selection with a symbols
-  (sp-pair "*" "*" :actions '(wrap))
-  (sp-pair "_" "_" :actions '(wrap))
-  (sp-pair "=" "=" :actions '(wrap))
-  (sp-pair "+" "+" :actions '(wrap))
-  (sp-pair "/" "/" :actions '(wrap))
-  (sp-pair "$" "$" :actions '(wrap))
-  (sp-pair "-" "-" :actions '(wrap))
-  (sp-pair "«" "»" :actions '(wrap))
-  (sp-pair "“" "”" :actions '(wrap))
-  (sp-pair "´" "´" :actions '(wrap))
-  (sp-pair "`" "`" :actions '(wrap))
-  (sp-pair "'" "'" :actions '(wrap)))
 
 (use-package magit
   :commands (magit-status)
@@ -781,6 +701,70 @@
   :commands (flyspell-mode flyspell-prog-mode)
   :config (setq ispell-program-name (executable-find "aspell")
                 ispell-extra-args '("--sug-mode=ultra")))
+
+
+(use-package smartparens
+  :diminish smartparens-mode
+  :hook (prog-mode . smartparens-mode)
+  :bind (:map smartparens-mode-map
+              ("M-2" . sp-clone-sexp)
+              ("C-M-k" . sp-kill-hybrid-sexp)
+              ("C-M-w" . sp-copy-sexp)
+              ("C-M-f" . sp-forward-sexp)
+              ("C-M-b" . sp-backward-sexp)
+              ("C-M-a" . sp-backward-down-sexp)
+              ("C-M-e" . sp-up-sexp)
+              ("C-M-d" . sp-down-sexp)
+              ("C-M-u" . sp-backward-up-sexp)
+              ("C-M-n" . sp-next-sexp)
+              ("C-M-p" . sp-previous-sexp)
+              ("M-<backspace>" . sp-unwrap-sexp)
+              ("C-S-<backspace>" . sp-splice-sexp-killing-forward)
+              ("C-M-<backspace>" . sp-splice-sexp-killing-around)
+              ("C-(" . sp-backward-slurp-sexp)
+              ("C-)" . sp-forward-slurp-sexp)
+              ("M-(" . sp-backward-barf-sexp)
+              ("M-)" . sp-forward-barf-sexp)
+              ("C-M-SPC" . sp-mark-sexp)
+              :map lisp-interaction-mode-map
+              ("M-e" . sp-end-of-sexp)
+              ("M-a" . sp-beginning-of-sexp)
+              :map emacs-lisp-mode-map
+              ("M-e" . sp-end-of-sexp)
+              ("M-a" . sp-beginning-of-sexp)
+              :map lisp-mode-map
+              ("M-e" . sp-end-of-sexp)
+              ("M-a" . sp-beginning-of-sexp))
+  ;; add more "standard bindings"
+  ;; and maybe the following
+  ;; sp-emit-sexp
+  ;; sp-split-sexp
+  ;; sp-absorb-sexp
+  ;; sp-splice-sexp (remove brackets M-Backspace)
+  ;; sp-cheat-sheet (very good)
+  ;; sp-next-sexp (C-M-n)
+  ;; sp-convolute-sexp
+  :defer 3
+  :config
+  (require 'smartparens-config)
+  ;;(setq sp-base-key-bindings 'sp)
+  ;;(sp-use-smartparens-bindings)
+  (smartparens-global-mode)
+  (show-smartparens-global-mode)
+
+  ;; wrap selection with a symbols
+  (sp-pair "*" "*" :actions '(wrap))
+  (sp-pair "_" "_" :actions '(wrap))
+  (sp-pair "=" "=" :actions '(wrap))
+  (sp-pair "+" "+" :actions '(wrap))
+  (sp-pair "/" "/" :actions '(wrap))
+  (sp-pair "$" "$" :actions '(wrap))
+  (sp-pair "-" "-" :actions '(wrap))
+  (sp-pair "«" "»" :actions '(wrap))
+  (sp-pair "“" "”" :actions '(wrap))
+  (sp-pair "´" "´" :actions '(wrap))
+  (sp-pair "`" "`" :actions '(wrap))
+  (sp-pair "'" "'" :actions '(wrap)))
 
 
 (use-package ztree :defer)
