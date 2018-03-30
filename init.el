@@ -661,8 +661,8 @@
 (use-package plantuml-mode
   :mode ("\\.\\(uml\\)$" . plantuml-mode))
 
-(use-package go-mode
-  :mode ("\\.\\(go\\)$" . go-mode))
+;; (use-package go-mode
+;;   :mode ("\\.\\(go\\)$" . go-mode))
 
 (use-package web-mode
   :mode ("\\.\\(html\\|css\\)$" . web-mode)
