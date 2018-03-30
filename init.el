@@ -815,7 +815,25 @@
   :config
   (setq inferior-lisp-program "sbcl --noinform")
   ;; (setq inferior-lisp-program "ros -Q run")
-  (slime-setup '(slime-fancy slime-indentation slime-banner slime-company)))
+  (slime-setup '(; this is slime-fancy without slime-editing-commands and slime-c-p-c
+                 slime-repl
+                 slime-autodoc
+                 slime-fancy-inspector
+                 slime-fancy-trace
+                 slime-fuzzy
+                 slime-mdot-fu
+                 slime-macrostep
+                 slime-presentations
+                 slime-scratch
+                 slime-references
+                 slime-package-fu
+                 slime-fontifying-fu
+                 slime-trace-dialog
+                 ;; and this are other addons
+                 slime-asdf
+                 slime-quicklisp
+                 slime-indentation slime-banner slime-company)))
+
 
 (use-package slime-company
   :after (slime company)
