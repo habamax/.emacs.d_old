@@ -723,10 +723,10 @@
               ("M-<backspace>" . sp-unwrap-sexp)
               ("C-S-<backspace>" . sp-splice-sexp-killing-forward)
               ("C-M-<backspace>" . sp-splice-sexp-killing-around)
-              ("C-(" . sp-backward-slurp-sexp)
-              ("C-)" . sp-forward-slurp-sexp)
-              ("M-(" . sp-backward-barf-sexp)
-              ("M-)" . sp-forward-barf-sexp)
+              ("C-9" . sp-backward-slurp-sexp)
+              ("C-0" . sp-forward-slurp-sexp)
+              ("M-9" . sp-backward-barf-sexp)
+              ("M-0" . sp-forward-barf-sexp)
               ("C-M-SPC" . sp-mark-sexp)
               :map lisp-interaction-mode-map
               ("M-e" . sp-end-of-sexp)
@@ -736,7 +736,9 @@
               ("M-a" . sp-beginning-of-sexp)
               :map lisp-mode-map
               ("M-e" . sp-end-of-sexp)
-              ("M-a" . sp-beginning-of-sexp))
+              ("M-a" . sp-beginning-of-sexp)
+              ("C-M-a" . sp-backward-down-sexp)
+              ("C-M-e" . sp-up-sexp))
   ;; add more "standard bindings"
   ;; and maybe the following
   ;; sp-emit-sexp
