@@ -479,7 +479,7 @@
   (setq counsel-grep-base-command
         "rg -i -M 120 --no-heading --line-number --color never %s %s")
 
-  (setq counsel-yank-pop-separator (concat "\n" (make-string 70 ?-) "\n"))
+  ;; (setq counsel-yank-pop-separator (concat "\n" (make-string 70 ?-) "\n"))
 
   (counsel-mode 1))
 
