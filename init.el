@@ -863,9 +863,9 @@
   :config
   (winner-mode 1))
 
-(use-package bookmark
-  :ensure nil
-  :bind (("M-g b" . bookmark-jump)))
+;; (use-package bookmark
+;;   :ensure nil
+;;   :bind (("M-g b" . bookmark-jump)))
 
 ;; dired extra stuff
 (use-package dired
