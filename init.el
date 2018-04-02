@@ -359,7 +359,8 @@
 
 (use-package avy
   :diminish avy-mode
-  :bind (("C-l" . avy-goto-word-or-subword-1)))
+  :bind (("C-l" . avy-goto-char)
+         ("C-M-l" . avy-goto-word-or-subword-1)))
 
 (use-package ace-window
   :bind (("C-x o" . ace-window))
