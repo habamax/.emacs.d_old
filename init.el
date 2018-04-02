@@ -710,7 +710,6 @@
   :diminish smartparens-mode
   :hook (prog-mode . smartparens-mode)
   :bind (:map smartparens-mode-map
-              ("M-2" . sp-clone-sexp)
               ("C-M-k" . sp-kill-hybrid-sexp)
               ("C-M-w" . sp-copy-sexp)
               ("C-M-f" . sp-forward-sexp)
@@ -730,12 +729,15 @@
               ("M-0" . sp-forward-barf-sexp)
               ("C-M-SPC" . sp-mark-sexp)
               :map lisp-interaction-mode-map
+              ("M-2" . sp-clone-sexp)
               ("M-e" . sp-end-of-sexp)
               ("M-a" . sp-beginning-of-sexp)
               :map emacs-lisp-mode-map
+              ("M-2" . sp-clone-sexp)
               ("M-e" . sp-end-of-sexp)
               ("M-a" . sp-beginning-of-sexp)
               :map lisp-mode-map
+              ("M-2" . sp-clone-sexp)
               ("M-e" . sp-end-of-sexp)
               ("M-a" . sp-beginning-of-sexp)
               ("C-M-a" . sp-backward-down-sexp)
