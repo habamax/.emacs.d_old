@@ -17,10 +17,15 @@
 
 (deftheme habamax "Boring white. Gets the job done.")
 
+(defcustom habamax-theme-variable-heading-heights nil
+  "Use different heights for headings for Asciidoctor, Org or Markdown."
+  :type 'boolean)
+
 (let
     ((color-fg "#000000")
      (color-bg "#ffffff")
      (color-dim-bg "#f5f9fe")
+     (color-dim-fg "#204060")
      (color-keyword "#0000ff")
      (color-keyword-dim "#006363")
      (color-str "#811111")
@@ -35,7 +40,13 @@
      (color-heading "#000000")
      (color-url "#3737D6")
      (color-url-visited "#806088")
-     (color-bg-highlight "#c7e7e7"))
+     (color-bg-highlight "#c7e7e7")
+     (height-1 (if habamax-theme-variable-heading-heights 1.6 1))
+     (height-2 (if habamax-theme-variable-heading-heights 1.4 1))
+     (height-3 (if habamax-theme-variable-heading-heights 1.2 1))
+     (height-4 (if habamax-theme-variable-heading-heights 1.1 1))
+     (height-5 (if habamax-theme-variable-heading-heights 1.1 1))
+     (height-6 (if habamax-theme-variable-heading-heights 1.1 1)))
 
   (custom-theme-set-faces
    'habamax
@@ -45,7 +56,7 @@
    '(cursor ((nil (:background "#000000"))))
    '(region ((t (:background "#f4e7b4"))))
    `(highlight ((nil (:background ,color-bg-highlight))))
-   `(minibuffer-prompt ((t (:foreground ,color-keyword-dim :background ,color-dim-bg :weight bold))))
+   `(minibuffer-prompt ((t (:foreground ,color-dim-fg :background ,color-dim-bg :weight bold))))
    ;; '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
    `(header-line ((t (:foreground ,color-fg :background "#e9e590" :box (:line-width 1 :color "#a9a550")))))
    
@@ -147,8 +158,8 @@
    ;; which-key
    `(which-key-key-face ((t (:foreground ,color-keyword))))
    `(which-key-command-description-face ((t (:foreground ,color-fg))))
-   `(which-key-group-description-face ((t (:foreground ,color-keyword-dim :background ,color-dim-bg :weight bold))))
-   `(which-key-separator-face ((t (:foreground ,color-keyword-dim))))
+   `(which-key-group-description-face ((t (:foreground ,color-dim-fg :background ,color-dim-bg :weight bold))))
+   `(which-key-separator-face ((t (:foreground ,color-dim-fg))))
 
    
    ;; company
@@ -198,10 +209,10 @@
    `(git-gutter:deleted ((nil (:foreground "#ff0000" :weight bold))))
 
    ;; Info
-   '(info-title-1 ((t (:inherit default :weight bold :height 1.6))))
-   '(info-title-2 ((t (:inherit default :weight bold :height 1.4))))
-   '(info-title-3 ((t (:inherit default :weight bold :height 1.2))))
-   '(info-title-4 ((t (:inherit default :weight bold :height 1.1))))
+   `(info-title-1 ((t (:inherit default :weight bold :height ,height-1))))
+   `(info-title-2 ((t (:inherit default :weight bold :height ,height-2))))
+   `(info-title-3 ((t (:inherit default :weight bold :height ,height-3))))
+   `(info-title-4 ((t (:inherit default :weight bold :height ,height-4))))
 
    ;; ace-window
    '(aw-leading-char-face ((nil (:foreground "#ff0000" :weight bold))))
@@ -225,20 +236,20 @@
    
 
    ;; org
-   ;; `(org-document-title ((t (:foreground ,color-keyword :weight bold :height 1.6))))
+   `(org-document-title ((t (:foreground ,color-keyword :weight bold :height ,height-1))))
    
-   ;; `(org-level-1 ((t (:foreground ,color-heading :weight bold :height 1.3))))
-   ;; `(org-level-2 ((t (:foreground ,color-heading :weight bold :height 1.2))))
-   ;; `(org-level-3 ((t (:foreground ,color-heading :weight bold :height 1.1))))
+   `(org-level-1 ((t (:foreground ,color-heading :weight bold :height ,height-1))))
+   `(org-level-2 ((t (:foreground ,color-heading :weight bold :height ,height-2))))
+   `(org-level-3 ((t (:foreground ,color-heading :weight bold :height ,height-3))))
 
-   ;; `(org-level-4 ((t (:foreground ,color-heading :slant italic :height 1.1))))
-   ;; `(org-level-5 ((t (:foreground ,color-heading :slant italic :height 1.1))))
-   ;; `(org-level-6 ((t (:foreground ,color-heading :slant italic :height 1.1))))
+   `(org-level-4 ((t (:foreground ,color-heading :slant italic :height ,height-4))))
+   `(org-level-5 ((t (:foreground ,color-heading :slant italic :height ,height-5))))
+   `(org-level-6 ((t (:foreground ,color-heading :slant italic :height ,height-6))))
 
-   ;; `(org-level-7 ((t (:foreground ,color-heading :slant italic :height 1))))
-   ;; `(org-level-8 ((t (:foreground ,color-heading :slant italic :height 1))))
-   ;; `(org-level-9 ((t (:foreground ,color-heading :slant italic :height 1))))
-   ;; `(org-level-10 ((t (:foreground ,color-heading :slant italic :height 1))))
+   `(org-level-7 ((t (:foreground ,color-heading :slant italic :height ,height-6))))
+   `(org-level-8 ((t (:foreground ,color-heading :slant italic :height ,height-6))))
+   `(org-level-9 ((t (:foreground ,color-heading :slant italic :height ,height-6))))
+   `(org-level-10 ((t (:foreground ,color-heading :slant italic :height ,height-6))))
 
    ;; `(org-tag ((nil (:foreground ,color-comment))))
 
@@ -277,14 +288,10 @@
 
    ;; calendar
    `(calendar-month-header ((t (:foreground ,color-fg :weight bold))))
-   `(calendar-weekday-header ((t (:foreground ,color-keyword-dim))))
+   `(calendar-weekday-header ((t (:foreground ,color-dim-fg))))
    `(calendar-weekend-header ((t (:foreground ,color-str :weight bold))))
    '(calendar-today ((t (:background "#f0c0f0" :foreground "#000000" :weight bold))))
 
-
-   ;; emms
-   ;; '(emms-playlist-track-face ((t (:inherit default))))
-   ;; '(emms-playlist-selected-face ((t (:background "#20408b" :foreground "white" :weight bold))))
 
 
    ;; LaTeX
@@ -300,20 +307,20 @@
 
 
    ;; XML
-   `(nxml-element-local-name ((t (:foreground ,color-keyword-dim :background ,color-dim-bg))))
-   `(nxml-tag-delimiter ((t (:foreground ,color-keyword-dim :background ,color-dim-bg))))
+   `(nxml-element-local-name ((t (:foreground ,color-dim-fg :background ,color-dim-bg))))
+   `(nxml-tag-delimiter ((t (:foreground ,color-dim-fg :background ,color-dim-bg))))
    ;; `(nxml-namespace-attribute-xmlns ((t (:foreground ,color-fg-dim))))
-   `(nxml-attribute-local-name ((t (:foreground ,color-keyword-dim))))
+   `(nxml-attribute-local-name ((t (:foreground ,color-dim-fg))))
    `(nxml-attribute-value ((t (:foreground ,color-str))))
-   `(nxml-cdata-section-CDATA ((t (:foreground ,color-keyword-dim :background ,color-dim-bg))))
-   `(nxml-cdata-section-delimiter ((t (:foreground ,color-keyword-dim :background ,color-dim-bg))))
+   `(nxml-cdata-section-CDATA ((t (:foreground ,color-dim-fg :background ,color-dim-bg))))
+   `(nxml-cdata-section-delimiter ((t (:foreground ,color-dim-fg :background ,color-dim-bg))))
    `(nxml-cdata-section-content ((t (:background ,color-dim-bg))))
 
 
    ;; web-mode
-   `(web-mode-html-tag-face ((t (:foreground ,color-keyword-dim :background ,color-dim-bg))))
-   `(web-mode-html-tag-bracket-face ((t (:foreground ,color-keyword-dim :background ,color-dim-bg))))
-   `(web-mode-html-attr-name-face ((t (:foreground ,color-keyword-dim))))
+   `(web-mode-html-tag-face ((t (:foreground ,color-dim-fg :background ,color-dim-bg))))
+   `(web-mode-html-tag-bracket-face ((t (:foreground ,color-dim-fg :background ,color-dim-bg))))
+   `(web-mode-html-attr-name-face ((t (:foreground ,color-dim-fg))))
 
    ;; whitespace-mode
    '(whitespace-space ((t (:foreground "#aaaaaa"))))
@@ -322,17 +329,6 @@
    '(whitespace-indentation ((t (:background "#f0f0f0" :foreground "#aaaaaa"))))
    '(whitespace-line ((nil (:background "#f7f7f0"))))
 
-
-   ;; ;; rainbow-delimiters
-   ;; `(rainbow-delimiters-depth-1-face ((t (:foreground ,color-keyword))))
-   ;; '(rainbow-delimiters-depth-2-face ((t (:foreground "#000000"))))
-   ;; `(rainbow-delimiters-depth-3-face ((t (:foreground ,color-keyword))))
-   ;; '(rainbow-delimiters-depth-4-face ((t (:foreground "#000000"))))
-   ;; `(rainbow-delimiters-depth-5-face ((t (:foreground ,color-keyword))))
-   ;; '(rainbow-delimiters-depth-6-face ((t (:foreground "#000000"))))
-   ;; `(rainbow-delimiters-depth-7-face ((t (:foreground ,color-keyword))))
-   ;; '(rainbow-delimiters-depth-8-face ((t (:foreground "#000000"))))
-   ;; `(rainbow-delimiters-depth-9-face ((t (:foreground ,color-keyword))))
 
    ;; rainbow-delimiters
    '(rainbow-delimiters-depth-1-face ((t (:foreground "#000000"))))
@@ -348,29 +344,25 @@
    ;; asciidoctor-mode
    ;; `(asciidoctor-header-delimiter-face ((t (:foreground ,color-fg-dim))))
 
-   `(asciidoctor-header-face-1 ((t (:foreground ,color-title :weight bold :height 1.3))))
-   `(asciidoctor-header-face-2 ((t (:foreground ,color-heading :weight bold :height 1.3))))
-   `(asciidoctor-header-face-3 ((t (:foreground ,color-heading :weight bold :height 1.2))))
-   `(asciidoctor-header-face-4 ((t (:foreground ,color-heading :weight bold :height 1.1))))
-   `(asciidoctor-header-face-5 ((t (:foreground ,color-heading :slant italic :height 1.1))))
-   `(asciidoctor-header-face-6 ((t (:foreground ,color-heading :slant italic :height 1.1))))
+   `(asciidoctor-header-face-1 ((t (:foreground ,color-title :weight bold :height ,height-1))))
+   `(asciidoctor-header-face-2 ((t (:foreground ,color-heading :weight bold :height ,height-1))))
+   `(asciidoctor-header-face-3 ((t (:foreground ,color-heading :weight bold :height ,height-2))))
+   `(asciidoctor-header-face-4 ((t (:foreground ,color-heading :weight bold :height ,height-3))))
+   `(asciidoctor-header-face-5 ((t (:foreground ,color-heading :slant italic :height ,height-4))))
+   `(asciidoctor-header-face-6 ((t (:foreground ,color-heading :slant italic :height ,height-5))))
 
    `(asciidoctor-option-face ((t (:foreground ,color-gray))))
    ;; `(asciidoctor-option-markup-face ((t (:foreground ,color-fg-dim))))
 
 
    ;; markdown-mode
-   `(markdown-header-face-1 ((t (:foreground ,color-title :weight bold :height 1.3))))
-   `(markdown-header-face-2 ((t (:foreground ,color-heading :weight bold :height 1.2))))
-   `(markdown-header-face-3 ((t (:foreground ,color-heading :weight bold :height 1.1))))
-   `(markdown-header-face-4 ((t (:foreground ,color-heading :weight bold :height 1.1))))
-   `(markdown-header-face-5 ((t (:foreground ,color-heading :slant italic :height 1.1))))
-   `(markdown-header-face-6 ((t (:foreground ,color-heading :slant italic :height 1.1))))
+   `(markdown-header-face-1 ((t (:foreground ,color-title :weight bold :height ,height-1))))
+   `(markdown-header-face-2 ((t (:foreground ,color-heading :weight bold :height ,height-2))))
+   `(markdown-header-face-3 ((t (:foreground ,color-heading :weight bold :height ,height-3))))
+   `(markdown-header-face-4 ((t (:foreground ,color-heading :weight bold :height ,height-4))))
+   `(markdown-header-face-5 ((t (:foreground ,color-heading :slant italic :height ,height-5))))
+   `(markdown-header-face-6 ((t (:foreground ,color-heading :slant italic :height ,height-6))))
    `(markdown-code-face ((t (:background ,color-dim-bg))))
-
-   ;; `(bongo-comment ((t (:foreground ,color-fg-dim))))
-   ;; `(bongo-elapsed-track-part ((t (:background ,color-bg-alt))))
-   ;; `(bongo-currently-playing-track ((t (:slant italic))))
 
    )
   )
