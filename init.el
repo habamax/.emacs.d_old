@@ -496,7 +496,27 @@
   :defer
   :diminish projectile-mode
   :config
-  (setq projectile-completion-system 'ivy))
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-enable-caching t)
+
+  (when (executable-find "rg")
+    (setq projectile-indexing-method 'alien)
+    ;; Default rg arguments
+    (defconst modi/rg-arguments
+      `("--line-number"                     ; line numbers
+        "--smart-case"
+        "--follow"                          ; follow symlinks
+        "--mmap")                           ; apply memory map optimization when possible
+      "Default rg arguments used in the functions in `projectile' package.")
+
+    (defun projectile-get-ext-command ()
+      "Always use `rg' for getting a list of all files in the project."
+      (mapconcat 'identity
+                 (append '("rg")
+                         modi/rg-arguments
+                         '("--null" ; output null separated results,
+                           "--files")) ; get file names matching the regex '' (all files)
+                 " "))))
 
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)
