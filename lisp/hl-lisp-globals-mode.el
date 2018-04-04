@@ -28,7 +28,7 @@
 
 (define-minor-mode hl-lisp-globals-mode
   "Minor mode for highlighting LISP *GLOBAL-VARIABLES* and +CONSTANT-VARIABLES+."
-  nil "CL" nil
+  nil " *L*" nil
 
   (if hl-lisp-globals-mode
       (hl-lisp-globals/add-keywords)
