@@ -501,22 +501,10 @@
 
   (when (executable-find "rg")
     (setq projectile-indexing-method 'alien)
-    ;; Default rg arguments
-    (defconst modi/rg-arguments
-      `("--line-number"                     ; line numbers
-        "--smart-case"
-        "--follow"                          ; follow symlinks
-        "--mmap")                           ; apply memory map optimization when possible
-      "Default rg arguments used in the functions in `projectile' package.")
 
     (defun projectile-get-ext-command ()
       "Always use `rg' for getting a list of all files in the project."
-      (mapconcat 'identity
-                 (append '("rg")
-                         modi/rg-arguments
-                         '("--null" ; output null separated results,
-                           "--files")) ; get file names matching the regex '' (all files)
-                 " "))))
+      "rg --line-number --smart-case --follow --mmap --null --files")))
 
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)

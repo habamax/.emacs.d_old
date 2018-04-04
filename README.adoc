@@ -74,3 +74,24 @@ Define a function with the text you need:
 ----
 
 <1> is defined earlier as `(defconst emacs-start-time (current-time))`
+
+=== Use ripgrep to search files in Projectile
+
+It is way faster then using "native" emacs lisp implementation.
+
+[source,elisp]
+----
+(use-package projectile
+  :defer
+  :diminish projectile-mode
+  :config
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-enable-caching t)
+
+  (when (executable-find "rg")
+    (setq projectile-indexing-method 'alien)
+
+    (defun projectile-get-ext-command ()
+      "Always use `rg' for getting a list of all files in the project."
+      "rg --line-number --smart-case --follow --mmap --null --files")))
+----
