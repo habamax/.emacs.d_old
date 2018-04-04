@@ -288,7 +288,7 @@
 ;; ================================================================================
 
 ;; (use-package leuven-theme :defer)
-;; (use-package cyberpunk-theme :defer)
+(use-package cyberpunk-theme :defer)
 
 
 (use-package diminish
