@@ -626,10 +626,12 @@
 ;; (use-package page-break-lines :diminish :hook (prog-mode . turn-on-page-break-lines-mode))
 
 (use-package aggressive-indent
+  :diminish
   :hook ((emacs-lisp-mode lisp-mode) . aggressive-indent-mode))
 
 (use-package hl-lisp-globals-mode
   :ensure nil
+  :diminish
   :load-path "lisp"
   :hook ((emacs-lisp-mode lisp-mode) . hl-lisp-globals-mode))
 
