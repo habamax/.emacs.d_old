@@ -1,5 +1,6 @@
 *.elc
 \#*\#
+*~
 ido.*
 /auto-save-list/
 /backups/
@@ -32,3 +33,6 @@ ido.*
 /custom.el
 /kosmos-theme/
 /freenode-pass
+/nov-places
+/history
+/places
