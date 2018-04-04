@@ -854,12 +854,12 @@
   :config (setq slime-company-completion 'fuzzy))
 
 ;; new golden-ratio
-(use-package zoom
-  :diminish zoom-mode
-  :defer 3
-  :config
-  (setq zoom-size '(90 . 33))
-  (zoom-mode))
+;; (use-package zoom
+;;   :diminish zoom-mode
+;;   :defer 3
+;;   :config
+;;   (setq zoom-size '(90 . 33))
+;;   (zoom-mode))
 
 
 (use-package restclient
