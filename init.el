@@ -524,8 +524,8 @@
 
 ;; goto last change
 (use-package goto-chg
-  :bind (("M-`" . goto-last-change)
-         ("M-~" . goto-last-change-reverse)))
+  :bind (("C-M-," . goto-last-change)
+         ("C-M-." . goto-last-change-reverse)))
 
 ;; sort buffers by git projects
 (use-package ibuffer-vc
