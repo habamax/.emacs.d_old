@@ -236,7 +236,14 @@
 
   (defun haba/make-new-frame ()
     (interactive)
-    (make-frame `((width . ,(frame-width)) (height . ,(frame-height)))))
+    (let* ((fullscreen (frame-parameter nil 'fullscreen))
+           (geom-width (cdr (assoc 'width frame-initial-frame-alist))) ; from -geometry parameter
+           (geom-height (cdr (assoc 'height frame-initial-frame-alist))) ; from -geometry parameter
+           (width (if fullscreen geom-width (frame-width)))
+           (height (if fullscreen geom-height (frame-height))))
+      (make-frame `((width . ,width)
+                    (height . ,height)
+                    (fullscreen . ,fullscreen)))))
 
   (defun haba/other-frame ()
     (interactive)
