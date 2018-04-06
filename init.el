@@ -892,6 +892,11 @@
 (use-package webpaste
   :commands (webpaste-paste-buffer webpaste-paste-region))
 
+
+(use-package define-word
+  :bind (("C-c d" . define-word-at-point))
+  :commands (define-word define-word-at-point))
+
 ;; ================================================================================
 ;; Built-in packages
 ;; ================================================================================
