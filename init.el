@@ -897,6 +897,14 @@
   :bind (("C-c d" . define-word-at-point))
   :commands (define-word define-word-at-point))
 
+
+(use-package powershell
+  :if +IS-WINDOWS+
+  :commands (powershell))
+
+
+
+
 ;; ================================================================================
 ;; Built-in packages
 ;; ================================================================================
