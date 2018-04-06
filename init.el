@@ -503,6 +503,7 @@
 (use-package projectile
   :defer
   :diminish projectile-mode
+  :bind (("C-c p v" . projectile-vc))
   :config
   (setq projectile-completion-system 'ivy)
   (setq projectile-enable-caching t)
