@@ -838,6 +838,9 @@
   :config
   (setq inferior-lisp-program "sbcl --noinform")
   ;; (setq inferior-lisp-program "ros -Q run")
+
+  (setq common-lisp-hyperspec-root (expand-file-name "~/quicklisp/hyperspec/HyperSpec/"))
+
   (slime-setup '(; this is slime-fancy without slime-editing-commands and slime-c-p-c
                  slime-repl
                  slime-autodoc
