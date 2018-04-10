@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: slot-reader
+# key: slor
+# --
+(${1:slot-name}
+:initarg :$1
+:initform ${2:nil}
+:reader $1
+:documentation "$3")

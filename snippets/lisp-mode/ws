@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: with-slots
+# key: ws
+# --
+(with-slots (${1:slot-name}) ${0:object})

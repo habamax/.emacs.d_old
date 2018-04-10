@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: defgeneric
+# key: defg
+# --
+(defgeneric ${1:gfunc} ($0))

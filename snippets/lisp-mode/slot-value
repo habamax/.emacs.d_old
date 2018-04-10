@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: slot-value
+# key: sv
+# --
+(slot-value ${1:object} ${0:slot})

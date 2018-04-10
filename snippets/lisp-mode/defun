@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: defun
+# key: def
+# --
+(defun ${1:f} ($2)
+"${3:Return}"
+$0)

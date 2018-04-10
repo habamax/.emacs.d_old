@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: defmethod
+# key: defm
+# --
+(defmethod ${1:mfunc} ($2)
+"$3"
+$0)

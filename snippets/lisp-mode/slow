@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: slot-writer
+# key: slow
+# --
+(${1:slot-name}
+:initarg :$1
+:initform ${2:nil}
+:writer (setf $1)
+:documentation "$3")

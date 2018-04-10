@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: setf-slot-value
+# key: ssv
+# --
+(setf (slot-value ${1:object} ${2:slot}) ${3:value})

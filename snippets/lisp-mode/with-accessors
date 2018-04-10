@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: with-accessors
+# key: wa
+# --
+(with-accessors ((${1:accessor} ${2:$1})) ${0:object})
