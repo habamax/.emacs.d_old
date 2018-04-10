@@ -1210,7 +1210,7 @@ dired buffer to be opened."
   (add-to-list 'rcirc-server-alist
                '("irc.freenode.net"
                  :nick "habamax"
-                 :channels ("#emacs" "#lor")))
+                 :channels ("#emacs" "#lor" "#lisp")))
 
 
   (defun haba/rcirc-mode-setup ()
