@@ -907,7 +907,7 @@
   :commands (powershell))
 
 ;; show keybindings and commands while typing
-(use-package keycast-mode
+(use-package keycast
   :defer
   :commands (keycast-mode))
 
