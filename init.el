@@ -190,7 +190,7 @@
 ;; My local packages
 ;; ================================================================================
 (use-package haba-stuff
-  :ensure nil
+  :defer t
   :load-path "lisp/"
   :commands (haba/next-buffer
              haba/previous-buffer
@@ -263,6 +263,7 @@
   (load-theme 'habamax t))
 
 (use-package kosmos-theme :defer
+  :ensure t
   :load-path "kosmos-theme/")
 
 (use-package asciidoctor-mode
@@ -624,13 +625,13 @@
 
 (use-package rainbow-delimiters :hook (prog-mode . rainbow-delimiters-mode))
 (use-package rainbow-mode :hook ((css-mode html-mode) . rainbow-mode))
-(use-package kurecolor
-  :bind (("<f7>" . kurecolor-increase-hue-by-step)
-         ("M-<f7>" . kurecolor-decrease-hue-by-step)
-         ("<f8>" . kurecolor-increase-saturation-by-step)
-         ("M-<f8>" . kurecolor-decrease-saturation-by-step)
-         ("<f9>" . kurecolor-increase-brightness-by-step)
-         ("M-<f9>" . kurecolor-decrease-brightness-by-step)))
+;; (use-package kurecolor
+;;   :bind (("<f7>" . kurecolor-increase-hue-by-step)
+;;          ("M-<f7>" . kurecolor-decrease-hue-by-step)
+;;          ("<f8>" . kurecolor-increase-saturation-by-step)
+;;          ("M-<f8>" . kurecolor-decrease-saturation-by-step)
+;;          ("<f9>" . kurecolor-increase-brightness-by-step)
+;;          ("M-<f9>" . kurecolor-decrease-brightness-by-step)))
 
 ;; (use-package page-break-lines :diminish :hook (prog-mode . turn-on-page-break-lines-mode))
 
@@ -907,9 +908,9 @@
   :commands (powershell))
 
 ;; show keybindings and commands while typing
-(use-package keycast
-  :defer
-  :commands (keycast-mode))
+;; (use-package keycast
+;;   :defer
+;;   :commands (keycast-mode))
 
 
 ;; ================================================================================
