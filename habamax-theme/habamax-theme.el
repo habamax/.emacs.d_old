@@ -61,8 +61,8 @@
    `(header-line ((t (:foreground ,color-fg :background "#e9e590" :box (:line-width 1 :color "#a9a550")))))
    
    ;; Default isearch is OK for now.
-   ;; `(isearch ((t (:background ,color-bg-search :foreground ,color-fg-search :weight bold :underline (:color ,color-fg-search)))))
-   ;; `(lazy-highlight ((t (:background ,color-bg-lazysearch :foreground ,color-fg-lazysearch :weight bold :underline (:color ,color-fg-lazysearch)))))
+   ;; `(isearch ((t (:background ,color-search-bg :foreground ,color-search-fg))))
+   ;; `(lazy-highlight ((t (:background ,color-lazysearch-bg :foreground ,color-lazysearch-fg))))
    ;; match?
    ;; `(isearch-fail ((t (:background ,color-bg-search-fail :foreground ,color-fg-search-fail :weight bold :underline (:color ,color-fg-search-fail)))))
 
@@ -219,20 +219,20 @@
 
 
    ;; ivy
-   ;; `(ivy-current-match ((t (:background ,color-bg-highlight))))
-   ;; `(ivy-minibuffer-match-face-1 ((t (:foreground ,color-fg-dim))))
-   ;; `(ivy-minibuffer-match-face-2 ((t (:foreground ,color-fg-search :weight bold :underline (:color ,color-fg-search)))))
-   ;; `(ivy-minibuffer-match-face-3 ((t (:foreground ,color-fg-lazysearch :weight bold :underline (:color ,color-bg-lazysearch)))))
-   ;; `(ivy-minibuffer-match-face-4 ((t (:foreground ,color-fg-search-fail :weight bold :underline (:color ,color-bg-search-fail)))))
-   ;; `(ivy-modified-buffer ((nil (:foreground ,color-keyword :slant italic))))
-   ;; '(ivy-remote ((t (:inherit font-lock-comment-face))))
-   ;; `(ivy-virtual ((t (:foreground ,color-fg-dim))))
+   `(ivy-current-match ((t (:background ,color-bg-highlight))))
+   `(ivy-minibuffer-match-face-1 ((t (:foreground ,color-dim-fg))))
+   '(ivy-minibuffer-match-face-2 ((t (:foreground "#b030b0" :weight bold :underline (:color "b030b0")))))
+   '(ivy-minibuffer-match-face-3 ((t (:inherit ivy-minibuffer-match-face-2))))
+   '(ivy-minibuffer-match-face-4 ((t (:inherit ivy-minibuffer-match-face-3))))
+   `(ivy-modified-buffer ((nil (:foreground ,color-keyword :slant italic))))
+   '(ivy-remote ((t (:inherit font-lock-comment-face))))
+   `(ivy-virtual ((t (:foreground ,color-dim-fg))))
 
    ;; swiper
-   ;; `(swiper-match-face-1 ((t (:foreground ,color-fg-dim))))
-   ;; `(swiper-match-face-2 ((t (:background ,color-bg-search :foreground ,color-fg-search :weight bold :underline (:color ,color-fg-search)))))
-   ;; `(swiper-match-face-3 ((t (:background ,color-bg-lazysearch :foreground ,color-fg-lazysearch :weight bold :underline (:color ,color-bg-lazysearch)))))
-   ;; `(swiper-match-face-4 ((t (:background ,color-bg-search-fail :foreground ,color-fg-search-fail :weight bold :underline (:color ,color-bg-search-fail)))))
+   `(swiper-match-face-1 ((t (:foreground ,color-dim-fg))))
+   '(swiper-match-face-2 ((t (:inherit ivy-minibuffer-match-face-2))))
+   '(swiper-match-face-3 ((t (:inherit swiper-match-face-2))))
+   '(swiper-match-face-4 ((t (:inherit swiper-match-face-3))))
    
 
    ;; org
@@ -364,6 +364,12 @@
    `(markdown-header-face-6 ((t (:foreground ,color-heading :slant italic :height ,height-6))))
    `(markdown-code-face ((t (:background ,color-dim-bg))))
 
+
+   ;; keycast-mode
+   '(keycast-key ((t (:foreground "#FF0000" :background "#FFFF00" :weight bold :height 1.0))))
+   '(keycast-command ((t (:foreground "#000000" :height 1.0))))
+
+   
    )
   )
 
