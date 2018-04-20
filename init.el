@@ -380,7 +380,35 @@
 
 (use-package rotate
   :bind (("<f5>" . rotate-layout)
-         ("M-<f5>" . rotate-window)))
+         ("M-<f5>" . rotate-window))
+  :config
+  (setq rotate-functions '(;;rotate:even-horizontal
+                           ;;rotate:even-vertical
+                           rotate:main-horizontal
+                           rotate:main-vertical
+                           rotate:tiled))
+
+  ;; redefine tiled functions
+  ;; prefer 3 columns when there are more than 4 windows (was 6)
+  (defun rotate:tiled-n (num)
+    (cond
+     ((<= num 2)
+      (split-window-vertically))
+     ((<= num 4)
+      (rotate:tiled-2column num))
+     (t
+      (rotate:tiled-3column num))))
+
+  ;; if there is non even windows make bigger top left one
+  ;; was the last bottom right
+  (defun rotate:tiled-3column (num)
+    (rotate:vertically-n (/ (+ num 2) 3))
+    (dotimes (i (/ (+ num 1) 3))
+      (rotate:horizontally-n 3)
+      (other-window 3))
+    (when (= (% num 3) 2)
+      (other-window 1)
+      (delete-window))))
 
 
 (use-package dumb-jump
