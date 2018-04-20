@@ -990,8 +990,8 @@ directory to make multiple eshell windows easier."
 (use-package winner
   :ensure nil
   :defer 3
-  :bind (("M-N" . winner-redo)
-         ("M-P" . winner-undo))
+  :bind (("<f7>" . winner-redo)
+         ("<f6>" . winner-undo))
   :config
   (winner-mode 1))
 
