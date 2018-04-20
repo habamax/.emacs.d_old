@@ -440,15 +440,6 @@
   ;; (setq ivy-re-builders-alist '((t . ivy--regex-plus)))
   (ivy-mode 1))
 
-(use-package ivy-rich
-  :after ivy
-  :config
-  (ivy-set-display-transformer 'ivy-switch-buffer
-                               'ivy-rich-switch-buffer-transformer)
-  (setq ivy-virtual-abbreviate 'full)
-  (setq ivy-rich-switch-buffer-align-virtual-buffer t)
-  (setq ivy-rich-switch-buffer-name-max-length 40)
-  (setq ivy-rich-path-style 'abbrev))
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
