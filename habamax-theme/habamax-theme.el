@@ -29,7 +29,6 @@
      (color-keyword "#0000ff")
      (color-keyword-dim "#006363")
      (color-str "#811111")
-     ;; (color-str "#008000")
      (color-comment "#808080")
      (color-gray "#7a7a7a")
      ;; (color-fg-todo "#bdabab")
@@ -40,7 +39,8 @@
      (color-heading "#000000")
      (color-url "#3737D6")
      (color-url-visited "#806088")
-     (color-bg-highlight "#c7e7e7")
+     (color-bg-highlight "#f7f7c7")
+     (color-bg-highlight-2 "#cadfca")
      (height-1 (if habamax-theme-variable-heading-heights 1.6 1))
      (height-2 (if habamax-theme-variable-heading-heights 1.4 1))
      (height-3 (if habamax-theme-variable-heading-heights 1.2 1))
@@ -219,14 +219,14 @@
 
 
    ;; ivy
-   `(ivy-current-match ((t (:background ,color-bg-highlight))))
+   `(ivy-current-match ((t (:background ,color-bg-highlight-2))))
    `(ivy-minibuffer-match-face-1 ((t (:foreground ,color-dim-fg))))
    '(ivy-minibuffer-match-face-2 ((t (:foreground "#b030b0" :weight bold :underline (:color "b030b0")))))
    '(ivy-minibuffer-match-face-3 ((t (:inherit ivy-minibuffer-match-face-2))))
    '(ivy-minibuffer-match-face-4 ((t (:inherit ivy-minibuffer-match-face-3))))
-   `(ivy-modified-buffer ((nil (:foreground ,color-keyword :slant italic))))
-   '(ivy-remote ((t (:inherit font-lock-comment-face))))
-   `(ivy-virtual ((t (:foreground ,color-dim-fg))))
+   '(ivy-modified-buffer ((nil (:slant italic))))
+   `(ivy-remote ((t (:foreground ,color-dim-fg))))
+   `(ivy-virtual ((t (:foreground ,color-comment))))
 
    ;; swiper
    `(swiper-match-face-1 ((t (:foreground ,color-dim-fg))))
