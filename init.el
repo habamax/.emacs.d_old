@@ -408,7 +408,23 @@
       (other-window 3))
     (when (= (% num 3) 2)
       (other-window 1)
-      (delete-window))))
+      (delete-window)))
+
+  ;; make it even for 2 windows
+  (defun rotate:main-horizontally-n (num)
+    (if (<= num 2)
+        (split-window-horizontally)
+      (split-window-vertically)
+      (other-window 1)
+      (rotate:horizontally-n (- num 1))))
+
+  ;; make it even for 2 windows
+  (defun rotate:main-vertically-n (num)
+    (if (<= num 2)
+        (split-window-vertically)
+      (split-window-horizontally)
+      (other-window 1)
+      (rotate:vertically-n (- num 1)))))
 
 
 (use-package dumb-jump
