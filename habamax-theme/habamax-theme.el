@@ -6,11 +6,9 @@
 
 ;;; Commentary:
 ;;; TODO:
-;; highlight line
 ;; magit highlight
 ;; diff mode colors refinements
 ;; minimal org mode refinements
-;; ivy and swiper
 ;; isearch
 
 ;;; Code:
@@ -39,7 +37,7 @@
      (color-heading "#000000")
      (color-url "#3737D6")
      (color-url-visited "#806088")
-     (color-bg-highlight "#f7f7c7")
+     (color-bg-highlight "#ececef")
      (color-bg-highlight-2 "#cadfca")
      (height-1 (if habamax-theme-variable-heading-heights 1.6 1))
      (height-2 (if habamax-theme-variable-heading-heights 1.4 1))
