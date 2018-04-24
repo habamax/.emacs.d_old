@@ -942,10 +942,6 @@
   :if +IS-WINDOWS+
   :commands (powershell))
 
-;; show keybindings and commands while typing
-;; (use-package keycast
-;;   :defer
-;;   :commands (keycast-mode))
 
 
 ;; ================================================================================
