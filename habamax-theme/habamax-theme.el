@@ -52,12 +52,12 @@
 ;;; standard faces
    `(default ((t (:background ,color-bg :foreground ,color-fg))))
    '(cursor ((nil (:background "#000000"))))
-   '(region ((t (:background "#f4e7b4"))))
+   '(region ((t (:background "#d0e0f0"))))
    `(highlight ((nil (:background ,color-bg-highlight))))
    `(minibuffer-prompt ((t (:foreground ,color-dim-fg :background ,color-dim-bg :weight bold))))
    ;; '(widget-field-face ((t (:background "#a0a0a0" :foreground "#000000"))))
    `(header-line ((t (:foreground ,color-fg :background "#e9e590" :box (:line-width 1 :color "#a9a550")))))
-   
+
    ;; Default isearch is OK for now.
    ;; `(isearch ((t (:background ,color-search-bg :foreground ,color-search-fg))))
    ;; `(lazy-highlight ((t (:background ,color-lazysearch-bg :foreground ,color-lazysearch-fg))))
@@ -132,7 +132,7 @@
    '(diredfl-exec-priv ((t (:background "#FFEDFFp" :foreground "#AA00AA"))))
    '(diredfl-no-priv ((t (:inherit default))))
    '(diredfl-flag-mark-line ((t (:background "#FFE0E0"))))
-   
+
    ;; sunrise-commander
    '(sr-active-path-face ((t (:background "#000000" :foreground "#ffffff" :weight bold))))
    '(sr-passive-path-face ((t (:background "#e0e0e0" :foreground "#000000" :weight bold))))
@@ -159,7 +159,7 @@
    `(which-key-group-description-face ((t (:foreground ,color-dim-fg :background ,color-dim-bg :weight bold))))
    `(which-key-separator-face ((t (:foreground ,color-dim-fg))))
 
-   
+
    ;; company
    ;; '(company-tooltip ((t (:background "Gray20" :foreground "Gray80"))))
    ;; '(company-tooltip-selection ((t (:background "LightSteelBlue4" :foreground "White"))))
@@ -191,7 +191,7 @@
    `(rcirc-my-nick ((t (:foreground ,color-str :weight bold))))
    `(rcirc-nick-in-message ((t (:foreground ,color-str :weight bold))))
    `(rcirc-url ((t (:foreground ,color-url :underline t))))
-   
+
    ;; `(rcirc-url ((t (:foreground ,color-fg-url :weight normal :underline (:color ,color-fg-url)))))
 
 
@@ -231,11 +231,11 @@
    '(swiper-match-face-2 ((t (:inherit ivy-minibuffer-match-face-2))))
    '(swiper-match-face-3 ((t (:inherit swiper-match-face-2))))
    '(swiper-match-face-4 ((t (:inherit swiper-match-face-3))))
-   
+
 
    ;; org
    `(org-document-title ((t (:foreground ,color-keyword :weight bold :height ,height-1))))
-   
+
    `(org-level-1 ((t (:foreground ,color-heading :weight bold :height ,height-1))))
    `(org-level-2 ((t (:foreground ,color-heading :weight bold :height ,height-2))))
    `(org-level-3 ((t (:foreground ,color-heading :weight bold :height ,height-3))))
@@ -255,13 +255,13 @@
    ;; todo: play with colors of the box
    ;; `(org-todo ((nil (:background ,color-bg-todo :foreground ,color-fg-todo :weight bold :box (:line-width 1 :color ,color-fg-todo)))))
    ;; `(org-done ((nil (:background ,color-bg-done :foreground ,color-fg-done :weight bold :box (:line-width 1 :color ,color-fg-done)))))
-   
+
    ;; '(org-table ((t (:inherit default))))
-   
+
    ;; `(org-date ((t (:foreground ,color-comment :underline (:color ,color-comment)))))
-   
+
    ;; `(org-verbatim ((nil (:background ,color-bg-alt :foreground ,color-fg))))
-   
+
    ;; `(org-special-keyword ((t (:foreground ,color-gray :background ,color-bg-modeline-inactive))))
 
    ;; `(org-agenda-structure ((t (:foreground ,color-fg :height 1.6 :weight bold))))
@@ -367,7 +367,7 @@
    '(keycast-key ((t (:foreground "#FF0000" :background "#FFFF00" :weight bold :height 1.0))))
    '(keycast-command ((t (:foreground "#000000" :height 1.0))))
 
-   
+
    )
   )
 
