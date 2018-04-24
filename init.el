@@ -795,9 +795,7 @@
               :map lisp-mode-map
               ("M-2" . sp-clone-sexp)
               ("M-e" . sp-end-of-sexp)
-              ("M-a" . sp-beginning-of-sexp)
-              ("C-M-a" . sp-backward-down-sexp)
-              ("C-M-e" . sp-up-sexp))
+              ("M-a" . sp-beginning-of-sexp))
   ;; add more "standard bindings"
   ;; and maybe the following
   ;; sp-emit-sexp
