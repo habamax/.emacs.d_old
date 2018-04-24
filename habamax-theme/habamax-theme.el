@@ -321,7 +321,7 @@
    `(web-mode-html-attr-name-face ((t (:foreground ,color-dim-fg))))
 
    ;; whitespace-mode
-   '(whitespace-space ((t (:foreground "#aaaaaa"))))
+   '(whitespace-space ((t (:foreground "#e7e7e7"))))
    '(whitespace-trailing ((t (:background "#f07070" :foreground "#f0f000"))))
    '(whitespace-space-after-tab ((t (:background "#f07070" :foreground "#f0f000"))))
    '(whitespace-indentation ((t (:background "#f0f0f0" :foreground "#aaaaaa"))))
