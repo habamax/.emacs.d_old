@@ -382,9 +382,7 @@
   :bind (("<f5>" . rotate-layout)
          ("M-<f5>" . rotate-window))
   :config
-  (setq rotate-functions '(;;rotate:even-horizontal
-                           ;;rotate:even-vertical
-                           rotate:main-horizontal
+  (setq rotate-functions '(rotate:main-horizontal
                            rotate:main-vertical
                            rotate:tiled))
 
