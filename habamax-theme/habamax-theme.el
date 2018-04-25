@@ -8,8 +8,7 @@
 ;;; TODO:
 ;; magit highlight
 ;; diff mode colors refinements
-;; minimal org mode refinements
-;; isearch
+;; isearch?
 
 ;;; Code:
 
@@ -29,10 +28,6 @@
      (color-str "#811111")
      (color-comment "#808080")
      (color-gray "#7a7a7a")
-     ;; (color-fg-todo "#bdabab")
-     ;; (color-bg-todo "#775555")
-     ;; (color-fg-done "#abbdab")
-     ;; (color-bg-done "#777777")
      (color-title "#000000")
      (color-heading "#000000")
      (color-url "#3737D6")
@@ -148,10 +143,7 @@
 
 
    ;; flycheck
-   ;; '(flycheck-warning ((t (:underline (:color "Wheat3" :style wave)))))
-   ;; '(flycheck-error ((t (:underline (:color "Coral" :style wave)))))
-   ;; '(flycheck-fringe-warning ((t (:foreground "Wheat3"))))
-   ;; '(flycheck-fringe-error ((t (:foreground "Coral"))))
+   ;; default flycheck colors are just fine
 
    ;; which-key
    `(which-key-key-face ((t (:foreground ,color-keyword))))
@@ -161,15 +153,7 @@
 
 
    ;; company
-   ;; '(company-tooltip ((t (:background "Gray20" :foreground "Gray80"))))
-   ;; '(company-tooltip-selection ((t (:background "LightSteelBlue4" :foreground "White"))))
-   ;; '(company-tooltip-annotation ((t (:foreground "Gray60" :slant italic))))
-   ;; '(company-tooltip-annotation-selection ((t (:foreground "Gray80"))))
-   ;; '(company-tooltip-common ((t (:slant italic))))
-   ;; '(company-scrollbar-bg ((t (:background "Gray40"))))
-   ;; '(company-scrollbar-fg ((t (:background "Gray80"))))
-   ;; '(company-preview ((t (:inherit company-tooltip-selection))))
-   ;; '(company-preview-common ((t (:inherit company-preview :slant italic))))
+   ;; default company colors are just fine for me
 
    ;; erc
    ;; '(erc-current-nick-face ((t (:foreground "#ffffff"))))
@@ -234,7 +218,7 @@
 
 
    ;; org
-   `(org-document-title ((t (:foreground ,color-keyword :weight bold :height ,height-1))))
+   `(org-document-title ((t (:foreground ,color-heading :weight bold :height ,height-1))))
 
    `(org-level-1 ((t (:foreground ,color-heading :weight bold :height ,height-1))))
    `(org-level-2 ((t (:foreground ,color-heading :weight bold :height ,height-2))))
@@ -249,39 +233,26 @@
    `(org-level-9 ((t (:foreground ,color-heading :slant italic :height ,height-6))))
    `(org-level-10 ((t (:foreground ,color-heading :slant italic :height ,height-6))))
 
-   ;; `(org-tag ((nil (:foreground ,color-comment))))
+   `(org-tag ((nil (:foreground ,color-comment))))
 
-   ;; `(org-archived ((nil (:foreground ,color-gray))))
-   ;; todo: play with colors of the box
-   ;; `(org-todo ((nil (:background ,color-bg-todo :foreground ,color-fg-todo :weight bold :box (:line-width 1 :color ,color-fg-todo)))))
-   ;; `(org-done ((nil (:background ,color-bg-done :foreground ,color-fg-done :weight bold :box (:line-width 1 :color ,color-fg-done)))))
+   '(org-table ((t (:inherit default))))
+   `(org-date ((t (:foreground ,color-keyword-dim))))
+   `(org-verbatim ((nil (:background ,color-dim-bg :foreground ,color-fg))))
+   `(org-code ((nil (:background ,color-dim-bg :foreground ,color-fg))))
 
-   ;; '(org-table ((t (:inherit default))))
+   `(org-special-keyword ((t (:foreground ,color-comment))))
 
-   ;; `(org-date ((t (:foreground ,color-comment :underline (:color ,color-comment)))))
+   `(org-agenda-structure ((t (:foreground ,color-fg :height 1.6 :weight bold))))
+   `(org-agenda-date ((nil (:inherit default))))
+   `(org-agenda-date-today ((t (:background ,color-dim-bg :foreground ,color-dim-fg))))
+   `(org-agenda-date-weekend ((t (:inherit default :weight bold))))
 
-   ;; `(org-verbatim ((nil (:background ,color-bg-alt :foreground ,color-fg))))
+   '(org-meta-line ((t (:inherit org-special-keyword))))
+   '(org-document-info-keyword ((t (:inherit org-meta-line))))
 
-   ;; `(org-special-keyword ((t (:foreground ,color-gray :background ,color-bg-modeline-inactive))))
-
-   ;; `(org-agenda-structure ((t (:foreground ,color-fg :height 1.6 :weight bold))))
-   ;; `(org-agenda-date ((nil (:height 1.0))))
-   ;; `(org-agenda-date-today ((t (:height 1.5 :weight bold))))
-   ;; `(org-agenda-date-weekend ((t (:foreground ,color-title :height 1.3))))
-
-   ;; '(org-scheduled ((t (:inherit :default))))
-   ;; `(org-scheduled-today ((t (:inherit :default :foreground ,color-keyword))))
-   ;; `(org-scheduled-previously ((t (:inherit :default :foreground "#d05050"))))
-   ;; `(org-agenda-done ((t (:inherit :default :foreground ,color-gray))))
-   ;; `(org-warning ((t (:foreground "#d0a000"))))
-
-   ;; `(org-agenda-clocking ((t (:background "#303030"))))
-
-   ;; '(org-meta-line ((t (:foreground "#707070" ))))
-   ;; '(org-document-info-keyword ((t (:inherit org-meta-line))))
-
-   ;; `(org-block-begin-line ((t :foreground ,color-comment)))
-   ;; `(org-block-end-line ((t (:foreground ,color-comment))))
+   `(org-block-begin-line ((t :foreground ,color-comment)))
+   `(org-block ((t :background "#fafafa" :foreground ,color-fg)))
+   `(org-block-end-line ((t (:foreground ,color-comment))))
 
 
    ;; calendar
