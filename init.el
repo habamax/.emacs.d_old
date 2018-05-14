@@ -259,7 +259,7 @@
 (use-package habamax-theme
   :load-path "habamax-theme/"
   :config
-  (setq habamax-theme-variable-heading-heights nil)
+  (setq habamax-theme-variable-heading-heights t)
   (load-theme 'habamax t))
 
 (use-package kosmos-theme :defer
