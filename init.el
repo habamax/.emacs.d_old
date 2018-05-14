@@ -851,11 +851,11 @@
   ;; (setq python-shell-interpreter "python3")
   )
 
-(use-package haskell-mode
-  :mode ("\\.\\(hs\\)$" . haskell-mode))
+;; (use-package haskell-mode
+;;   :mode ("\\.\\(hs\\)$" . haskell-mode))
 
-(use-package intero
-  :hook (haskell-mode . intero-mode))
+;; (use-package intero
+;;   :hook (haskell-mode . intero-mode))
 
 (use-package clojure-mode
   :mode ("\\.\\(clj\\)$" . clojure-mode)
