@@ -269,7 +269,7 @@
 (use-package asciidoctor-mode
   :ensure nil
   :load-path "lisp/"
-  :mode ("\\.\\(adoc\\|asciidoc\\)$" . asciidoctor-mode)
+  :mode "\\.\\(adoc\\|asciidoc\\)$"
   :hook ((asciidoctor-mode . goto-address-mode))
   :bind (:map asciidoctor-mode-map
               ("C-c C-o C-o" . browse-url-of-buffer)
@@ -709,31 +709,31 @@
   :commands (git-timemachine))
 
 (use-package markdown-mode
-  :mode ("\\.\\(markdown\\|md\\)$" . markdown-mode)
+  :mode "\\.\\(markdown\\|md\\)$"
   :config
   (setq markdown-fontify-code-blocks-natively t))
 
 (use-package plantuml-mode
-  :mode ("\\.\\(uml\\)$" . plantuml-mode))
+  :mode "\\.uml$")
 
 ;; (use-package go-mode
 ;;   :mode ("\\.\\(go\\)$" . go-mode))
 
 (use-package web-mode
-  :mode ("\\.\\(html\\|css\\)$" . web-mode)
+  :mode "\\.\\(html\\|css\\)$"
   :config
   (setq web-mode-enable-auto-expanding t
         web-mode-enable-auto-pairing t))
 
 (use-package elixir-mode
-  :mode ("\\.\\(ex\\|exs\\)$" . elixir-mode))
+  :mode "\\.\\(ex\\|exs\\)$")
 
 (use-package alchemist
   :after elixir-mode)
 
 
 (use-package yaml-mode
-  :mode ("\\.\\(yml\\)$" . yaml-mode))
+  :mode "\\.yml$")
 
 (use-package emmet-mode
   :defer
@@ -744,7 +744,7 @@
   (add-hook 'nxml-mode-hook 'emmet-mode))
 
 (use-package groovy-mode
-  :mode ("\\.groovy$" . groovy-mode))
+  :mode "\\.groovy$")
 
 ;; flycheck
 (use-package flycheck
@@ -846,7 +846,7 @@
 
 
 (use-package python-mode
-  :mode ("\\.\\(py\\)$" . python-mode)
+  :mode "\\.py$"
   :config
   ;; (setq python-shell-interpreter "python3")
   )
@@ -862,8 +862,9 @@
 
 (use-package toml-mode
   :mode "\\.toml$")
+
 (use-package clojure-mode
-  :mode ("\\.\\(clj\\)$" . clojure-mode)
+  :mode "\\.clj$"
   :config
   (use-package cider
     :config
@@ -912,18 +913,18 @@
 
 
 (use-package restclient
-  :mode ("\\.\\(rest\\)$" . restclient-mode)
+  :mode ("\\.rest$" . restclient-mode)
   :commands (restclient-mode))
 
 (use-package csv-mode
-  :mode ("\\.\\(csv\\)$" . csv-mode)
+  :mode "\\.csv$"
   :init
   (setq csv-separators '("," ";" "|"))
   (setq csv-header-lines 1))
 
 
 (use-package nov
-  :mode ("\\.\\(epub\\)$" . nov-mode))
+  :mode ("\\.epub$" . nov-mode))
 
 (use-package htmlize
   :defer
