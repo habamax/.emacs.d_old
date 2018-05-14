@@ -857,6 +857,11 @@
 ;; (use-package intero
 ;;   :hook (haskell-mode . intero-mode))
 
+(use-package rust-mode
+  :mode "\\.rs$")
+
+(use-package toml-mode
+  :mode "\\.toml$")
 (use-package clojure-mode
   :mode ("\\.\\(clj\\)$" . clojure-mode)
   :config
