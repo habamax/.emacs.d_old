@@ -140,7 +140,7 @@
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
 ;; S-left, S-right, S-down, S-up to switch windows
-(windmove-default-keybindings)
+;; (windmove-default-keybindings)
 
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
