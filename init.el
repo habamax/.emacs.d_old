@@ -1030,7 +1030,11 @@ directory to make multiple eshell windows easier."
   ;; by default hide all details
   ;; you can toggle details using `('
   (add-hook 'dired-mode-hook 'dired-hide-details-mode)
-  (add-hook 'dired-mode-hook 'dired-omit-mode)
+
+  ;; C-x M-o to toggle omit-mode
+  ;; Let it be off by default for now
+  ;; (add-hook 'dired-mode-hook 'dired-omit-mode)
+
   :config
   ;; dired user another dired buffer as destination for copy/move
   (setq dired-dwim-target t)
