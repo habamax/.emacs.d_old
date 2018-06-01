@@ -622,16 +622,6 @@
   (company-childframe-mode 1))
 
 
-;;; just in case
-;; (use-package auto-complete
-;;   :defer 2
-;;   :bind (("C-M-i" . auto-complete))
-;;   :config
-;;   (use-package fuzzy :defer)
-;;   (setq ac-use-fuzzy t)
-;;   (ac-config-default))
-
-
 (use-package multiple-cursors
   :defer 3
   :bind-keymap (("C-x m" . haba/mc-map))
