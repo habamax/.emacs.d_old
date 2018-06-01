@@ -1123,7 +1123,7 @@ dired buffer to be opened."
     (unless (buffer-narrowed-p)
       (let* (
              p beg end path peol
-               (inhibit-read-only t) )
+             (inhibit-read-only t) )
         (save-excursion
           (goto-char (point-min))
           (setq peol (point-at-eol))
