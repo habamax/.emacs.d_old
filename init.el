@@ -1024,7 +1024,6 @@ directory to make multiple eshell windows easier."
          ("b" . bookmark-jump)
          ("j" . dired-up-directory)
          ("J" . dired-goto-file)
-         ("<C-return>" . haba/dired-open-in-os)
          ("TAB" . haba/dired-tab)
          ("<mouse-2>" . haba/dired-mouse-find-file))
   :init
@@ -1045,12 +1044,6 @@ directory to make multiple eshell windows easier."
     (require 'ls-lisp)
     (setq ls-lisp-use-insert-directory-program nil))
   (setq ls-lisp-dirs-first t)
-
-  (defun haba/dired-open-in-os ()
-    "Open file/folder under cursor in OS."
-    (interactive)
-    (let ((file (ignore-errors (dired-get-file-for-visit))))
-      (browse-url (file-truename file))))
 
   (defun haba/dired-mouse-find-file (event)
     "In Dired, visit the file or directory name you click on in the same window."
