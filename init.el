@@ -66,6 +66,9 @@
 ;; scroll to the top or bottom with C-v and M-v
 (setq scroll-error-top-bottom t)
 
+;; single line horizontal scroll
+(setq auto-hscroll-mode 'current-line)
+
 ;; not so jumpy mouse scroll
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
 
