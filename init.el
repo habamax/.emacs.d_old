@@ -311,34 +311,34 @@
   (setq exec-path-from-shell-check-startup-files nil)
   (exec-path-from-shell-initialize))
 
-;; sometimes text mangling is just too cumbersome with emacs bindings...
-;; be EVIL then and SHOW THEM ALL!!!
-(use-package evil
-  :bind (("C-c e" . haba/become-evil-or-not)
-         :map evil-emacs-state-map
-         ([escape] . evil-normal-state)
-         ("ESC" . evil-normal-state)
-         :map evil-visual-state-map
-         ([escape] . evil-normal-state)
-         ("ESC" . evil-normal-state))
-  :commands (evil-mode)
-  :config
-  (defalias 'evil-insert-state 'evil-emacs-state)
+;; ;; sometimes text mangling is just too cumbersome with emacs bindings...
+;; ;; be EVIL then and SHOW THEM ALL!!!
+;; (use-package evil
+;;   :bind (("C-c e" . haba/become-evil-or-not)
+;;          :map evil-emacs-state-map
+;;          ([escape] . evil-normal-state)
+;;          ("ESC" . evil-normal-state)
+;;          :map evil-visual-state-map
+;;          ([escape] . evil-normal-state)
+;;          ("ESC" . evil-normal-state))
+;;   :commands (evil-mode)
+;;   :config
+;;   (defalias 'evil-insert-state 'evil-emacs-state)
 
-  (defun haba/become-evil-or-not ()
-    (interactive)
-    (if (bound-and-true-p evil-state)
-        (progn
-          (evil-mode -1)
-          (message "Calm down. Don't be evil, be nice..."))
-      (progn
-        (evil-mode)
-        (message "I!     AM!     EVIL!!!!")))))
+;;   (defun haba/become-evil-or-not ()
+;;     (interactive)
+;;     (if (bound-and-true-p evil-state)
+;;         (progn
+;;           (evil-mode -1)
+;;           (message "Calm down. Don't be evil, be nice..."))
+;;       (progn
+;;         (evil-mode)
+;;         (message "I!     AM!     EVIL!!!!")))))
 
-(use-package evil-commentary
-  :after evil
-  :config
-  (evil-commentary-mode))
+;; (use-package evil-commentary
+;;   :after evil
+;;   :config
+;;   (evil-commentary-mode))
 
 (use-package reverse-im
   :config
