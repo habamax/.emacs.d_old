@@ -610,10 +610,16 @@
   (company-tng-configure-default)
   (global-company-mode))
 
-(use-package company-quickhelp
+;; doesn’t play well with company-childframe
+;; (use-package company-quickhelp
+;;   :after company
+;;   :config
+;;   (company-quickhelp-mode))
+
+(use-package company-childframe
   :after company
   :config
-  (company-quickhelp-mode))
+  (company-childframe-mode 1))
 
 
 ;;; just in case
