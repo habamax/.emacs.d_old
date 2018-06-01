@@ -81,6 +81,10 @@
 (setq suggest-key-bindings t)
 
 (electric-indent-mode t)
+(electric-layout-mode t)
+(electric-quote-mode t)
+(setq electric-quote-context-sensitive t)
+
 (global-subword-mode t)
 (show-paren-mode t)
 (column-number-mode t)
