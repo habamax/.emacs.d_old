@@ -307,3 +307,13 @@ by using nxml's indentation rules."
     (indent-region begin end)
     (normal-mode))
   (message "Prettified! Did my best!"))
+
+(defun haba/flush-blank-lines (start end)
+  "Delete all blank lines in a region."
+  (interactive "r")
+  (flush-lines "^\\s-*$" start end nil))
+
+(defun haba/collapse-blank-lines (start end)
+  "Delete all but one blank lines in a region."
+  (interactive "r")
+  (replace-regexp "^\n\\{2,\\}" "\n" nil start end))
