@@ -617,6 +617,7 @@
 ;;   (company-quickhelp-mode))
 
 (use-package company-childframe
+  :diminish
   :after company
   :config
   (company-childframe-mode 1))
