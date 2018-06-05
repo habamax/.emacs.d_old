@@ -88,7 +88,7 @@
 (global-subword-mode t)
 (show-paren-mode t)
 (column-number-mode t)
-(global-display-line-numbers-mode t)
+;; (global-display-line-numbers-mode t)
 (recentf-mode 1)
 
 ;; can help with very long lines processing (speedwise)
