@@ -76,6 +76,7 @@
 (setq sentence-end-double-space nil)
 
 (delete-selection-mode 1)
+(blink-cursor-mode 0)
 (setq ring-bell-function #'ignore)
 (setq disabled-command-function nil)
 (setq suggest-key-bindings t)
