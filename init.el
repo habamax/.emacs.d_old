@@ -1241,6 +1241,35 @@ dired buffer to be opened."
 
 
 
+(use-package erc
+  :defer
+  :ensure nil
+  :init
+
+  (defun erc-freenode ()
+    (interactive)
+    (erc :server "irc.freenode.net" :port 6667 :nick "habamax"))
+
+  :config
+  (setq erc-hide-list '("JOIN" "PART" "QUIT"))
+  (setq erc-join-buffer 'bury)
+
+  (setq
+   erc-nick '("habamax" "mxmkm")
+   erc-track-minor-mode t
+   erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor" "#godotengine")))
+
+  (ignore-errors
+    (load (concat user-emacs-directory "freenode-pass"))
+    (require 'erc-services)
+    (erc-services-mode 1)
+
+    (setq erc-prompt-for-nickserv-password nil)
+    (setq erc-nickserv-passwords
+          `((freenode (("habamax" . ,freenode-habamax-pass)))))))
+
+
+
 (use-package rcirc
   :defer
   :commands (irc rcirc)
