@@ -952,6 +952,13 @@
   :commands (powershell))
 
 
+;; it is awesome
+(use-package org-jira
+  :defer
+  :commands (org-jira-mode org-jira-get-issues org-jira-get-projects)
+  :config
+  (setq jiralib-url "https://butr.avast.com/"))
+
 
 ;; ================================================================================
 ;; Built-in packages
