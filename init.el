@@ -1257,7 +1257,7 @@ dired buffer to be opened."
   (setq
    erc-nick '("habamax" "mxmkm")
    erc-track-minor-mode t
-   erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor" "#godotengine")))
+   erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#lor" "#godotengine" "#lisp")))
 
   (ignore-errors
     (load (concat user-emacs-directory "freenode-pass"))
