@@ -789,15 +789,15 @@
               ("M-0" . sp-forward-barf-sexp)
               ("C-M-SPC" . sp-mark-sexp)
               :map lisp-interaction-mode-map
-              ("M-2" . sp-clone-sexp)
+              ("C-c M-2" . sp-clone-sexp)
               ("M-e" . sp-end-of-sexp)
               ("M-a" . sp-beginning-of-sexp)
               :map emacs-lisp-mode-map
-              ("M-2" . sp-clone-sexp)
+              ("C-c M-2" . sp-clone-sexp)
               ("M-e" . sp-end-of-sexp)
               ("M-a" . sp-beginning-of-sexp)
               :map lisp-mode-map
-              ("M-2" . sp-clone-sexp)
+              ("C-c M-2" . sp-clone-sexp)
               ("M-e" . sp-end-of-sexp)
               ("M-a" . sp-beginning-of-sexp))
   ;; add more "standard bindings"
