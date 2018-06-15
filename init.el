@@ -256,7 +256,7 @@
 
   (defun haba/other-frame ()
     (interactive)
-    (if (eql (length (frame-list)) 1)
+    (if (eql (length (frame-list-z-order)) 1)
         (haba/make-new-frame)
       (other-frame 1)))
 
