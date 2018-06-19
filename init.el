@@ -1032,7 +1032,7 @@ directory to make multiple eshell windows easier."
 (use-package winner
   :ensure nil
   :defer 3
-  :bind (("<f7>" . winner-redo)
+  :bind (("M-<f6>" . winner-redo)
          ("<f6>" . winner-undo))
   :config
   (winner-mode 1))
