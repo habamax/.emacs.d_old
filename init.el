@@ -172,7 +172,21 @@
                                 (vertical-scroll-bars . nil)))
   (setq default-frame-alist '((fullscreen . nil)
                               (vertical-scroll-bars . nil))))
-(setq frame-title-format "%b")
+;; (setq frame-title-format "%b")
+
+;; format title frame as
+;; buffer-name [buffer path]
+(setq-default frame-title-format
+              '(:eval
+                (format "%s %s"
+                        (buffer-name)
+                        (cond
+                         (buffer-file-truename
+                          (concat "[" (file-name-directory buffer-file-truename) "]"))
+                         (dired-directory
+                          (concat "{" dired-directory "}"))
+                         (t
+                          "[no file]")))))
 
 ;; ================================================================================
 ;; Set up packaging system
