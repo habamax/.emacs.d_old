@@ -396,7 +396,8 @@
          ("C-M-l" . avy-goto-char)))
 
 (use-package ace-window
-  :bind (("C-x o" . ace-window))
+  :bind (("C-x o" . ace-window)
+         ("C-x O" . ace-swap-window))
   :config
   (setq aw-scope 'frame)
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
