@@ -1206,10 +1206,6 @@ dired buffer to be opened."
   :after dired
   :bind (:map dired-mode-map ("/" . dired-narrow)))
 
-(use-package diredfl
-  :after dired
-  :config
-  (diredfl-global-mode))
 
 
 ;; dired-filter
