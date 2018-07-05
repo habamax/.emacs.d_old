@@ -632,12 +632,12 @@
 ;;   :config
 ;;   (company-quickhelp-mode))
 
-(use-package company-childframe
-  :diminish company-childframe-mode
+
+(use-package company-posframe
+  :diminish company-posframe-mode
   :after company
   :config
-  (company-childframe-mode 1))
-
+  (company-posframe-mode 1))
 
 (use-package multiple-cursors
   :defer 3
