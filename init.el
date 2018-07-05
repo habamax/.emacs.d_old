@@ -1053,6 +1053,7 @@ directory to make multiple eshell windows easier."
   :bind (("C-x C-j" . dired-jump)
          ("C-x 4 C-j" . dired-jump-other-window)
          :map dired-mode-map
+         ("," . dired)
          ("b" . bookmark-jump)
          ("j" . dired-up-directory)
          ("J" . dired-goto-file)
@@ -1070,6 +1071,14 @@ directory to make multiple eshell windows easier."
   :config
   ;; dired user another dired buffer as destination for copy/move
   (setq dired-dwim-target t)
+
+  ;; dired history, very handy
+  ;; just press comma (,) in dired buffer now
+  (use-package ivy-dired-history
+    :if (package-installed-p 'ivy)
+    :config
+    (add-to-list 'savehist-additional-variables 'ivy-dired-history-variable)
+    (require 'ivy-dired-history))
 
   ;; directories first?
   ;; OSX has ls but it is not gnu compatible and can't group directories first
