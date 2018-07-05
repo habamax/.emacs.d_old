@@ -1187,9 +1187,7 @@ dired buffer to be opened."
                                                   'help-echo (format "mouse-2, RET: Follow the link to \"%s\"." path)
                                                   'keymap dired-mouse-map))))))
 
-  (add-hook 'dired-after-readin-hook 'dired-propertize-directory-heading)
-
-  )
+  (add-hook 'dired-after-readin-hook 'dired-propertize-directory-heading))
 
 (use-package dired-x
   :ensure nil
