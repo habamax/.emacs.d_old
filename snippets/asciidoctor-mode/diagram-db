@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: diagram-database
+# key: diagdb
+# --
+[plantuml, ${1:diagram-db-name}, ${2:svg}]
+....
+skinparam monochrome true
+skinparam shadowing false
+skinparam dpi 300
+skinparam backgroundcolor transparent
+skinparam classarrowcolor gray
+
+!include <material/key>
+
+!define table(x) class x << (T,mistyrose) >>
+!define view(x) class x << (V,lightblue) >>
+!define tr(x) class x << (R,red) >>
+!define fn(x) class x << (F,plum) >>
+!define p(x) class x << (P,indianred) >>
+
+hide methods
+hide stereotypes
+
+table(Schema.Table) {
+<$ma_key{scale=0.3}>ID: int
+{field}Name: nvarchar(100)
+}
+
+view(Schema.View) {
+ID: int
+{field}Title: nvarchar(200)
+EndDate: date
+}
+
+Schema.Table -|> Schema.View:FK
+
+$0
+....

@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: diagram-activity
+# key: diagac
+# --
+[plantuml, ${1:diagram-activity-name}, ${2:svg}]
+....
+skinparam monochrome true
+skinparam shadowing false
+skinparam dpi 300
+skinparam backgroundcolor transparent
+
+start
+
+:Инициализация **программного**
+интерфейса;
+
+if (Норм?) then (Да)
+:A1;
+:A2;
+:A3;
+else (Нет)
+:B1;
+:B2;
+endif
+
+stop
+
+....

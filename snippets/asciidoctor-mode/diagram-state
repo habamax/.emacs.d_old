@@ -2,12 +2,16 @@
 # name: diagram-state
 # key: diagst
 # --
-[plantuml, ${1:diagram-state-name}, svg]
+[plantuml, ${1:diagram-state-name}, ${2:svg}]
 ....
+skinparam monochrome true
+skinparam shadowing false
+skinparam dpi 300
+skinparam backgroundcolor transparent
 
-[*] --> ${2:State1}
-$2 --> ${3:State2}
-$2 --> ${4:State3}
+[*] --> ${3:State1}
+$2 --> ${4:State2}
+$2 --> ${5:State3}
 $3 --> [*]
 $4 --> [*]
 $0

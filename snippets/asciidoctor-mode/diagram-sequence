@@ -2,13 +2,17 @@
 # name: diagram-sequence
 # key: diagseq
 # --
-[plantuml, ${1:diagram-sequence-name}, svg]
+[plantuml, ${1:diagram-sequence-name}, ${2:svg}]
 ....
+skinparam monochrome true
+skinparam shadowing false
+skinparam dpi 300
+skinparam backgroundcolor transparent
 
-${2:Max} -> ${3:Alex}: ${4:I want more work!}
-$3 -> ${5:Sharka}: ${6:Max wants more work!}
-$5 --> $3: ${7:He can do this and that!}
-$3 --> $2: ${8:Hey, do that!}
+${3:Max} -> ${4:Alex}: ${5:I want more work!}
+$4 -> ${6:Sharka}: ${7:Max wants more work!}
+$6 --> $4: ${8:He can do this and that!}
+$4 --> $3: ${9:Hey, do that!}
 note left: Max has some time...
 $0
 ....

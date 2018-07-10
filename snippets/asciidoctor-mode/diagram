@@ -2,7 +2,12 @@
 # name: diagram
 # key: diag
 # --
-[plantuml, ${1:diagram-name}, svg]
+[plantuml, ${1:diagram-name}, ${2:svg}]
 ....
+skinparam monochrome true
+skinparam shadowing false
+skinparam dpi 300
+skinparam backgroundcolor transparent
+
 $0
 ....
