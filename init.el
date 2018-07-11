@@ -1326,14 +1326,39 @@ dired buffer to be opened."
 (use-package calendar
   :init
   (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
-  ;; (setq calendar-today-marker "T")
+  (add-hook 'calendar-mode-hook #'haba/calendar-mode-hook)
+
   ;; Calendar -- говорим и показываем по русски.
   (setq calendar-date-style 'iso)
   (setq calendar-week-start-day 1)
   (setq calendar-day-name-array ["Вс" "Пн" "Вт" "Ср" "Чт" "Пт" "Сб"])
   (setq calendar-month-name-array ["Январь" "Февраль" "Март" "Апрель"
                                    "Май" "Июнь" "Июль" "Август"
-                                   "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"]))
+                                   "Сентябрь" "Октябрь" "Ноябрь" "Декабрь"])
+  :config
+  ;; (setq calendar-today-marker "T")
+
+
+  ;; To copy date from the calendar with M-w
+  (defcustom calendar-copy-as-kill-format "%Y-%m-%d"
+    "Format string for formatting calendar dates with `format-time-string'."
+    :type 'string
+    :group 'calendar)
+
+  (defun haba/calendar-copy-as-kill ()
+    "Copy date at point as kill if region is not active.
+Delegate to `kill-ring-save' otherwise."
+    (interactive)
+    (if (use-region-p)
+        (call-interactively #'kill-ring-save)
+      (let ((date (calendar-cursor-to-date)))
+        (when date
+          (setq date (encode-time 0 0 0 (nth 1 date) (nth 0 date) (nth 2 date)))
+          (kill-new (format-time-string calendar-copy-as-kill-format date))))))
+
+  (defun haba/calendar-mode-hook ()
+    "Let \[kill-ring-save] copy the date at point if region is not active."
+    (local-set-key (kbd "M-w") #'haba/calendar-copy-as-kill)))
 
 
 
