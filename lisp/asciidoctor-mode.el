@@ -224,7 +224,7 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
   (if (executable-find asciidoctor-pandoc-executable)
       (when buffer-file-name
         (message "AsciiDoctor DOCX compilation...")
-        (let ((tempfname (make-temp-file "asciidoctor")))
+        (let ((docbook-filename (concat (file-name-base) ".xml")))
           ;; convert asciidoctor to docbook
           (shell-command
            (concat "asciidoctor"
@@ -235,7 +235,7 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
                    " "
                    "-a doctime=" (format-time-string "%T")
                    " "
-                   "-o " tempfname
+                   "-o " docbook-filename
                    " "
                    "-b docbook"
                    " "
@@ -250,32 +250,25 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
                      (when (not (string= "" data-dir))
                        (concat "--data-dir " data-dir))
                      " "
-                     "-o " (concat (file-name-sans-extension buffer-file-name)
-                                   ".docx")
+                     "-o " (concat (file-name-base) ".docx")
                      " "
-                     tempfname)))))
+                     docbook-filename)))))
     (message "Can't find pandoc tool!")))
 
 (defun asciidoctor-open-pdf ()
   "Open compiled PDF file."
   (interactive)
-  (browse-url (concat
-               (file-name-sans-extension buffer-file-name)
-               ".pdf")))
+  (browse-url (concat (file-name-base) ".pdf")))
 
 (defun asciidoctor-open-html ()
   "Open compiled HTML file."
   (interactive)
-  (browse-url (concat
-               (file-name-sans-extension buffer-file-name)
-               ".html")))
+  (browse-url (concat (file-name-base) ".html")))
 
 (defun asciidoctor-open-docx ()
   "Open compiled DOCX file."
   (interactive)
-  (browse-url (concat
-               (file-name-sans-extension buffer-file-name)
-               ".docx")))
+  (browse-url (concat (file-name-base) ".docx")))
 
 (defvar asciidoctor-mode-map
   (let ((map (make-sparse-keymap)))
