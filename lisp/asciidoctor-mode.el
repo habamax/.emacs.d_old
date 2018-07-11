@@ -226,6 +226,11 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
         (message "AsciiDoctor DOCX compilation...")
         (let ((docbook-filename (concat (file-name-base) ".xml")))
           ;; convert asciidoctor to docbook
+          ;; I will not use it as a -o parameter
+          ;; while using -o filename asciidoctor-diagram doesn’t generate images
+          ;; hopefully by default asciidoctor uses the same file name as an output file
+          ;; so I don’t have to specify -o parameter, i.e. docbook-filename can be used further
+          ;; for pandoc
           (shell-command
            (concat "asciidoctor"
                    " "
@@ -235,8 +240,8 @@ Group 2 matches the text, without surrounding whitespace, of an atx heading.")
                    " "
                    "-a doctime=" (format-time-string "%T")
                    " "
-                   "-o " docbook-filename
-                   " "
+                   ;; "-o " docbook-filename
+                   ;; " "
                    "-b docbook"
                    " "
                    buffer-file-name))
