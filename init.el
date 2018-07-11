@@ -82,8 +82,8 @@
 (setq suggest-key-bindings t)
 
 (electric-indent-mode t)
-(electric-layout-mode t)
-(electric-quote-mode t)
+;; (electric-layout-mode t)
+;; (electric-quote-mode t)
 (setq electric-quote-context-sensitive t)
 
 (global-subword-mode t)
