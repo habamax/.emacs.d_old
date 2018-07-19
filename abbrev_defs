@@ -47,15 +47,7 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
-    ("amail" "maksim.kim@adastragrp.com" nil 4)
-    ("cau" "CAUTION:" nil 1)
-    ("hmail" "habamax@gmail.com" nil 4)
-    ("impo" "IMPORTANT:" nil 1)
-    ("noteme" "NOTE:" nil 8)
     ("teh" "the" nil 1)
-    ("tipme" "TIP:" nil 1)
-    ("todo" "TODO:" nil 5)
-    ("warn" "WARNING:" nil 3)
     ("ешзьу" "TIP:" nil 2)
     ("ещвщ" "TODO:" nil 1)
     ("сфг" "CAUTION:" nil 2)

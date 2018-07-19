@@ -862,8 +862,13 @@
          :map yas-minor-mode-map
          ("C-c y" . yas-expand))
   :config
-
   (use-package yasnippet-snippets :defer)
+
+  ;; make fundametal-mode snippets global for all modes
+  (add-hook 'yas-minor-mode-hook
+            (lambda ()
+              (yas-activate-extra-mode 'fundamental-mode)))
+
   (yas-global-mode t))
 
 
