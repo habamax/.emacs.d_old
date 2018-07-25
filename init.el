@@ -506,6 +506,19 @@
   ;; (setq ivy-re-builders-alist '((t . ivy--regex-plus)))
   (ivy-mode 1))
 
+(use-package swiper
+  :after counsel
+  :bind (:map swiper-map
+              ("M-c" . haba/swiper-mc-fixed))
+  :init
+  (bind-key "M-s" #'swiper-from-isearch isearch-mode-map)
+  :config
+  ;; Fix swiper multiple cursors
+  ;; https://github.com/abo-abo/swiper/issues/1304
+  (defun haba/swiper-mc-fixed()
+    (interactive)
+    (setq swiper--current-window-start nil)
+    (swiper-mc)))
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
@@ -519,17 +532,6 @@
          ("M-y" . ivy-next-line))
   :diminish counsel-mode
   :config
-  (use-package swiper
-    :bind (:map swiper-map
-                ("M-c" . haba/swiper-mc-fixed))
-    :init
-    (bind-key "M-s" #'swiper-from-isearch isearch-mode-map)
-    :config
-    (defun haba/swiper-mc-fixed()
-      (interactive)
-      (setq swiper--current-window-start nil)
-      (swiper-mc)))
-
   (setq counsel-yank-pop-preselect-last t)
   (setq counsel-find-file-at-point t)
   (setq counsel-find-file-ignore-regexp
