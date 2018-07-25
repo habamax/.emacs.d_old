@@ -901,6 +901,13 @@
     (setq cider-repl-display-help-banner t)
     (setq cider-repl-use-pretty-printing t)))
 
+;; (use-package sly
+;;   :commands (sly)
+;;   :config
+;;   (setq inferior-lisp-program "sbcl --noinform")
+;;   (setq common-lisp-hyperspec-root (expand-file-name "~/quicklisp/hyperspec/HyperSpec/")))
+
+
 (use-package slime
   :commands (slime)
   :config
