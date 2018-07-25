@@ -12,6 +12,26 @@ Otherwise call well known `comment-dwim'"
         (forward-line))
     (comment-dwim arg)))
 
+
+(defun haba/comment-fill-aligned (arg)
+  "Comment out the current line using fill-column to pad and align with comment chars.
+
+For the fill-column set to 80 it should look like:
+
+elisp:
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; hello ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+c:
+/************************************* hello  *************************************/
+"
+  (interactive "p")
+  (comment-normalize-vars)
+  (let* ((comment-style 'aligned)
+         (beg (line-beginning-position))
+         (end (line-end-position))
+         (com-add (/ (- fill-column (- end beg)) 2)))
+    (comment-region beg end (+ comment-add com-add))))
+
 (defun haba/open-line ()
   "Insert newline(s) below the line containing cursor."
   (interactive)

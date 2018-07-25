@@ -223,6 +223,7 @@
   :bind (("C-w" . haba/kill-region)
          ("M-w" . haba/kill-ring-save)
          ("M-;" . haba/toggle-comment)
+         ("C-M-;" . haba/comment-fill-aligned)
          ("C-a" . haba/move-beginning-of-line)
          ("M-j" . haba/join-line)
          ("C-o" . haba/open-line)
