@@ -797,6 +797,7 @@
               ("C-M-u" . sp-backward-up-sexp)
               ("C-M-n" . sp-next-sexp)
               ("C-M-p" . sp-previous-sexp)
+              ;; ("C-M-t" . sp-transpose-sexp)
               ("M-<backspace>" . sp-unwrap-sexp)
               ("C-S-<backspace>" . sp-splice-sexp-killing-forward)
               ("C-M-<backspace>" . sp-splice-sexp-killing-around)
