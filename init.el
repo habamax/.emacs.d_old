@@ -488,7 +488,7 @@
   (global-whitespace-cleanup-mode))
 
 (use-package ivy
-  ;; :defer 2
+  :defer 0.1
   :diminish ivy-mode
   :init
   ;; clear default ^ for counsel-M-x and friends
