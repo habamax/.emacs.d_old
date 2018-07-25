@@ -552,16 +552,16 @@
   (counsel-mode 1))
 
 (use-package counsel-projectile
-  :bind (("C-c p SPC" . counsel-projectile)
-         ("C-c p p" . counsel-projectile-switch-project)
-         ("C-c p f" . counsel-projectile-find-file))
+  :bind (("C-c C-p SPC" . counsel-projectile)
+         ("C-c C-p p" . counsel-projectile-switch-project)
+         ("C-c C-p f" . counsel-projectile-find-file))
   :config
   (counsel-projectile-mode))
 
 (use-package projectile
   :defer
   :diminish projectile-mode
-  :bind (("C-c p v" . projectile-vc))
+  :bind (("C-c C-p v" . projectile-vc))
   :config
   (setq projectile-completion-system 'ivy)
   (setq projectile-enable-caching t)
