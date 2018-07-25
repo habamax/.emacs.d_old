@@ -612,7 +612,7 @@
 
 ;; Complete Anything
 (use-package company
-  :defer 3
+  :defer 1
   ;; :demand
   :diminish company-mode
   :bind (("TAB" . company-indent-or-complete-common))
@@ -642,7 +642,7 @@
   (company-posframe-mode 1))
 
 (use-package multiple-cursors
-  :defer 3
+  :defer 1.5
   :bind-keymap (("C-x m" . haba/mc-map))
   :bind (("C-M-m" . haba/mark-next-like-this)
          ;; ("C-M-u" . mc/unmark-next-like-this)
