@@ -295,13 +295,13 @@
   :mode "\\.\\(adoc\\|asciidoc\\)$"
   :hook ((asciidoctor-mode . goto-address-mode))
   :bind (:map asciidoctor-mode-map
+              ("C-c C-c C-h" . asciidoctor-compile-html)
+              ("C-c C-c C-p" . asciidoctor-compile-pdf)
+              ("C-c C-c C-d" . asciidoctor-compile-docx)
+              ("C-c C-o C-h" . asciidoctor-open-html)
+              ("C-c C-o C-p" . asciidoctor-open-pdf)
+              ("C-c C-o C-d" . asciidoctor-open-docx)
               ("C-c C-o C-o" . browse-url-of-buffer)
-              ("C-c C-h C-h" . asciidoctor-compile-html)
-              ("C-c C-p C-p" . asciidoctor-compile-pdf)
-              ("C-c C-d C-d" . asciidoctor-compile-docx)
-              ("C-c C-h C-o" . asciidoctor-open-html)
-              ("C-c C-p C-o" . asciidoctor-open-pdf)
-              ("C-c C-d C-o" . asciidoctor-open-docx)
               ("C-c C-y" . asciidoctor-save-image-insert-link))
   :config
   ;; (setq asciidoctor-pdf-executable (concat "ruby " (expand-file-name "~/projects/asciidoctor-pdf/bin/asciidoctor-pdf")))
