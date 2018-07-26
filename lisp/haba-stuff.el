@@ -114,8 +114,8 @@ remove the comment characters from that line."
          (line (buffer-substring bol eol)))
     (goto-char bol)
     (while (re-search-forward "[0-9]+" eol 1)
-      (let ((num (string-to-int (buffer-substring
-                                 (match-beginning 0) (match-end 0)))))
+      (let ((num (string-to-number (buffer-substring
+                                    (match-beginning 0) (match-end 0)))))
         (replace-match (int-to-string (1+ num))))
       (setq eol (save-excursion (goto-char eol) (end-of-line) (point))))
     (goto-char bol)
