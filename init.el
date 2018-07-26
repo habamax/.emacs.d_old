@@ -243,6 +243,7 @@
          ("C-c i d" . haba/insert-current-date)
          ("<C-wheel-up>" . text-scale-increase)
          ("<C-wheel-down>" . text-scale-decrease)
+         ("C-c SPC" . delete-horizontal-space)
          ("<f10>" . menu-bar-mode)
          ("C-x C-b" . ibuffer)
          ("C-<tab>" . haba/other-frame)
