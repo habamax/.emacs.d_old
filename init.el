@@ -35,7 +35,7 @@
 ;;   (menu-bar-mode -1))
 
 ;; Show menu by default
-(menu-bar-mode 1)
+;; (menu-bar-mode 1)
 
 (when window-system
   (tool-bar-mode -1))
