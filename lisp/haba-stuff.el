@@ -29,7 +29,11 @@ c:
   (let* ((comment-style 'aligned)
          (beg (line-beginning-position))
          (end (line-end-position))
-         (com-add (/ (- fill-column (- end beg)) 2)))
+         (com-add (/ (- fill-column
+                        (- end beg)
+                        (string-width comment-start)
+                        (* 2 (string-width comment-padding))
+                        (string-width comment-end)) 2)))
     (comment-region beg end (+ comment-add com-add))))
 
 (defun haba/open-line ()
