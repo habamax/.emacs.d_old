@@ -784,11 +784,11 @@
   :config (global-flycheck-mode))
 
 ;; flyspell - use aspell instead of ispell
-(use-package flyspell
-  :defer
-  :commands (flyspell-mode flyspell-prog-mode)
-  :config (setq ispell-program-name (executable-find "aspell")
-                ispell-extra-args '("--sug-mode=ultra")))
+;; (use-package flyspell
+;;   :defer
+;;   :commands (flyspell-mode flyspell-prog-mode)
+;;   :config (setq ispell-program-name (executable-find "aspell")
+;;                 ispell-extra-args '("--sug-mode=ultra")))
 
 
 (use-package smartparens
