@@ -779,7 +779,7 @@
 
 ;; flycheck
 (use-package flycheck
-  :defer
+  :defer 0.5
   :diminish 'flycheck-mode
   :config (global-flycheck-mode))
 
