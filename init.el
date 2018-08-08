@@ -643,6 +643,12 @@
   :config
   (company-posframe-mode 1))
 
+;; company backend for anaconda (python)
+(use-package company-anaconda
+  :after company
+  :config
+  (add-to-list 'company-backends '(company-anaconda :with company-capf)))
+
 (use-package multiple-cursors
   :defer 1.5
   :bind-keymap (("C-x m" . haba/mc-map))
@@ -894,6 +900,9 @@
 
 (use-package toml-mode
   :mode "\\.toml$")
+
+(use-package anaconda-mode
+  :hook python-mode)
 
 (use-package clojure-mode
   :mode "\\.clj$"
