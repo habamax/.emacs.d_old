@@ -835,7 +835,7 @@
   ;; sp-cheat-sheet (very good)
   ;; sp-next-sexp (C-M-n)
   ;; sp-convolute-sexp
-  :defer 3
+  :defer 0.5
   :config
   (require 'smartparens-config)
   ;;(setq sp-base-key-bindings 'sp)
