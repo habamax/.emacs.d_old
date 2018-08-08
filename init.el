@@ -297,9 +297,9 @@
   :mode "\\.\\(adoc\\|asciidoc\\)$"
   :hook ((asciidoctor-mode . goto-address-mode))
   :bind (:map asciidoctor-mode-map
-              ("C-c C-c C-h" . asciidoctor-compile-html)
-              ("C-c C-c C-p" . asciidoctor-compile-pdf)
-              ("C-c C-c C-d" . asciidoctor-compile-docx)
+              ("C-c C-m C-h" . asciidoctor-compile-html)
+              ("C-c C-m C-p" . asciidoctor-compile-pdf)
+              ("C-c C-m C-d" . asciidoctor-compile-docx)
               ("C-c C-o C-h" . asciidoctor-open-html)
               ("C-c C-o C-p" . asciidoctor-open-pdf)
               ("C-c C-o C-d" . asciidoctor-open-docx)
