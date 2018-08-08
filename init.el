@@ -882,13 +882,6 @@
 
   (yas-global-mode t))
 
-
-(use-package python-mode
-  :mode "\\.py$"
-  :config
-  ;; (setq python-shell-interpreter "python3")
-  )
-
 ;; (use-package haskell-mode
 ;;   :mode ("\\.\\(hs\\)$" . haskell-mode))
 
