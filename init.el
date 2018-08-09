@@ -389,7 +389,10 @@
 
 (use-package undo-tree
   :diminish undo-tree-mode
-  :config (global-undo-tree-mode 1))
+  :config
+  (setq undo-tree-auto-save-history t)
+  (setq undo-tree-history-directory-alist `(("." . ,(concat user-emacs-directory ".undo"))))
+  (global-undo-tree-mode 1))
 
 
 (use-package avy
