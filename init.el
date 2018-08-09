@@ -558,12 +558,12 @@
 
   (counsel-mode 1))
 
-(use-package counsel-projectile
-  :bind (("C-c p SPC" . counsel-projectile)
-         ("C-c p p" . counsel-projectile-switch-project)
-         ("C-c p f" . counsel-projectile-find-file))
-  :config
-  (counsel-projectile-mode))
+;; (use-package counsel-projectile
+;;   :bind (("C-c p SPC" . counsel-projectile)
+;;          ("C-c p p" . counsel-projectile-switch-project)
+;;          ("C-c p f" . counsel-projectile-find-file))
+;;   :config
+;;   (counsel-projectile-mode))
 
 (use-package projectile
   :defer
