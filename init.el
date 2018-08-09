@@ -568,19 +568,21 @@
 (use-package projectile
   :defer
   :diminish projectile-mode
-  :bind (("C-c p v" . projectile-vc))
+  :bind-keymap (("C-c p" . projectile-mode-map))
   :init
   (setq projectile-keymap-prefix (kbd "C-c p"))
   :config
   (setq projectile-completion-system 'ivy)
   (setq projectile-enable-caching t)
+  ;; (setq projectile-switch-project-action 'projectile-dired)
 
   (when (executable-find "rg")
     (setq projectile-indexing-method 'alien)
 
     (defun projectile-get-ext-command ()
       "Always use `rg' for getting a list of all files in the project."
-      "rg --line-number --smart-case --follow --mmap --null --files")))
+      "rg --line-number --smart-case --follow --mmap --null --files"))
+  (projectile-mode +1))
 
 ;; counsel uses smex for better sorting
 (use-package smex :after counsel)
