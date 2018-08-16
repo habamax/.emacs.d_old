@@ -903,6 +903,21 @@
 (use-package anaconda-mode
   :hook python-mode)
 
+
+(use-package json-mode
+  :mode "\\.json$")
+
+(use-package json-navigator
+  :commands (json-navigator-navigate-region json-navigator-navigate-after-point))
+
+(use-package julia-mode
+  :mode "\\.jl$")
+
+(use-package ess
+  :commands (ess-julia-mode)
+  :config
+  (require 'ess-site))
+
 (use-package clojure-mode
   :mode "\\.clj$"
   :config
