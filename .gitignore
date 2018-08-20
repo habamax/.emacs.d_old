@@ -6,7 +6,6 @@ ido.*
 /backups/
 /bookmarks
 /elpa/
-/eshell/
 /kill-ring-saved.el
 /projectile-bookmarks.eld
 /projectile.cache
@@ -20,7 +19,6 @@ ido.*
 /.mc-lists.el
 /smex-items
 /saveplace
-
 *.html
 /current-theme
 /emms/
@@ -41,3 +39,5 @@ ido.*
 /image-dired
 /request
 /server
+/eshell/history
+/eshell/lastdir
