@@ -140,8 +140,8 @@
 ;; use hippie-expand
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 
-;; S-left, S-right, S-down, S-up to switch windows
-;; (windmove-default-keybindings)
+;; M-left, M-right, M-down, M-up to switch windows
+(windmove-default-keybindings 'meta)
 
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
@@ -281,14 +281,22 @@
     (interactive)
     (find-file "~/docs/todo.adoc")))
 
+(use-package haba-export
+  :defer t
+  :load-path "lisp/"
+  :commands (haba/pandoc-md2html))
+
 (use-package habamax-theme
+  :if window-system
   :load-path "habamax-theme/"
   :config
   (setq habamax-theme-variable-heading-heights t)
   (load-theme 'habamax t))
 
-(use-package kosmos-theme :defer
+(use-package kosmos-theme
+  :defer
   :ensure t
+  :if window-system
   :load-path "kosmos-theme/")
 
 (use-package asciidoctor-mode
@@ -397,7 +405,8 @@
 
 (use-package avy
   :diminish avy-mode
-  :bind (("C-l" . avy-goto-word-or-subword-1)
+  :bind (;("C-l" . avy-goto-word-or-subword-1)
+         ("C-l" . avy-goto-char-timer)
          ("C-M-l" . avy-goto-char)))
 
 (use-package ace-window
@@ -867,7 +876,9 @@
 
 (use-package ztree :defer)
 
-(use-package string-edit :commands string-edit)
+(use-package string-edit
+  :commands string-edit-at-point
+  :bind ("C-c e s" . string-edit-at-point))
 
 (use-package string-inflection :bind (("C-c C-u" . string-inflection-toggle)))
 
@@ -910,13 +921,15 @@
 (use-package json-navigator
   :commands (json-navigator-navigate-region json-navigator-navigate-after-point))
 
-(use-package julia-mode
-  :mode "\\.jl$")
 
-(use-package ess
-  :commands (ess-julia-mode)
-  :config
-  (require 'ess-site))
+;; (use-package julia-mode
+;;   :mode "\\.jl$")
+
+;;; poor support on Win
+;; (use-package ess
+;; :commands (julia)
+;; :config
+;; (require 'ess-site))
 
 (use-package clojure-mode
   :mode "\\.clj$"
