@@ -922,14 +922,14 @@
   :commands (json-navigator-navigate-region json-navigator-navigate-after-point))
 
 
-;; (use-package julia-mode
-;;   :mode "\\.jl$")
+(use-package julia-mode
+  :mode "\\.jl$")
 
 ;;; poor support on Win
-;; (use-package ess
-;; :commands (julia)
-;; :config
-;; (require 'ess-site))
+(use-package ess
+  :commands (julia)
+  :config
+  (require 'ess-site))
 
 (use-package clojure-mode
   :mode "\\.clj$"
