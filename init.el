@@ -538,7 +538,7 @@
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("M-s g" . counsel-git)
-         ("C-s" . counsel-grep-or-swiper)
+         ("M-s s" . counsel-grep-or-swiper)
          ("M-s r" . counsel-rg)
          ("C-h a" . counsel-apropos)
          ("C-x 8 RET" . counsel-unicode-char)
