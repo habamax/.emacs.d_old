@@ -105,9 +105,9 @@
 ;; it is also good for follow-mode -- it prevents cursor to go to followed window
 (setq scroll-margin 1)
 
-;; tabs are evil...
+;; Emacs tabs are evil...
 (setq-default indent-tabs-mode nil)
-(setq tab-width 4)
+(setq-default tab-width 4)
 (defvaralias 'c-basic-offset 'tab-width)
 
 ;; y/n for yes/no
