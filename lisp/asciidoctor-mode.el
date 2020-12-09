@@ -1052,8 +1052,7 @@ Create directory if needed."
 
   ;; Indentation
   (setq indent-line-function 'asciidoctor-indent-line)
-  ;; XXX: How to make it local?
-  (add-hook 'electric-indent-functions 'asciidoctor-electric-indent)
+  (add-hook 'electric-indent-functions 'asciidoctor-electric-indent nil t)
   
   )
 
